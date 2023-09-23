@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_first_ggs_later/screens/home_page.dart';
+import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.yellow,
         visualDensity: VisualDensity.adaptivePlatformDensity
       ),
-      home: const Home(),
+      home: const Pomodoro(),
     );
   }
 }
