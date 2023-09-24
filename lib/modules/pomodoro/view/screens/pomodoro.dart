@@ -31,6 +31,8 @@ class Pomodoro extends StatefulWidget {
   State<Pomodoro> createState() => _PomodoroState();
 }
 
+// TODO: put to constants folder
+
 const _btnTextStart = 'START SESSION';
 const _btnTextShortBreak = 'SHORT BREAK';
 const _btnTextResume = 'RESUME SESSION';
