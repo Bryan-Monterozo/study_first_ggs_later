@@ -5,6 +5,7 @@ import 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
+import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 /*
 TODO: Organize code blocks to their respective folders
@@ -62,6 +63,7 @@ class _PomodoroState extends State<Pomodoro> {
       appBar: AppBar(
         title: const Text('Pomodoro Timer'),
       ),
+      drawer: const NavDrawer(),
       body: SafeArea(
         child: Center(
           child: Column(
