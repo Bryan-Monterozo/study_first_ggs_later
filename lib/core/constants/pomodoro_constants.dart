@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
 
-const pomodoroTotalTime = 1 * 60;
-const shortBreakTime = 5 * 60;
-const longBreakTime = 15 * 60;
-const pomodoroPerSet = 4;
+const pomodoroTotalTime = 1 * 60; // 25 minutes
+const shortBreakTime = 1 * 60; // 5 minutes
+const longBreakTime = 1 * 60; // 15 minutes
+const pomodoroPerSet = 4; // 4 pomodoros per set
 
 const Map<PomodoroStatus, String> statusText = {
   PomodoroStatus.runningPomodoro: 'Pomodoro is Running',
