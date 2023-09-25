@@ -1,4 +1,4 @@
-library pomodoro;
+library pomodoro_lib;
 
 import 'dart:async';
 import 'package:flutter/material.dart';
@@ -9,7 +9,7 @@ import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_but
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
-part '/core/constants/pomodoro_constants.dart';
+part 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
 
 /*
 TODO: Organize code blocks to their respective folders

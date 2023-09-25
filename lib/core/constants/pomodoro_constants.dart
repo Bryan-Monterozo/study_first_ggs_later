@@ -3,7 +3,7 @@
 
 // library pomodoro_constants;
 
-part of pomodoro;
+part of pomodoro_lib;
 
 const pomodoroTotalTime = 1 * 60; // 25 minutes
 const shortBreakTime = 1 * 60; // 5 minutes
