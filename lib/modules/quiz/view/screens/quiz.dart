@@ -11,7 +11,7 @@ class StudyQuiz extends StatelessWidget {
         title: const Text('Quiz'),
       ),
       body: const Center(
-        child: Text('Quiz'),
+        child: Text('Test'),
       ),
       drawer: const NavDrawer(),
     );
