@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
+// import 'package:flutter/material.dart';
+// import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
+
+// library pomodoro_constants;
+
+part of pomodoro;
 
 const pomodoroTotalTime = 1 * 60; // 25 minutes
 const shortBreakTime = 1 * 60; // 5 minutes
@@ -25,3 +29,11 @@ const Map<PomodoroStatus, MaterialColor> statusColor = {
   PomodoroStatus.pausedLongBreak: Colors.orange,
   PomodoroStatus.setFinished: Colors.yellow,
 };
+
+const _btnTextStart = 'START SESSION';
+const _btnTextShortBreak = 'SHORT BREAK';
+const _btnTextResume = 'RESUME SESSION';
+const _btnTextLongBreak = 'LONG BREAK';
+const _btnTextStartNewSet = 'START NEW SET';
+const _btnTextPause = 'PAUSE SESSION';
+const _btnTextReset = 'RESET SESSION';

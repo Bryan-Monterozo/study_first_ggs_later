@@ -1,11 +1,15 @@
+library pomodoro;
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
+// import 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+
+part '/core/constants/pomodoro_constants.dart';
 
 /*
 TODO: Organize code blocks to their respective folders
@@ -33,14 +37,6 @@ class Pomodoro extends StatefulWidget {
 }
 
 // TODO: put to constants folder
-
-const _btnTextStart = 'START SESSION';
-const _btnTextShortBreak = 'SHORT BREAK';
-const _btnTextResume = 'RESUME SESSION';
-const _btnTextLongBreak = 'LONG BREAK';
-const _btnTextStartNewSet = 'START NEW SET';
-const _btnTextPause = 'PAUSE SESSION';
-const _btnTextReset = 'RESET SESSION';
 
 class _PomodoroState extends State<Pomodoro> {
   int remainingTime = pomodoroTotalTime;
