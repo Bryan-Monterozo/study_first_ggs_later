@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
       title: "Study First",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        fontFamily: 'Product Sans',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: const StudyHome(),
