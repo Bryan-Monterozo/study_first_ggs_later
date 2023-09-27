@@ -57,6 +57,7 @@ class _PomodoroState extends State<Pomodoro> {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey[500]),
         title: const Text('Pomodoro Timer'),
       ),
       drawer: const NavDrawer(),

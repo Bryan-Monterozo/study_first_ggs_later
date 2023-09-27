@@ -7,13 +7,32 @@ class StudyCalendar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Calendar'),
-      ),
-      body: const Center(
-        child: Text('Calendar'),
-      ),
-      drawer: const NavDrawer(),
-    );
+        drawer: const NavDrawer(),
+        appBar: AppBar(
+          iconTheme: IconThemeData(color: Colors.grey[500]),
+          title: const Text(
+            'Calendar',
+            style: TextStyle(
+                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.white,
+        ),
+        body: const Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                  'Calendar',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
+                ),
+            ],
+          ),
+          ),
+        );
   }
 }

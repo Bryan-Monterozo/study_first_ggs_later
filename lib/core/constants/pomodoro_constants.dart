@@ -5,9 +5,9 @@
 
 part of pomodoro_lib;
 
-const pomodoroTotalTime = 1 * 60; // 25 minutes
-const shortBreakTime = 1 * 60; // 5 minutes
-const longBreakTime = 1 * 60; // 15 minutes
+const pomodoroTotalTime = 1 * 10; // 25 minutes
+const shortBreakTime = 1 * 10; // 5 minutes
+const longBreakTime = 1 * 10; // 15 minutes
 const pomodoroPerSet = 4; // 4 pomodoros per set
 
 const Map<PomodoroStatus, String> statusText = {

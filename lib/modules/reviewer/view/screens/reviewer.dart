@@ -7,13 +7,32 @@ class StudyReviewer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: const NavDrawer(),
       appBar: AppBar(
-        title: const Text('Reviewer'),
+        iconTheme: IconThemeData(color: Colors.grey[500]),
+        title: const Text(
+          'Reviewer',
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.white,
       ),
       body: const Center(
-        child: Text('Reviewer'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Reviewer',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+          ],
+        ),
       ),
-      drawer: const NavDrawer(),
     );
   }
 }
