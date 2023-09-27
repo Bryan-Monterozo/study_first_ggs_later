@@ -55,8 +55,9 @@ class _PomodoroState extends State<Pomodoro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Colors.grey[500]),
         title: const Text('Pomodoro Timer'),
       ),
       drawer: const NavDrawer(),
