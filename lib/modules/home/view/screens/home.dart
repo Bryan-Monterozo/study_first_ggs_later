@@ -24,7 +24,7 @@ class _HomeState extends State<StudyHome> {
       ),
       body: const Column(
         children: [
-          Text('Login',
+          Text('Home',
           style: TextStyle(
           color: Colors.black,
           fontSize: 30,
