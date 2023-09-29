@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 // import 'package:flashcardplus/flashcardplus.dart';
 import 'package:flip_card/flip_card.dart';
@@ -15,16 +16,7 @@ class _FlashCardState extends State<FlashCard> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey[500]),
-        title: const Text(
-          'Flash Card',
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
+      appBar: const SharedAppBar(),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[

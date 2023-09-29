@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyQuiz extends StatelessWidget {
@@ -6,19 +7,10 @@ class StudyQuiz extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const NavDrawer(),
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey[500]),
-        title: const Text(
-          'Quiz',
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
-      body: const Center(
+    return const Scaffold(
+      drawer: NavDrawer(),
+      appBar: SharedAppBar(),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

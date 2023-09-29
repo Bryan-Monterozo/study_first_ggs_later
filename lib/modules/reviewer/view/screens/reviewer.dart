@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviwer_flash_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/reviewer_button.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyReviewer extends StatelessWidget {
@@ -10,16 +11,7 @@ class StudyReviewer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: const NavDrawer(),
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.grey[500]),
-          title: const Text(
-            'Reviewer',
-            style: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-        ),
+        appBar: const SharedAppBar(),
         body: SafeArea(
             child: Center(
           child: Column(

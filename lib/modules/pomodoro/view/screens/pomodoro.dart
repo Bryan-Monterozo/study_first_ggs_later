@@ -7,6 +7,7 @@ import 'package:percent_indicator/percent_indicator.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 part 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
@@ -56,10 +57,7 @@ class _PomodoroState extends State<Pomodoro> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey[500]),
-        title: const Text('Pomodoro Timer'),
-      ),
+      appBar: const SharedAppBar(),
       drawer: const NavDrawer(),
       body: SafeArea(
         child: Center(

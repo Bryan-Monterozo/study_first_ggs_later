@@ -49,7 +49,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyHome(),
@@ -68,7 +68,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const Pomodoro(),
@@ -87,7 +87,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyCalendar(),
@@ -106,7 +106,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyToDo(),
@@ -125,7 +125,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyReviewer(),
@@ -144,7 +144,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyQuiz(),
