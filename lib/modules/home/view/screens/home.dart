@@ -13,16 +13,7 @@ class _HomeState extends State<StudyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.grey[500]),
-        title: const Text(
-          'Study First',
-          style: TextStyle(
-              color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.white,
-      ),
+      appBar: appBar(),
       body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -38,6 +29,40 @@ class _HomeState extends State<StudyHome> {
           ],
         ),
       ),
+    );
+  }
+
+  AppBar appBar() {
+    return AppBar(
+      backgroundColor: Colors.white,
+      iconTheme: IconThemeData(color: Color(0xFF1C1C1C),),
+title: ClipRRect(
+  borderRadius: BorderRadius.circular(8),
+  child: Image.asset(
+    'assets/images/Rectangle1.png',
+    width: 115,
+    height: 52,
+    fit: BoxFit.fitHeight,
+    alignment: Alignment(0.00, 0.00),
+  ),
+),
+actions: [
+  Container(
+    width: 80,
+    height: 80,
+    clipBehavior: Clip.antiAlias,
+    decoration: BoxDecoration(
+      shape: BoxShape.circle,
+    ),
+    child: Image.asset(
+      'assets/images/Ellipse1.png',
+      fit: BoxFit.cover,
+      alignment: Alignment(0.00, -0.50),
+    ),
+  ),
+],
+centerTitle: true,
+elevation: 0,
     );
   }
 }
