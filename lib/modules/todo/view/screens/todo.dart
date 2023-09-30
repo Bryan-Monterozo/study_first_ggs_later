@@ -10,24 +10,66 @@ class StudyToDo extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-          titlePic: titlePic(context),
-          withPic: withPic(context),
+        titlePic: titlePic(context),
+        withPic: withPic(context),
+      ),
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 15,
         ),
-      body: const Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'To Do',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
+            searchBox(),
+            Expanded(
+              child: ListView(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(
+                      top: 50,
+                      bottom: 20,
+                    ),
+                    child: const Text(
+                      'All Todos',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
     );
   }
+}
+
+Widget searchBox() {
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: const TextField(
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.all(0),
+        prefixIcon: Icon(
+          Icons.search,
+          color: Colors.black,
+          size: 15,
+        ),
+        prefixIconConstraints: BoxConstraints(
+          maxHeight: 20,
+          minWidth: 25,
+        ),
+        border: InputBorder.none,
+        hintText: 'Search',
+        hintStyle: TextStyle(color: Colors.grey),
+      ),
+    ),
+  );
 }
