@@ -7,10 +7,13 @@ class StudyToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      drawer: NavDrawer(),
-      appBar: SharedAppBar(),
-      body: Center(
+    return Scaffold(
+      drawer: const NavDrawer(),
+      appBar: SharedAppBar(
+          titlePic: titlePic(context),
+          withPic: withPic(context),
+        ),
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

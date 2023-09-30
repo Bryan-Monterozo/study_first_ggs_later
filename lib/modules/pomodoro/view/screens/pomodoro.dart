@@ -57,7 +57,10 @@ class _PomodoroState extends State<Pomodoro> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: const SharedAppBar(),
+      appBar: SharedAppBar(
+          titlePic: titlePic(context),
+          withPic: withPic(context),
+        ),
       drawer: const NavDrawer(),
       body: SafeArea(
         child: Center(

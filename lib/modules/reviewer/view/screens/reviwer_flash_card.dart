@@ -4,19 +4,22 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 // import 'package:flashcardplus/flashcardplus.dart';
 import 'package:flip_card/flip_card.dart';
 
-class FlashCard extends StatefulWidget {
-  const FlashCard({super.key});
+class ReviewerFlashCard extends StatefulWidget {
+  const ReviewerFlashCard({super.key});
 
   @override
-  State<FlashCard> createState() => _FlashCardState();
+  State<ReviewerFlashCard> createState() => _ReviewerFlashCardState();
 }
 
-class _FlashCardState extends State<FlashCard> {
+class _ReviewerFlashCardState extends State<ReviewerFlashCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar: const SharedAppBar(),
+      appBar: SharedAppBar(
+          titlePic: titlePic(context),
+          withPic: withPic(context),
+        ),
       body: Stack(
         fit: StackFit.expand,
         children: <Widget>[
