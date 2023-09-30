@@ -56,7 +56,7 @@ class _PomodoroState extends State<Pomodoro> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: SharedAppBar(
           titlePic: titlePic(context),
           withPic: withPic(context),
@@ -67,28 +67,36 @@ class _PomodoroState extends State<Pomodoro> {
           child: Column(
             children: [
               const SizedBox(
+                height: 20,
+              ),
+              Text('POMODORO',
+                  style: const TextStyle(fontSize: 30, fontFamily: 'PIXEL', color: Color(0xFF0B6BA7),)),
+              const SizedBox(
+                height: 20,
+              ),
+              const SizedBox(
                 height: 10,
               ),
               Text('Pomodoro number: $pomodoroNum',
-                  style: const TextStyle(fontSize: 32, color: Colors.white)),
+                  style: const TextStyle(fontSize: 14, color:Color(0xFF1C1C1C))),
               const SizedBox(
                 height: 10,
               ),
               Text('Set: $setNum',
-                  style: const TextStyle(fontSize: 22, color: Colors.white)),
+                  style: const TextStyle(fontSize: 14, color: Color(0xFF1C1C1C))),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CircularPercentIndicator(
+                      backgroundColor:Color(0xFFCECECE),
                       radius: 220.0,
                       lineWidth: 15.0,
                       percent: _getPomodoroPercentage(),
-                      circularStrokeCap: CircularStrokeCap.round,
                       center: Text(
                         _secToString(remainingTime),
                         style:
-                            const TextStyle(fontSize: 40, color: Colors.white),
+                            const TextStyle(fontSize: 40, color:Color(0xFF1C1C1C)),
                       ),
                       progressColor: statusColor[pomodoroStatus],
                     ),
@@ -104,11 +112,17 @@ class _PomodoroState extends State<Pomodoro> {
                     ),
                     Text(
                       statusText[pomodoroStatus]!,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color:Color(0xFF1C1C1C)),
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     PomodoroButton(
                       onTap: _mainBtnPressed,
                       text: pomodoroBtnText,
+                    ),
+                    const SizedBox(
+                      height: 10,
                     ),
                     PomodoroButton(
                       onTap: _resetPomodoroCount,

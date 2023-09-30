@@ -38,8 +38,8 @@ dependencies:
   percent_indicator: ^3.0.1
   # flashcardplus: ^0.0.1
   flip_card: ^0.7.0
-  firebase_core: ^1.3.0
-  cloud_firestore: ^2.2.0
+  firebase_core: ^2.16.0
+  cloud_firestore: ^4.9.0
 
 dev_dependencies:
   flutter_test:
@@ -99,6 +99,11 @@ flutter:
         - asset: fonts/Product Sans Bold Italic.ttf
           weight: 700
           style: italic
+        
+    - family: PIXEL
+      fonts:
+        - asset: fonts/pixelgamerpersonaluse-rg61l.otf
+          weight: 400
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
