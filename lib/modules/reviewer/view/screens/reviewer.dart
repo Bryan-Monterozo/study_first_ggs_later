@@ -30,7 +30,7 @@ class StudyReviewer extends StatelessWidget {
             ),
             ReviewerButton(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReviewerNotes()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerNotes()));
               },
               text: "Notes",
             ),
