@@ -21,11 +21,13 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Padding(
+      padding:const EdgeInsets.only(left: 16, top: 16, bottom: 16),
+    child:Drawer(
       child: ListView(
         children: <Widget>[
           const SizedBox(
-            height:64.0,
+            height:124.0,
             child:DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -58,7 +60,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.home_outlined,
               size: 20,
-              color: Colors.black,
+              color:  Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -77,7 +79,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.timer_outlined,
               size: 20,
-              color: Colors.black,
+              color: Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -96,7 +98,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.calendar_month_outlined,
               size: 20,
-              color: Colors.black,
+              color:  Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -115,7 +117,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.checklist_outlined,
               size: 20,
-              color: Colors.black,
+              color:  Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -134,7 +136,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.my_library_books_outlined,
               size: 20,
-              color: Colors.black,
+              color:  Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -153,7 +155,7 @@ class NavDrawer extends StatelessWidget {
             leading: const Icon(
               Icons.quiz_outlined,
               size: 20,
-              color: Colors.black,
+              color:  Color(0xFF1C1C1C),
             ),
             onTap: () {
               Navigator.pushReplacement(
@@ -166,6 +168,7 @@ class NavDrawer extends StatelessWidget {
           ),
         ],
       ),
+    ),
     );
   }
 }
