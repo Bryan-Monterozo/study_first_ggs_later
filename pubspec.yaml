@@ -99,6 +99,11 @@ flutter:
         - asset: fonts/Product Sans Bold Italic.ttf
           weight: 700
           style: italic
+        
+    - family: PIXEL
+      fonts:
+        - asset: fonts/pixelgamerpersonaluse-rg61l.otf
+          weight: 400
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
