@@ -30,10 +30,10 @@ const Map<PomodoroStatus, MaterialColor> statusColor = {
   PomodoroStatus.setFinished: Colors.yellow,
 };
 
-const _btnTextStart = 'START SESSION';
-const _btnTextShortBreak = 'SHORT BREAK';
-const _btnTextResume = 'RESUME SESSION';
-const _btnTextLongBreak = 'LONG BREAK';
-const _btnTextStartNewSet = 'START NEW SET';
-const _btnTextPause = 'PAUSE SESSION';
-const _btnTextReset = 'RESET SESSION';
+const _btnTextStart = 'Start Session';
+const _btnTextShortBreak = 'Short Break';
+const _btnTextResume = 'Resume Session';
+const _btnTextLongBreak = 'Long Break';
+const _btnTextStartNewSet = 'Start New Session';
+const _btnTextPause = 'Pause Session';
+const _btnTextReset = 'Reset Session';

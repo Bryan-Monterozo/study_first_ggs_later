@@ -23,33 +23,45 @@ class NavDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: ListView(
-        children: [
-          DrawerHeader(
-              decoration: const BoxDecoration(
-                color: Colors.orange,
+        children: <Widget>[
+          const SizedBox(
+            height:64.0,
+            child:DrawerHeader(
+              decoration: BoxDecoration(
+                color: Colors.white,
               ),
-              child: Column(
-                children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(30)),
-                  )
+              child: Stack(
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage('Ellipse1.png'),
+                      radius: 25.0,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Text(
+                      'User06969',
+                      style: TextStyle(color: Color(0xFF1C1C1C), fontSize: 20.0),
+                    ),
+                  ),
                 ],
-              )),
+              ),
+              ),
+              ),
           ListTile(
             title: const Text(
               'Home',
               style: TextStyle(fontSize: 20),
             ),
             leading: const Icon(
-              Icons.home,
+              Icons.home_outlined,
               size: 20,
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyHome(),
@@ -68,7 +80,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const Pomodoro(),
@@ -87,7 +99,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyCalendar(),
@@ -106,7 +118,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyToDo(),
@@ -125,7 +137,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyReviewer(),
@@ -144,7 +156,7 @@ class NavDrawer extends StatelessWidget {
               color: Colors.black,
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => const StudyQuiz(),

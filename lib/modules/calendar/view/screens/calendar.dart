@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyCalendar extends StatelessWidget {
@@ -8,15 +9,9 @@ class StudyCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         drawer: const NavDrawer(),
-        appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.grey[500]),
-          title: const Text(
-            'Calendar',
-            style: TextStyle(
-                color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
-          ),
-          centerTitle: true,
-          backgroundColor: Colors.white,
+        appBar: SharedAppBar(
+          titlePic: titlePic(context),
+          withPic: withPic(context),
         ),
         body: const Center(
           child: Column(

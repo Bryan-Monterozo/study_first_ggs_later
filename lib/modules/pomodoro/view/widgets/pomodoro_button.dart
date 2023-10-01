@@ -8,17 +8,25 @@ class PomodoroButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ButtonTheme(
-      minWidth: 200.0,
+  return ButtonTheme(
+    minWidth: 200.0,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Color(0xFF0B6BA7),
+      ),
       child: ElevatedButton(
         onPressed: () {
           onTap();
         },
+        style: ButtonStyle(
+          backgroundColor: MaterialStateProperty.all(Colors.transparent), 
+        ),
         child: Text(
           text,
-          style: const TextStyle(fontSize: 20),
+          style: TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 }
