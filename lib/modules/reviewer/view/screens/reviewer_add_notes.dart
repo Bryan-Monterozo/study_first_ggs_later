@@ -34,7 +34,7 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
             onPressed: () {
               ReviewerNotesDB().addNoteToDB(
                 title: title, 
-                content: content);
+                content: content,);
               Navigator.pop(context);
             },
           ),

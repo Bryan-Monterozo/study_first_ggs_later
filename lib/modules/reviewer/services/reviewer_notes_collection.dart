@@ -5,12 +5,13 @@ class ReviewerNotesDB {
   final firestore = FirebaseFirestore.instance;
 
   void addNoteToDB({
-    required String title,
-    required String content,
+    required title,
+    required content,
   }) async {
+    final timeCreated = DateTime.now().toString();
     final collection = firestore.collection('notes').doc();
 
-    NoteModel noteModel = NoteModel(title: title, content: content);
+    NoteModel noteModel = NoteModel(title: title, content: content, timeCreated: timeCreated);
 
     await collection.set(noteModel.toMap());
   }

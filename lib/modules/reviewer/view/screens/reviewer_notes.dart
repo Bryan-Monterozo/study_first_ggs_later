@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:study_first_ggs_later/modules/reviewer/models/note.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/widgets/note_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_add_notes.dart';
@@ -27,28 +29,19 @@ class ReviewerNotes extends StatelessWidget {
         ),
         drawer: const NavDrawer(),
         body: SafeArea(
-            child: StreamBuilder(
+            child: StreamBuilder<QuerySnapshot>(
                 stream: ref.snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                      itemCount: snapshot.hasData ? snapshot.data!.docs.length : 0,
+                  return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                            margin: const EdgeInsets.all(20),
-                            height: 150,
-                            color: Colors.grey,
-                            child: Column(
-                              children: [
-                                Text(snapshot.data!.docs[index]['title']),
-                                Text(snapshot.data!.docs[index]['content']),
-                              ],
-                            )
-                            );
+                        final noteDataMap = snapshot.data!.docs[index];
+                        NoteModel noteModel = NoteModel.fromMap(
+                            noteDataMap.data() as Map<String, dynamic>);
+                        return NoteTileWidget(noteModel: noteModel);
                       });
                 })));
   }
