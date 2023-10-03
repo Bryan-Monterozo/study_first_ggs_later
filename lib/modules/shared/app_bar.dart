@@ -3,12 +3,18 @@ import 'package:flutter/foundation.dart';
 
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SharedAppBar(
-      {super.key, this.title, this.actions, this.withPic, this.titlePic});
+      {super.key,
+      this.title,
+      this.actions,
+      this.withPic,
+      this.titlePic,
+      this.leading});
 
   final String? title;
   final List<Widget>? actions;
   final Widget? withPic;
   final Widget? titlePic;
+  final Widget? leading;
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -20,6 +26,14 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(
         color: Color(0xFF1C1C1C),
       ),
+      leading: leading == null
+          ? IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            )
+          : leading!,
       title: titlePic == null
           ? Text(
               title!,

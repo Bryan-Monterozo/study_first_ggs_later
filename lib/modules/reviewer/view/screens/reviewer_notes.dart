@@ -5,11 +5,12 @@ import 'package:study_first_ggs_later/modules/reviewer/view/widgets/note_tiles.d
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_add_notes.dart';
+import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 
 class ReviewerNotes extends StatelessWidget {
   ReviewerNotes({super.key});
 
-  final ref = FirebaseFirestore.instance.collection('notes');
+  final ref = FirebaseFirestore.instance.collection('Notes');
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class ReviewerNotes extends StatelessWidget {
                         final noteDataMap = snapshot.data!.docs[index];
                         NoteModel noteModel = NoteModel.fromMap(
                             noteDataMap.data() as Map<String, dynamic>);
-                        return NoteTileWidget(noteModel: noteModel);
+                        return NoteTileWidget(noteModel: noteModel, colorNotes: NoteColors().noteColorsList[index]);
                       });
                 })));
   }

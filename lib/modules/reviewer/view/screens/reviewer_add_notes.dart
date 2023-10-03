@@ -24,10 +24,12 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.delete,
-              color: Colors.black,
+              Icons.cancel,
+              color: Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+            },
           ),
           IconButton(
             icon: const Icon(Icons.save),
