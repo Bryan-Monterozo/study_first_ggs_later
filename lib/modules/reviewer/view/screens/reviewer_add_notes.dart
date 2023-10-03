@@ -20,13 +20,15 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SharedAppBar(
-        title: "Edit Note",
+        leading: leadingBack(context),
+        title: "Create a Note",
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.cancel,
-              color: Colors.red,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              shadowColor: Colors.transparent,
             ),
+            child: const Text('Cancel', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -49,6 +51,7 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
+                maxLength: 60,
                 onChanged: (value) {
                   title = value;
                 },
@@ -78,47 +81,3 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
     );
   }
 }
-
-// class AddNoteAppBar extends SharedAppBar {
-//   const AddNoteAppBar({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AppBar(
-//       // title: const Text("Add Note"),
-      
-//       actions: <Widget>[
-//         IconButton(
-//           icon: const Icon(Icons.delete),
-//           onPressed: () {},
-//         ),
-//         IconButton(
-//           icon: const Icon(Icons.save),
-//           onPressed: () {},
-//         ),
-//       ],
-//     );
-//   }
-// }
-
-// Widget withPic(BuildContext context) {
-//   return Container(
-//     width: 80,
-//     height: 80,
-//     clipBehavior: Clip.antiAlias,
-//     decoration: const BoxDecoration(
-//       shape: BoxShape.circle,
-//     ),
-//     child: kIsWeb
-//         ? Image.network(
-//             'assets/images/Ellipse1.png',
-//             fit: BoxFit.cover,
-//             alignment: const Alignment(0.00, -0.50),
-//           )
-//         : Image.asset(
-//             'assets/images/Ellipse1.png',
-//             fit: BoxFit.cover,
-//             alignment: const Alignment(0.00, -0.50),
-//           ),
-//   );
-// }

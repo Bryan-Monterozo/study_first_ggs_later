@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
-import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+// import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 // import 'package:flashcardplus/flashcardplus.dart';
 import 'package:flip_card/flip_card.dart';
 
@@ -15,8 +15,8 @@ class _ReviewerFlashCardState extends State<ReviewerFlashCard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const NavDrawer(),
       appBar: SharedAppBar(
+          leading: leadingBack(context),
           titlePic: titlePic(context),
           withPic: withPic(context),
         ),

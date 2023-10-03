@@ -16,6 +16,19 @@ class ReviewerNotesDB {
     await collection.set(noteModel.toMap());
   }
 
+  editNoteDB({
+    required title,
+    required content,
+    required noteId,
+  }) async {
+
+    await firestore.collection('Notes').doc(noteId).update({
+      'title': title,
+      'content': content,
+    });
+    }
+
+
   deleteNoteDB(noteId) async {
     await firestore.collection('Notes').doc(noteId).delete();
   }

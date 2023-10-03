@@ -38,7 +38,7 @@ class NoteTileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'TITLE: ${noteModel.title}',
+                  noteModel.title,
                   style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
                 Text(dateCreated),

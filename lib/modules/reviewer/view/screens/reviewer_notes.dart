@@ -16,6 +16,7 @@ class ReviewerNotes extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: SharedAppBar(
+          leading: leadingBack(context),
           titlePic: titlePic(context),
           withPic: withPic(context),
         ),

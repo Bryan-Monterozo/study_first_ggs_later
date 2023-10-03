@@ -92,5 +92,15 @@ Widget titlePic(BuildContext context) {
             ));
 }
 
-
+Widget leadingBack(BuildContext context) {
+  return IconButton(
+    icon: const Icon(
+      Icons.arrow_back_ios_new,
+      color: Colors.black,
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+}
 // if (withPic != null) withPic!, ...?actions
