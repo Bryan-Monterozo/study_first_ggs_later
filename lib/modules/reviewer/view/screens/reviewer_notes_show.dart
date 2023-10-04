@@ -2,9 +2,9 @@
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:study_first_ggs_later/modules/reviewer/models/note.dart';
+import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_edit_notes.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes_edit.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 // import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 

@@ -1,9 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:study_first_ggs_later/modules/reviewer/models/note.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_show_notes.dart';
+import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes_show.dart';
 
 class NoteTileWidget extends StatelessWidget {
   final NoteModel noteModel;

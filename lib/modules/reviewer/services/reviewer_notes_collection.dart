@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:study_first_ggs_later/modules/reviewer/models/note.dart';
+import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 
 class ReviewerNotesDB {
   final firestore = FirebaseFirestore.instance;
