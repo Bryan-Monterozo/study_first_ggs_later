@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_my_decks.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviwer_flash_card.dart';
+// import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/reviewer_button.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
@@ -24,13 +25,13 @@ class StudyReviewer extends StatelessWidget {
             children: [
             ReviewerButton(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReviewerFlashCard()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerFcMyDecks()));
               },
               text: "Flash Cards",
             ),
             ReviewerButton(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReviewerNotes()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerNotes()));
               },
               text: "Notes",
             ),
