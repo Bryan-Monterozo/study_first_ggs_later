@@ -31,7 +31,7 @@ class StudyCalendar extends StatelessWidget {
           ),*/
           child: SfCalendar(
             view: CalendarView.month,
-            firstDayOfWeek: 7,
+            firstDayOfWeek: 1,
             dataSource: MeetingDataSource(getAppointments()),
           ),
         )
