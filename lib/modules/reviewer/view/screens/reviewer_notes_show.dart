@@ -13,7 +13,7 @@ class ReviewerShowNote extends StatelessWidget {
 
   const ReviewerShowNote({
     Key? key,
-    this.noteModel,
+    required this.noteModel,
   }) : super(key: key);
 
   @override

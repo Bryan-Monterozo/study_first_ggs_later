@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_show_deck.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcEditCard extends StatefulWidget {
@@ -35,6 +34,7 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
 
     cardFront = TextEditingController(text: cardModel.cardFront);
     cardBack = TextEditingController(text: cardModel.cardBack);
+    
   }
 
   @override
@@ -66,12 +66,16 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
                 deckId: widget.deckId,
                 cardId: widget.cardModel.cardId,
               );
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcShowDeck(
-                            deckModel: widget.deckModel,
-                          )));
+              Navigator.of(context)..pop()..pop();
+              // Navigator.po(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => ReviewerFcShowCard(
+              //               deckModel: widget.deckModel,
+              //               cardModel: widget.cardModel,
+              //             )));
+
+              // Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => ReviewerFcShowDeck(deckModel: widget.deckModel)), (route) => false);
             },
           ),
         ],

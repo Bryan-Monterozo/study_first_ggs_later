@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerEditNote extends StatefulWidget {
@@ -22,20 +21,17 @@ class ReviewerEditNote extends StatefulWidget {
 }
 
 class _ReviewerEditNoteState extends State<ReviewerEditNote> {
-
   TextEditingController title = TextEditingController();
   TextEditingController content = TextEditingController();
 
   @override
   void initState() {
-    
     super.initState();
 
     NoteModel noteModel = widget.noteModel;
 
     title = TextEditingController(text: noteModel.title);
     content = TextEditingController(text: noteModel.content);
-
   }
 
   @override
@@ -68,8 +64,9 @@ class _ReviewerEditNoteState extends State<ReviewerEditNote> {
                 content: content.text,
                 noteId: widget.noteId,
               );
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => ReviewerNotes()));
+              Navigator.of(context)
+                ..pop()
+                ..pop();
             },
           ),
         ],

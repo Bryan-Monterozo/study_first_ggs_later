@@ -59,4 +59,14 @@ class ReviewerFcDB {
     await firestore.collection('Decks').doc(deckId).collection('cards').doc(cardId).delete();
   }
 
+  getCardCount({
+    required deckId,
+  }) async {
+    QuerySnapshot collection = await FirebaseFirestore.instance
+      .collection('Decks')
+      .doc(deckId)
+      .collection('cards').get();
+
+    return collection.docs.length;
+  }
 }
