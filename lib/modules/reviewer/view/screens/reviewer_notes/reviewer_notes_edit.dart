@@ -9,6 +9,7 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 class ReviewerEditNote extends StatefulWidget {
   final noteId;
   final NoteModel noteModel;
+  static const String routeName = '/reviewer/mynotes/note/edit';
 
   const ReviewerEditNote({
     Key? key,

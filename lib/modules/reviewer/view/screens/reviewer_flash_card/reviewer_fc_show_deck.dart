@@ -11,8 +11,9 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcShowDeck extends StatelessWidget {
   final DeckModel? deckModel;
+  final noteColors = NoteColors().noteColorsList;
 
-  const ReviewerFcShowDeck({
+  ReviewerFcShowDeck({
     Key? key,
     required this.deckModel,
   }) : super(key: key);
@@ -77,7 +78,8 @@ class ReviewerFcShowDeck extends StatelessWidget {
                       : CardTileWidget(
                           deckModel: deckModel!,
                           cardModel: cardModel,
-                          colorNotes: NoteColors().noteColorsList[index]);
+                          colorNotes: NoteColors().noteColorsList[index % 15]
+                          ,);
                 });
           },
         ),

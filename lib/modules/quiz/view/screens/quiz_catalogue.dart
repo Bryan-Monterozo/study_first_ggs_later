@@ -16,7 +16,8 @@ class QuizCatalogue extends StatelessWidget {
             icon: const Icon(Icons.search),
           ),
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+            },
             icon: const Icon(Icons.add),
           ),
         ],

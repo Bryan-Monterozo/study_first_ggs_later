@@ -10,6 +10,7 @@ class ReviewerNotes extends StatelessWidget {
   ReviewerNotes({super.key});
 
   final ref = FirebaseFirestore.instance.collection('Notes');
+  static const String routeName = '/reviewer/mynotes';
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +42,7 @@ class ReviewerNotes extends StatelessWidget {
                         final noteDataMap = snapshot.data!.docs[index];
                         NoteModel noteModel = NoteModel.fromMap(
                             noteDataMap.data() as Map<String, dynamic>);
-                        return NoteTileWidget(noteModel: noteModel, colorNotes: NoteColors().noteColorsList[index]);
+                        return NoteTileWidget(noteModel: noteModel, colorNotes: NoteColors().noteColorsList[index % 15]);
                       });
                 })));
   }

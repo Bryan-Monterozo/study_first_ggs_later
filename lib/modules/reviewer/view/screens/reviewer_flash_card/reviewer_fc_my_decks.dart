@@ -48,7 +48,7 @@ class ReviewerFcMyDecks extends StatelessWidget {
                       fcDataMap.data() as Map<String, dynamic>);
                   return DeckTileWidget(
                       deckModel: deckModel,
-                      colorNotes: NoteColors().noteColorsList[index]);
+                      colorNotes: NoteColors().noteColorsList[index % 15]);
                 });
           },
         ),

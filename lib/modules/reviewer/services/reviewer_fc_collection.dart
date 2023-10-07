@@ -10,7 +10,8 @@ class ReviewerFcDB {
   }) async {
     final collection = firestore.collection('Decks').doc();
 
-    DeckModel deckModel = DeckModel(deckName: deckName, deckDesc: deckDesc, deckId: collection.id);
+    DeckModel deckModel = DeckModel(
+        deckName: deckName, deckDesc: deckDesc, deckId: collection.id);
 
     await collection.set(deckModel.toMap());
   }
@@ -20,14 +21,14 @@ class ReviewerFcDB {
     required cardBack,
     required deckId,
   }) async {
-    
-    final collection = firestore
-      .collection('Decks')
-      .doc(deckId)
-      .collection('cards')
-      .doc();
+    final collection =
+        firestore.collection('Decks').doc(deckId).collection('cards').doc();
 
-    CardModel cardModel = CardModel(cardFront: cardFront, cardBack: cardBack,deckId: deckId, cardId: collection.id);
+    CardModel cardModel = CardModel(
+        cardFront: cardFront,
+        cardBack: cardBack,
+        deckId: deckId,
+        cardId: collection.id);
 
     await collection.set(cardModel.toMap());
   }
@@ -38,12 +39,11 @@ class ReviewerFcDB {
     required deckId,
     required cardId,
   }) async {
-    
     final collection = firestore
-      .collection('Decks')
-      .doc(deckId)
-      .collection('cards')
-      .doc(cardId);
+        .collection('Decks')
+        .doc(deckId)
+        .collection('cards')
+        .doc(cardId);
 
     await collection.update({
       'cardFront': cardFront,
@@ -51,21 +51,49 @@ class ReviewerFcDB {
     });
   }
 
+  deleteDeckFromDB({
+    required deckId,
+    required cardId,
+  }) async {
+    await firestore.collection('Decks').doc(deckId).delete();
+    await firestore.collection('Decks').doc(deckId).collection('cards').get().then((cards) {
+      for (DocumentSnapshot doc in cards.docs) {
+        doc.reference.delete();
+      }
+    });
+
+    // firestore.collection('Decks').get().then((decks) {
+    //   decks.docs.forEach((deckElement) {
+    //     firestore.collection('Decks').doc(deckElement.id.toString()).collection('cards').get().then((cards) {
+    //       cards.docs.forEach((cardElement) {
+    //         firestore.collection('Decks').doc(deckElement.id.toString()).collection('cards').doc(cardElement.id.toString()).delete();
+    //       });
+    //     });
+    //     firestore.collection('Decks').doc(deckElement.id.toString()).delete();
+    //   });
+    // });
+  }
+
   deleteCardFromDeck({
     required deckId,
     required cardId,
   }) async {
-
-    await firestore.collection('Decks').doc(deckId).collection('cards').doc(cardId).delete();
+    await firestore
+        .collection('Decks')
+        .doc(deckId)
+        .collection('cards')
+        .doc(cardId)
+        .delete();
   }
 
   getCardCount({
     required deckId,
   }) async {
     QuerySnapshot collection = await FirebaseFirestore.instance
-      .collection('Decks')
-      .doc(deckId)
-      .collection('cards').get();
+        .collection('Decks')
+        .doc(deckId)
+        .collection('cards')
+        .get();
 
     return collection.docs.length;
   }

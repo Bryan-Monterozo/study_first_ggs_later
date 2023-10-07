@@ -9,35 +9,40 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 class StudyReviewer extends StatelessWidget {
   const StudyReviewer({super.key});
 
+  static const String routeName = '/reviewer';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavDrawer(),
-        appBar: SharedAppBar(
-          titlePic: titlePic(context),
-          withPic: withPic(context),
-        ),
-        body: SafeArea(
-            child: Center(
-          child: Column(
+      drawer: const NavDrawer(),
+      appBar: SharedAppBar(
+        titlePic: titlePic(context),
+        withPic: withPic(context),
+      ),
+      body: SafeArea(
+          child: Center(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            ReviewerButton(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerFcMyDecks()));
-              },
-              text: "Flash Cards",
-            ),
-            ReviewerButton(
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerNotes()));
-              },
-              text: "Notes",
-            ),
-          ]),
-        )),
-      );
+              ReviewerButton(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ReviewerFcMyDecks()));
+                },
+                text: "Flash Cards",
+              ),
+              ReviewerButton(
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerNotes()));
+                },
+                text: "Notes",
+              ),
+            ]),
+      )),
+    );
   }
 }
 
