@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_add_card.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_shuffle_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_add_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_shuffle_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/card_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 

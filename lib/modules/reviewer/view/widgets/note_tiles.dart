@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes_show.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes/reviewer_notes_show.dart';
 
 class NoteTileWidget extends StatelessWidget {
   final NoteModel noteModel;
