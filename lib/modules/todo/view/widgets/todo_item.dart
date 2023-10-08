@@ -6,7 +6,11 @@ class TodoItem extends StatelessWidget {
   final onToDoChanged;
   final onDeleteItem;
 
+<<<<<<< HEAD
   const TodoItem({
+=======
+  TodoItem({
+>>>>>>> 262f956584a778469416a12cc693839c87bfef8d
     Key? key,
     required this.todo,
     required this.onToDoChanged,
