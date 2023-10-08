@@ -48,6 +48,7 @@ class _StudyToDoState extends State<StudyToDo> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+<<<<<<< HEAD
                       ),
                       for (ToDo todoo in todosList)
                         TodoItem(
@@ -112,6 +113,71 @@ class _StudyToDoState extends State<StudyToDo> {
                         style: TextStyle(fontSize: 40),
                       ),
                     ),
+=======
+                      ),
+                      for (ToDo todoo in todosList)
+                        TodoItem(
+                          todo: todoo,
+                          onToDoChanged: _handleToDoChange,
+                          onDeleteItem: _deleteTodoItem,
+                        ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          ),
+          Align(
+              alignment: Alignment.bottomCenter,
+              child: Row(children: [
+                Expanded(
+                  child: Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 20,
+                        right: 20,
+                        left: 20,
+                      ),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            offset: Offset(0.0, 0.0),
+                            blurRadius: 10.0,
+                            spreadRadius: 0.0,
+                          ),
+                        ],
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: TextField(
+                        controller: _todoController,
+                        decoration: const InputDecoration(
+                          hintText: 'Add a new todo item',
+                          border: InputBorder.none,
+                        ),
+                      )),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(
+                    bottom: 20,
+                    right: 20,
+                  ),
+                  child: ElevatedButton(
+                      child: const Text(
+                        '+',
+                        style: TextStyle(fontSize: 40),
+                      ),
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.blue,
+                        minimumSize: Size(60, 60),
+                        elevation: 10,
+                      )),
+>>>>>>> 262f956584a778469416a12cc693839c87bfef8d
                 )
               ])),
         ],
