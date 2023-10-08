@@ -69,8 +69,8 @@ class _PomodoroState extends State<Pomodoro> {
               const SizedBox(
                 height: 20,
               ),
-              const Text('POMODORO',
-                  style: TextStyle(fontSize: 30, fontFamily: 'PIXEL', color: Color(0xFF0B6BA7),)),
+              const Text('Pomodoro',
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFF0B6BA7),)),
               const SizedBox(
                 height: 20,
               ),
