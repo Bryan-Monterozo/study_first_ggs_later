@@ -6,7 +6,6 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_coll
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcAddCard extends StatefulWidget {
-
   final deckId;
   final DeckModel? deckModel;
 
@@ -48,7 +47,7 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
             icon: const Icon(Icons.save),
             onPressed: () {
               ReviewerFcDB().addCardToDeck(
-                cardFront: cardFront, 
+                cardFront: cardFront,
                 cardBack: cardBack,
                 deckId: widget.deckId,
               );
