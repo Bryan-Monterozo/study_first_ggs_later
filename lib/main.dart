@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
+import 'firebase_options.dart';
 
 
 void main() async {
@@ -54,52 +54,3 @@ class _MyAppState extends State<MyApp> {
 }
 
 
-
-// class MenuBar extends StatefulWidget {
-//   const MenuBar({super.key});
-
-//   @override
-//   State<MenuBar> createState() => _MenuBarState();
-// }
-
-// class _MenuBarState extends State<MenuBar> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Study First'),
-//       ),
-//       drawer: Drawer(
-//         child: ListView(
-//           children: [
-//             DrawerHeader(
-//                 decoration: const BoxDecoration(
-//                   color: Colors.orange,
-//                 ),
-//                 child: Column(
-//                   children: [
-//                     Container(
-//                       height: 60,
-//                       width: 60,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30)),
-//                     )
-//                   ],
-//                 )),
-//             const ListTile(
-//               leading: Icon(
-//                 Icons.home,
-//                 size: 20,
-//                 color: Colors.black,
-//               ),
-//               title: Text(
-//                 'Home',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

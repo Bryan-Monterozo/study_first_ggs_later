@@ -2,14 +2,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_show_deck.dart';
+import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
 
 class DeckTileWidget extends StatelessWidget {
-
-  
   final DeckModel deckModel;
   final Color colorNotes;
-
 
   const DeckTileWidget({
     Key? key,
@@ -20,28 +18,51 @@ class DeckTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: GestureDetector(
-        onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerFcShowDeck(deckModel: deckModel)));
-        },
-        child: Container(
-          decoration: BoxDecoration(
-              color: colorNotes,
-              borderRadius: const BorderRadius.all(
-                Radius.circular(8),
-              )),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                deckModel.deckName,
-                style: const TextStyle(fontSize: 20, color: Colors.black),
-              ),
-              Text(deckModel.deckDesc),
-            ],
-        ),
-      ),
-    ));
+        padding: const EdgeInsets.all(3.0),
+        child: GestureDetector(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>
+                        ReviewerFcShowDeck(deckModel: deckModel)));
+          },
+          onLongPress: () async {
+
+            final result = await showMenu(
+              context: context,
+              position: const RelativeRect.fromLTRB(100, 100, 100, 100),
+              items: [
+                const PopupMenuItem(
+                  value: 'delete',
+                  child: Text('Delete', style: TextStyle(color: Colors.red)),
+                ),
+              ]
+            );
+
+              switch (result) {
+                case 'delete':
+                  ReviewerFcDB().deleteDeckFromDB(deckId: deckModel.deckId, cardId: deckModel.deckId);
+                  break;
+              }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                color: colorNotes,
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(8),
+                )),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  deckModel.deckName,
+                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                ),
+                Text(deckModel.deckDesc),
+              ],
+            ),
+          ),
+        ));
   }
 }

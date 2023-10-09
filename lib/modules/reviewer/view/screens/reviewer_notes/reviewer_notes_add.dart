@@ -5,6 +5,7 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_c
 
 class ReviewerAddNote extends StatefulWidget {
   const ReviewerAddNote({super.key});
+  static const String routeName = '/reviewer/mynotes/note/add';
 
   @override
   State<ReviewerAddNote> createState() => _ReviewerAddNoteState();

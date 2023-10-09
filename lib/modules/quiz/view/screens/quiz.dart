@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_buttons.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
@@ -10,21 +12,19 @@ class StudyQuiz extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-          titlePic: titlePic(context),
-          withPic: withPic(context),
-        ),
-      body: const Center(
+        titlePic: titlePic(context),
+        withPic: withPic(context),
+      ),
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              'Quiz',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
+            QuizButton(
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizCatalogue()));
+              }, 
+              text: 'Quiz Catalogue')
           ],
         ),
       ),

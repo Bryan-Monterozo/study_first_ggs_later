@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes_edit.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes/reviewer_notes_edit.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 // import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
@@ -13,7 +13,7 @@ class ReviewerShowNote extends StatelessWidget {
 
   const ReviewerShowNote({
     Key? key,
-    this.noteModel,
+    required this.noteModel,
   }) : super(key: key);
 
   @override

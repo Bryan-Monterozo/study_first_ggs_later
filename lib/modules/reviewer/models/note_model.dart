@@ -9,7 +9,6 @@ class NoteModel {
     required this.content,
     required this.timeCreated,
     required this.noteId,
-
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +26,6 @@ class NoteModel {
       content: map['content'] as String,
       timeCreated: map['timeCreated'],
       noteId: map['noteId'] as String,
-
     );
   }
 }

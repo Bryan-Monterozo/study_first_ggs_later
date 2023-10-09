@@ -1,28 +1,18 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
-import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 
-class ReviewerFcAddCard extends StatefulWidget {
-
-  final deckId;
-  final DeckModel? deckModel;
-
-  const ReviewerFcAddCard({
-    Key? key,
-    required this.deckId,
-    required this.deckModel,
-  }) : super(key: key);
+class QuizCreate extends StatefulWidget {
+  const QuizCreate({super.key});
 
   @override
-  State<ReviewerFcAddCard> createState() => _ReviewerFcAddCardState();
+  State<QuizCreate> createState() => _QuizCreateState();
 }
 
-class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
-  String cardFront = '';
-  String cardBack = '';
+class _QuizCreateState extends State<QuizCreate> {
+
+  String quizTitle = '';
+  String quizDesc = '';
 
   @override
   Widget build(BuildContext context) {
@@ -47,11 +37,9 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () {
-              ReviewerFcDB().addCardToDeck(
-                cardFront: cardFront, 
-                cardBack: cardBack,
-                deckId: widget.deckId,
-              );
+              QuizCatDB().addQuizToDB(
+                quizTitle: quizTitle, 
+                quizDesc: quizDesc,);
               Navigator.pop(context);
             },
           ),
@@ -66,19 +54,19 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
               child: TextField(
                 maxLength: 60,
                 onChanged: (value) {
-                  cardFront = value;
+                  quizTitle = value;
                 },
-                decoration: const InputDecoration(hintText: 'Input a Question'),
+                decoration: const InputDecoration(hintText: 'Deck Name'),
               ),
             ),
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
-                maxLength: 200,
+                maxLength: 60,
                 onChanged: (value) {
-                  cardBack = value;
+                  quizDesc = value;
                 },
-                decoration: const InputDecoration(hintText: 'Input an Answer'),
+                decoration: const InputDecoration(hintText: 'Description'),
               ),
             ),
           ],

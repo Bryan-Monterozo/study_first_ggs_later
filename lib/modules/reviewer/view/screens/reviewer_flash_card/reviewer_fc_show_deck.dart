@@ -4,14 +4,16 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_add_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_add_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_shuffle_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/card_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcShowDeck extends StatelessWidget {
   final DeckModel? deckModel;
+  final noteColors = NoteColors().noteColorsList;
 
-  const ReviewerFcShowDeck({
+  ReviewerFcShowDeck({
     Key? key,
     required this.deckModel,
   }) : super(key: key);
@@ -42,20 +44,25 @@ class ReviewerFcShowDeck extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              // ReviewerNotesDB().deleteNoteDB(noteModel!.noteId);
-              // Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewerFcShuffleCard(
+                            // deckId: deckModel!.deckId,
+                            deckModel: deckModel,
+                          )));
             },
-            icon: const Icon(Icons.search),
+            icon: const Icon(Icons.shuffle),
           ),
         ],
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance
-            .collection('Decks')
-            .doc(deckModel!.deckId)
-            .collection('cards')
-            .snapshots(),
+              .collection('Decks')
+              .doc(deckModel!.deckId)
+              .collection('cards')
+              .snapshots(),
           builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
@@ -71,7 +78,8 @@ class ReviewerFcShowDeck extends StatelessWidget {
                       : CardTileWidget(
                           deckModel: deckModel!,
                           cardModel: cardModel,
-                          colorNotes: NoteColors().noteColorsList[index]);
+                          colorNotes: NoteColors().noteColorsList[index % 15]
+                          ,);
                 });
           },
         ),

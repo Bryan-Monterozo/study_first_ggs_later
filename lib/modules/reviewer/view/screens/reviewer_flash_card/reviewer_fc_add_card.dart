@@ -3,46 +3,32 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc_show_deck.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-class ReviewerFcEditCard extends StatefulWidget {
+class ReviewerFcAddCard extends StatefulWidget {
   final deckId;
-  final CardModel cardModel;
-  final DeckModel deckModel;
+  final DeckModel? deckModel;
 
-  const ReviewerFcEditCard({
+  const ReviewerFcAddCard({
     Key? key,
     required this.deckId,
-    required this.cardModel,
     required this.deckModel,
   }) : super(key: key);
 
   @override
-  State<ReviewerFcEditCard> createState() => _ReviewerFcEditCardState();
+  State<ReviewerFcAddCard> createState() => _ReviewerFcAddCardState();
 }
 
-class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
-
-  TextEditingController cardFront = TextEditingController();
-  TextEditingController cardBack = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    CardModel cardModel = widget.cardModel;
-
-    cardFront = TextEditingController(text: cardModel.cardFront);
-    cardBack = TextEditingController(text: cardModel.cardBack);
-  }
+class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
+  String cardFront = '';
+  String cardBack = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        title: 'Edit Card',
+        title: 'Create a Deck',
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -60,18 +46,12 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () {
-              ReviewerFcDB().editCardFromDeck(
-                cardFront: cardFront.text,
-                cardBack: cardBack.text,
+              ReviewerFcDB().addCardToDeck(
+                cardFront: cardFront,
+                cardBack: cardBack,
                 deckId: widget.deckId,
-                cardId: widget.cardModel.cardId,
               );
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcShowDeck(
-                            deckModel: widget.deckModel,
-                          )));
+              Navigator.pop(context);
             },
           ),
         ],
@@ -84,7 +64,9 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
                 maxLength: 60,
-                controller: cardFront,
+                onChanged: (value) {
+                  cardFront = value;
+                },
                 decoration: const InputDecoration(hintText: 'Input a Question'),
               ),
             ),
@@ -92,7 +74,9 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
                 maxLength: 200,
-                controller: cardBack,
+                onChanged: (value) {
+                  cardBack = value;
+                },
                 decoration: const InputDecoration(hintText: 'Input an Answer'),
               ),
             ),

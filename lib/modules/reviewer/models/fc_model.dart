@@ -49,3 +49,31 @@ class CardModel {
     );
   }
 }
+
+class RandomCardModel {
+  final String cardFront;
+  final String cardBack;
+  final String deckId;
+  final String cardId;
+
+  RandomCardModel({required this.cardFront, required this.cardBack, required this.deckId, required this.cardId});
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'cardFront': cardFront,
+      'cardBack': cardBack,
+      'deckId': deckId,
+      'cardId': cardId,
+    };
+  }
+
+  factory RandomCardModel.fromMap(Map<String, dynamic> map) {
+    return RandomCardModel(
+      cardFront: map['cardFront'] as String,
+      cardBack: map['cardBack'] as String,
+      deckId: map['deckId'] as String,
+      cardId: map['cardId'] as String,
+    );
+  }
+}
+
