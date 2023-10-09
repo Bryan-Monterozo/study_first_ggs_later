@@ -77,15 +77,15 @@ Widget titlePic(BuildContext context) {
       borderRadius: BorderRadius.circular(8),
       child: kIsWeb
           ? Image.network(
-              'assets/images/Rectangle1.png',
-              width: 115,
+              'assets/images/logo.png',
+              width: 160,
               height: 52,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
             )
           : Image.asset(
-              'assets/images/Rectangle1.png',
-              width: 115,
+              'assets/images/logo.png',
+              width: 160,
               height: 52,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
