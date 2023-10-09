@@ -83,7 +83,10 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerHome(),
+                      child: const DrawerNavButton(
+                        navText: 'Home',
+                        navIcon: Icons.home_outlined,
+                      ),
                     ),
                   ),
                   Padding(
@@ -98,7 +101,10 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerPomodoro(),
+                      child: const DrawerNavButton(
+                        navText: 'Pomodoro',
+                        navIcon: Icons.timer_outlined,
+                      ),
                     ),
                   ),
                   Padding(
@@ -113,7 +119,10 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerCalendar(),
+                      child: const DrawerNavButton(
+                        navText: 'Calendar',
+                        navIcon: Icons.calendar_month_outlined,
+                      ),
                     ),
                   ),
                   Padding(
@@ -128,7 +137,10 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerToDo(),
+                      child: const DrawerNavButton(
+                        navText: 'To Do',
+                        navIcon: Icons.checklist_outlined,
+                      ),
                     ),
                   ),
                   Padding(
@@ -143,7 +155,10 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerReviewer(),
+                      child: const DrawerNavButton(
+                        navText: 'Reviewer',
+                        navIcon: Icons.my_library_books_outlined,
+                      ),
                     ),
                   ),
                   Padding(
@@ -158,96 +173,14 @@ class NavDrawer extends StatelessWidget {
                           ),
                         );
                       },
-                      child: const DrawerQuiz(),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const Divider(
-                            height: 12,
-                            thickness: 2,
-                            color: Color(0xFFE5E7EB),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 12, 0, 0),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              children: [
-                                Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: Color(0x4D9489F5),
-                                    borderRadius: BorderRadius.circular(12),
-                                    border: Border.all(
-                                      color: Color(0xFF6F61EF),
-                                      width: 2,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsetsDirectional.fromSTEB(
-                                            2, 2, 2, 2),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(8),
-                                      child: Image.network(
-                                        'assets/images/Ellipse1.png',
-                                        width: 44,
-                                        height: 44,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        12, 0, 0, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          'User06969',
-                                          style: TextStyle(
-                                            fontFamily: 'Product Sans',
-                                            color: Color(0xFF15161E),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 4, 0, 0),
-                                          child: Text(
-                                            'ryanmikes@gmail.com',
-                                            style: TextStyle(
-                                              fontFamily: 'Product Sans',
-                                              color: Color(0xFF606A85),
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                      child: const DrawerNavButton(
+                        navText: 'Quiz',
+                        navIcon: Icons.quiz_outlined,
                       ),
                     ),
+                  ),
+                  const Expanded(
+                    child: NavBarStatus(),
                   ),
                 ],
               ),

@@ -5,7 +5,7 @@ import 'package:study_first_ggs_later/modules/todo/view/widgets/todo_item.dart';
 import 'package:study_first_ggs_later/modules/todo/models/todo.dart';
 
 class StudyToDo extends StatefulWidget {
-  StudyToDo({super.key});
+  const StudyToDo({super.key});
 
   @override
   State<StudyToDo> createState() => _StudyToDoState();
