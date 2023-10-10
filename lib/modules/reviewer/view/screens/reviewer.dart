@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_my_decks.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes/reviewer_notes.dart';
 // import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fc.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/widgets/reviewer_button.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/widgets/reviewer_widget.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
@@ -20,32 +20,43 @@ class StudyReviewer extends StatelessWidget {
         withPic: withPic(context),
       ),
       body: SafeArea(
-          child: Center(
         child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              ReviewerButton(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ReviewerFcMyDecks()));
-                },
-                text: "Flash Cards",
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ReviewerGesture(
+                    revNavigator: ReviewerFcMyDecks(),
+                    revContainer: const ReviewerWidget(
+                      reviewerText: 'Flash Cards',
+                      reviewerColor: Color(0xFF0B6BA7),
+                      reviewerIcon: Icons.add_card_rounded,
+                    ),
+                  ),
+                  ReviewerGesture(
+                    revNavigator: ReviewerNotes(),
+                    revContainer: const ReviewerWidget(
+                      reviewerText: 'Notes',
+                      reviewerColor: Color(0xFF57BA5E),
+                      reviewerIcon: Icons.edit_note_rounded,
+                    ),
+                  ),
+                ],
               ),
-              ReviewerButton(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerNotes()));
-                },
-                text: "Notes",
-              ),
-            ]),
-      )),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
 
 // _showFlashCard() {
-  
+
 // }
