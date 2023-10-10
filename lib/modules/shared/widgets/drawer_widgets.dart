@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 //TODO: Place Holder muna mga to dapat yung mga title, and eme is maging object for reusability
 // @jhnpaulogrc kaw mag aayos nito
@@ -7,7 +8,8 @@ class DrawerNavButton extends StatelessWidget {
   final String? navText;
   final IconData? navIcon;
 
-  const DrawerNavButton({super.key, required this.navText, required this.navIcon});
+  const DrawerNavButton(
+      {super.key, required this.navText, required this.navIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +60,7 @@ class DrawerNavButton extends StatelessWidget {
     );
   }
 }
+
 class NavBarStatus extends StatelessWidget {
   const NavBarStatus({
     super.key,
@@ -96,12 +99,19 @@ class NavBarStatus extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        'assets/images/Ellipse1.png',
-                        width: 44,
-                        height: 44,
-                        fit: BoxFit.cover,
-                      ),
+                      child: kIsWeb
+                          ? Image.network(
+                              'assets/images/Ellipse1.png',
+                              width: 44,
+                              height: 44,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/images/Ellipse1.png',
+                              width: 44,
+                              height: 44,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),

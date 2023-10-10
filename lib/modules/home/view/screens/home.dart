@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
@@ -36,7 +37,9 @@ class _HomeState extends State<StudyHome> {
                   navDesc:
                       'Supercharge your \nproductivity with our \nPomodoro technic',
                   navColor: Color(0xFF818C80),
-                  navPic: 'assets/images/pomodoro.png',
+                  navPic: kIsWeb
+                      ? 'assets/images/pomodoro.png'
+                      : 'assets/images/pomodoro.png',
                 ),
               ),
               HomeNavGesture(
@@ -46,7 +49,9 @@ class _HomeState extends State<StudyHome> {
                   navDesc:
                       'Master your schedule \neffortlessly with our \nuser-friendly \ncalendar app.',
                   navColor: Color(0xFF7E7F7A),
-                  navPic: 'assets/images/calendar.png',
+                  navPic: kIsWeb
+                      ? 'assets/images/calendar.png'
+                      : 'assets/images/calendar.png',
                 ),
               ),
               HomeNavGesture(
@@ -55,7 +60,9 @@ class _HomeState extends State<StudyHome> {
                   navText: 'TO DO',
                   navDesc: 'Unleash your productivity \nwith our to-do app',
                   navColor: Color(0xFF734429),
-                  navPic: 'assets/images/to do.png',
+                  navPic: kIsWeb
+                      ? 'assets/images/to do.png'
+                      : 'assets/images/to do.png',
                 ),
               ),
               HomeNavGesture(
@@ -64,7 +71,9 @@ class _HomeState extends State<StudyHome> {
                   navText: 'REVIEWER',
                   navDesc: 'Elevate your studies \nwith our Reviewer tool',
                   navColor: Color(0xFF405568),
-                  navPic: 'assets/images/reviewer.png',
+                  navPic: kIsWeb
+                      ? 'assets/images/reviewer.png'
+                      : 'assets/images/reviewer.png',
                 ),
               ),
               HomeNavGesture(
@@ -73,7 +82,9 @@ class _HomeState extends State<StudyHome> {
                   navText: 'QUIZ',
                   navDesc: 'Take a quiz, \nchallenge yourself.',
                   navColor: Color(0xFF598F78),
-                  navPic: 'assets/images/quiz.png',
+                  navPic: kIsWeb
+                      ? 'assets/images/quiz.png'
+                      : 'assets/images/quiz.png',
                 ),
               ),
             ],
