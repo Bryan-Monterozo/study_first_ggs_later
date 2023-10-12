@@ -3,6 +3,8 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_coll
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcAddDeck extends StatefulWidget {
+
+  static const String routeName = '/reviewer/reviewer_fc_add_deck';
   const ReviewerFcAddDeck({super.key});
 
   @override

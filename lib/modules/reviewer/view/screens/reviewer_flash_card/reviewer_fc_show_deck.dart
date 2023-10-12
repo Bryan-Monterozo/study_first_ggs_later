@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_add_card.dart';
@@ -10,6 +9,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/widgets/card_tiles.d
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcShowDeck extends StatelessWidget {
+  static const String routeName = '/reviewer/:reviewer_fc_show_deck';
   final DeckModel? deckModel;
   final noteColors = NoteColors().noteColorsList;
 
@@ -25,6 +25,7 @@ class ReviewerFcShowDeck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
@@ -78,8 +79,8 @@ class ReviewerFcShowDeck extends StatelessWidget {
                       : CardTileWidget(
                           deckModel: deckModel!,
                           cardModel: cardModel,
-                          colorNotes: NoteColors().noteColorsList[index % 15]
-                          ,);
+                          colorNotes: NoteColors().noteColorsList[index % 15],
+                        );
                 });
           },
         ),

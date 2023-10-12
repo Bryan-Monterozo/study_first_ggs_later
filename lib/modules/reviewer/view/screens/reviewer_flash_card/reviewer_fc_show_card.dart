@@ -6,6 +6,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card.d
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcShowCard extends StatelessWidget {
+  static const String routeName = '/reviewer/reviewer_fc_show_card';
   final CardModel? cardModel;
   final DeckModel? deckModel;
 

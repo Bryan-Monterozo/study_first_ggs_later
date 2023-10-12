@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
@@ -28,23 +27,22 @@ class DeckTileWidget extends StatelessWidget {
                         ReviewerFcShowDeck(deckModel: deckModel)));
           },
           onLongPress: () async {
-
             final result = await showMenu(
-              context: context,
-              position: const RelativeRect.fromLTRB(100, 100, 100, 100),
-              items: [
-                const PopupMenuItem(
-                  value: 'delete',
-                  child: Text('Delete', style: TextStyle(color: Colors.red)),
-                ),
-              ]
-            );
+                context: context,
+                position: const RelativeRect.fromLTRB(100, 100, 100, 100),
+                items: [
+                  const PopupMenuItem(
+                    value: 'delete',
+                    child: Text('Delete', style: TextStyle(color: Colors.red)),
+                  ),
+                ]);
 
-              switch (result) {
-                case 'delete':
-                  ReviewerFcDB().deleteDeckFromDB(deckId: deckModel.deckId, cardId: deckModel.deckId);
-                  break;
-              }
+            switch (result) {
+              case 'delete':
+                ReviewerFcDB().deleteDeckFromDB(
+                    deckId: deckModel.deckId, cardId: deckModel.deckId);
+                break;
+            }
           },
           child: Container(
             decoration: BoxDecoration(

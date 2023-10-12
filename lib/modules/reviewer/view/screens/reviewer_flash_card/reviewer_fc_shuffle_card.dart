@@ -11,6 +11,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_s
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcShuffleCard extends StatelessWidget {
+  static const String routeName = '/reviewer/reviewer_fc_shuffle_card';
   final DeckModel? deckModel;
   final CardModel? cardModel;
 

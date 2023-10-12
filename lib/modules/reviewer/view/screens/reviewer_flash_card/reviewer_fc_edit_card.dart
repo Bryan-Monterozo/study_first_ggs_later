@@ -6,6 +6,8 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_coll
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcEditCard extends StatefulWidget {
+
+  static const String routeName = '/reviewer/reviewer_fc_edit_card';
   final deckId;
   final CardModel cardModel;
   final DeckModel deckModel;

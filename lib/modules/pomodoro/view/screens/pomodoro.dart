@@ -2,12 +2,14 @@ library pomodoro_lib;
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-// import 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 part 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
@@ -31,6 +33,7 @@ TODO: Organize code blocks to their respective folders
 */
 
 class Pomodoro extends StatefulWidget {
+  static const String routeName = '/pomodoro';
   const Pomodoro({Key? key}) : super(key: key);
 
   @override
@@ -47,10 +50,20 @@ class _PomodoroState extends State<Pomodoro> {
   int pomodoroNum = 0;
   int setNum = 0;
 
+  NavController navController = Get.put(NavController());
+
   @override
   void dispose() {
     _cancelTimer();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    navController.initNav(
+      currentRoute: CurrentRoute.pomodoro,
+    );
+    super.initState();
   }
 
   @override

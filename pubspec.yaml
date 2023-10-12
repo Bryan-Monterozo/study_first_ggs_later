@@ -45,6 +45,7 @@ dependencies:
   card_swiper: ^3.0.1
   shared_preferences: ^2.2.1
   get: ^4.6.6
+  enum_to_string: ^2.0.1
 
 dev_dependencies:
   flutter_test:
@@ -63,10 +64,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/Ellipse1.png
-    - assets/images/Rectangle1.png
-    - assets/images/pomodoro.png
-    - assets/images/calendar.png
+    - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

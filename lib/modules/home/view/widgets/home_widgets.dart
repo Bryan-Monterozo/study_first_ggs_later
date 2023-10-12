@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class HomeNavButtonWidget extends StatelessWidget {
   final String? navText;
@@ -60,12 +61,19 @@ class HomeNavButtonWidget extends StatelessWidget {
               alignment: const AlignmentDirectional(0.00, 0.00),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
+                child: kIsWeb ? Image.network(
                   navPic!,
                   width: 150,
                   height: 200,
                   fit: BoxFit.cover,
-                ),
+                )
+                : Image.asset(
+                  navPic!,
+                  width: 150,
+                  height: 200,
+                  fit: BoxFit.cover,
+                )
+                ,
               ),
             ),
           ],

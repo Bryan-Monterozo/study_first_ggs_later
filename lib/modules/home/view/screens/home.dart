@@ -1,22 +1,38 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
 
 class StudyHome extends StatefulWidget {
+  static const String routeName = '/';
   const StudyHome({super.key});
+
 
   @override
   State<StudyHome> createState() => _HomeState();
 }
 
 class _HomeState extends State<StudyHome> {
+
+  NavController navController = Get.put(NavController());
+
+  @override
+  void initState() {
+    navController.initNav(
+      currentRoute: CurrentRoute.home,
+    );
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +74,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyToDo(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'TO DO',
-                  navDesc: 'Unleash your productivity \nwith our to-do app',
+                  navDesc: 'Unleash your \nproductivity \nwith our to-do app',
                   navColor: Color(0xFF734429),
                   navPic: kIsWeb
                       ? 'assets/images/to do.png'
@@ -69,7 +85,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyReviewer(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'REVIEWER',
-                  navDesc: 'Elevate your studies \nwith our Reviewer tool',
+                  navDesc: 'Elevate your studies \nwith our \nReviewer tool',
                   navColor: Color(0xFF405568),
                   navPic: kIsWeb
                       ? 'assets/images/reviewer.png'
@@ -80,7 +96,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyQuiz(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'QUIZ',
-                  navDesc: 'Take a quiz, \nchallenge yourself.',
+                  navDesc: 'Take a quiz, \nchallenge \nyourself.',
                   navColor: Color(0xFF598F78),
                   navPic: kIsWeb
                       ? 'assets/images/quiz.png'
