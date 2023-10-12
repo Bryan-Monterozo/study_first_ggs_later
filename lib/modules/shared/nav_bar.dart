@@ -125,6 +125,7 @@ class NavDrawer extends StatelessWidget {
                         const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                     child: GestureDetector(
                       onTap: () {
+                        navController.currentNav.value = CurrentRoute.calendar;
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -146,6 +147,7 @@ class NavDrawer extends StatelessWidget {
                         const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                     child: GestureDetector(
                       onTap: () {
+                        navController.currentNav.value = CurrentRoute.todo;
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -167,6 +169,7 @@ class NavDrawer extends StatelessWidget {
                         const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                     child: GestureDetector(
                       onTap: () {
+                        navController.currentNav.value = CurrentRoute.reviewer;
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
@@ -188,6 +191,7 @@ class NavDrawer extends StatelessWidget {
                         const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
                     child: GestureDetector(
                       onTap: () {
+                        navController.currentNav.value = CurrentRoute.quiz;
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
