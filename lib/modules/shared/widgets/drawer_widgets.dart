@@ -7,9 +7,10 @@ import 'package:flutter/foundation.dart';
 class DrawerNavButton extends StatelessWidget {
   final String? navText;
   final IconData? navIcon;
+  final Color? navColor;
 
   const DrawerNavButton(
-      {super.key, required this.navText, required this.navIcon});
+      {super.key, required this.navText, required this.navIcon, this.navColor});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class DrawerNavButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-        color: const Color(0xFFF1F4F8),
+        color: navColor,
         borderRadius: BorderRadius.circular(12),
         shape: BoxShape.rectangle,
       ),

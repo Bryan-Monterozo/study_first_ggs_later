@@ -3,6 +3,7 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyCalendar extends StatelessWidget {
+  static const String routeName = '/calendar';
   const StudyCalendar({super.key});
 
   @override

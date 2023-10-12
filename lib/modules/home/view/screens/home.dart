@@ -10,6 +10,7 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
 
 class StudyHome extends StatefulWidget {
+  static const String routeName = '/';
   const StudyHome({super.key});
 
   @override
@@ -58,7 +59,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyToDo(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'TO DO',
-                  navDesc: 'Unleash your productivity \nwith our to-do app',
+                  navDesc: 'Unleash your \nproductivity \nwith our to-do app',
                   navColor: Color(0xFF734429),
                   navPic: kIsWeb
                       ? 'assets/images/to do.png'
@@ -69,7 +70,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyReviewer(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'REVIEWER',
-                  navDesc: 'Elevate your studies \nwith our Reviewer tool',
+                  navDesc: 'Elevate your studies \nwith our \nReviewer tool',
                   navColor: Color(0xFF405568),
                   navPic: kIsWeb
                       ? 'assets/images/reviewer.png'
@@ -80,7 +81,7 @@ class _HomeState extends State<StudyHome> {
                 navigator: StudyQuiz(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'QUIZ',
-                  navDesc: 'Take a quiz, \nchallenge yourself.',
+                  navDesc: 'Take a quiz, \nchallenge \nyourself.',
                   navColor: Color(0xFF598F78),
                   navPic: kIsWeb
                       ? 'assets/images/quiz.png'

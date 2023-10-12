@@ -5,6 +5,7 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyQuiz extends StatelessWidget {
+  static const String routeName = '/quiz';
   const StudyQuiz({super.key});
 
   @override

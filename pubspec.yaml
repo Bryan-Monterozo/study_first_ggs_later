@@ -63,10 +63,7 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/Ellipse1.png
-    - assets/images/Rectangle1.png
-    - assets/images/pomodoro.png
-    - assets/images/calendar.png
+    - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

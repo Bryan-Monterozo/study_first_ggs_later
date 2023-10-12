@@ -31,6 +31,7 @@ TODO: Organize code blocks to their respective folders
 */
 
 class Pomodoro extends StatefulWidget {
+  static const String routeName = '/pomodoro';
   const Pomodoro({Key? key}) : super(key: key);
 
   @override

@@ -5,6 +5,7 @@ import 'package:study_first_ggs_later/modules/todo/view/widgets/todo_item.dart';
 import 'package:study_first_ggs_later/modules/todo/models/todo.dart';
 
 class StudyToDo extends StatefulWidget {
+  static const String routeName = '/todo';
   const StudyToDo({super.key});
 
   @override
