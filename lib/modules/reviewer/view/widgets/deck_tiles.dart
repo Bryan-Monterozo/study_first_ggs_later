@@ -50,7 +50,7 @@ class DeckTileWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 color: colorNotes,
                 borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
+                  Radius.circular(12),
                 )),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

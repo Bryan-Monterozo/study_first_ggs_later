@@ -95,8 +95,8 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                         // ReviewerFcDB()
                         //     .getCardCount(deckId: deckModel!.deckId),
                         itemWidth: 300.0,
-                        itemHeight: 500.0,
-                        layout: SwiperLayout.STACK,
+                        itemHeight: 350.0,
+                        layout: SwiperLayout.TINDER,
                       ),
                     ),
                     Expanded(

@@ -18,37 +18,43 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
       elevation: 0.0,
       margin: const EdgeInsets.only(
           left: 32.0, right: 32.0, top: 20.0, bottom: 0.0),
-      color: Colors.white,
+      color: Colors.transparent,
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
         side: CardSide.FRONT,
         speed: 500,
         front: Container(
           decoration: const BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            color: Color(0xFF0B6BA7),
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                cardModel!.cardFront,
-                style: const TextStyle(fontSize: 30, color: Colors.white),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+                child: Text(
+                  cardModel!.cardFront,
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                ),
               ),
             ],
           ),
         ),
         back: Container(
           decoration: const BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            color: Color(0xFF57BA5E),
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                cardModel!.cardBack,
-                style: const TextStyle(fontSize: 30, color: Colors.white),
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
+                child: Text(
+                  cardModel!.cardBack,
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                ),
               ),
             ],
           ),
