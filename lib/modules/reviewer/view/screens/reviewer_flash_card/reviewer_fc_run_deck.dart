@@ -1,22 +1,19 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
-
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_shuffle_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_shuffle.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-class ReviewerFcShuffleCard extends StatelessWidget {
+class ReviewerFcRunDeck extends StatelessWidget {
   final DeckModel? deckModel;
   final CardModel? cardModel;
 
 
-  const ReviewerFcShuffleCard({
+  const ReviewerFcRunDeck({
     Key? key,
     this.deckModel,
     this.cardModel,
@@ -35,24 +32,29 @@ class ReviewerFcShuffleCard extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              // Navigator.pushReplacement(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => ReviewerFcEditCard(
-              //               deckId: deckModel!.deckId,
-              //               cardModel: cardModel!,
-              //               deckModel: deckModel!,
-              //             )));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewerFcShowDeck(
+                            // deckId: deckModel!.deckId,
+                            // cardModel: cardModel!,
+                            deckModel: deckModel!,
+                          )));
             },
             icon: const Icon(Icons.edit),
           ),
           IconButton(
             onPressed: () {
-              // ReviewerFcDB().deleteCardFromDeck(
-              //     deckId: cardModel!.deckId, cardId: cardModel!.cardId);
-              // Navigator.pop(context);
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewerFcShuffleCard(
+                            // deckId: deckModel!.deckId,
+                            // cardModel: cardModel!,
+                            deckModel: deckModel!,
+                          )));
             },
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.shuffle_rounded),
           ),
         ],
       ),
@@ -68,8 +70,8 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 }
 
-                final random = (snapshot.data! as QuerySnapshot).docs.toList()
-                  ..shuffle();
+                // final random = (snapshot.data! as QuerySnapshot).docs.toList()
+                //   ..shuffle();
 
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,8 +82,8 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           // .shuffle();
 
-                          // final fcDataMap = snapshot.data!.docs..shuffle();
-                          final fcDataMap = random[index];
+                          final fcDataMap = snapshot.data!.docs[index];
+                          // final fcDataMap = random[index];
                           CardModel cardModel = CardModel.fromMap(
                               fcDataMap.data() as Map<String, dynamic>);
                           return snapshot.data!.docs.isEmpty

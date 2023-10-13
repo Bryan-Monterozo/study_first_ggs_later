@@ -6,10 +6,12 @@ import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 
 class ReviewerFcShuffleWidget extends StatelessWidget {
   final CardModel? cardModel;
+  final Color? colorNotes;
 
   const ReviewerFcShuffleWidget({
     Key? key,
     this.cardModel,
+    this.colorNotes,
   }) : super(key: key);
 
   @override
@@ -24,8 +26,8 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
         side: CardSide.FRONT,
         speed: 500,
         front: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFF0B6BA7),
+          decoration: BoxDecoration(
+            color: colorNotes,
             borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
@@ -42,8 +44,8 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
           ),
         ),
         back: Container(
-          decoration: const BoxDecoration(
-            color: Color(0xFF57BA5E),
+          decoration: BoxDecoration(
+            color: colorNotes,
             borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
