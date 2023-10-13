@@ -41,12 +41,12 @@ class _HomeState extends State<StudyHome> {
         titlePic: titlePic(context),
         withPic: withPic(context),
       ),
-      body: const Center(
+      body: Center(
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              HomeNavGesture(
+              const HomeNavGesture(
                 navigator: Pomodoro(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'POMODORO',
@@ -60,7 +60,7 @@ class _HomeState extends State<StudyHome> {
               ),
               HomeNavGesture(
                 navigator: StudyCalendar(),
-                navContainer: HomeNavButtonWidget(
+                navContainer: const HomeNavButtonWidget(
                   navText: 'CALENDAR',
                   navDesc:
                       'Master your schedule \neffortlessly with our \nuser-friendly \ncalendar app.',
@@ -70,7 +70,7 @@ class _HomeState extends State<StudyHome> {
                       : 'assets/images/calendar.png',
                 ),
               ),
-              HomeNavGesture(
+              const HomeNavGesture(
                 navigator: StudyToDo(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'TO DO',
@@ -83,7 +83,7 @@ class _HomeState extends State<StudyHome> {
               ),
               HomeNavGesture(
                 navigator: StudyReviewer(),
-                navContainer: HomeNavButtonWidget(
+                navContainer: const HomeNavButtonWidget(
                   navText: 'REVIEWER',
                   navDesc: 'Elevate your studies \nwith our \nReviewer tool',
                   navColor: Color(0xFF405568),
@@ -94,7 +94,7 @@ class _HomeState extends State<StudyHome> {
               ),
               HomeNavGesture(
                 navigator: StudyQuiz(),
-                navContainer: HomeNavButtonWidget(
+                navContainer: const HomeNavButtonWidget(
                   navText: 'QUIZ',
                   navDesc: 'Take a quiz, \nchallenge \nyourself.',
                   navColor: Color(0xFF598F78),

@@ -11,11 +11,14 @@ class QuizCreate extends StatelessWidget {
   final QuestionModel? questionModel;
   final quizId;
 
-  QuizCreate({super.key, this.questionModel, this.quizId,});
+  QuizCreate({
+    super.key,
+    this.questionModel,
+    this.quizId,
+  });
 
   @override
   Widget build(BuildContext context) {
-
     String quizTitle = '';
     String quizDesc = '';
 
@@ -58,7 +61,8 @@ class QuizCreate extends StatelessWidget {
                   decoration: BoxDecoration(border: Border.all()),
                   child: TextFormField(
                     maxLength: 60,
-                    validator: (value) => value!.isEmpty ? 'Enter a title' : null,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a title' : null,
                     initialValue: quizTitle,
                     onChanged: (value) {
                       quizTitle = value;
@@ -70,7 +74,8 @@ class QuizCreate extends StatelessWidget {
                   decoration: BoxDecoration(border: Border.all()),
                   child: TextFormField(
                     maxLength: 60,
-                    validator: (value) => value!.isEmpty ? 'Enter a title' : null,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a title' : null,
                     initialValue: quizDesc,
                     onChanged: (value) {
                       quizDesc = value;
@@ -78,7 +83,7 @@ class QuizCreate extends StatelessWidget {
                     decoration: const InputDecoration(hintText: 'Description'),
                   ),
                 ),
-                  quizController.hasQuestionField.value == false
+                quizController.hasQuestionField.value == false
                     ? Container(
                         margin: const EdgeInsets.all(30),
                         child: Column(
@@ -87,7 +92,8 @@ class QuizCreate extends StatelessWidget {
                               ElevatedButton(
                                   onPressed: () {
                                     quizController.removeQuestionButton();
-                                    debugPrint('${quizController.hasQuestionField.value}');
+                                    debugPrint(
+                                        '${quizController.hasQuestionField.value}');
                                   },
                                   child: const Text('Add Question')),
                             ]),
@@ -95,8 +101,20 @@ class QuizCreate extends StatelessWidget {
                     : Container(
                         padding: const EdgeInsets.all(10),
                         margin: const EdgeInsets.all(10),
-                        child: QuizAddQuestion(questionModel: questionModel, quizId: quizId,)
-                      ),
+                        child: QuizAddQuestion(
+                          questionModel: questionModel,
+                          quizId: quizId,
+                        )),
+                quizController.hasQuestionField.value == true
+                    ? ElevatedButton(
+                        onPressed: () {
+                          quizController.deleteQuestionField();
+                          debugPrint(
+                              '${quizController.hasQuestionField.value}');
+                        },
+                        child: const Text('Add Question'),
+                      )
+                    : Container(),
               ],
             ),
           ),

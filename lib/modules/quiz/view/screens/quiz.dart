@@ -9,12 +9,13 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyQuiz extends StatelessWidget {
   static const String routeName = '/quiz';
-  const StudyQuiz({super.key});
+  final NavController navController = Get.put(NavController());
+  StudyQuiz({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    NavController navController = Get.put(NavController());
+    
 
     navController.initNav(
       currentRoute: CurrentRoute.quiz,

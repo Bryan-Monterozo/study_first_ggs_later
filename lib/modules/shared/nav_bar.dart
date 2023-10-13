@@ -129,7 +129,7 @@ class NavDrawer extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const StudyCalendar(),
+                            builder: (context) => StudyCalendar(),
                           ),
                         );
                       },
@@ -173,7 +173,7 @@ class NavDrawer extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const StudyReviewer(),
+                            builder: (context) => StudyReviewer(),
                           ),
                         );
                       },
@@ -195,7 +195,7 @@ class NavDrawer extends StatelessWidget {
                         Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const StudyQuiz(),
+                            builder: (context) => StudyQuiz(),
                           ),
                         );
                       },

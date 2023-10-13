@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +17,7 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
       elevation: 0.0,
       margin: const EdgeInsets.only(
           left: 32.0, right: 32.0, top: 20.0, bottom: 0.0),
-      color: Colors.white,
+      color: Colors.transparent,
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
         side: CardSide.FRONT,

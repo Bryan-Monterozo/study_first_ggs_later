@@ -10,15 +10,15 @@ import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.d
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyReviewer extends StatelessWidget {
-
-  const StudyReviewer({super.key});
-
+  final NavController navController = Get.put(NavController());
+  StudyReviewer({super.key});
+  
   static const String routeName = '/reviewer';
 
   @override
   Widget build(BuildContext context) {
 
-    NavController navController = Get.put(NavController());
+    
     navController.initNav(
       currentRoute: CurrentRoute.reviewer,
     );

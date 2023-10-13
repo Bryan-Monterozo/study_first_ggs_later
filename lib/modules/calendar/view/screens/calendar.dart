@@ -7,12 +7,13 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyCalendar extends StatelessWidget {
   static const String routeName = '/calendar';
-  const StudyCalendar({super.key});
+  final NavController navController = Get.put(NavController());
+  StudyCalendar({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    NavController navController = Get.put(NavController());
+    
 
     navController.initNav(
       currentRoute: CurrentRoute.calendar,
