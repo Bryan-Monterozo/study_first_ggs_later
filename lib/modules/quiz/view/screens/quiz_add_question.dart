@@ -1,115 +1,123 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
+import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 // import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-class QuizAddQuestion extends GetView<QuizController> {
-  final quizId;
-  final QuestionModel? questionModel;
+class QuizAddQuestion extends StatelessWidget {
+  late final quizId;
+  final QuizModel? quizModel;
+  // final QuestionModel? questionModel;
+  final QuizCatDB quizCatDB = QuizCatDB();
+  // final QuizController quizController = Get.put(QuizController());
 
   QuizAddQuestion({
     Key? key,
-    required this.questionModel,
+    // required this.questionModel,
     required this.quizId,
+    required this.quizModel,
   }) : super(key: key);
-
-  // final question = ''.obs;
-
-  // final option1 = ''.obs;
-
-  // final option2 = ''.obs;
-
-  // final option3 = ''.obs;
-
-  // final option4 = ''.obs;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-      child: Obx(
-        () => Column(
-          children: [
-            Obx(
-              () => Container(
+    final quizController = Get.find<QuizController>();
+
+    return Material(
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        child: Form(
+          child: Column(
+            children: [
+              Container(
                 decoration: BoxDecoration(border: Border.all()),
-                child: Obx(
-                  () => TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter a question' : null,
-                    onChanged: (value) {
-                      controller.question.value = value;
-                    },
-                    decoration: const InputDecoration(hintText: 'Question'),
-                  ),
+                child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter a question' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: quizController.questionController,
+                  decoration: const InputDecoration(hintText: 'Question'),
                 ),
               ),
-            ),
-            Obx(
-              () => Container(
+              Container(
                 decoration: BoxDecoration(border: Border.all()),
-                child: Obx(
-                  () => TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter the Correct Answer' : null,
-                    onChanged: (value) {
-                      controller.option1.value = value;
-                    },
-                    decoration: const InputDecoration(
-                        hintText: 'Option 1 (Correct Answer)'),
-                  ),
+                child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter the Correct Answer' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: quizController.option1Controller,
+                  decoration: const InputDecoration(
+                      hintText: 'Option 1 (Correct Answer)'),
                 ),
               ),
-            ),
-            Obx(
-              () => Container(
+              Container(
                 decoration: BoxDecoration(border: Border.all()),
-                child: Obx(
-                  () => TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter an Option' : null,
-                    onChanged: (value) {
-                      controller.option2.value = value;
-                    },
-                    decoration: const InputDecoration(hintText: 'Option 2'),
-                  ),
+                child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter an Option' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: quizController.option2Controller,
+                  decoration: const InputDecoration(hintText: 'Option 2'),
                 ),
               ),
-            ),
-            Obx(
-              () => Container(
+              Container(
                 decoration: BoxDecoration(border: Border.all()),
-                child: Obx(
-                  () => TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter an Option' : null,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: (value) {
-                      controller.option3.value = value;
-                    },
-                    decoration: const InputDecoration(hintText: 'Option 3'),
-                  ),
+                child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter an Option' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: quizController.option3Controller,
+                  decoration: const InputDecoration(hintText: 'Option 3'),
                 ),
               ),
-            ),
-            Obx(
-              () => Container(
+              Container(
                 decoration: BoxDecoration(border: Border.all()),
-                child: Obx(
-                  () => TextFormField(
-                    validator: (value) =>
-                        value!.isEmpty ? 'Enter an Option' : null,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
-                    onChanged: (value) {
-                      controller.option4.value = value;
-                    },
-                    decoration: const InputDecoration(hintText: 'Option 4'),
-                  ),
+                child: TextFormField(
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter an Option' : null,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  controller: quizController.option4Controller,
+                  decoration: const InputDecoration(hintText: 'Option 4'),
                 ),
               ),
-            ),
-          ],
+              ElevatedButton(
+                onPressed: () async {
+
+                  final SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+
+                  final quizId = prefs.getString('quizId');
+                  
+                  // final ref = FirebaseFirestore.instance
+                  //     .collection('Quizzes')
+                  //     .doc();
+                  // ref.get().then((DocumentSnapshot doc) {
+                  //   quizModel = QuizModel.fromMap(
+                  //       doc.data() as Map<String, dynamic>);
+                  //   quizId = quizModel!.quizId;
+                  //   debugPrint('Quiz ID: $quizId');
+                  // });
+                  quizCatDB.addQuestionToQuiz(
+                      question: quizController.question.value,
+                      option1: quizController.option1.value,
+                      option2: quizController.option2.value,
+                      option3: quizController.option3.value,
+                      option4: quizController.option4.value,
+                      quizId: quizId);
+                  debugPrint('${quizController.hasQuestionField.value}'
+                      ' ${quizController.question.value}'
+                      ' ${quizController.option1.value}'
+                      ' ${quizController.option2.value}'
+                      ' ${quizController.option3.value}'
+                      ' ${quizController.option4.value}'
+                      ' $quizId');
+                  quizController.deleteQuestionField();
+                },
+                child: const Text('Add Question'),
+              )
+            ],
+          ),
         ),
       ),
     );
