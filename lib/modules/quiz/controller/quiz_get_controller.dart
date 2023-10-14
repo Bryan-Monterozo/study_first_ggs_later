@@ -1,10 +1,16 @@
 // import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 // import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 
 class QuizController extends GetxController {
+  QuizCatDB quizCatDB = QuizCatDB();
+  final quizFormKey = GlobalKey<FormState>();
+  final quizFormKeyTop = GlobalKey<FormState>();
+
   TextEditingController questionController = TextEditingController();
   TextEditingController option1Controller = TextEditingController();
   TextEditingController option2Controller = TextEditingController();
@@ -19,8 +25,9 @@ class QuizController extends GetxController {
   RxString option4 = ''.obs;
 
   @override
-  void onInit() {
+  void onInit() async {
     super.onInit();
+    hasQuestionField.value = false;
     questionController = TextEditingController(text: question.value);
     option1Controller = TextEditingController(text: option1.value);
     option2Controller = TextEditingController(text: option2.value);
@@ -42,6 +49,39 @@ class QuizController extends GetxController {
     option4Controller.addListener(() {
       option4.value = option4Controller.text;
     });
+  }
+
+  @override
+  void onClose() {
+    super.onClose();
+    questionController.dispose();
+    option1Controller.dispose();
+    option2Controller.dispose();
+    option3Controller.dispose();
+    option4Controller.dispose();
+  }
+
+
+  questionValidation() async {
+    final isValid = quizFormKey.currentState!.validate();
+    if (isValid) {
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final quizId = prefs.getString('quizId');
+      quizCatDB.addQuestionToQuiz(
+          question: question.value,
+          option1: option1.value,
+          option2: option2.value,
+          option3: option3.value,
+          option4: option4.value,
+          quizId: quizId);
+      deleteQuestionField();
+    } else {
+      Get.snackbar(
+        'Quiz',
+        'Please fill up all the fields',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
   }
 
   // updateQuizID({

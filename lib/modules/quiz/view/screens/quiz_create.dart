@@ -6,25 +6,22 @@ import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
-// import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 
 class QuizCreate extends StatelessWidget {
-  final QuizController quizController = Get.put(QuizController());
-  final QuizCatDB quizDBController = Get.put(QuizCatDB());
   final QuestionModel? questionModel;
-  // final QuizModel quizModel;
-  final QuizCatDB quizCatDB = QuizCatDB();
   final quizId;
 
-  QuizCreate({
+  const QuizCreate({
     super.key,
     this.questionModel,
     this.quizId,
-    // this.quizModel,
   });
 
   @override
   Widget build(BuildContext context) {
+    Get.delete<QuizController>();
+    final QuizController quizController = Get.put(QuizController());
+    final QuizCatDB quizCatDB = QuizCatDB();
     String quizTitle = '';
     String quizDesc = '';
 
@@ -32,7 +29,19 @@ class QuizCreate extends StatelessWidget {
 
     return Scaffold(
       appBar: SharedAppBar(
-        leading: leadingBack(context),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
+          onPressed: () async {
+            final SharedPreferences prefs =
+                await SharedPreferences.getInstance();
+            quizCatDB.deleteQuizFromDB(quizId: quizId);
+            prefs.remove('quizId');
+            Get.back();
+          },
+        ),
         title: 'Create a Quiz',
         actions: [
           ElevatedButton(
@@ -44,17 +53,25 @@ class QuizCreate extends StatelessWidget {
               'Cancel',
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
-            onPressed: () {
-              Navigator.pop(context);
+            onPressed: () async {
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              final quizId = prefs.getString('quizId');
+              quizCatDB.deleteQuizFromDB(quizId: quizId);
+              prefs.remove('quizId');
+              Get.back();
             },
           ),
           IconButton(
             icon: const Icon(Icons.save),
-            onPressed: () {
-              // QuizCatDB().addQuizToDB(
-              //   quizTitle: quizTitle,
-              //   quizDesc: quizDesc,);
-              // Navigator.pop(context);
+            onPressed: () async {
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              final quizId = prefs.getString('quizId');
+              await quizCatDB.saveCatalogueToDB(
+                  quizTitle: quizTitle, quizDesc: quizDesc, quizId: quizId);
+              prefs.remove('quizId');
+              Get.back();
             },
           ),
         ],
@@ -64,65 +81,119 @@ class QuizCreate extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child:
               // Obx(
-              Column(
-            children: [
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextFormField(
-                  maxLength: 60,
-                  validator: (value) => value!.isEmpty ? 'Enter a title' : null,
-                  initialValue: quizTitle,
-                  onChanged: (value) {
-                    quizTitle = value;
-                  },
-                  decoration: const InputDecoration(hintText: 'Quiz Title'),
+              Form(
+            key: quizController.quizFormKeyTop,
+            child: Column(
+              children: [
+                Container(
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: TextFormField(
+                    maxLength: 60,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a title' : null,
+                    initialValue: quizTitle,
+                    onChanged: (value) {
+                      quizTitle = value;
+                    },
+                    decoration: const InputDecoration(hintText: 'Quiz Title'),
+                  ),
                 ),
-              ),
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextFormField(
-                  maxLength: 60,
-                  validator: (value) => value!.isEmpty ? 'Enter a title' : null,
-                  initialValue: quizDesc,
-                  onChanged: (value) {
-                    quizDesc = value;
-                  },
-                  decoration: const InputDecoration(hintText: 'Description'),
+                Container(
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: TextFormField(
+                    maxLength: 60,
+                    validator: (value) =>
+                        value!.isEmpty ? 'Enter a description' : null,
+                    initialValue: quizDesc,
+                    onChanged: (value) {
+                      quizDesc = value;
+                    },
+                    decoration: const InputDecoration(hintText: 'Description'),
+                  ),
                 ),
-              ),
-              Container(
-                margin: const EdgeInsets.all(30),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () async {
-                            final SharedPreferences prefs = await SharedPreferences.getInstance();
-                            // final ref = FirebaseFirestore.instance
-                            //     .collection('Quizzes')
-                            //     .doc(quizId);
-                            quizController.removeQuestionButton();
-                            quizCatDB.addQuizToDB(
-                                quizTitle: quizTitle, quizDesc: quizDesc);
-                            final getQuizId = quizDBController.quizId.value;
-                            debugPrint('Quiz GETX ID: $getQuizId');
-                            final quizId = prefs.getString('quizId');
+                Obx(
+                  () => quizController.hasQuestionField.value == false
+                      ? Container(
+                          margin: const EdgeInsets.all(30),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      final isValid = quizController
+                                          .quizFormKeyTop.currentState!
+                                          .validate();
+                                      if (isValid) {
+                                        // final SharedPreferences prefs = await SharedPreferences.getInstance();
+                                        // final quizId = prefs.getString('quizId');
+                                        quizController.removeQuestionButton();
+                                        quizCatDB.addQuizToDB(
+                                            quizTitle: quizTitle,
+                                            quizDesc: quizDesc);
+                                        quizController.hasQuestionField.value = true;
+                                      } else {
+                                        Get.snackbar(
+                                          'Quiz',
+                                          'Please fill up all the fields',
+                                          snackPosition: SnackPosition.BOTTOM,
+                                        );
+                                      }
+                                      // final ref = FirebaseFi
+                                      // restore.instance
+                                      //     .collection('Quizzes')
+                                      //     .doc(quizId);
+                                      // quizController.removeQuestionButton();
+                                      // quizCatDB.addQuizToDB(
+                                      //     quizTitle: quizTitle,
+                                      //     quizDesc: quizDesc);
+                                      // quizController.hasQuestionField.value =
+                                      //     true;
 
-                            // debugPrint('quizId: $quizId');
-                            // quizModel = QuizModel(
-                            //   quizId: ref.id,
-                            //   quizTitle: quizTitle,
-                            //   quizDesc: quizDesc,
-                            // );
-                            Get.to(QuizAddQuestion(
-                              quizId: quizId,
-                              quizModel: quizModel,
-                            ));
+                                      // debugPrint('quizId: $quizId');
+                                      // quizModel = QuizModel(
+                                      //   quizId: ref.id,
+                                      //   quizTitle: quizTitle,
+                                      //   quizDesc: quizDesc,
+                                      // );
+                                      // Get.to(QuizAddQuestion(
+                                      //   quizId: quizId,
+                                      //   quizModel: quizModel,
+                                      // ));
+                                    },
+                                    child: const Text('Add Question')),
+                              ]),
+                        )
+                      : Container(
+                          padding: const EdgeInsets.all(10),
+                          margin: const EdgeInsets.all(10),
+                          child: QuizAddQuestion(
+                            quizModel: quizModel,
+                            quizId: quizId,
+                          )),
+                ),
+                Obx(
+                  () => quizController.hasQuestionField.value == true
+                      ? ElevatedButton(
+                          onPressed: () async {
+                            quizController.questionValidation();
+                            // final SharedPreferences prefs =
+                            //     await SharedPreferences.getInstance();
+                            // final quizId = prefs.getString('quizId');
+                            // quizCatDB.addQuestionToQuiz(
+                            //     question: quizController.question.value,
+                            //     option1: quizController.option1.value,
+                            //     option2: quizController.option2.value,
+                            //     option3: quizController.option3.value,
+                            //     option4: quizController.option4.value,
+                            //     quizId: quizId);
+                            // quizController.deleteQuestionField();
                           },
-                          child: const Text('Add Question')),
-                    ]),
-              ),
-            ],
+                          child: const Text('Add More Question'),
+                        )
+                      : Container(),
+                ),
+              ],
+            ),
           ),
           // ),
         );

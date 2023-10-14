@@ -1,11 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 
-class QuizCatDB extends GetxController {
-  
+class QuizCatDB {
   final firestore = FirebaseFirestore.instance;
   RxString quizId = ''.obs;
 
@@ -20,9 +18,9 @@ class QuizCatDB extends GetxController {
         quizTitle: quizTitle, quizDesc: quizDesc, quizId: collection.id);
 
     await collection.set(quizModel.toMap());
-    quizId.value = collection.id;
-    debugPrint('Quiz ID: ${quizId.value}');
     await prefs.setString('quizId', collection.id);
+    // quizId.value = collection.id;
+    // debugPrint('Quiz ID: ${quizId.value}');
   }
 
   addQuestionToQuiz({
@@ -42,7 +40,7 @@ class QuizCatDB extends GetxController {
         option2: option2,
         option3: option3,
         option4: option4,
-        quizId: collection.id);
+        quizId: quizId);
     await collection.set(questionModel.toMap());
   }
 
@@ -53,5 +51,37 @@ class QuizCatDB extends GetxController {
       'quizTitle': quizTitle,
       'quizDesc': quizDesc,
     });
+  }
+
+  cancelQuizCreation({
+    required quizId,
+  }) async {
+    await firestore.collection('Decks').doc(quizId).delete();
+    await firestore
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('questions')
+        .get()
+        .then((questions) {
+      for (DocumentSnapshot doc in questions.docs) {
+        doc.reference.delete();
+      }
+    });
+  }
+
+  deleteQuizFromDB({
+    required quizId,
+  }) async {
+    await firestore.collection('Quiz').doc(quizId).delete();
+    // await firestore
+    //     .collection('Quiz')
+    //     .doc(quizId)
+    //     .collection('questions')
+    //     .get()
+    //     .then((questions) {
+    //   for (DocumentSnapshot doc in questions.docs) {
+    //     doc.reference.delete();
+    //   }
+    // });
   }
 }
