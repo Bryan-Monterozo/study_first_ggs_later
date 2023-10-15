@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_run_deck.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_buttons.dart';
 // import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 // import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 // import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card.dart';
@@ -14,7 +16,6 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 class ReviewerFcShuffleCard extends StatelessWidget {
   final DeckModel? deckModel;
   final CardModel? cardModel;
-
 
   const ReviewerFcShuffleCard({
     Key? key,
@@ -33,27 +34,27 @@ class ReviewerFcShuffleCard extends StatelessWidget {
         leading: leadingBack(context),
         titlePic: titlePic(context),
         actions: [
-          IconButton(
-            onPressed: () {
-              // Navigator.pushReplacement(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => ReviewerFcEditCard(
-              //               deckId: deckModel!.deckId,
-              //               cardModel: cardModel!,
-              //               deckModel: deckModel!,
-              //             )));
-            },
-            icon: const Icon(Icons.edit),
-          ),
-          IconButton(
-            onPressed: () {
-              // ReviewerFcDB().deleteCardFromDeck(
-              //     deckId: cardModel!.deckId, cardId: cardModel!.cardId);
-              // Navigator.pop(context);
-            },
-            icon: const Icon(Icons.delete),
-          ),
+          // IconButton(
+          //   onPressed: () {
+          //     // Navigator.pushReplacement(
+          //     //     context,
+          //     //     MaterialPageRoute(
+          //     //         builder: (context) => ReviewerFcEditCard(
+          //     //               deckId: deckModel!.deckId,
+          //     //               cardModel: cardModel!,
+          //     //               deckModel: deckModel!,
+          //     //             )));
+          //   },
+          //   icon: const Icon(Icons.edit),
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     // ReviewerFcDB().deleteCardFromDeck(
+          //     //     deckId: cardModel!.deckId, cardId: cardModel!.cardId);
+          //     // Navigator.pop(context);
+          //   },
+          //   icon: const Icon(Icons.delete),
+          // ),
         ],
       ),
       body: Container(
@@ -90,8 +91,8 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                                   // deckModel: deckModel!,
                                   // colorNotes: NoteColors.noteColor[index],
                                   cardModel: cardModel,
-                                  colorNotes: NoteColors().noteColorsList[index]
-                                );
+                                  colorNotes:
+                                      NoteColors().noteColorsList[index]);
                         },
                         itemCount: snapshot.data!.docs.length,
                         // ReviewerFcDB()
@@ -103,8 +104,27 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                     ),
                     Expanded(
                       flex: 1,
-                      child: Container(),
-                    )
+                      child: SizedBox(
+                        width: 400,
+                        height: 50,
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            FlashCardButtonGesture(
+                                flashCardButtonNavigator: ReviewerFcRunDeck(
+                                  deckModel: deckModel!,
+                                ),
+                                flashCardButtonContainer:
+                                    const FlashCardButtonWidget(
+                                  flashCardButtonText: 'Quit',
+                                  flashCardButtonColor: Colors.redAccent,
+                                  flashCardButtonIcon: Icons.exit_to_app_rounded,
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 );
               }),

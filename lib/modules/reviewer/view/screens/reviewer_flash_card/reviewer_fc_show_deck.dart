@@ -67,7 +67,12 @@ class ReviewerFcShowDeck extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             }
-            return ListView.builder(
+            return GridView.builder(
+               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                mainAxisExtent: 300,
+                crossAxisCount: 2,
+                crossAxisSpacing: 0,
+                mainAxisSpacing: 0),
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   final fcDataMap = snapshot.data!.docs[index];

@@ -17,7 +17,7 @@ class CardTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(48.0),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -36,11 +36,12 @@ class CardTileWidget extends StatelessWidget {
                   Radius.circular(8),
                 )),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   cardModel.cardFront,
-                  style: const TextStyle(fontSize: 30, color: Colors.black),
+                  style: const TextStyle(fontSize: 30, color: Colors.white),
                 ),
               ],
             ),

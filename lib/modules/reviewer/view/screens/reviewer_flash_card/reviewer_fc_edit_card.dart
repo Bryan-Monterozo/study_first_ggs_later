@@ -85,15 +85,24 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
         child: Column(
           children: [
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+              decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(width: 2, color: const Color(0xFFcecece))),
               child: TextField(
                 maxLength: 60,
                 controller: cardFront,
                 decoration: const InputDecoration(hintText: 'Input a Question'),
               ),
             ),
+            const SizedBox(
+              height: 50,
+            ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
+              decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(width: 2, color: const Color(0xFFcecece))),
               child: TextField(
                 maxLength: 200,
                 controller: cardBack,

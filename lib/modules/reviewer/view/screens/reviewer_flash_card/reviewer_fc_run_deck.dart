@@ -5,13 +5,13 @@ import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_shuffle_card.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_buttons.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_shuffle.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcRunDeck extends StatelessWidget {
   final DeckModel? deckModel;
   final CardModel? cardModel;
-
 
   const ReviewerFcRunDeck({
     Key? key,
@@ -29,33 +29,33 @@ class ReviewerFcRunDeck extends StatelessWidget {
       appBar: SharedAppBar(
         leading: leadingBack(context),
         titlePic: titlePic(context),
-        actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcShowDeck(
-                            // deckId: deckModel!.deckId,
-                            // cardModel: cardModel!,
-                            deckModel: deckModel!,
-                          )));
-            },
-            icon: const Icon(Icons.edit),
-          ),
-          IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcShuffleCard(
-                            // deckId: deckModel!.deckId,
-                            // cardModel: cardModel!,
-                            deckModel: deckModel!,
-                          )));
-            },
-            icon: const Icon(Icons.shuffle_rounded),
-          ),
+        actions: const [
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => ReviewerFcShowDeck(
+          //                   // deckId: deckModel!.deckId,
+          //                   // cardModel: cardModel!,
+          //                   deckModel: deckModel!,
+          //                 )));
+          //   },
+          //   icon: const Icon(Icons.edit),
+          // ),
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => ReviewerFcShuffleCard(
+          //                   // deckId: deckModel!.deckId,
+          //                   // cardModel: cardModel!,
+          //                   deckModel: deckModel!,
+          //                 )));
+          //   },
+          //   icon: const Icon(Icons.shuffle_rounded),
+          // ),
         ],
       ),
       body: Container(
@@ -76,6 +76,17 @@ class ReviewerFcRunDeck extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
+                    const Expanded(
+                      child: SizedBox(
+                        child: Align(
+                          alignment: AlignmentDirectional(0.00, 1.00),
+                          child: Text(
+                            'My Cards',
+                            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFF0B6BA7),)
+                          ),
+                        ),
+                      ),
+                    ),
                     Expanded(
                       flex: 4,
                       child: Swiper(
@@ -92,8 +103,8 @@ class ReviewerFcRunDeck extends StatelessWidget {
                                   // deckModel: deckModel!,
                                   // colorNotes: NoteColors.noteColor[index],
                                   cardModel: cardModel,
-                                  colorNotes: NoteColors().noteColorsList[index]
-                                );
+                                  colorNotes:
+                                      NoteColors().noteColorsList[index]);
                         },
                         itemCount: snapshot.data!.docs.length,
                         // ReviewerFcDB()
@@ -104,9 +115,40 @@ class ReviewerFcRunDeck extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 1,
-                      child: Container(),
-                    )
+                        flex: 1,
+                        child: SizedBox(
+                          width: 400,
+                          height: 50,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              FlashCardButtonGesture(
+                                  flashCardButtonNavigator: ReviewerFcShowDeck(
+                                    deckModel: deckModel!,
+                                  ),
+                                  flashCardButtonContainer:
+                                      const FlashCardButtonWidget(
+                                    flashCardButtonText: 'View Cards',
+                                    flashCardButtonColor: Color(0xFF0B6BA7),
+                                    flashCardButtonIcon:
+                                        Icons.view_list_rounded,
+                                  )),
+                              FlashCardButtonGesture(
+                                  flashCardButtonNavigator:
+                                      ReviewerFcShuffleCard(
+                                    deckModel: deckModel!,
+                                  ),
+                                  flashCardButtonContainer:
+                                      const FlashCardButtonWidget(
+                                    flashCardButtonText: 'Play!',
+                                    flashCardButtonColor: Color(0xFF57BA5E),
+                                    flashCardButtonIcon:
+                                        Icons.shuffle_on_rounded,
+                                  )),
+                            ],
+                          ),
+                        )),
                   ],
                 );
               }),

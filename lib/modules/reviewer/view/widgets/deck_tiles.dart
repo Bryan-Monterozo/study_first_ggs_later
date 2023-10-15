@@ -19,7 +19,7 @@ class DeckTileWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.all(3.0),
+        padding: const EdgeInsets.all(48.0),
         child: GestureDetector(
           onTap: () {
             Navigator.push(
@@ -54,13 +54,16 @@ class DeckTileWidget extends StatelessWidget {
                   Radius.circular(12),
                 )),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   deckModel.deckName,
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                Text(deckModel.deckDesc),
+                Text(deckModel.deckDesc,
+                style: const TextStyle(fontSize: 14 , color: Colors.white),
+                ),
               ],
             ),
           ),
