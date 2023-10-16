@@ -1,13 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class QuizModel {
   final String quizTitle;
   final String quizDesc;
   final String quizId;
 
-  QuizModel({
-    required this.quizTitle, 
-    required this.quizDesc, 
-    required this.quizId
-  });
+  QuizModel(
+      {required this.quizTitle, required this.quizDesc, required this.quizId});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -33,14 +31,17 @@ class QuestionModel {
   final String option3;
   final String option4;
   final String quizId;
+  final String questionId;
 
   QuestionModel({
-    required this.question, 
-    required this.option1, 
-    required this.option2, 
-    required this.option3, 
+    required this.question,
+    required this.option1,
+    required this.option2,
+    required this.option3,
     required this.option4,
-    required this.quizId});
+    required this.quizId,
+    required this.questionId,
+  });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -50,6 +51,7 @@ class QuestionModel {
       'option3': option3,
       'option4': option4,
       'quizId': quizId,
+      'questionId': questionId,
     };
   }
 
@@ -61,6 +63,26 @@ class QuestionModel {
       option3: map['option3'] as String,
       option4: map['option4'] as String,
       quizId: map['quizId'] as String,
+      questionId: map['questionId'] as String,
     );
   }
+}
+
+class OptionModel {
+  String? question;
+  String? option1;
+  String? option2;
+  String? option3;
+  String? option4;
+  String? correctOption;
+  bool? answered;
+  OptionModel({
+    this.question,
+    this.option1,
+    this.option2,
+    this.option3,
+    this.option4,
+    this.correctOption,
+    this.answered,
+  });
 }

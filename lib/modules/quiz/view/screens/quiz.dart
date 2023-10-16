@@ -15,8 +15,6 @@ class StudyQuiz extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
-
     navController.initNav(
       currentRoute: CurrentRoute.quiz,
     );

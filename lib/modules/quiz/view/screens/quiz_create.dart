@@ -65,11 +65,42 @@ class QuizCreate extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.save),
             onPressed: () async {
-              final SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
+              final isValid = quizController.quizFormKeyTop.currentState!.validate();
+              final SharedPreferences prefs = await SharedPreferences.getInstance();
               final quizId = prefs.getString('quizId');
-              await quizCatDB.saveCatalogueToDB(
-                  quizTitle: quizTitle, quizDesc: quizDesc, quizId: quizId);
+              if (quizController.hasQuestionField.value == false) {
+                if (isValid) {
+                  // final SharedPreferences prefs = await SharedPreferences.getInstance();
+                  // final quizId = prefs.getString('quizId');
+                  quizController.removeQuestionButton();
+                  quizCatDB.addQuizToDB(
+                      quizTitle: quizTitle, quizDesc: quizDesc);
+                  quizController.hasQuestionField.value = true;
+                } else {
+                  Get.snackbar(
+                    'Quiz',
+                    'Please fill up all the fields',
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              } else {
+                if (isValid) {
+                  quizController.removeQuestionButton();
+                  quizCatDB.saveCatalogueToDB(
+                      quizTitle: quizTitle, quizDesc: quizDesc, quizId: quizId);
+                } else {
+                  Get.snackbar(
+                    'Quiz',
+                    'Please fill up all the fields',
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                }
+              }
+              // quizId == null
+              //     ? quizCatDB.addQuizToDB(
+              //         quizTitle: quizTitle, quizDesc: quizDesc)
+              //     : quizCatDB.saveCatalogueToDB(
+              //         quizTitle: quizTitle, quizDesc: quizDesc, quizId: quizId);
               prefs.remove('quizId');
               Get.back();
             },
@@ -130,7 +161,8 @@ class QuizCreate extends StatelessWidget {
                                         quizCatDB.addQuizToDB(
                                             quizTitle: quizTitle,
                                             quizDesc: quizDesc);
-                                        quizController.hasQuestionField.value = true;
+                                        quizController.hasQuestionField.value =
+                                            true;
                                       } else {
                                         Get.snackbar(
                                           'Quiz',
@@ -138,27 +170,6 @@ class QuizCreate extends StatelessWidget {
                                           snackPosition: SnackPosition.BOTTOM,
                                         );
                                       }
-                                      // final ref = FirebaseFi
-                                      // restore.instance
-                                      //     .collection('Quizzes')
-                                      //     .doc(quizId);
-                                      // quizController.removeQuestionButton();
-                                      // quizCatDB.addQuizToDB(
-                                      //     quizTitle: quizTitle,
-                                      //     quizDesc: quizDesc);
-                                      // quizController.hasQuestionField.value =
-                                      //     true;
-
-                                      // debugPrint('quizId: $quizId');
-                                      // quizModel = QuizModel(
-                                      //   quizId: ref.id,
-                                      //   quizTitle: quizTitle,
-                                      //   quizDesc: quizDesc,
-                                      // );
-                                      // Get.to(QuizAddQuestion(
-                                      //   quizId: quizId,
-                                      //   quizModel: quizModel,
-                                      // ));
                                     },
                                     child: const Text('Add Question')),
                               ]),
@@ -176,17 +187,6 @@ class QuizCreate extends StatelessWidget {
                       ? ElevatedButton(
                           onPressed: () async {
                             quizController.questionValidation();
-                            // final SharedPreferences prefs =
-                            //     await SharedPreferences.getInstance();
-                            // final quizId = prefs.getString('quizId');
-                            // quizCatDB.addQuestionToQuiz(
-                            //     question: quizController.question.value,
-                            //     option1: quizController.option1.value,
-                            //     option2: quizController.option2.value,
-                            //     option3: quizController.option3.value,
-                            //     option4: quizController.option4.value,
-                            //     quizId: quizId);
-                            // quizController.deleteQuestionField();
                           },
                           child: const Text('Add More Question'),
                         )
@@ -195,7 +195,6 @@ class QuizCreate extends StatelessWidget {
               ],
             ),
           ),
-          // ),
         );
       }),
     );

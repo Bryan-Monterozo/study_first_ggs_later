@@ -35,12 +35,14 @@ class QuizCatDB {
         firestore.collection('Quiz').doc(quizId).collection('questions').doc();
 
     QuestionModel questionModel = QuestionModel(
-        question: question,
-        option1: option1,
-        option2: option2,
-        option3: option3,
-        option4: option4,
-        quizId: quizId);
+      question: question,
+      option1: option1,
+      option2: option2,
+      option3: option3,
+      option4: option4,
+      quizId: quizId,
+      questionId: collection.id,
+    );
     await collection.set(questionModel.toMap());
   }
 
@@ -56,7 +58,7 @@ class QuizCatDB {
   cancelQuizCreation({
     required quizId,
   }) async {
-    await firestore.collection('Decks').doc(quizId).delete();
+    await firestore.collection('Quiz').doc(quizId).delete();
     await firestore
         .collection('Quiz')
         .doc(quizId)
@@ -84,4 +86,37 @@ class QuizCatDB {
     //   }
     // });
   }
+
+  getQuizFromDb({
+    required quizId,
+  }) async {
+    final quizRef = FirebaseFirestore.instance
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('questions')
+        .get();
+    return quizRef;
+  }
+
+  // retrieveOptions({required quizId, required questionId}) async {
+  //   final optionsRef = firestore
+  //       .collection('Quiz')
+  //       .doc(quizId)
+  //       .collection('questions')
+  //       .doc(questionId);
+  //   // List<String> optionsList = List<String>.from(optionsRef);
+
+  //   final optionSnaps = optionsRef.snapshots();
+
+  //   List<String> optionsList = snapshot.data()!['options'] as List<String>;
+  //   // optionsRef.snapshots().listen((doc) {
+  //   //   doc.data()!.forEach((key, value) {
+  //   //     correct = data['option1'];
+  //   //    });
+  //   // })
+
+// QuizModel quizModel = QuizModel.fromMap(
+//                       fcDataMap.data() as Map<String, dynamic>);
+  //   return optionsList;
+  // }
 }
