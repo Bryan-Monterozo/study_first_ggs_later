@@ -21,6 +21,7 @@ class ReviewerFcRunDeck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('deckModel: rundeck}');
     final ref = FirebaseFirestore.instance
         .collection('Decks')
         .doc(deckModel!.deckId)

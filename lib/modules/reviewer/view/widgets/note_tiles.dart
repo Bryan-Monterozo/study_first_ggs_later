@@ -24,22 +24,40 @@ class NoteTileWidget extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ReviewerShowNote(noteModel: noteModel,)));
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => ReviewerShowNote(
+                        noteModel: noteModel,
+                      )));
         },
         child: Container(
+            padding: const EdgeInsets.all(24.0),
             decoration: BoxDecoration(
                 color: colorNotes,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(8),
                 )),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
+                  overflow: TextOverflow.ellipsis,
                   noteModel.title,
                   style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
-                Text(dateCreated),
+                Text(
+                  overflow: TextOverflow.ellipsis,
+                  maxLines:10,
+                  noteModel.content,
+                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                ),
+                Text(
+                  overflow: TextOverflow.ellipsis,
+                  dateCreated,
+                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                ),
               ],
             )),
       ),

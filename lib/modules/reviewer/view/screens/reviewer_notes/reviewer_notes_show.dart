@@ -59,18 +59,21 @@ class ReviewerShowNote extends StatelessWidget {
             children: [
               Text(
                 noteModel!.title,
+                style: const TextStyle(fontSize: 24, color: Colors.black),
               ),
               const SizedBox(height: 9),
               Row(
                 children: [
                   Text(
                     'Date Modified: $dateCreated',
+                    style: const TextStyle(fontSize: 12, color: Colors.grey),
                   )
                 ],
               ),
               const SizedBox(height: 9),
               Text(
                 noteModel!.content,
+                style: const TextStyle(fontSize: 14, color: Colors.black),
               )
             ],
           ),

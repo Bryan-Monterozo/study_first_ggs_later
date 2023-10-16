@@ -102,7 +102,7 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                         layout: SwiperLayout.TINDER,
                       ),
                     ),
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: SizedBox(
                         width: 400,
@@ -112,15 +112,11 @@ class ReviewerFcShuffleCard extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             FlashCardButtonGesture(
-                                flashCardButtonNavigator: ReviewerFcRunDeck(
-                                  deckModel: deckModel!,
-                                ),
-                                flashCardButtonContainer:
-                                    const FlashCardButtonWidget(
-                                  flashCardButtonText: 'Quit',
-                                  flashCardButtonColor: Colors.redAccent,
-                                  flashCardButtonIcon: Icons.exit_to_app_rounded,
-                                )),
+                                flashCardButtonContainer: FlashCardButtonWidget(
+                              flashCardButtonText: 'Quit',
+                              flashCardButtonColor: Colors.redAccent,
+                              flashCardButtonIcon: Icons.exit_to_app_rounded,
+                            )),
                           ],
                         ),
                       ),

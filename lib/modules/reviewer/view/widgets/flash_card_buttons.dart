@@ -48,23 +48,25 @@ class FlashCardButtonWidget extends StatelessWidget {
 }
 
 class FlashCardButtonGesture extends StatelessWidget {
-  final Widget flashCardButtonNavigator;
+  final Widget? flashCardButtonNavigator;
   final Widget flashCardButtonContainer;
 
   const FlashCardButtonGesture(
-      {super.key, required this.flashCardButtonNavigator,  required this.flashCardButtonContainer});
+      {super.key, this.flashCardButtonNavigator,  required this.flashCardButtonContainer});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: flashCardButtonNavigator != null
+      ? () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => flashCardButtonNavigator,
+            builder: (context) => flashCardButtonNavigator!,
           ),
         );
-      },
+      }
+      : () => Navigator.pop(context),
       child: flashCardButtonContainer,
     );
   }

@@ -34,29 +34,37 @@ class ReviewerFcMyDecks extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        
-        child: StreamBuilder<QuerySnapshot>(
-          stream: ref.snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisExtent: 300,
-                crossAxisCount: 2,
-                crossAxisSpacing: 0,
-                mainAxisSpacing: 0),
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final fcDataMap = snapshot.data!.docs[index];
-                  DeckModel deckModel = DeckModel.fromMap(
-                      fcDataMap.data() as Map<String, dynamic>);
-                  return DeckTileWidget(
-                      deckModel: deckModel,
-                      colorNotes: NoteColors().noteColorsList[index % 15]);
-                });
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: ref.snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return GridView.builder(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisExtent: 300,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 24,
+                        mainAxisSpacing: 24),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final fcDataMap = snapshot.data!.docs[index];
+                          DeckModel deckModel = DeckModel.fromMap(
+                              fcDataMap.data() as Map<String, dynamic>);
+                          return DeckTileWidget(
+                              deckModel: deckModel,
+                              colorNotes: NoteColors().noteColorsList[index % 15]);
+                        });
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
