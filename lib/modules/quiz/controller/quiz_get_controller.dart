@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/widgets/question_tiles.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 // import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 
@@ -113,41 +113,99 @@ class QuizController extends GetxController {
   }
 }
 
-// class OptionsContoller extends GetxController {
-//   final QuizCatDB quizCatDB = QuizCatDB();
-//   QuerySnapshot? querySnapshot;
-//   final quizId = ''.obs;
+class OptionsController extends GetxController {
+  // final optionModel = OptionModel().obs;
+  // // final OptionModel optionModel2 = OptionModel();
+  // // final optionSelected = ''.obs;
+  // final OptionModel optionModels = OptionModel();
+  // final colorChange = [].obs;
+  // String optionSelected = '';
+  // final questionList = [].obs;
+  // // final optionMap = <Key, bool>{}.obs;
 
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     debugPrint('quizId: ${quizId.value}');
-//     quizCatDB.getQuizFromDb(quizId: quizId.value).then((value) {
-//       querySnapshot = value;
-//     });
-    
-//   }
+  // void pickAns(String option) async {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // final optionId = prefs.getString('optionId');
+  //   optionSelected = option;
+  //   update();
+  // }
 
-//   OptionModel getQuestionFromDatasnapshot(DocumentSnapshot questionSnapshot) {
-//     OptionModel optionModel = OptionModel();
-//     optionModel.question = questionSnapshot['question'];
+  // @override
+  // void onInit() {
+  //   debugPrint(optionModel.value.option1.toString());
+  //   debugPrint(optionModel.value.option2.toString());
+  //   debugPrint(optionModel.value.option3.toString());
+  //   debugPrint(optionModel.value.option4.toString());
+  //   debugPrint(optionModel.value.correctOption.toString());
+  //   super.onInit();
+  // }
 
-//     List<String> options = [
-//       questionSnapshot['option1'],
-//       questionSnapshot['option2'],
-//       questionSnapshot['option3'],
-//       questionSnapshot['option4'],
-//     ];
+  // void setKey(Key key, bool value) {
+  //   optionMap[key] = value;
+  // }
 
-//     options.shuffle();
+  // void changeKeyVal(Key key) {
+  //   if (optionMap[key] != null) {
+  //     optionMap[key] = !optionMap[key]!;
+  //   }
+  // }
 
-//     optionModel.option1 = options[0];
-//     optionModel.option2 = options[1];
-//     optionModel.option3 = options[2];
-//     optionModel.option4 = options[3];
-//     optionModel.correctOption = questionSnapshot['option1'];
-//     optionModel.answered = false;
+  // bool getKeyVal(Key key) {
+  //   if (optionMap[key] != null) {
+  //     return optionMap[key]!;
+  //   }
+  //   return false;
+  // }
 
-//     return optionModel;
-//   }
-// }
+  // void selectedOption1() {
+  //   if (optionModel.value.answered == false) {
+  //     if (optionModel.value.option1 == optionModel.value.correctOption) {
+  //       optionSelected.value = optionModel.value.option1!;
+  //       optionModel.value.answered = true;
+  //       debugPrint(optionModel.value.answered.toString());
+  //       debugPrint(optionModel.value.option1.toString());
+  //       debugPrint(optionModel.value.correctOption.toString());
+  //       debugPrint(optionSelected.value);
+  //     }
+  //   } else {
+  //     optionSelected.value = optionModel.value.option1!;
+  //     optionModel.value.answered = true;
+  //   }
+  // }
+
+  // void selectedOption2() {
+  //   if (optionModel.value.answered == false) {
+  //     if (optionModel.value.option2 == optionModel.value.correctOption) {
+  //       optionSelected.value = optionModel.value.option2!;
+  //       optionModel.value.answered = true;
+  //     }
+  //   } else {
+  //     optionSelected.value = optionModel.value.option2!;
+  //     optionModel.value.answered = true;
+  //   }
+  // }
+
+  // void selectedOption3() {
+  //   if (optionModel.value.answered == false) {
+  //     if (optionModel.value.option3 == optionModel.value.correctOption) {
+  //       optionSelected.value = optionModel.value.option3!;
+  //       optionModel.value.answered = true;
+  //     }
+  //   } else {
+  //     optionSelected.value = optionModel.value.option3!;
+  //     optionModel.value.answered = true;
+  //   }
+  // }
+
+  // void selectedOption4() {
+  //   if (optionModel.value.answered == false) {
+  //     if (optionModel.value.option4 == optionModel.value.correctOption) {
+  //       optionSelected.value = optionModel.value.option4!;
+  //       optionModel.value.answered = true;
+  //     }
+  //   } else {
+  //     optionSelected.value = optionModel.value.option4!;
+  //     optionModel.value.answered = true;
+  //   }
+  // }
+}

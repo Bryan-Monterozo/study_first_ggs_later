@@ -76,6 +76,7 @@ class OptionModel {
   String? option4;
   String? correctOption;
   bool? answered;
+  
   OptionModel({
     this.question,
     this.option1,
