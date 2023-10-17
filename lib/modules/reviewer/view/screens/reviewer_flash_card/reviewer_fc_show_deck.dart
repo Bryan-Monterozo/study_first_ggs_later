@@ -57,31 +57,45 @@ class ReviewerFcShowDeck extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: FirebaseFirestore.instance
-              .collection('Decks')
-              .doc(deckModel!.deckId)
-              .collection('cards')
-              .snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return ListView.builder(
-                itemCount: snapshot.data!.docs.length,
-                itemBuilder: (context, index) {
-                  final fcDataMap = snapshot.data!.docs[index];
-                  CardModel cardModel = CardModel.fromMap(
-                      fcDataMap.data() as Map<String, dynamic>);
-                  return snapshot.data!.docs.isEmpty
-                      ? const Center(child: Text('No Cards'))
-                      : CardTileWidget(
-                          deckModel: deckModel!,
-                          cardModel: cardModel,
-                          colorNotes: NoteColors().noteColorsList[index % 15]
-                          ,);
-                });
-          },
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            children: [
+              Expanded(
+                child: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Decks')
+                      .doc(deckModel!.deckId)
+                      .collection('cards')
+                      .snapshots(),
+                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                    return GridView.builder(
+                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        mainAxisExtent: 300,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 24,
+                        mainAxisSpacing: 24),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final fcDataMap = snapshot.data!.docs[index];
+                          CardModel cardModel = CardModel.fromMap(
+                              fcDataMap.data() as Map<String, dynamic>);
+                          return snapshot.data!.docs.isEmpty
+                              ? const Center(child: Text('No Cards'))
+                              : CardTileWidget(
+                                  deckModel: deckModel!,
+                                  cardModel: cardModel,
+                                  colorNotes: NoteColors().noteColorsList[index % 15]
+                                  ,);
+                        });
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

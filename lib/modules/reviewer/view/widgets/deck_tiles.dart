@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
+import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_run_deck.dart';
+// import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_deck.dart';
 
 class DeckTileWidget extends StatelessWidget {
   final DeckModel deckModel;
@@ -25,7 +26,7 @@ class DeckTileWidget extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) =>
-                        ReviewerFcShowDeck(deckModel: deckModel)));
+                        ReviewerFcRunDeck(deckModel: deckModel)));
           },
           onLongPress: () async {
 
@@ -50,16 +51,19 @@ class DeckTileWidget extends StatelessWidget {
             decoration: BoxDecoration(
                 color: colorNotes,
                 borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
+                  Radius.circular(12),
                 )),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   deckModel.deckName,
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
-                Text(deckModel.deckDesc),
+                Text(deckModel.deckDesc,
+                style: const TextStyle(fontSize: 14 , color: Colors.white),
+                ),
               ],
             ),
           ),

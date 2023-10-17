@@ -17,7 +17,7 @@ class ReviewerFlashCardWidget extends StatelessWidget {
     return Card(
       elevation: 0.0,
       margin: const EdgeInsets.only(
-          left: 32.0, right: 32.0, top: 20.0, bottom: 0.0),
+          left: 76.0, right: 76.0, top: 48.0, bottom: 48.0),
       color: Colors.white,
       child: FlipCard(
         direction: FlipDirection.HORIZONTAL,
@@ -25,8 +25,8 @@ class ReviewerFlashCardWidget extends StatelessWidget {
         speed: 500,
         front: Container(
           decoration: const BoxDecoration(
-            color: Colors.red,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            color: Color(0xFF0B6BA7),
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,8 +40,8 @@ class ReviewerFlashCardWidget extends StatelessWidget {
         ),
         back: Container(
           decoration: const BoxDecoration(
-            color: Colors.blue,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            color: Color(0xFF57BA5E),
+            borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
