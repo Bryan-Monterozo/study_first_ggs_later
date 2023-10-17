@@ -9,6 +9,7 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 // import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class ReviewerShowNote extends StatelessWidget {
+  static const String routeName = '/reviewer/reviewer_show_note';
   final NoteModel? noteModel;
 
   const ReviewerShowNote({

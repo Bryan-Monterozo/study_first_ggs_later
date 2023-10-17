@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_buttons.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class StudyQuiz extends StatelessWidget {
-  const StudyQuiz({super.key});
+  static const String routeName = '/quiz';
+  final NavController navController = Get.put(NavController());
+  StudyQuiz({super.key});
 
   @override
   Widget build(BuildContext context) {
+
+    navController.initNav(
+      currentRoute: CurrentRoute.quiz,
+    );
+
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(

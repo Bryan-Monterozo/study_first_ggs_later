@@ -1,69 +1,60 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
-import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+// import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-class QuizCreateQuestion extends StatefulWidget {
+class QuizAddQuestion extends StatelessWidget {
   final quizId;
   final QuestionModel? questionModel;
+  final QuizController quizController = Get.put(QuizController());
 
-  const QuizCreateQuestion({
+  QuizAddQuestion({
     Key? key,
     this.questionModel,
     this.quizId,
   }) : super(key: key);
+  // final question = ''.obs;
 
-  @override
-  State<QuizCreateQuestion> createState() => _QuizCreateQuestionState();
-}
+  // final option1 = ''.obs;
 
-class _QuizCreateQuestionState extends State<QuizCreateQuestion> {
-  String question = '';
-  String option1 = '';
-  String option2 = '';
-  String option3 = '';
-  String option4 = '';
+  // final option2 = ''.obs;
+
+  // final option3 = ''.obs;
+
+  // final option4 = ''.obs;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: SharedAppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_new,
-            color: Colors.black,
-          ),
-          onPressed: () {
-            
-            Navigator.pop(context);
-          },
-        ),
-        title: 'Create a Question',
-        withPic: withPic(context),
-      ),
-      body: Container(
+    return Obx(
+      () => Container(
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(border: Border.all()),
-              child: TextFormField(
-                validator: (value) =>
-                    value!.isEmpty ? 'Enter a question' : null,
-                onChanged: (value) {
-                  question = value;
-                },
-                decoration: const InputDecoration(hintText: 'Question'),
+              child: Obx(
+                () => TextFormField(
+                  initialValue: quizController.question.value,
+                  validator: (value) =>
+                      value!.isEmpty ? 'Enter a question' : null,
+                  onChanged: (value) {
+                    quizController.question.value = value;
+                  },
+                  decoration: const InputDecoration(hintText: 'Question'),
+                ),
               ),
             ),
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextFormField(
+                initialValue: quizController.option1.value,
                 validator: (value) =>
                     value!.isEmpty ? 'Enter the Correct Answer' : null,
                 onChanged: (value) {
-                  option1 = value;
+                  quizController.option1.value = value;
                 },
                 decoration: const InputDecoration(
                     hintText: 'Option 1 (Correct Answer)'),
@@ -72,9 +63,10 @@ class _QuizCreateQuestionState extends State<QuizCreateQuestion> {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextFormField(
+                initialValue: quizController.option2.value,
                 validator: (value) => value!.isEmpty ? 'Enter an Option' : null,
                 onChanged: (value) {
-                  option2 = value;
+                  quizController.option2.value = value;
                 },
                 decoration: const InputDecoration(hintText: 'Option 2'),
               ),
@@ -82,9 +74,11 @@ class _QuizCreateQuestionState extends State<QuizCreateQuestion> {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextFormField(
+                initialValue: quizController.option3.value,
                 validator: (value) => value!.isEmpty ? 'Enter an Option' : null,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 onChanged: (value) {
-                  option3 = value;
+                  quizController.option3.value = value;
                 },
                 decoration: const InputDecoration(hintText: 'Option 3'),
               ),
@@ -92,9 +86,11 @@ class _QuizCreateQuestionState extends State<QuizCreateQuestion> {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextFormField(
+                initialValue: quizController.option4.value,
                 validator: (value) => value!.isEmpty ? 'Enter an Option' : null,
+                autovalidateMode: AutovalidateMode.onUserInteraction,
                 onChanged: (value) {
-                  option4 = value;
+                  quizController.option4.value = value;
                 },
                 decoration: const InputDecoration(hintText: 'Option 4'),
               ),

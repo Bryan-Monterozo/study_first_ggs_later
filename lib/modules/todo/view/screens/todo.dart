@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/widgets/todo_item.dart';
 import 'package:study_first_ggs_later/modules/todo/models/todo.dart';
 
 class StudyToDo extends StatefulWidget {
+  static const String routeName = '/todo';
   const StudyToDo({super.key});
 
   @override
@@ -12,6 +16,18 @@ class StudyToDo extends StatefulWidget {
 }
 
 class _StudyToDoState extends State<StudyToDo> {
+
+  NavController navController = Get.put(NavController());
+
+  @override
+  void initState() {
+    navController.initNav(
+      currentRoute: CurrentRoute.todo,
+    );
+    super.initState();
+  }
+  
+
   final todosList = ToDo.todoList();
   final _todoController = TextEditingController();
 

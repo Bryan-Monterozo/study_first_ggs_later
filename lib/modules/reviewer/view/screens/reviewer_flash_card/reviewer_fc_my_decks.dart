@@ -7,6 +7,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/widgets/deck_tiles.d
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcMyDecks extends StatelessWidget {
+  static const String routeName = '/reviewer/reviewer_fc_my_decks';
   ReviewerFcMyDecks({super.key});
 
   final ref = FirebaseFirestore.instance.collection('Decks');

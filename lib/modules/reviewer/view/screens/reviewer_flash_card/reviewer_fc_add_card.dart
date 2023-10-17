@@ -1,11 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcAddCard extends StatefulWidget {
+
+  static const String routeName = '/reviewer/reviewer_fc_add_card';
   final deckId;
   final DeckModel? deckModel;
 

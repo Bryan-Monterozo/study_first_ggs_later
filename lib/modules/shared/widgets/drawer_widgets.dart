@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 //TODO: Place Holder muna mga to dapat yung mga title, and eme is maging object for reusability
 // @jhnpaulogrc kaw mag aayos nito
 
 class DrawerNavButton extends StatelessWidget {
-  final String? navText;
-  final IconData? navIcon;
+  final Widget? navText;
+  final Widget? navIcon;
+  final Color? navColor;
 
-  const DrawerNavButton({super.key, required this.navText, required this.navIcon});
+  const DrawerNavButton(
+      {super.key, required this.navText, required this.navIcon, this.navColor});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class DrawerNavButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-        color: const Color(0xFFF1F4F8),
+        color: navColor,
         borderRadius: BorderRadius.circular(12),
         shape: BoxShape.rectangle,
       ),
@@ -24,33 +27,10 @@ class DrawerNavButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 12, 12),
-              child: Container(
-                width: 4,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF6F61EF),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            Icon(
-              navIcon!,
-              color: const Color(0xFF15161E),
-              size: 28,
-            ),
+            navIcon!,
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-              child: Text(
-                navText!,
-                style: const TextStyle(
-                  fontFamily: 'Product Sans',
-                  color: Color(0xff1c1c1c),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              child: navText,
             ),
           ],
         ),
@@ -58,6 +38,7 @@ class DrawerNavButton extends StatelessWidget {
     );
   }
 }
+
 class NavBarStatus extends StatelessWidget {
   const NavBarStatus({
     super.key,
@@ -96,12 +77,19 @@ class NavBarStatus extends StatelessWidget {
                     padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        'assets/images/Ellipse1.png',
-                        width: 44,
-                        height: 44,
-                        fit: BoxFit.cover,
-                      ),
+                      child: kIsWeb
+                          ? Image.network(
+                              'assets/images/Ellipse1.png',
+                              width: 44,
+                              height: 44,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/images/Ellipse1.png',
+                              width: 44,
+                              height: 44,
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                 ),
