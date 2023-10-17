@@ -1,10 +1,10 @@
 // import 'package:flutter/material.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
-import 'package:study_first_ggs_later/modules/quiz/view/widgets/question_tiles.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 // import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 
@@ -55,12 +55,12 @@ class QuizController extends GetxController {
 
   @override
   void onClose() {
-    super.onClose();
     questionController.dispose();
     option1Controller.dispose();
     option2Controller.dispose();
     option3Controller.dispose();
     option4Controller.dispose();
+    super.onClose();
   }
 
   questionValidation() async {
@@ -114,98 +114,94 @@ class QuizController extends GetxController {
 }
 
 class OptionsController extends GetxController {
-  // final optionModel = OptionModel().obs;
-  // // final OptionModel optionModel2 = OptionModel();
-  // // final optionSelected = ''.obs;
-  // final OptionModel optionModels = OptionModel();
-  // final colorChange = [].obs;
-  // String optionSelected = '';
-  // final questionList = [].obs;
-  // // final optionMap = <Key, bool>{}.obs;
+  late PageController nextPage;
+  final questionTotal = 0.obs;
+  final questionNumber = 1.obs;
+  int questionNumberInt = 1;
+  int totalTime = 0;
+  final timeLeft = 0.obs;
+  int timeLeftInt = 0;
+  final qMins = 0.obs;
+  final qSecs = ''.obs;
+  Timer? timer;
+  // int questionTotalInt = 0;
 
-  // void pickAns(String option) async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   // final optionId = prefs.getString('optionId');
-  //   optionSelected = option;
-  //   update();
-  // }
+  // final nextPageView = PageController(initialPage: 0);
 
-  // @override
-  // void onInit() {
-  //   debugPrint(optionModel.value.option1.toString());
-  //   debugPrint(optionModel.value.option2.toString());
-  //   debugPrint(optionModel.value.option3.toString());
-  //   debugPrint(optionModel.value.option4.toString());
-  //   debugPrint(optionModel.value.correctOption.toString());
-  //   super.onInit();
-  // }
+  @override
+  void onInit() {
+    nextPage = PageController(initialPage: 0);
+    startTimer();
+    debugPrint('onInit');
+    debugPrint('${timeLeft.value}');
+    super.onInit();
+    // questionTotalInt = questionTotal.value;
+  }
 
-  // void setKey(Key key, bool value) {
-  //   optionMap[key] = value;
-  // }
+  @override
+  void onClose() {
+    nextPage.dispose();
+    timer?.cancel();
+    super.onClose();
+  }
 
-  // void changeKeyVal(Key key) {
-  //   if (optionMap[key] != null) {
-  //     optionMap[key] = !optionMap[key]!;
-  //   }
-  // }
+  void nextQuestion() {
+    if (questionNumber.value < questionTotal.value) {
+      nextPage.nextPage(
+          duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
+      questionNumber.value++;
+      questionNumberInt = questionNumber.value;
+      debugPrint('onNext');
+      debugPrint('${timeLeft.value}');
+      update();
+    }
+  }
 
-  // bool getKeyVal(Key key) {
-  //   if (optionMap[key] != null) {
-  //     return optionMap[key]!;
-  //   }
-  //   return false;
-  // }
+  void questionTotalInit() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('questionTotalInt', questionTotal.value);
+  }
 
-  // void selectedOption1() {
-  //   if (optionModel.value.answered == false) {
-  //     if (optionModel.value.option1 == optionModel.value.correctOption) {
-  //       optionSelected.value = optionModel.value.option1!;
-  //       optionModel.value.answered = true;
-  //       debugPrint(optionModel.value.answered.toString());
-  //       debugPrint(optionModel.value.option1.toString());
-  //       debugPrint(optionModel.value.correctOption.toString());
-  //       debugPrint(optionSelected.value);
-  //     }
-  //   } else {
-  //     optionSelected.value = optionModel.value.option1!;
-  //     optionModel.value.answered = true;
-  //   }
-  // }
+  questionTotalFinal() async {
+    questionTotalInit();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // ignore: unused_local_variable
+    final questionTotalInt = prefs.getInt('questionTotalInt');
+    timeLeft.value = questionTotal.value * 60;
+    timeLeftInt = timeLeft.value;
+    totalTime = questionTotal.value * 60;
+    update();
+  }
 
-  // void selectedOption2() {
-  //   if (optionModel.value.answered == false) {
-  //     if (optionModel.value.option2 == optionModel.value.correctOption) {
-  //       optionSelected.value = optionModel.value.option2!;
-  //       optionModel.value.answered = true;
-  //     }
-  //   } else {
-  //     optionSelected.value = optionModel.value.option2!;
-  //     optionModel.value.answered = true;
-  //   }
-  // }
+  secToString(int seconds) {
+    int roundedMinutes = seconds ~/ 60;
+    int remainingSeconds = seconds - (roundedMinutes * 60);
+    String remainingSecondsStr;
 
-  // void selectedOption3() {
-  //   if (optionModel.value.answered == false) {
-  //     if (optionModel.value.option3 == optionModel.value.correctOption) {
-  //       optionSelected.value = optionModel.value.option3!;
-  //       optionModel.value.answered = true;
-  //     }
-  //   } else {
-  //     optionSelected.value = optionModel.value.option3!;
-  //     optionModel.value.answered = true;
-  //   }
-  // }
+    if (remainingSeconds < 10) {
+      remainingSecondsStr = '0$remainingSeconds';
+    } else {
+      remainingSecondsStr = remainingSeconds.toString();
+    }
 
-  // void selectedOption4() {
-  //   if (optionModel.value.answered == false) {
-  //     if (optionModel.value.option4 == optionModel.value.correctOption) {
-  //       optionSelected.value = optionModel.value.option4!;
-  //       optionModel.value.answered = true;
-  //     }
-  //   } else {
-  //     optionSelected.value = optionModel.value.option4!;
-  //     optionModel.value.answered = true;
-  //   }
-  // }
+    qMins.value = roundedMinutes;
+    qSecs.value = remainingSecondsStr;
+
+    return '$roundedMinutes:$remainingSecondsStr';
+  }
+
+  timePercentage() {
+    double percentage = (totalTime - timeLeft.value) / totalTime;
+    return percentage;
+  }
+
+  startTimer() {
+    timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (timeLeft.value > 0) {
+        timeLeft.value--;
+      } else {
+        timer.cancel();
+      }
+    });
+  }
 }

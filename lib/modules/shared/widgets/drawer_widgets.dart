@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 // @jhnpaulogrc kaw mag aayos nito
 
 class DrawerNavButton extends StatelessWidget {
-  final String? navText;
-  final IconData? navIcon;
+  final Widget? navText;
+  final Widget? navIcon;
   final Color? navColor;
 
   const DrawerNavButton(
@@ -27,33 +27,10 @@ class DrawerNavButton extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 12, 12, 12),
-              child: Container(
-                width: 4,
-                height: 100,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF6F61EF),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-            ),
-            Icon(
-              navIcon!,
-              color: const Color(0xFF15161E),
-              size: 28,
-            ),
+            navIcon!,
             Padding(
               padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-              child: Text(
-                navText!,
-                style: const TextStyle(
-                  fontFamily: 'Product Sans',
-                  color: Color(0xff1c1c1c),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+              child: navText,
             ),
           ],
         ),

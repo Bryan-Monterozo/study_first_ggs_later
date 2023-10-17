@@ -1,9 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
-import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 
 class OptionsTilesWidget extends StatelessWidget {
   final String option, description, correctOption, optionSelected;

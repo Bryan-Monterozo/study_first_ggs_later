@@ -1,8 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/option_tiles.dart';
 
@@ -27,7 +24,7 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> {
   @override
   Widget build(BuildContext context) {
     // final optionsController = Get.find<OptionsController>();
-    final OptionsController optionsController = Get.put(OptionsController());
+    // final OptionsController optionsController = Get.put(OptionsController());
 
     return Padding(
       padding: const EdgeInsets.all(8.0),

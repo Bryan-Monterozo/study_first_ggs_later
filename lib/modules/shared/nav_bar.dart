@@ -14,7 +14,6 @@ import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
 //      ORRRR make the hamborgir sharable across all screens with index and shaded
 
 class NavDrawer extends StatelessWidget {
-
   // final NavController navController = Get.put(NavController());
   // final List<Widget> _screens = const <Widget>[
   //   StudyHome(),
@@ -27,7 +26,6 @@ class NavDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final NavController navController = Get.put(NavController());
 
     return Column(
@@ -88,11 +86,41 @@ class NavDrawer extends StatelessWidget {
                           );
                         },
                         child: DrawerNavButton(
-                          navText: 'Home',
-                          navIcon: Icons.home_outlined,
-                          navColor: navController.currentNav.value == CurrentRoute.home ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                          navText: navController.currentNav.value == CurrentRoute.home
+                        ? const Text(
+                          'Home',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'Home',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                          navIcon: navController.currentNav.value ==
+                                  CurrentRoute.home
+                              ? const Icon(
+                                  Icons.home_outlined,
+                                  color: Colors.white,
+                                  size: 24,
+                                )
+                              : const Icon(
+                                  Icons.home_outlined,
+                                  color: Color(0xFF15161E),
+                                  size: 24,
+                                ),
+                          navColor: navController.currentNav.value ==
+                                  CurrentRoute.home
+                              ? const Color(0xFF0B6BA7)
+                              : Colors.white,
                         ),
                       ),
                     ),
@@ -111,11 +139,41 @@ class NavDrawer extends StatelessWidget {
                           );
                         },
                         child: DrawerNavButton(
-                          navText: 'Pomodoro',
-                          navIcon: Icons.timer_outlined,
-                          navColor: navController.currentNav.value == CurrentRoute.pomodoro ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                          navText: navController.currentNav.value == CurrentRoute.pomodoro
+                        ? const Text(
+                          'Pomodoro',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'Pomodoro',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                          navIcon: navController.currentNav.value ==
+                                  CurrentRoute.pomodoro
+                              ? const Icon(
+                                  Icons.timer_outlined,
+                                  color: Colors.white,
+                                  size: 24,
+                                )
+                              : const Icon(
+                                  Icons.timer_outlined,
+                                  color: Color(0xFF15161E),
+                                  size: 24,
+                                ),
+                          navColor: navController.currentNav.value ==
+                                  CurrentRoute.pomodoro
+                              ? const Color(0xFF0B6BA7)
+                              : Colors.white,
                         ),
                       ),
                     ),
@@ -134,11 +192,41 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: 'Calendar',
-                        navIcon: Icons.calendar_month_outlined,
-                        navColor: navController.currentNav.value == CurrentRoute.calendar ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                        navText: navController.currentNav.value == CurrentRoute.calendar
+                        ? const Text(
+                          'Calendar',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'Calendar',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        navIcon: navController.currentNav.value ==
+                                CurrentRoute.calendar
+                            ? const Icon(
+                                Icons.calendar_month_outlined,
+                                color: Colors.white,
+                                size: 24,
+                              )
+                            : const Icon(
+                                Icons.calendar_month_outlined,
+                                color: Color(0xFF15161E),
+                                size: 24,
+                              ),
+                        navColor: navController.currentNav.value ==
+                                CurrentRoute.calendar
+                            ? const Color(0xFF0B6BA7)
+                            : Colors.white,
                       ),
                     ),
                   ),
@@ -156,11 +244,41 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: 'To Do',
-                        navIcon: Icons.checklist_outlined,
-                        navColor: navController.currentNav.value == CurrentRoute.todo ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                        navText: navController.currentNav.value == CurrentRoute.todo
+                        ? const Text(
+                          'To Do',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'To Do',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        navIcon:
+                            navController.currentNav.value == CurrentRoute.todo
+                                ? const Icon(
+                                    Icons.checklist_outlined,
+                                    color: Colors.white,
+                                    size: 24,
+                                  )
+                                : const Icon(
+                                    Icons.checklist_outlined,
+                                    color: Color(0xFF15161E),
+                                    size: 24,
+                                  ),
+                        navColor:
+                            navController.currentNav.value == CurrentRoute.todo
+                                ? const Color(0xFF0B6BA7)
+                                : Colors.white,
                       ),
                     ),
                   ),
@@ -178,11 +296,41 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: 'Reviewer',
-                        navIcon: Icons.my_library_books_outlined,
-                        navColor: navController.currentNav.value == CurrentRoute.reviewer ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                        navText: navController.currentNav.value == CurrentRoute.reviewer
+                        ? const Text(
+                          'Reviewer',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'Reviewer',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        navIcon: navController.currentNav.value ==
+                                CurrentRoute.reviewer
+                            ? const Icon(
+                                Icons.my_library_books_outlined,
+                                color: Colors.white,
+                                size: 24,
+                              )
+                            : const Icon(
+                                Icons.my_library_books_outlined,
+                                color: Color(0xFF15161E),
+                                size: 24,
+                              ),
+                        navColor: navController.currentNav.value ==
+                                CurrentRoute.reviewer
+                            ? const Color(0xFF0B6BA7)
+                            : Colors.white,
                       ),
                     ),
                   ),
@@ -200,11 +348,41 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: 'Quiz',
-                        navIcon: Icons.quiz_outlined,
-                        navColor: navController.currentNav.value == CurrentRoute.quiz ?
-                           const Color(0xFFF1F4F8)
-                           : Colors.white,
+                        navText: navController.currentNav.value == CurrentRoute.quiz
+                        ? const Text(
+                          'Quiz',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        )
+                        : const Text(
+                          'Quiz',
+                          style: TextStyle(
+                            fontFamily: 'Product Sans',
+                            color: Color(0xff1c1c1c),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        navIcon:
+                            navController.currentNav.value == CurrentRoute.quiz
+                                ? const Icon(
+                                    Icons.quiz_outlined,
+                                    color: Colors.white,
+                                    size: 24,
+                                  )
+                                : const Icon(
+                                    Icons.quiz_outlined,
+                                    color: Color(0xFF15161E),
+                                    size: 24,
+                                  ),
+                        navColor:
+                            navController.currentNav.value == CurrentRoute.quiz
+                                ? const Color(0xFF0B6BA7)
+                                : Colors.white,
                       ),
                     ),
                   ),

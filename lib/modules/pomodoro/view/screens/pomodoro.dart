@@ -11,7 +11,6 @@ import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.da
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
-
 part 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
 
 /*

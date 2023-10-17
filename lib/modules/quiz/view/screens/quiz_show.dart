@@ -1,99 +1,168 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/question_tiles.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class QuizShowQuestions extends StatelessWidget {
   final quizId;
   final QuizModel quizModel;
   final QuestionModel? questionModel;
 
-  const QuizShowQuestions({
+  QuizShowQuestions({
     Key? key,
     required this.quizModel,
     this.questionModel,
     required this.quizId,
   }) : super(key: key);
 
+  final OptionsController optionsController = Get.put(OptionsController());
+
+
   // final OptionModel optionModel = OptionModel();
   @override
   Widget build(BuildContext context) {
-    
+    debugPrint('onBuild');
+    debugPrint('${optionsController.timeLeft.value}');
+   
     final questionRef = FirebaseFirestore.instance
         .collection('Quiz')
         .doc(quizModel.quizId)
         .collection('questions');
-
-    debugPrint('QuizShowQuestionsOnScreen: ${quizModel.quizId}');
+    // int questionTotal = initQuestionTotal(questionRef);
+    // debugPrint('QuizShowQuestionsOnScreen: ${quizModel.quizId}');
+    // debugPrint('$questionTotal');
     // Key controllerKey;
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz'),
       ),
-      body: FutureBuilder<QuerySnapshot>(
-          future: questionRef.get(),
-          builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            }
-            return ListView.builder(
-                shrinkWrap: true,
-                itemCount: snapshot.data!.docs.length,
-                // separatorBuilder: (context, index) => const Divider(),
-                itemBuilder: (context, index) {
-                  // controllerKey = GlobalKey();
-                  // optionsController.setKey(controllerKey, false);
-                  // final quizDataMap = snapshot.data!.docs[index];
-                  // optionsController.optionModel.value = OptionModel();
-                  OptionModel optionModel = OptionModel();
-                  // optionsController.optionModel.value.question =
-                  //     snapshot.data!.docs[index]['question'];
+      body: Column(
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    quizModel.quizTitle,
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      alignment: Alignment.centerLeft,
+                      child: Obx(
+                        () => Text(
+                          optionsController
+                              .secToString(optionsController.timeLeft.value),
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(20.0)),
+                    GetBuilder<OptionsController>(
+                      init: OptionsController(),
+                      builder: (controller) => Text(
+                        'Question: ${controller.questionNumberInt}/${controller.questionTotal}',
+                        style: const TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  // alignment: Alignment.center,
+                  child: Expanded(
+                    child: Obx(
+                      () => LinearPercentIndicator(
+                        alignment: MainAxisAlignment.center,
+                        width: MediaQuery.of(context).size.width - 50,
+                        // animation: true,
+                        lineHeight: 30.0,
+                        // animationDuration: 1000,
+                        percent: (1.00 - optionsController.timePercentage()),
+                        center: Text(
+                          'Time Remaining: ${optionsController.secToString(optionsController.timeLeft.value)}',
+                          style: const TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        progressColor: Colors.green,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            // padding: const EdgeInsets.all(8.0),
+            child: FutureBuilder<QuerySnapshot>(
+                future: questionRef.get(),
+                builder: (BuildContext context,
+                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
 
-                  optionModel.question =
-                      snapshot.data!.docs[index]['question'];
+                  final random = (snapshot.data! as QuerySnapshot).docs.toList()
+                    ..shuffle();
 
-                  List<String> options = [
-                    snapshot.data!.docs[index]['option1'],
-                    snapshot.data!.docs[index]['option2'],
-                    snapshot.data!.docs[index]['option3'],
-                    snapshot.data!.docs[index]['option4'],
-                  ];
+                  return PageView.builder(
+                      controller: optionsController.nextPage,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        OptionModel optionModel = OptionModel();
 
-                  options.shuffle();
+                        optionModel.question = random[index]['question'];
 
-                  // optionsController.optionModel.value.option1 = options[0];
-                  // optionsController.optionModel.value.option2 = options[1];
-                  // optionsController.optionModel.value.option3 = options[2];
-                  // optionsController.optionModel.value.option4 = options[3];
-                  // optionsController.optionModel.value.correctOption =
-                  //     snapshot.data!.docs[index]['option1'];
-                  // optionsController.optionModel.value.answered = false;
-                  optionModel.option1 = options[0];
-                  optionModel.option2 = options[1];
-                  optionModel.option3 = options[2];
-                  optionModel.option4 = options[3];
-                  optionModel.correctOption = snapshot.data!.docs[index]['option1'];
-                  optionModel.answered = false;
+                        optionsController.questionTotal.value =
+                            snapshot.data!.docs.length;
 
-                  // debugPrint(
-                  //     optionsController.optionModel.value.option1.toString());
-                  // debugPrint(
-                  //     optionsController.optionModel.value.option2.toString());
-                  // debugPrint(
-                  //     optionsController.optionModel.value.option3.toString());
-                  // debugPrint(
-                  //     optionsController.optionModel.value.option4.toString());
-                  // debugPrint(optionsController.optionModel.value.correctOption
-                  //     .toString());
+                        List<String> options = [
+                          random[index]['option1'],
+                          random[index]['option2'],
+                          random[index]['option3'],
+                          random[index]['option4'],
+                        ];
 
-                  return QuestionTilesWidget(
-                    optionModel: optionModel,
-                  );
-                });
-          }),
+                        options.shuffle();
+
+                        optionModel.option1 = options[0];
+                        optionModel.option2 = options[1];
+                        optionModel.option3 = options[2];
+                        optionModel.option4 = options[3];
+                        optionModel.correctOption = random[index]['option1'];
+                        optionModel.answered = false;
+                        optionsController.questionTotalFinal();
+                        return QuestionTilesWidget(
+                          optionModel: optionModel,
+                        );
+                      });
+                }),
+          ),
+          Expanded(
+            child: Container(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                onPressed: () {
+                  optionsController.nextQuestion();
+                },
+                child: const Text('Next'),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
