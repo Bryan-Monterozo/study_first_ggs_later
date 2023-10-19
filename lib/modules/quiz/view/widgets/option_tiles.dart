@@ -23,36 +23,62 @@ class OptionsTilesWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: Row(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: optionSelected == description
-                      ? optionSelected == correctOption
-                          ? Colors.green.withOpacity(0.7)
-                          : Colors.red.withOpacity(0.7)
-                      : Colors.grey),
-            ),
-            child: Text(
-              option,
-              style: TextStyle(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: optionSelected == description
+                  ? Colors.blue
+                  : Colors.transparent,
+            border: Border.all(
+              width: 2,
+              color: optionSelected == description
+                  ? Colors.white
+                  : Colors.black,
+            )),
+        padding: const EdgeInsets.all(5.0),
+        // color: optionSelected == description ? Colors.blue : Colors.transparent,
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              width: 28,
+              height: 28,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
                 color: optionSelected == description
-                    ? optionSelected == correctOption
-                        ? Colors.green.withOpacity(0.7)
-                        : Colors.red.withOpacity(0.7)
-                    : Colors.grey,
+                    ? Colors.blue
+                    : Colors.transparent,
+                border: Border.all(
+                    width: 2,
+                    color: optionSelected == description
+                        ? Colors.white
+                        : Colors.black),
+                borderRadius: BorderRadius.circular(30),
+              ),
+              child: Text(
+                option,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: optionSelected == description
+                      ? Colors.white
+                      : Colors.black,
+                ),
               ),
             ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(description)
-        ],
+            const SizedBox(
+              width: 8,
+            ),
+            Text(description,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                    color: optionSelected == description
+                        ? Colors.white
+                        : Colors.black)),
+          ],
+        ),
       ),
     );
   }

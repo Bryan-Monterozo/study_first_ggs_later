@@ -1,6 +1,5 @@
 // import 'package:flutter/material.dart';
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -114,38 +113,50 @@ class QuizController extends GetxController {
 }
 
 class OptionsController extends GetxController {
+  //next page
   late PageController nextPage;
+
+  //question total
   final questionTotal = 0.obs;
   final questionNumber = 1.obs;
   int questionNumberInt = 1;
-  int totalTime = 0;
+  int questionTotalInt = 0;
+
+  //timer
   final timeLeft = 0.obs;
+  int timeLeftX = 0;
   int timeLeftInt = 0;
+  String timeLeftMin = '';
+  String timeLeftSec = '';
+  int totalTime = 0;
+  double timePercent = 0.0;
   final qMins = 0.obs;
   final qSecs = ''.obs;
   Timer? timer;
-  // int questionTotalInt = 0;
-
-  // final nextPageView = PageController(initialPage: 0);
 
   @override
-  void onInit() {
+  void onInit() async {
     nextPage = PageController(initialPage: 0);
-    startTimer();
-    debugPrint('onInit');
-    debugPrint('${timeLeft.value}');
+    
     super.onInit();
-    // questionTotalInt = questionTotal.value;
+  }
+
+  @override
+  void onReady() async {
+    // ignore: unused_local_variable
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    startTimer();
+    debugPrint('Widget Rebuilt');
+    super.onReady();
   }
 
   @override
   void onClose() {
-    nextPage.dispose();
     timer?.cancel();
     super.onClose();
   }
 
-  void nextQuestion() {
+  nextQuestion() async {
     if (questionNumber.value < questionTotal.value) {
       nextPage.nextPage(
           duration: const Duration(milliseconds: 250), curve: Curves.easeIn);
@@ -153,13 +164,18 @@ class OptionsController extends GetxController {
       questionNumberInt = questionNumber.value;
       debugPrint('onNext');
       debugPrint('${timeLeft.value}');
-      update();
+      update(['nextQuestion']);
     }
   }
 
-  void questionTotalInit() async {
+  // Initialize Questionaire
+
+  questionTotalInit() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('questionTotalInt', questionTotal.value);
+    timeLeftInt = questionTotal.value * 60;
+    totalTime = questionTotal.value * 60;
+    update();
   }
 
   questionTotalFinal() async {
@@ -167,11 +183,10 @@ class OptionsController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // ignore: unused_local_variable
     final questionTotalInt = prefs.getInt('questionTotalInt');
-    timeLeft.value = questionTotal.value * 60;
-    timeLeftInt = timeLeft.value;
-    totalTime = questionTotal.value * 60;
-    update();
+    update(['nextQuestion']);
   }
+
+  // For Question Timer
 
   secToString(int seconds) {
     int roundedMinutes = seconds ~/ 60;
@@ -183,22 +198,20 @@ class OptionsController extends GetxController {
     } else {
       remainingSecondsStr = remainingSeconds.toString();
     }
-
-    qMins.value = roundedMinutes;
-    qSecs.value = remainingSecondsStr;
-
     return '$roundedMinutes:$remainingSecondsStr';
   }
 
   timePercentage() {
-    double percentage = (totalTime - timeLeft.value) / totalTime;
+    double percentage = 1.00 - ((totalTime - timeLeftInt) / totalTime);
     return percentage;
   }
 
-  startTimer() {
+  startTimer() async {
     timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-      if (timeLeft.value > 0) {
-        timeLeft.value--;
+      if (timeLeftInt > 0) {
+        timeLeftInt--;
+        timePercent = timePercentage();
+        update(['timeLeft']);
       } else {
         timer.cancel();
       }

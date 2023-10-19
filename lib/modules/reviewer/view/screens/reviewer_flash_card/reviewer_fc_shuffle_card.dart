@@ -3,13 +3,8 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
-
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_run_deck.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_buttons.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
-// import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_shuffle.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 

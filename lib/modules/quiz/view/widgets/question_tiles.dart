@@ -15,7 +15,7 @@ class QuestionTilesWidget extends StatefulWidget {
   State<QuestionTilesWidget> createState() => _QuestionTilesWidgetState();
 }
 
-class _QuestionTilesWidgetState extends State<QuestionTilesWidget> {
+class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTickerProviderStateMixin {
   String optionSelected = '';
   OptionModel optionModel = OptionModel();
   // final optionsController = Get.create(() => OptionsController());
@@ -26,9 +26,10 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> {
     // final optionsController = Get.find<OptionsController>();
     // final OptionsController optionsController = Get.put(OptionsController());
 
-    return Padding(
+    return Container(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -41,128 +42,124 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(8),
-                  )),
-              child: Stack(
-                // crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Column(
-                    children: [
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (widget.optionModel.answered == false) {
-                            if (widget.optionModel.option1 ==
-                                widget.optionModel.correctOption) {
-                              optionSelected = widget.optionModel.option1!;
-                              widget.optionModel.answered = true;
-                              // debugPrint(
-                              //     widget.optionModel.answered.toString());
-                              // debugPrint(widget.optionModel.option1.toString());
-                              // debugPrint(
-                              //     widget.optionModel.correctOption.toString());
-                              // debugPrint(optionSelected);
-                              setState(() {});
-                            } else {
-                              optionSelected = widget.optionModel.option1!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
-                            }
-                          }
-                        },
-                        child: OptionsTilesWidget(
-                          option: 'A',
-                          description: widget.optionModel.option1!,
-                          correctOption: widget.optionModel.correctOption!,
-                          optionSelected: optionSelected,
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(8),
+                    )),
+                child: Stack(
+                  // crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      children: [
+                        const SizedBox(
+                          height: 4,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (widget.optionModel.answered == false) {
-                            if (widget.optionModel.option2 ==
-                                widget.optionModel.correctOption) {
-                              optionSelected = widget.optionModel.option2!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
-                            } else {
-                              optionSelected = widget.optionModel.option2!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
+                        GestureDetector(
+                          onTap: () {
+                            if (widget.optionModel.answered == false) {
+                              if (widget.optionModel.option1 ==
+                                  widget.optionModel.correctOption) {
+                                optionSelected = widget.optionModel.option1!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              } else {
+                                optionSelected = widget.optionModel.option1!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              }
                             }
-                          }
-                        },
-                        child: OptionsTilesWidget(
-                          option: 'B',
-                          description: widget.optionModel.option2!,
-                          correctOption: widget.optionModel.correctOption!,
-                          optionSelected: optionSelected,
+                          },
+                          child: OptionsTilesWidget(
+                            option: 'A',
+                            description: widget.optionModel.option1!,
+                            correctOption: widget.optionModel.correctOption!,
+                            optionSelected: optionSelected,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (widget.optionModel.answered == false) {
-                            if (widget.optionModel.option3 ==
-                                widget.optionModel.correctOption) {
-                              optionSelected = widget.optionModel.option3!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
-                            } else {
-                              optionSelected = widget.optionModel.option3!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (widget.optionModel.answered == false) {
+                              if (widget.optionModel.option2 ==
+                                  widget.optionModel.correctOption) {
+                                optionSelected = widget.optionModel.option2!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              } else {
+                                optionSelected = widget.optionModel.option2!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              }
                             }
-                          }
-                        },
-                        child: OptionsTilesWidget(
-                          option: 'C',
-                          description: widget.optionModel.option3!,
-                          correctOption: widget.optionModel.correctOption!,
-                          optionSelected: optionSelected,
+                          },
+                          child: OptionsTilesWidget(
+                            option: 'B',
+                            description: widget.optionModel.option2!,
+                            correctOption: widget.optionModel.correctOption!,
+                            optionSelected: optionSelected,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (widget.optionModel.answered == false) {
-                            if (widget.optionModel.option4 ==
-                                widget.optionModel.correctOption) {
-                              optionSelected = widget.optionModel.option4!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
-                            } else {
-                              optionSelected = widget.optionModel.option4!;
-                              widget.optionModel.answered = true;
-                              setState(() {});
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (widget.optionModel.answered == false) {
+                              if (widget.optionModel.option3 ==
+                                  widget.optionModel.correctOption) {
+                                optionSelected = widget.optionModel.option3!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              } else {
+                                optionSelected = widget.optionModel.option3!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              }
                             }
-                          }
-                        },
-                        child: OptionsTilesWidget(
-                          option: 'D',
-                          description: widget.optionModel.option4!,
-                          correctOption: widget.optionModel.correctOption!,
-                          optionSelected: optionSelected,
+                          },
+                          child: OptionsTilesWidget(
+                            option: 'C',
+                            description: widget.optionModel.option3!,
+                            correctOption: widget.optionModel.correctOption!,
+                            optionSelected: optionSelected,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
-                ],
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            if (widget.optionModel.answered == false) {
+                              if (widget.optionModel.option4 ==
+                                  widget.optionModel.correctOption) {
+                                optionSelected = widget.optionModel.option4!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              } else {
+                                optionSelected = widget.optionModel.option4!;
+                                widget.optionModel.answered = true;
+                                setState(() {});
+                              }
+                            }
+                          },
+                          child: OptionsTilesWidget(
+                            option: 'D',
+                            description: widget.optionModel.option4!,
+                            correctOption: widget.optionModel.correctOption!,
+                            optionSelected: optionSelected,
+                          ),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
               ),
             ),
           )

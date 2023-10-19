@@ -47,6 +47,7 @@ dependencies:
   get: ^4.6.6
   enum_to_string: ^2.0.1
   swipe_deck: ^1.0.0
+  custom_timer: ^0.2.3
 
 dev_dependencies:
   flutter_test:
