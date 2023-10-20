@@ -1,19 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
-import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play.dart';
 
-class QuizTileWidget extends StatelessWidget {
+class QuestionTileSingleWidget extends StatelessWidget {
   final QuizModel quizModel;
-  // final QuestionModel questionModel;
+  final QuestionModel questionModel;
   final Color colorNotes;
 
-  const QuizTileWidget({
+  const QuestionTileSingleWidget({
     Key? key,
     required this.quizModel,
-    // required this.questionModel,
+    required this.questionModel,
     required this.colorNotes,
   }) : super(key: key);
 
@@ -22,14 +19,7 @@ class QuizTileWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(3.0),
         child: GestureDetector(
-          onTap: () {
-            //  TODO: Navigate to quiz
-            debugPrint('QuizTileWidget: ${quizModel.quizId}');
-            Get.to(QuizPlay(
-              quizModel: quizModel,
-              quizId: quizModel.quizId,
-            ));
-          },
+          onTap: () {},
           onLongPress: () async {
             // final result = await showMenu(
             //     context: context,
@@ -58,10 +48,17 @@ class QuizTileWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  quizModel.quizTitle,
+                  questionModel.question,
                   style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
-                Text(quizModel.quizDesc),
+                Text(questionModel.option1,
+                    style: const TextStyle(fontSize: 16, color: Colors.black)),
+                Text(questionModel.option2,
+                    style: const TextStyle(fontSize: 16, color: Colors.black)),
+                Text(questionModel.option3,
+                    style: const TextStyle(fontSize: 16, color: Colors.black)),
+                Text(questionModel.option4,
+                    style: const TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),
           ),

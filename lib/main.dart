@@ -49,7 +49,8 @@ class _MyAppState extends State<MyApp> {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Product Sans'
       ),
-      home: const StudyHome(),
+      // ignore: prefer_const_constructors
+      home: StudyHome(),
     );
   }
 }

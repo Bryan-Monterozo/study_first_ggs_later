@@ -8,12 +8,12 @@ import 'package:study_first_ggs_later/modules/quiz/view/widgets/question_tiles.d
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-class QuizShowQuestions extends StatelessWidget {
+class QuizPlay extends StatelessWidget {
   final quizId;
   final QuizModel quizModel;
   final QuestionModel? questionModel;
 
-  const QuizShowQuestions({
+  const QuizPlay({
     Key? key,
     required this.quizModel,
     this.questionModel,
@@ -22,14 +22,22 @@ class QuizShowQuestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // debugPrint('Widget Rebuild');
     final questionRef = FirebaseFirestore.instance
         .collection('Quiz')
         .doc(quizModel.quizId)
         .collection('questions');
     final OptionsController optionsController = Get.put(OptionsController());
+    optionsController.answeredCurrent = false;
     return SafeArea(
       child: Scaffold(
         appBar: SharedAppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: const Icon(Icons.arrow_back),
+          ),
           title: quizModel.quizTitle,
         ),
         body: Column(
@@ -90,7 +98,7 @@ class QuizShowQuestions extends StatelessWidget {
                         width: MediaQuery.of(context).size.width - 50,
                         lineHeight: 30.0,
                         animation: true,
-                        animationDuration: 1000,
+                        animationDuration: 750,
                         animateFromLastPercent: true,
                         percent: (controller.timePercent),
                         center: Text(
@@ -120,9 +128,8 @@ class QuizShowQuestions extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     }
-    
                     final random = snapshot.data!.docs.toList()..shuffle();
-    
+
                     optionsController.questionTotal.value =
                         snapshot.data!.docs.length;
                     optionsController.questionTotalFinal();
@@ -132,25 +139,25 @@ class QuizShowQuestions extends StatelessWidget {
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           OptionModel optionModel = OptionModel();
-    
+
                           optionModel.question = random[index]['question'];
-    
+
                           List<String> options = [
                             random[index]['option1'],
                             random[index]['option2'],
                             random[index]['option3'],
                             random[index]['option4'],
                           ];
-    
+
                           options.shuffle();
-    
+
                           optionModel.option1 = options[0];
                           optionModel.option2 = options[1];
                           optionModel.option3 = options[2];
                           optionModel.option4 = options[3];
                           optionModel.correctOption = random[index]['option1'];
                           optionModel.answered = false;
-    
+
                           return QuestionTilesWidget(
                             optionModel: optionModel,
                           );
@@ -158,18 +165,24 @@ class QuizShowQuestions extends StatelessWidget {
                   }),
             ),
             Expanded(
-              flex: 1,
-              child: Container(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        optionsController.nextQuestion();
-                      },
-                      child: const Text('Next'),
+              flex: 3,
+              child: GetBuilder<OptionsController>(
+                id: 'nextQuestionButton',
+                builder: (controller) => Visibility(
+                  visible: controller.answeredCurrent == true ? true : false,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            controller.nextQuestion();
+                          },
+                          child: const Text('Next'),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

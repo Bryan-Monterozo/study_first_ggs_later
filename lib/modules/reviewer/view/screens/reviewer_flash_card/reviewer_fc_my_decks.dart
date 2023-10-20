@@ -14,6 +14,7 @@ class ReviewerFcMyDecks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('Widget Rebuild');
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),

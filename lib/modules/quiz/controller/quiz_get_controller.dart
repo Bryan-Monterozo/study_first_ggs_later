@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_result.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 // import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 
@@ -122,6 +123,10 @@ class OptionsController extends GetxController {
   int questionNumberInt = 1;
   int questionTotalInt = 0;
 
+  //Quiz Checker
+  bool answeredCurrent = false;
+  int quizPoints = 0;
+
   //timer
   final timeLeft = 0.obs;
   int timeLeftX = 0;
@@ -137,7 +142,6 @@ class OptionsController extends GetxController {
   @override
   void onInit() async {
     nextPage = PageController(initialPage: 0);
-    
     super.onInit();
   }
 
@@ -156,6 +160,15 @@ class OptionsController extends GetxController {
     super.onClose();
   }
 
+  currentQuestionAnswered() {
+    answeredCurrent = true;
+    update(['nextQuestionButton']);
+  }
+
+  addPoints() {
+    quizPoints++;
+  }
+
   nextQuestion() async {
     if (questionNumber.value < questionTotal.value) {
       nextPage.nextPage(
@@ -164,8 +177,18 @@ class OptionsController extends GetxController {
       questionNumberInt = questionNumber.value;
       debugPrint('onNext');
       debugPrint('${timeLeft.value}');
-      update(['nextQuestion']);
+      answeredCurrent = false;
+      update(['nextQuestion', 'nextQuestionButton']);
+    } else {
+      finishQuiz();
     }
+  }
+
+  finishQuiz() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('questionTotalInt', questionTotal.value);
+    questionTotalInt = prefs.getInt('questionTotalInt')!;
+    Get.off(const QuizResult());
   }
 
   // Initialize Questionaire
@@ -214,6 +237,7 @@ class OptionsController extends GetxController {
         update(['timeLeft']);
       } else {
         timer.cancel();
+        finishQuiz();
       }
     });
   }

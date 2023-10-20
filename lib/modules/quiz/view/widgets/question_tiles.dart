@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/option_tiles.dart';
 
@@ -15,17 +17,16 @@ class QuestionTilesWidget extends StatefulWidget {
   State<QuestionTilesWidget> createState() => _QuestionTilesWidgetState();
 }
 
-class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTickerProviderStateMixin {
+class _QuestionTilesWidgetState extends State<QuestionTilesWidget> {
   String optionSelected = '';
   OptionModel optionModel = OptionModel();
   // final optionsController = Get.create(() => OptionsController());
-  
 
   @override
   Widget build(BuildContext context) {
     // final optionsController = Get.find<OptionsController>();
-    // final OptionsController optionsController = Get.put(OptionsController());
-
+    final OptionsController optionsController = Get.put(OptionsController());
+    // debugPrint('Widget Rebuild');
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -61,11 +62,13 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTi
                         ),
                         GestureDetector(
                           onTap: () {
+                            optionsController.currentQuestionAnswered();
                             if (widget.optionModel.answered == false) {
                               if (widget.optionModel.option1 ==
                                   widget.optionModel.correctOption) {
                                 optionSelected = widget.optionModel.option1!;
                                 widget.optionModel.answered = true;
+                                optionsController.addPoints();
                                 setState(() {});
                               } else {
                                 optionSelected = widget.optionModel.option1!;
@@ -86,10 +89,12 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTi
                         ),
                         GestureDetector(
                           onTap: () {
+                            optionsController.currentQuestionAnswered();
                             if (widget.optionModel.answered == false) {
                               if (widget.optionModel.option2 ==
                                   widget.optionModel.correctOption) {
                                 optionSelected = widget.optionModel.option2!;
+                                optionsController.addPoints();
                                 widget.optionModel.answered = true;
                                 setState(() {});
                               } else {
@@ -111,10 +116,12 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTi
                         ),
                         GestureDetector(
                           onTap: () {
+                            optionsController.currentQuestionAnswered();
                             if (widget.optionModel.answered == false) {
                               if (widget.optionModel.option3 ==
                                   widget.optionModel.correctOption) {
                                 optionSelected = widget.optionModel.option3!;
+                                optionsController.addPoints();
                                 widget.optionModel.answered = true;
                                 setState(() {});
                               } else {
@@ -136,10 +143,12 @@ class _QuestionTilesWidgetState extends State<QuestionTilesWidget> with SingleTi
                         ),
                         GestureDetector(
                           onTap: () {
+                            optionsController.currentQuestionAnswered();
                             if (widget.optionModel.answered == false) {
                               if (widget.optionModel.option4 ==
                                   widget.optionModel.correctOption) {
                                 optionSelected = widget.optionModel.option4!;
+                                optionsController.addPoints();
                                 widget.optionModel.answered = true;
                                 setState(() {});
                               } else {

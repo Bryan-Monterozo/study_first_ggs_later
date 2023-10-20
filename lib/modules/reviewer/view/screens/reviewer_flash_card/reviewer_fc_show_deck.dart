@@ -17,12 +17,7 @@ class ReviewerFcShowDeck extends StatelessWidget {
     Key? key,
     required this.deckModel,
   }) : super(key: key);
-
-  // final ref = FirebaseFirestore.instance
-  //     .collection('Decks')
-  //     .doc(deckId)
-  //     .collection('Cards');
-
+  
   @override
   Widget build(BuildContext context) {
     

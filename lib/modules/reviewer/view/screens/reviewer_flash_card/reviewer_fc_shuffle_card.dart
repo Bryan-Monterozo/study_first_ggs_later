@@ -29,7 +29,7 @@ class ReviewerFcShuffleCard extends StatelessWidget {
       appBar: SharedAppBar(
         leading: leadingBack(context),
         titlePic: titlePic(context),
-        actions: [
+        actions: const [
           // IconButton(
           //   onPressed: () {
           //     // Navigator.pushReplacement(
