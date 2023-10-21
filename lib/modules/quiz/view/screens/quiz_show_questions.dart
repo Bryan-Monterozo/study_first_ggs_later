@@ -1,8 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_edit.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/questions_tiles_single.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
@@ -22,7 +24,17 @@ class QuizShowQuestions extends StatelessWidget {
         .collection('questions');
     return Scaffold(
       appBar: SharedAppBar(
+        title: 'Edit Quiz',
         leading: leadingBack(context),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Get.to(
+                  QuizEdit(quizModel: quizModel!, quizId: quizModel!.quizId));
+            },
+            icon: const Icon(Icons.edit),
+          ),
+        ],
       ),
       body: SafeArea(
         child: StreamBuilder<QuerySnapshot>(

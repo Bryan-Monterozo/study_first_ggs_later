@@ -1,9 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
-import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_dialog.dart';
 
 class QuizTileWidget extends StatelessWidget {
   final QuizModel quizModel;
@@ -25,10 +24,15 @@ class QuizTileWidget extends StatelessWidget {
           onTap: () {
             //  TODO: Navigate to quiz
             debugPrint('QuizTileWidget: ${quizModel.quizId}');
-            Get.to(QuizPlay(
-              quizModel: quizModel,
-              quizId: quizModel.quizId,
-            ));
+            // Get.to(QuizPlay(
+            //   quizModel: quizModel,
+            //   quizId: quizModel.quizId,
+            // ));
+            Get.dialog(
+              QuizDialogWidget(quizModel: quizModel),
+              barrierDismissible: true,
+              barrierColor: Colors.black.withOpacity(0.5),
+            );
           },
           onLongPress: () async {
             // final result = await showMenu(

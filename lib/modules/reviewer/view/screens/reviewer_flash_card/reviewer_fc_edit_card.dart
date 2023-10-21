@@ -40,6 +40,13 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
   }
 
   @override
+  void dispose() {
+    cardFront.dispose();
+    cardBack.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: SharedAppBar(

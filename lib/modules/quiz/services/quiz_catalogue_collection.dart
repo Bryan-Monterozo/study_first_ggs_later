@@ -98,6 +98,30 @@ class QuizCatDB {
     return quizRef;
   }
 
+  editQuestionFromQuiz({
+    required quizId,
+    required questionId,
+    required question,
+    required option1,
+    required option2,
+    required option3,
+    required option4,
+  }) async {
+    final collection = firestore
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('questions')
+        .doc(questionId);
+
+    await collection.update({
+      'question': question,
+      'option1': option1,
+      'option2': option2,
+      'option3': option3,
+      'option4': option4,
+    });
+  }
+
   // retrieveOptions({required quizId, required questionId}) async {
   //   final optionsRef = firestore
   //       .collection('Quiz')

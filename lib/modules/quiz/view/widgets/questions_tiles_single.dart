@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_edit_question.dart';
 
 class QuestionTileSingleWidget extends StatelessWidget {
   final QuizModel quizModel;
@@ -19,7 +21,12 @@ class QuestionTileSingleWidget extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(3.0),
         child: GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.to(QuizEditQuestion(
+              quizModel: quizModel,
+              questionModel: questionModel,
+            ));
+          },
           onLongPress: () async {
             // final result = await showMenu(
             //     context: context,
@@ -51,13 +58,13 @@ class QuestionTileSingleWidget extends StatelessWidget {
                   questionModel.question,
                   style: const TextStyle(fontSize: 20, color: Colors.black),
                 ),
-                Text(questionModel.option1,
+                Text('${questionModel.option1} correct',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
-                Text(questionModel.option2,
+                Text('${questionModel.option2} wrong',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
-                Text(questionModel.option3,
+                Text('${questionModel.option3} wrong',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
-                Text(questionModel.option4,
+                Text('${questionModel.option4} wrong',
                     style: const TextStyle(fontSize: 16, color: Colors.black)),
               ],
             ),

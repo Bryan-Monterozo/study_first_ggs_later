@@ -25,6 +25,9 @@ class QuizController extends GetxController {
   RxString option2 = ''.obs;
   RxString option3 = ''.obs;
   RxString option4 = ''.obs;
+  // RxString quizIdObx = ''.obs;
+
+  String quizTitleStr = '';
 
   @override
   void onInit() async {
@@ -60,6 +63,7 @@ class QuizController extends GetxController {
     option2Controller.dispose();
     option3Controller.dispose();
     option4Controller.dispose();
+    Get.delete<QuizController>();
     super.onClose();
   }
 
@@ -94,6 +98,11 @@ class QuizController extends GetxController {
   //     quizId = quizModel.quizId;
   //     debugPrint('Quiz ID: $quizId');
   //   });
+  // }
+
+  // void editGetQuizId() {
+  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   final quizId = prefs.getString('quizId');
   // }
 
   void removeQuestionButton() {

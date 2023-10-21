@@ -6,7 +6,7 @@ import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_colle
 // import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class QuizAddQuestion extends StatelessWidget {
-  late final quizId;
+  final quizId;
   final QuizModel? quizModel;
   // final QuestionModel? questionModel;
   final QuizCatDB quizCatDB = QuizCatDB();
