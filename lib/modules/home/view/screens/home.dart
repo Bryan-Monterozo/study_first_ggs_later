@@ -70,9 +70,9 @@ class _HomeState extends State<StudyHome> {
                       : 'assets/images/calendar.png',
                 ),
               ),
-              const HomeNavGesture(
+              HomeNavGesture(
                 navigator: StudyToDo(),
-                navContainer: HomeNavButtonWidget(
+                navContainer: const HomeNavButtonWidget(
                   navText: 'TO DO',
                   navDesc: 'Unleash your \nproductivity \nwith our to-do app',
                   navColor: Color(0xFF734429),

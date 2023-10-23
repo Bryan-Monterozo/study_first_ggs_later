@@ -1,16 +1,17 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:study_first_ggs_later/modules/todo/models/todo.dart';
+
+import 'package:study_first_ggs_later/modules/todo/models/todo_model.dart';
 
 class TodoItem extends StatelessWidget {
-  final ToDo todo;
-  final onToDoChanged;
-  final onDeleteItem;
+  // final ToDo todo;
+  // final onToDoChanged;
+  // final onDeleteItem;
+  final ToDoModel toDoModel;
 
   const TodoItem({
     Key? key,
-    required this.todo,
-    required this.onToDoChanged,
-    required this.onDeleteItem,
+    required this.toDoModel,
   }) : super(key: key);
 
   @override
@@ -19,23 +20,23 @@ class TodoItem extends StatelessWidget {
       child: ListTile(
         onTap: () {
           // print('Clicked on Todo Item');
-          onToDoChanged(todo);
+          // onToDoChanged(todo);
         },
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tileColor: Colors.white,
-        leading: Icon(
-          todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,
-          color: Colors.blue,
-        ),
+        // leading: Icon(
+        //   todo.isDone ? Icons.check_box : Icons.check_box_outline_blank,
+        //   color: Colors.blue,
+        // ),
         title: Text(
-          todo.todoText!,
-          style: TextStyle(
+          toDoModel.todoTitle,
+          style: const TextStyle(
             fontSize: 16,
             color: Colors.black,
-            decoration: todo.isDone ? TextDecoration.lineThrough : null,
+            // decoration: todo.isDone ? TextDecoration.lineThrough : null,
           ),
         ),
         trailing: Container(
@@ -53,7 +54,7 @@ class TodoItem extends StatelessWidget {
             icon: const Icon(Icons.delete),
             onPressed: () {
               // print('Clicked Delete button');
-              onDeleteItem(todo.id);
+              // onDeleteItem(todo.id);
             },
           ),
         ),
