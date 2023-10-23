@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar_provider.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'firebase_options.dart';
 
@@ -42,7 +44,11 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => MeetingProvider(),),
+    ],
+    child: GetMaterialApp(
       title: "Study First",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -51,7 +57,7 @@ class _MyAppState extends State<MyApp> {
       ),
       // ignore: prefer_const_constructors
       home: StudyHome(),
-    );
+    ));
   }
 }
 

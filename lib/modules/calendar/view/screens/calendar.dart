@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_data_source.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+import 'package:provider/provider.dart';
+import 'event_editing_page.dart';
+import 'calendar_provider.dart';
 
 class StudyCalendar extends StatefulWidget {
   static const String routeName = '/calendar';
@@ -16,93 +20,104 @@ class StudyCalendar extends StatefulWidget {
 }
 
 class _StudyCalendarState extends State<StudyCalendar> {
+  CalendarController _controller = CalendarController();
+  CalendarView calendarView = CalendarView.month;
 
   @override
   void initState() {
     widget.navController.initNav(
       currentRoute: CurrentRoute.calendar,
     );
+    _controller = CalendarController();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-
+    final events = Provider.of<MeetingProvider>(context).meetings;
+    final provider = Provider.of<MeetingProvider>(context);
     return Scaffold(
-      drawer: const NavDrawer(),
-      appBar: SharedAppBar(
-        titlePic: titlePic(context),
-        withPic: withPic(context),
-      ),
-      body: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Text(
-              'Calendar',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-            SfCalendar(
-              view: CalendarView.month,
-              firstDayOfWeek: 7,
-              dataSource: MeetingDataSource(_getDataSource()),
-              monthViewSettings: const MonthViewSettings(
-                  appointmentDisplayMode:
-                      MonthAppointmentDisplayMode.appointment),
-              todayHighlightColor: Colors.red,
-              showNavigationArrow: true,
-            ),
+        drawer: const NavDrawer(),
+        appBar: SharedAppBar(
+          titlePic: titlePic(context),
+          withPic: withPic(context),
+          actions: [
+            IconButton(onPressed: (){
+              provider.editMeeting(0);
+            }, icon: const Icon(Icons.edit))
           ],
         ),
-      ),
-    );
+        floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EventEditingPage()))
+        ),
+        body: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Calendar',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        calendarView = CalendarView.month;
+                        _controller.view = calendarView;
+                      });
+                    },
+                    child: const Text("Month View")),
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        calendarView = CalendarView.week;
+                        _controller.view = calendarView;
+                      });
+                    },
+                    child: const Text("Week View")),
+                OutlinedButton(
+                    onPressed: () {
+                      setState(() {
+                        calendarView = CalendarView.day;
+                        _controller.view = calendarView;
+                      });
+                    },
+                    child: const Text("Day View"))
+              ],
+            ),
+            Expanded(
+              child: SfCalendar(
+                view: calendarView,
+                firstDayOfWeek: 7,
+                dataSource: MeetingDataSource(events),
+                controller: _controller,
+                monthViewSettings: const MonthViewSettings(
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.indicator,
+                    showAgenda: true),
+                initialSelectedDate: DateTime.now(),
+                todayHighlightColor: Colors.blue,
+                selectionDecoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(color: Colors.green, width: 2),
+                  borderRadius: const BorderRadius.all(Radius.circular(4)),
+                  shape: BoxShape.rectangle,
+                ),
+                cellBorderColor: Colors.transparent,
+                showNavigationArrow: true,
+              ),
+            )
+          ],
+        ),
+        );
   }
 }
-
-List<Meeting> _getDataSource() {
-    final List<Meeting> meetings = <Meeting>[];
-    final DateTime today = DateTime.now();
-    final DateTime startTime = DateTime(today.year, today.month, today.day, 9, 0, 0);
-    final DateTime endTime = startTime.add(const Duration(hours: 2));
-    meetings.add(Meeting('Conference', startTime, endTime, const Color(0xFF0F8644), false));
-    return meetings;
-  }
-
-  class MeetingDataSource extends CalendarDataSource {
-    MeetingDataSource(List<Meeting> source) {
-      appointments = source;
-    }
-
-    @override
-    DateTime getStartTime(int index) {
-      return appointments![index].from;
-    }
-
-    @override
-    DateTime getEndTime(int index) {
-      return appointments![index].to;
-    }
-
-    @override
-    String getSubject(int index) {
-      return appointments![index].background;
-    }
-
-    @override
-    bool isAllDay(int index) {
-      return appointments![index].isAllDay;
-    }
-  }
-
-  class Meeting {
-    Meeting(this.eventName, this.from, this.to, this.background, this.isAllDay);
-
-    String eventName;
-    DateTime from;
-    DateTime to;
-    Color background;
-    bool isAllDay;
-  }
