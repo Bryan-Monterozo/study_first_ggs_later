@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play.dart';
+// import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play_v2.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_show_questions.dart';
 
 class QuizDialogWidget extends StatelessWidget {

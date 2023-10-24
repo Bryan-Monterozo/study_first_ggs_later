@@ -47,7 +47,7 @@ class StudyReviewer extends StatelessWidget {
                     revContainer: const ReviewerWidget(
                       reviewerText: 'Flash Cards',
                       reviewerColor: Color(0xFF0B6BA7),
-                      reviewerIcon: Icons.add_card_rounded,
+                      reviewerIcon: Icons.amp_stories_rounded,
                     ),
                   ),
                   ReviewerGesture(

@@ -42,30 +42,30 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0, 24, 0, 16),
+              padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(16, 0, 16, 24),
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Icon(
-                          Icons.book_online_rounded,
+                          Icons.lightbulb_circle_rounded,
                           color: Color(0xFF0B6BA7),
-                          size: 32,
+                          size: 36,
                         ),
                         Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
                           child: Text(
                             'Study First',
                             style: TextStyle(
-                              fontFamily: 'Product Sans',
-                              color: Color(0xFF15161E),
-                              fontSize: 24,
-                              fontWeight: FontWeight.w500,
+                              color: Color(0xFF0B6BA7),
+                              fontFamily: 'Poppins',
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -75,7 +75,7 @@ class NavDrawer extends StatelessWidget {
                   Obx(
                     () => Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                          const EdgeInsetsDirectional.fromSTEB(0, 36, 0, 0),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
@@ -86,40 +86,41 @@ class NavDrawer extends StatelessWidget {
                           );
                         },
                         child: DrawerNavButton(
-                          navText: navController.currentNav.value == CurrentRoute.home
-                        ? const Text(
-                          'Home',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'Home',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                          navText: navController.currentNav.value ==
+                                  CurrentRoute.home
+                              ? const Text(
+                                  'Home',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF0B6BA7),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              : const Text(
+                                  'Home',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xffbcbcbc),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                           navIcon: navController.currentNav.value ==
                                   CurrentRoute.home
                               ? const Icon(
-                                  Icons.home_outlined,
-                                  color: Colors.white,
-                                  size: 24,
+                                  Icons.home_filled,
+                                  color: Color(0xFF0B6BA7),
+                                  size: 20,
                                 )
                               : const Icon(
-                                  Icons.home_outlined,
-                                  color: Color(0xFF15161E),
-                                  size: 24,
+                                  Icons.home_filled,
+                                  color: Color(0xffbcbcbc),
+                                  size: 20,
                                 ),
-                          navColor: navController.currentNav.value ==
+                          navShadow: navController.currentNav.value ==
                                   CurrentRoute.home
-                              ? const Color(0xFF0B6BA7)
+                              ? const Color(0x33000000)
                               : Colors.white,
                         ),
                       ),
@@ -128,7 +129,7 @@ class NavDrawer extends StatelessWidget {
                   Obx(
                     () => Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                          const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                       child: GestureDetector(
                         onTap: () {
                           Navigator.pushReplacement(
@@ -139,40 +140,41 @@ class NavDrawer extends StatelessWidget {
                           );
                         },
                         child: DrawerNavButton(
-                          navText: navController.currentNav.value == CurrentRoute.pomodoro
-                        ? const Text(
-                          'Pomodoro',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'Pomodoro',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                          navText: navController.currentNav.value ==
+                                  CurrentRoute.pomodoro
+                              ? const Text(
+                                  'Pomodoro',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xFF0B6BA7),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              : const Text(
+                                  'Pomodoro',
+                                  style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    color: Color(0xffbcbcbc),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                           navIcon: navController.currentNav.value ==
                                   CurrentRoute.pomodoro
                               ? const Icon(
-                                  Icons.timer_outlined,
-                                  color: Colors.white,
-                                  size: 24,
+                                  Icons.timer_rounded,
+                                  color: Color(0xFF0B6BA7),
+                                  size: 20,
                                 )
                               : const Icon(
-                                  Icons.timer_outlined,
-                                  color: Color(0xFF15161E),
-                                  size: 24,
+                                  Icons.timer_rounded,
+                                  color: Color(0xffbcbcbc),
+                                  size: 20,
                                 ),
-                          navColor: navController.currentNav.value ==
+                          navShadow: navController.currentNav.value ==
                                   CurrentRoute.pomodoro
-                              ? const Color(0xFF0B6BA7)
+                              ? const Color(0x33000000)
                               : Colors.white,
                         ),
                       ),
@@ -180,7 +182,7 @@ class NavDrawer extends StatelessWidget {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                        const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                     child: GestureDetector(
                       onTap: () {
                         navController.currentNav.value = CurrentRoute.calendar;
@@ -192,47 +194,48 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: navController.currentNav.value == CurrentRoute.calendar
-                        ? const Text(
-                          'Calendar',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'Calendar',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        navText: navController.currentNav.value ==
+                                CurrentRoute.calendar
+                            ? const Text(
+                                'Calendar',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF0B6BA7),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : const Text(
+                                'Calendar',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xffbcbcbc),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                         navIcon: navController.currentNav.value ==
                                 CurrentRoute.calendar
                             ? const Icon(
-                                Icons.calendar_month_outlined,
-                                color: Colors.white,
-                                size: 24,
+                                Icons.calendar_month_rounded,
+                                color: Color(0xFF0B6BA7),
+                                size: 20,
                               )
                             : const Icon(
-                                Icons.calendar_month_outlined,
-                                color: Color(0xFF15161E),
-                                size: 24,
+                                Icons.calendar_month_rounded,
+                                color: Color(0xffbcbcbc),
+                                size: 20,
                               ),
-                        navColor: navController.currentNav.value ==
-                                CurrentRoute.calendar
-                            ? const Color(0xFF0B6BA7)
-                            : Colors.white,
+                        navShadow:
+                            navController.currentNav.value == CurrentRoute.calendar
+                                ? const Color(0x33000000)
+                                : Colors.white,
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                        const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                     child: GestureDetector(
                       onTap: () {
                         navController.currentNav.value = CurrentRoute.todo;
@@ -244,47 +247,48 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: navController.currentNav.value == CurrentRoute.todo
-                        ? const Text(
-                          'To Do',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'To Do',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        navText:
+                            navController.currentNav.value == CurrentRoute.todo
+                                ? const Text(
+                                    'To Do',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFF0B6BA7),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                : const Text(
+                                    'To Do',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xffbcbcbc),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                         navIcon:
                             navController.currentNav.value == CurrentRoute.todo
                                 ? const Icon(
-                                    Icons.checklist_outlined,
-                                    color: Colors.white,
-                                    size: 24,
+                                    Icons.library_add_check_rounded,
+                                    color: Color(0xFF0B6BA7),
+                                    size: 20,
                                   )
                                 : const Icon(
-                                    Icons.checklist_outlined,
-                                    color: Color(0xFF15161E),
-                                    size: 24,
+                                    Icons.library_add_check_rounded,
+                                    color: Color(0xffbcbcbc),
+                                    size: 20,
                                   ),
-                        navColor:
+                        navShadow:
                             navController.currentNav.value == CurrentRoute.todo
-                                ? const Color(0xFF0B6BA7)
+                                ? const Color(0x33000000)
                                 : Colors.white,
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                        const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                     child: GestureDetector(
                       onTap: () {
                         navController.currentNav.value = CurrentRoute.reviewer;
@@ -296,47 +300,48 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: navController.currentNav.value == CurrentRoute.reviewer
-                        ? const Text(
-                          'Reviewer',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'Reviewer',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        navText: navController.currentNav.value ==
+                                CurrentRoute.reviewer
+                            ? const Text(
+                                'Reviewer',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color:Color(0xFF0B6BA7),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : const Text(
+                                'Reviewer',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xffbcbcbc),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                         navIcon: navController.currentNav.value ==
                                 CurrentRoute.reviewer
                             ? const Icon(
-                                Icons.my_library_books_outlined,
-                                color: Colors.white,
-                                size: 24,
+                                Icons.my_library_books_rounded,
+                                color: Color(0xFF0B6BA7),
+                                size: 20,
                               )
                             : const Icon(
-                                Icons.my_library_books_outlined,
-                                color: Color(0xFF15161E),
-                                size: 24,
+                                Icons.my_library_books_rounded,
+                                color: Color(0xffbcbcbc),
+                                size: 20,
                               ),
-                        navColor: navController.currentNav.value ==
-                                CurrentRoute.reviewer
-                            ? const Color(0xFF0B6BA7)
-                            : Colors.white,
+                        navShadow:
+                            navController.currentNav.value == CurrentRoute.reviewer
+                                ? const Color(0x33000000)
+                                : Colors.white,
                       ),
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 12),
+                        const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                     child: GestureDetector(
                       onTap: () {
                         navController.currentNav.value = CurrentRoute.quiz;
@@ -348,40 +353,41 @@ class NavDrawer extends StatelessWidget {
                         );
                       },
                       child: DrawerNavButton(
-                        navText: navController.currentNav.value == CurrentRoute.quiz
-                        ? const Text(
-                          'Quiz',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Colors.white,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                        : const Text(
-                          'Quiz',
-                          style: TextStyle(
-                            fontFamily: 'Product Sans',
-                            color: Color(0xff1c1c1c),
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
+                        navText:
+                            navController.currentNav.value == CurrentRoute.quiz
+                                ? const Text(
+                                    'Quiz',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xFF0B6BA7),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                : const Text(
+                                    'Quiz',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Color(0xffbcbcbc),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
                         navIcon:
                             navController.currentNav.value == CurrentRoute.quiz
                                 ? const Icon(
-                                    Icons.quiz_outlined,
-                                    color: Colors.white,
-                                    size: 24,
+                                    Icons.quiz_rounded,
+                                    color: Color(0xFF0B6BA7),
+                                    size: 20,
                                   )
                                 : const Icon(
-                                    Icons.quiz_outlined,
-                                    color: Color(0xFF15161E),
-                                    size: 24,
+                                    Icons.quiz_rounded,
+                                    color: Color(0xffbcbcbc),
+                                    size: 20,
                                   ),
-                        navColor:
+                        navShadow:
                             navController.currentNav.value == CurrentRoute.quiz
-                                ? const Color(0xFF0B6BA7)
+                                ? const Color(0x33000000)
                                 : Colors.white,
                       ),
                     ),

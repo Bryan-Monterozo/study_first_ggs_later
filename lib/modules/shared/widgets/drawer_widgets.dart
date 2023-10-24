@@ -7,10 +7,13 @@ import 'package:flutter/foundation.dart';
 class DrawerNavButton extends StatelessWidget {
   final Widget? navText;
   final Widget? navIcon;
-  final Color? navColor;
+  final Color? navShadow;
 
   const DrawerNavButton(
-      {super.key, required this.navText, required this.navIcon, this.navColor});
+      {super.key,
+      required this.navText,
+      required this.navIcon,
+      this.navShadow});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +21,16 @@ class DrawerNavButton extends StatelessWidget {
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-        color: navColor,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(12),
         shape: BoxShape.rectangle,
+        boxShadow: [
+          BoxShadow(
+            blurRadius: 4,
+            color: navShadow!,
+            offset: const Offset(0, 2),
+          )
+        ],
       ),
       child: Padding(
         padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 12, 0),
@@ -47,7 +57,7 @@ class NavBarStatus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16, 0, 16, 16),
+      padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.end,
@@ -103,20 +113,20 @@ class NavBarStatus extends StatelessWidget {
                         Text(
                           'User06969',
                           style: TextStyle(
-                            fontFamily: 'Product Sans',
+                            fontFamily: 'Poppins',
                             color: Color(0xFF15161E),
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(0, 4, 0, 0),
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
                           child: Text(
                             'ryanmikes@gmail.com',
                             style: TextStyle(
-                              fontFamily: 'Product Sans',
+                              fontFamily: 'Poppins',
                               color: Color(0xFF606A85),
-                              fontSize: 14,
+                              fontSize: 10,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
