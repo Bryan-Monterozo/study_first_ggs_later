@@ -49,6 +49,7 @@ dependencies:
   syncfusion_flutter_calendar: ^23.1.41
   provider: ^6.0.5
   confetti: ^0.7.0
+  syncfusion_flutter_core: ^23.1.42
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar_provider.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_provider.dart';
 import 'package:study_first_ggs_later/utils.dart';
 import 'meeting.dart';
 
@@ -14,15 +14,16 @@ class EventEditingPage extends StatefulWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  _EventEditingPageState createState() => _EventEditingPageState();  
+  _EventEditingPageState createState() => _EventEditingPageState();
 }
-
 
 class _EventEditingPageState extends State<EventEditingPage> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
+  final descriptionController = TextEditingController();
   late DateTime fromDate;
   late DateTime toDate;
+  late bool allDay = false;
 
   @override
   void initState() {
@@ -31,12 +32,20 @@ class _EventEditingPageState extends State<EventEditingPage> {
     if (widget.meeting == null) {
       fromDate = DateTime.now();
       toDate = DateTime.now().add(const Duration(hours: 2));
+    } else {
+      final meeting = widget.meeting!;
+
+      titleController.text = meeting.eventName;
+      descriptionController.text = meeting.eventDescription;
+      fromDate = meeting.from;
+      toDate = meeting.to;
     }
   }
 
   @override
   void dispose() {
     titleController.dispose();
+    descriptionController.dispose();
     super.dispose();
   }
 
@@ -56,6 +65,10 @@ class _EventEditingPageState extends State<EventEditingPage> {
                 buildTitle(),
                 const SizedBox(height: 12),
                 buildDateTimePickers(),
+                const SizedBox(height: 12),
+                buildAllDay(),
+                const SizedBox(height: 12),
+                buildDescription(),
               ],
             ),
           )));
@@ -66,7 +79,9 @@ class _EventEditingPageState extends State<EventEditingPage> {
             backgroundColor: Colors.transparent,
             shadowColor: Colors.transparent,
           ),
-          onPressed: saveForm,
+          onPressed: () {
+            saveForm();
+          },
           icon: const Icon(Icons.done),
           label: const Text("Save"),
         )
@@ -78,7 +93,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
           border: UnderlineInputBorder(),
           hintText: 'Add Title',
         ),
-        onFieldSubmitted: (_) => saveForm(),
         validator: (title) =>
             title != null && title.isEmpty ? 'Title cannot be empty' : null,
         controller: titleController,
@@ -89,6 +103,32 @@ class _EventEditingPageState extends State<EventEditingPage> {
           buildFrom(),
           buildTo(),
         ],
+      );
+
+  Widget buildAllDay() => Row(children: [
+        const Text('Is the Meeting All Day?'),
+        Checkbox(
+            value: allDay,
+            onChanged: (bool? value) {
+              setState(() {
+                allDay = value!;
+              });
+            })
+      ]);
+
+  Widget buildDescription() => TextFormField(
+        style: const TextStyle(fontSize: 16),
+        decoration: InputDecoration(
+          hintText: 'Add Description',
+          enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: Colors.black),
+              borderRadius: BorderRadius.circular(3)),
+          focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(width: 1, color: Colors.black),
+              borderRadius: BorderRadius.circular(3)),
+        ),
+        controller: descriptionController,
+        maxLines: null,
       );
 
   Widget buildFrom() => buildHeader(
@@ -132,14 +172,19 @@ class _EventEditingPageState extends State<EventEditingPage> {
     if (date == null) return;
 
     if (date.isAfter(toDate)) {
-      toDate = DateTime(date.year, date.month, date.day, toDate.hour, toDate.minute);
+      toDate =
+          DateTime(date.year, date.month, date.day, toDate.hour, toDate.minute);
     }
 
     setState(() => fromDate = date);
   }
 
-    Future pickToDateTime({required bool pickDate}) async {
-    final date = await pickDateTime(toDate, pickDate: pickDate, firstDate: pickDate ? fromDate: null,);
+  Future pickToDateTime({required bool pickDate}) async {
+    final date = await pickDateTime(
+      toDate,
+      pickDate: pickDate,
+      firstDate: pickDate ? fromDate : null,
+    );
     if (date == null) return;
 
     setState(() => toDate = date);
@@ -164,8 +209,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           Duration(hours: initialDate.hour, minutes: initialDate.minute);
 
       return date.add(time);
-    } 
-    else {
+    } else {
       final timeOfDay = await showTimePicker(
         context: context,
         initialTime: TimeOfDay.fromDateTime(initialDate),
@@ -173,7 +217,8 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
       if (timeOfDay == null) return null;
 
-      final date = DateTime(initialDate.year, initialDate.month, initialDate.day);
+      final date =
+          DateTime(initialDate.year, initialDate.month, initialDate.day);
       final time = Duration(hours: timeOfDay.hour, minutes: timeOfDay.minute);
 
       return date.add(time);
@@ -211,14 +256,21 @@ class _EventEditingPageState extends State<EventEditingPage> {
     if (isValid) {
       final meeting = Meeting(
         eventName: titleController.text,
-        eventDescription: 'Description',
+        eventDescription: descriptionController.text,
         from: fromDate,
         to: toDate,
-        isAllDay: false,
+        isAllDay: allDay,
       );
 
+      final isEditing = widget.meeting != null;
       final provider = Provider.of<MeetingProvider>(context, listen: false);
-      provider.addMeeting(meeting);
+
+      if (isEditing) {
+        provider.editMeeting(meeting, widget.meeting!);
+        Navigator.of(context).pop();
+      } else {
+        provider.addMeeting(meeting);
+      }
 
       Navigator.of(context).pop();
     }

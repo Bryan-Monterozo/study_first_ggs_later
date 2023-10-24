@@ -12,6 +12,8 @@ class MeetingDataSource extends CalendarDataSource{
   @override
   String getSubject(int index) => getEvent(index).eventName;
 
+  String getDescription(int index) => getEvent(index).eventDescription;
+
   @override
   DateTime getStartTime(int index) => getEvent(index).from;
 

@@ -8,7 +8,8 @@ import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.d
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:provider/provider.dart';
 import 'event_editing_page.dart';
-import 'calendar_provider.dart';
+import 'meeting_tasks.dart';
+import 'meeting_provider.dart';
 
 class StudyCalendar extends StatefulWidget {
   static const String routeName = '/calendar';
@@ -35,21 +36,15 @@ class _StudyCalendarState extends State<StudyCalendar> {
   @override
   Widget build(BuildContext context) {
     final events = Provider.of<MeetingProvider>(context).meetings;
-    final provider = Provider.of<MeetingProvider>(context);
     return Scaffold(
         drawer: const NavDrawer(),
         appBar: SharedAppBar(
           titlePic: titlePic(context),
           withPic: withPic(context),
-          actions: [
-            IconButton(onPressed: (){
-              provider.editMeeting(0);
-            }, icon: const Icon(Icons.edit))
-          ],
         ),
         floatingActionButton: FloatingActionButton(
             child: const Icon(Icons.add),
-            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => const EventEditingPage()))
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => EventEditingPage()))
         ),
         body: Column(
           children: [
@@ -105,6 +100,12 @@ class _StudyCalendarState extends State<StudyCalendar> {
                         MonthAppointmentDisplayMode.indicator,
                     showAgenda: true),
                 initialSelectedDate: DateTime.now(),
+                onLongPress: (details) {
+                  final provider = Provider.of<MeetingProvider>(context, listen: false);
+
+                  provider.setDate(details.date!);
+                  showModalBottomSheet(context: context, builder: (context) => const TasksWidget(),);
+                },
                 todayHighlightColor: Colors.blue,
                 selectionDecoration: BoxDecoration(
                   color: Colors.transparent,
