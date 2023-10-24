@@ -52,23 +52,28 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Widget withPic(BuildContext context) {
   return Container(
-    width: 80,
-    height: 80,
-    clipBehavior: Clip.antiAlias,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
+    padding: const EdgeInsetsDirectional.all(12),
+    decoration:  BoxDecoration(
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(12)
     ),
-    child: kIsWeb
-        ? Image.network(
-            'assets/images/Ellipse1.png',
-            fit: BoxFit.cover,
-            alignment: const Alignment(0.00, -0.50),
-          )
-        : Image.asset(
-            'assets/images/Ellipse1.png',
-            fit: BoxFit.cover,
-            alignment: const Alignment(0.00, -0.50),
-          ),
+    child: Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: kIsWeb
+            ? Image.network(
+                'assets/images/dp.jpg',
+                fit: BoxFit.fill,
+                alignment: const Alignment(0.00, -0.50),
+              )
+            : Image.asset(
+                'assets/images/dp.jpg',
+                fit: BoxFit.fill,
+                alignment: const Alignment(0.00, -0.50),
+              ),
+      ),
+    ),
   );
 }
 
@@ -79,14 +84,14 @@ Widget titlePic(BuildContext context) {
           ? Image.network(
               'assets/images/logo.png',
               width: 160,
-              height: 52,
+              height: 50,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
             )
           : Image.asset(
               'assets/images/logo.png',
               width: 160,
-              height: 52,
+              height: 50,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
             ));

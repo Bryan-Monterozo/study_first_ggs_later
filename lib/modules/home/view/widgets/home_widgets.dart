@@ -1,82 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
 
 class HomeNavButtonWidget extends StatelessWidget {
-  final String? navText;
-  final String? navDesc;
-  final Color? navColor;
-  final String? navPic;
+  final Color? homeNavColor;
+  final Color? homeNavColorText;
+  final double? homeNavHeight;
+  final double? homeNavWidth;
+  final String? homeNavText;
+  final Widget navContent;
 
-  const HomeNavButtonWidget({
-    super.key,
-    this.navText,
-    this.navDesc,
-    this.navColor,
-    this.navPic,
-  });
+  const HomeNavButtonWidget(
+      {super.key,
+      this.homeNavColor,
+      this.homeNavColorText,
+      this.homeNavHeight,
+      this.homeNavWidth,
+      this.homeNavText,
+      required this.navContent});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(24, 6, 24, 6),
-      child: Container(
-        width: 400,
-        height: 150,
-        decoration: BoxDecoration(
-          color: navColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
+    return Container(
+      width: homeNavWidth,
+      height: homeNavHeight,
+      decoration: BoxDecoration(
+        color: homeNavColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Align(
+        alignment: const AlignmentDirectional(0.00, 0.00),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 0, 0),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: const AlignmentDirectional(0.00, 0.00),
-                    child: Text(navText!,
-                        style: const TextStyle(
-                          fontSize: 25,
-                          color: Colors.white,
-                        )),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.00, 0.00),
-                    child: Text(navDesc!,
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        )),
-                  ),
-                ],
+            Text(
+              homeNavText!,
+              style: TextStyle(
+                fontFamily: 'Poppins',
+                color: homeNavColorText!,
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.00),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: kIsWeb ? Image.network(
-                  navPic!,
-                  width: 150,
-                  height: 200,
-                  fit: BoxFit.cover,
-                )
-                : Image.asset(
-                  navPic!,
-                  width: 150,
-                  height: 200,
-                  fit: BoxFit.cover,
-                )
-                ,
-              ),
-            ),
+            navContent,
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class HomeNavGetStarted extends StatelessWidget {
+  final Color? homeNavColor;
+  final Color? homeNavColorText;
+  final double? homeNavHeight;
+  final double? homeNavWidth;
+  final String? homeNavText;
+
+  const HomeNavGetStarted(
+      {super.key,
+      this.homeNavColor,
+      this.homeNavColorText,
+      this.homeNavHeight,
+      this.homeNavWidth,
+      this.homeNavText});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: homeNavWidth,
+      height: homeNavHeight,
+      decoration: BoxDecoration(
+        color: homeNavColor,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Align(
+        alignment: const AlignmentDirectional(0.00, 0.00),
+        child: Text(
+          homeNavText!,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            color: homeNavColorText!,
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
@@ -87,7 +92,11 @@ class HomeNavGesture extends StatelessWidget {
   final Widget? navigator;
   final Widget? navContainer;
 
-  const HomeNavGesture({super.key, required this.navigator, this.navContainer});
+  const HomeNavGesture({
+    super.key,
+    this.navigator,
+    this.navContainer,
+  });
 
   @override
   Widget build(BuildContext context) {
