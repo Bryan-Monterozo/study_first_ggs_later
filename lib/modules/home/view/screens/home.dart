@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
+import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
@@ -164,7 +166,7 @@ class _HomeState extends State<StudyHome> {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         HomeNavGesture(
-                          // navigator: HomeNavButtonWidget(),
+                          navigator: const Pomodoro(),
                           navContainer: HomeNavButtonWidget(
                             homeNavColor: Colors.white,
                             homeNavColorText: Color(0xFF0B6BA7),
@@ -225,7 +227,7 @@ class _HomeState extends State<StudyHome> {
                           ),
                         ),
                         HomeNavGesture(
-                          // navigator: HomeNavButtonWidget(),
+                          navigator: StudyCalendar(),
                           navContainer: HomeNavButtonWidget(
                             homeNavColor: Colors.transparent,
                             homeNavColorText: Color(0xFF0B6BA7),

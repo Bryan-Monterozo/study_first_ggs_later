@@ -94,6 +94,7 @@ class HomeNavGesture extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      behavior: HitTestBehavior.translucent,
       onTap: () {
         Navigator.pushReplacement(
           context,
@@ -114,7 +115,7 @@ Widget homeCalendar() {
       defaultTextStyle: TextStyle(
         fontFamily: 'Poppins',
         fontSize: 8,
-        color: const Color(0xFF0B6BA7),
+        color: Color(0xFF0B6BA7),
       ),
       outsideTextStyle: TextStyle(
           fontFamily: 'Poppins', fontSize: 8, color: Colors.transparent),
@@ -153,8 +154,14 @@ Widget homeCalendar() {
       formatButtonVisible: false,
       headerPadding: EdgeInsets.symmetric(vertical: 0.0),
       leftChevronMargin: EdgeInsets.all(0.0),
-      leftChevronIcon: Icon(Icons.chevron_left_rounded, color:  Color(0xFF0B6BA7),),
-      rightChevronIcon: Icon(Icons.chevron_right_rounded, color:  Color(0xFF0B6BA7),),
+      leftChevronIcon: Icon(
+        Icons.chevron_left_rounded,
+        color: Color(0xFF0B6BA7),
+      ),
+      rightChevronIcon: Icon(
+        Icons.chevron_right_rounded,
+        color: Color(0xFF0B6BA7),
+      ),
       titleCentered: true,
       titleTextStyle: TextStyle(
         fontFamily: 'Poppins',
@@ -163,7 +170,7 @@ Widget homeCalendar() {
         color: Color(0xFF0B6BA7),
       ),
     ),
-    availableGestures: AvailableGestures.all,
+    availableGestures: AvailableGestures.horizontalSwipe,
     focusedDay: DateTime.now(),
     firstDay: DateTime.utc(2010, 10, 16),
     lastDay: DateTime.utc(2030, 3, 14),
