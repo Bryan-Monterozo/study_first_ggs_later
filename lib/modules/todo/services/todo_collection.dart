@@ -17,4 +17,31 @@ class ToDoDB {
     );
     await collection.set(toDoModel.toMap());
   }
+
+  isDoneToDo({
+    required id,
+    required isDone,
+  }) async {
+    final collection = firestore.collection('Todos').doc(id);
+    await collection.update({
+      'isDone': isDone,
+    });
+  }
+
+  deleteToDo ({
+    required id,
+  }) async {
+    final collection = firestore.collection('Todos').doc(id);
+    await collection.delete();
+  }
+
+  editToDo ({
+    required id,
+    required todoTitle,
+  }) async {
+    final collection = firestore.collection('Todos').doc(id);
+    await collection.update({
+      'todoTitle': todoTitle,
+    });
+  }
 }

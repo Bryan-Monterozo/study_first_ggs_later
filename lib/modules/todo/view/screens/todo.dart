@@ -59,6 +59,7 @@ class StudyToDo extends StatelessWidget {
                         stream: ref,
                         builder:
                             (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          int number = 0;
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return const Center(
@@ -67,6 +68,8 @@ class StudyToDo extends StatelessWidget {
                           return ListView.builder(
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
+                                number++;
+                                debugPrint('reloaded times: $number');
                                 final todoDataMap = snapshot.data!.docs[index];
                                 ToDoModel toDoModel = ToDoModel.fromMap(
                                     todoDataMap.data() as Map<String, dynamic>);
