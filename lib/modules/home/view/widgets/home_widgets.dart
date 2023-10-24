@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/main.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class HomeNavButtonWidget extends StatelessWidget {
   final Color? homeNavColor;
   final Color? homeNavColorText;
   final double? homeNavHeight;
   final double? homeNavWidth;
-  final String? homeNavText;
+  final Widget? homeNavText;
   final Widget navContent;
 
   const HomeNavButtonWidget(
@@ -31,15 +33,7 @@ class HomeNavButtonWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              homeNavText!,
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                color: homeNavColorText!,
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            homeNavText!,
             navContent,
           ],
         ),
@@ -112,4 +106,68 @@ class HomeNavGesture extends StatelessWidget {
       child: navContainer,
     );
   }
+}
+
+Widget homeCalendar() {
+  return TableCalendar(
+    calendarStyle: (const CalendarStyle(
+      cellMargin: EdgeInsets.all(0.0),
+      defaultTextStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 8,
+        color: const Color(0xFF0B6BA7),
+      ),
+      outsideTextStyle: TextStyle(
+          fontFamily: 'Poppins', fontSize: 8, color: Colors.transparent),
+      todayTextStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 8,
+        color: Colors.white,
+      ),
+      weekendTextStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 8,
+        color: Color(0xFF0B6BA7),
+      ),
+      todayDecoration: BoxDecoration(
+        color: Color(0xFF0B6BA7),
+        shape: BoxShape.circle,
+      ),
+    )),
+    locale: "en_US",
+    rowHeight: 21,
+    daysOfWeekStyle: const DaysOfWeekStyle(
+      weekdayStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 8,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF0B6BA7),
+      ),
+      weekendStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 8,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF0B6BA7),
+      ),
+    ),
+    headerStyle: const HeaderStyle(
+      formatButtonVisible: false,
+      headerPadding: EdgeInsets.symmetric(vertical: 0.0),
+      leftChevronMargin: EdgeInsets.all(0.0),
+      leftChevronIcon: Icon(Icons.chevron_left_rounded, color:  Color(0xFF0B6BA7),),
+      rightChevronIcon: Icon(Icons.chevron_right_rounded, color:  Color(0xFF0B6BA7),),
+      titleCentered: true,
+      titleTextStyle: TextStyle(
+        fontFamily: 'Poppins',
+        fontSize: 14,
+        fontWeight: FontWeight.bold,
+        color: Color(0xFF0B6BA7),
+      ),
+    ),
+    availableGestures: AvailableGestures.all,
+    focusedDay: DateTime.now(),
+    firstDay: DateTime.utc(2010, 10, 16),
+    lastDay: DateTime.utc(2030, 3, 14),
+    startingDayOfWeek: StartingDayOfWeek.monday,
+  );
 }
