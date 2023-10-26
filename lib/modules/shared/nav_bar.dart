@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/auth/login.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
@@ -25,8 +26,8 @@ class NavDrawer extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           const SizedBox(
-            height:64.0,
-            child:DrawerHeader(
+            height: 64.0,
+            child: DrawerHeader(
               decoration: BoxDecoration(
                 color: Colors.white,
               ),
@@ -43,13 +44,14 @@ class NavDrawer extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       'User06969',
-                      style: TextStyle(color: Color(0xFF1C1C1C), fontSize: 20.0),
+                      style:
+                          TextStyle(color: Color(0xFF1C1C1C), fontSize: 20.0),
                     ),
                   ),
                 ],
               ),
-              ),
-              ),
+            ),
+          ),
           ListTile(
             title: const Text(
               'Home',
@@ -164,6 +166,25 @@ class NavDrawer extends StatelessWidget {
               );
             },
           ),
+          ListTile(                                                                                                                              
+            title: const Text(
+              'Test Auth',
+              style: TextStyle(fontSize: 20),
+            ),
+            leading: const Icon(
+              Icons.face,
+              size: 20,
+              color: Colors.black,
+            ),
+            onTap: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Login(),
+                ),
+              );
+            },
+          )
         ],
       ),
     );
