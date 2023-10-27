@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ReviewerButton extends StatelessWidget {
-  const ReviewerButton({super.key, required this.onTap, required this.text});
+class QuizButton extends StatelessWidget {
+  const QuizButton({super.key, required this.onTap, required this.text});
 
   final Function onTap;
   final String text;

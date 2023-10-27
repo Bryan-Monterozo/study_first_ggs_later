@@ -3,12 +3,18 @@ import 'package:flutter/foundation.dart';
 
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SharedAppBar(
-      {super.key, this.title, this.actions, this.withPic, this.titlePic});
+      {super.key,
+      this.title,
+      this.actions,
+      this.withPic,
+      this.titlePic,
+      this.leading});
 
   final String? title;
   final List<Widget>? actions;
   final Widget? withPic;
   final Widget? titlePic;
+  final Widget? leading;
 
   @override
   Size get preferredSize => const Size.fromHeight(60);
@@ -20,6 +26,14 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(
         color: Color(0xFF1C1C1C),
       ),
+      leading: leading == null
+          ? IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(Icons.menu),
+            )
+          : leading!,
       title: titlePic == null
           ? Text(
               title!,
@@ -38,23 +52,28 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
 
 Widget withPic(BuildContext context) {
   return Container(
-    width: 80,
-    height: 80,
-    clipBehavior: Clip.antiAlias,
-    decoration: const BoxDecoration(
-      shape: BoxShape.circle,
+    padding: const EdgeInsetsDirectional.all(12),
+    decoration:  BoxDecoration(
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(12)
     ),
-    child: kIsWeb
-        ? Image.network(
-            'assets/images/Ellipse1.png',
-            fit: BoxFit.cover,
-            alignment: const Alignment(0.00, -0.50),
-          )
-        : Image.asset(
-            'assets/images/Ellipse1.png',
-            fit: BoxFit.cover,
-            alignment: const Alignment(0.00, -0.50),
-          ),
+    child: Padding(
+      padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: kIsWeb
+            ? Image.network(
+                'assets/images/dp.jpg',
+                fit: BoxFit.fill,
+                alignment: const Alignment(0.00, -0.50),
+              )
+            : Image.asset(
+                'assets/images/dp.jpg',
+                fit: BoxFit.fill,
+                alignment: const Alignment(0.00, -0.50),
+              ),
+      ),
+    ),
   );
 }
 
@@ -63,20 +82,30 @@ Widget titlePic(BuildContext context) {
       borderRadius: BorderRadius.circular(8),
       child: kIsWeb
           ? Image.network(
-              'assets/images/Rectangle1.png',
-              width: 115,
-              height: 52,
+              'assets/images/logo.png',
+              width: 160,
+              height: 50,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
             )
           : Image.asset(
-              'assets/images/Rectangle1.png',
-              width: 115,
-              height: 52,
+              'assets/images/logo.png',
+              width: 160,
+              height: 50,
               fit: BoxFit.fitHeight,
               alignment: const Alignment(0.00, 0.00),
             ));
 }
 
-
+Widget leadingBack(BuildContext context) {
+  return IconButton(
+    icon: const Icon(
+      Icons.arrow_back_ios_new,
+      color: Colors.black,
+    ),
+    onPressed: () {
+      Navigator.pop(context);
+    },
+  );
+}
 // if (withPic != null) withPic!, ...?actions

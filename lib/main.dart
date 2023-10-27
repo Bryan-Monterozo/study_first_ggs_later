@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:provider/provider.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_provider.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
+import 'firebase_options.dart';
 
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
-
 // class MyApp extends StatelessWidget {
 //   const MyApp({super.key});
 
@@ -36,65 +44,21 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (context) => MeetingProvider(),),
+    ],
+    child: GetMaterialApp(
       title: "Study First",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Product Sans'
       ),
-      home: const StudyHome(),
-    );
+      // ignore: prefer_const_constructors
+      home: StudyHome(),
+    ));
   }
 }
 
 
-
-// class MenuBar extends StatefulWidget {
-//   const MenuBar({super.key});
-
-//   @override
-//   State<MenuBar> createState() => _MenuBarState();
-// }
-
-// class _MenuBarState extends State<MenuBar> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Study First'),
-//       ),
-//       drawer: Drawer(
-//         child: ListView(
-//           children: [
-//             DrawerHeader(
-//                 decoration: const BoxDecoration(
-//                   color: Colors.orange,
-//                 ),
-//                 child: Column(
-//                   children: [
-//                     Container(
-//                       height: 60,
-//                       width: 60,
-//                       decoration: BoxDecoration(
-//                           borderRadius: BorderRadius.circular(30)),
-//                     )
-//                   ],
-//                 )),
-//             const ListTile(
-//               leading: Icon(
-//                 Icons.home,
-//                 size: 20,
-//                 color: Colors.black,
-//               ),
-//               title: Text(
-//                 'Home',
-//                 style: TextStyle(fontSize: 20),
-//               ),
-//             )
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

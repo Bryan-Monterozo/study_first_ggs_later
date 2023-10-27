@@ -30,16 +30,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  percent_indicator: ^4.2.3
+  percent_indicator: ^3.0.1
   # flashcardplus: ^0.0.1
   flip_card: ^0.7.0
   firebase_core: ^2.16.0
   cloud_firestore: ^4.9.2
+  intl: ^0.18.1
+  swipe_cards: ^2.0.0+1
+  card_swiper: ^3.0.1
+  shared_preferences: ^2.2.1
+  get: ^4.6.6
+  enum_to_string: ^2.0.1
+  swipe_deck: ^1.0.0
+  custom_timer: ^0.2.3
+  syncfusion_flutter_calendar: ^23.1.41
+  provider: ^6.0.5
+  confetti: ^0.7.0
+  syncfusion_flutter_core: ^23.1.42
+  table_calendar: ^3.0.8
 
 dev_dependencies:
   flutter_test:
@@ -58,8 +69,8 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/Ellipse1.png
-    - assets/images/Rectangle1.png
+    - assets/images/
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -87,23 +98,18 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-    - family: Product Sans
+    - family: Poppins
       fonts:
-        - asset: fonts/Product Sans Regular.ttf
+        - asset: fonts/Poppins-Regular.ttf
           weight: 400
-        - asset: fonts/Product Sans Italic.ttf
+        - asset: fonts/Poppins-Italic.ttf
           weight: 400
           style: italic
-        - asset: fonts/Product Sans Bold.ttf
+        - asset: fonts/Poppins-Bold.ttf
           weight: 700
-        - asset: fonts/Product Sans Bold Italic.ttf
+        - asset: fonts/Poppins-BoldItalic.ttf
           weight: 700
           style: italic
-        
-    - family: PIXEL
-      fonts:
-        - asset: fonts/pixelgamerpersonaluse-rg61l.otf
-          weight: 400
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

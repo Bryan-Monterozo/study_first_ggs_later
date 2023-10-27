@@ -11,7 +11,7 @@ class PomodoroButton extends StatelessWidget {
   return ButtonTheme(
     minWidth: 200.0,
     child: Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Color(0xFF0B6BA7),
       ),
       child: ElevatedButton(
@@ -23,7 +23,7 @@ class PomodoroButton extends StatelessWidget {
         ),
         child: Text(
           text,
-          style: TextStyle(fontSize: 16, color: Colors.white),
+          style: const TextStyle(fontSize: 16, color: Colors.white),
         ),
       ),
     ),
