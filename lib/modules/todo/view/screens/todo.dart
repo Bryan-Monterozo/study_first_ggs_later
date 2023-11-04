@@ -45,88 +45,100 @@ class StudyToDo extends StatelessWidget {
       ),
       body: Stack(
         children: [
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 15,
-            ),
-            child: GetBuilder<TodoController>(
-              init: TodoController(),
-              id: 'todoList',
-              builder: (controller) => SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    searchBox(),
-                    Flexible(
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: controller.ref,
-                          builder:
-                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            int number = 0;
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                            return ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) {
-                                  number++;
-                                  debugPrint('reloaded times: $number');
-                                  final todoDataMap =
-                                      snapshot.data!.docs[index];
-                                  ToDoModel toDoModel = ToDoModel.fromMap(
-                                      todoDataMap.data()
-                                          as Map<String, dynamic>);
-                                  return TodoItem(
-                                    toDoModel: toDoModel,
-                                  );
-                                });
-                          }),
-                    ),
-                    Flexible(
-                      child: Container(
-                        alignment: Alignment.centerLeft,
-                        child: const Text('Done Tasks',
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey,
-                            )),
+          Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 70),
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+              child: GetBuilder<TodoController>(
+                init: TodoController(),
+                id: 'todoList',
+                builder: (controller) => SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Flexible(
+                        child: StreamBuilder<QuerySnapshot>(
+                            stream: controller.ref,
+                            builder:
+                                (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              int number = 0;
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              return ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    number++;
+                                    debugPrint('reloaded times: $number');
+                                    final todoDataMap =
+                                        snapshot.data!.docs[index];
+                                    ToDoModel toDoModel = ToDoModel.fromMap(
+                                        todoDataMap.data()
+                                            as Map<String, dynamic>);
+                                    return TodoItem(
+                                      toDoModel: toDoModel,
+                                    );
+                                  });
+                            }),
                       ),
-                    ),
-                    Flexible(
-                       child: StreamBuilder<QuerySnapshot>(
-                          stream: controller.isDoneRef,
-                          builder:
-                              (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const Center(
-                                  child: CircularProgressIndicator());
-                            }
-                            return ListView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.docs.length,
-                                itemBuilder: (context, index) {
-                                  final todoDataMap =
-                                      snapshot.data!.docs[index];
-                                  ToDoModel toDoModel = ToDoModel.fromMap(
-                                      todoDataMap.data()
-                                          as Map<String, dynamic>);
-                                  return TodoItem(
-                                    toDoModel: toDoModel,
-                                  );
-                                });
-                          })
-                    ),
-                  ],
+                      Flexible(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: const Text('Done Tasks',
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.grey,
+                              )),
+                        ),
+                      ),
+                      Flexible(
+                         child: StreamBuilder<QuerySnapshot>(
+                            stream: controller.isDoneRef,
+                            builder:
+                                (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                    child: CircularProgressIndicator());
+                              }
+                              return ListView.builder(
+                                  physics: const NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  itemCount: snapshot.data!.docs.length,
+                                  itemBuilder: (context, index) {
+                                    final todoDataMap =
+                                        snapshot.data!.docs[index];
+                                    ToDoModel toDoModel = ToDoModel.fromMap(
+                                        todoDataMap.data()
+                                            as Map<String, dynamic>);
+                                    return TodoItem(
+                                      toDoModel: toDoModel,
+                                    );
+                                  });
+                            })
+                      ),
+                    ],
+                  ),
                 ),
               ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 20,
+                vertical: 15,
+              ),
+              child: searchBox(),
             ),
           ),
           Align(
