@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
-import 'package:study_first_ggs_later/modules/home/model/homeModel.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz.dart';
@@ -13,29 +11,19 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
-import 'package:table_calendar/table_calendar.dart';
 
 class StudyHome extends StatefulWidget {
   static const String routeName = '/';
   const StudyHome({super.key});
+
 
   @override
   State<StudyHome> createState() => _HomeState();
 }
 
 class _HomeState extends State<StudyHome> {
-  NavController navController = Get.put(NavController());
 
-  List homeWidget = [
-    HomeModel(
-        text: "Quiz",
-        description: "Try Quiz",
-        imagePath: "assets/images/books.png"),
-    HomeModel(
-        text: "Flashcards",
-        description: "Try Flashcards",
-        imagePath: "assets/images/books.png")
-  ];
+  NavController navController = Get.put(NavController());
 
   @override
   void initState() {
@@ -48,390 +36,77 @@ class _HomeState extends State<StudyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        drawer: const NavDrawer(),
-        appBar: SharedAppBar(
-          titlePic: titlePic(context),
-          withPic: withPic(context),
-        ),
-        body: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(24, 24, 24, 0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  children: [
-                    Stack(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            padding: const EdgeInsets.all(12),
-                            width: 400.0,
-                            height: 150.0,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF0B6BA7),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Align(
-                              alignment: const Alignment(0.8, 0.0),
-                              child: SizedBox(
-                                width: 10.0,
-                                height: 20.0,
-                                child: OverflowBox(
-                                  minWidth: 0.0,
-                                  maxWidth: 130.0,
-                                  minHeight: 0.0,
-                                  maxHeight: 130.0,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(12),
-                                    ),
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsetsDirectional.fromSTEB(
-                                              2, 2, 2, 2),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(8),
-                                        child: kIsWeb
-                                            ? Image.network(
-                                                'assets/images/books.png',
-                                                fit: BoxFit.fill,
-                                                alignment: const Alignment(
-                                                    0.00, -0.50),
-                                              )
-                                            : Image.asset(
-                                                'assets/images/books.png',
-                                                fit: BoxFit.fill,
-                                                alignment: const Alignment(
-                                                    0.00, -0.50),
-                                              ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          width: 260.0,
-                          height: 160.0,
-                          decoration: BoxDecoration(
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(15, 15, 15, 15),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Text(
-                                    'Studying is Fun!',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Text(
-                                    'Explore the enjoyable side of studying, where curiosity and discovery make learning a truly exciting experience.',
-                                    textAlign: TextAlign.start,
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.white,
-                                      fontSize: 10,
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(-1.00, 0.00),
-                                  child: Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                                    child: HomeNavGesture(
-                                      // navigator: HomeNavButtonWidget(),
-                                      navContainer: HomeNavGetStarted(
-                                        homeNavColor: Color(0xFF57BA5E),
-                                        homeNavColorText: Colors.white,
-                                        homeNavHeight: 30,
-                                        homeNavWidth: 130,
-                                        homeNavText: 'Get Started',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      child: HomeNavGesture(
-                        // navigator: HomeNavButtonWidget(),
-                        navContainer: HomeNavButtonWidget(
-                          homeNavColor: Colors.transparent,
-                          homeNavColorText: Color(0xFF0B6BA7),
-                          homeNavHeight: 230,
-                          homeNavWidth: 300,
-                          homeNavText: Container(),
-                          navContent: SizedBox(
-                              width: 300, height: 200, child: homeCalendar()),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            HomeNavGesture(
-                              // navigator: HomeNavButtonWidget(),
-                              navContainer: HomeNavButtonWidget(
-                                homeNavColor: Colors.white,
-                                homeNavColorText: Color(0xFF0B6BA7),
-                                homeNavHeight: 170,
-                                homeNavWidth: 140,
-                                homeNavText: const Center(
-                                  child: Text(
-                                    'Pomodoro',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF0B6BA7),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                navContent: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: 80,
-                                        width: 80,
-                                        decoration: BoxDecoration(
-                                          color: Colors.transparent,
-                                          borderRadius:
-                                              BorderRadius.circular(12),
-                                        ),
-                                        child: Padding(
-                                          padding: const EdgeInsetsDirectional
-                                              .fromSTEB(2, 2, 2, 2),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            child: kIsWeb
-                                                ? Image.network(
-                                                    'assets/images/time-management.png',
-                                                    fit: BoxFit.fill,
-                                                    alignment: const Alignment(
-                                                        0.00, -0.50),
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/time-management.png',
-                                                    fit: BoxFit.fill,
-                                                    alignment: const Alignment(
-                                                        0.00, -0.50),
-                                                  ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const Text(
-                                      'Study effieciently by using Pomodoro!',
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        color: Color(0xFF0B6BA7),
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            HomeNavGesture(
-                                // navigator: HomeNavButtonWidget(),
-                                navContainer: HomeNavButtonWidget(
-                              homeNavColor: Colors.transparent,
-                              homeNavColorText: Color(0xFF0B6BA7),
-                              homeNavHeight: 200,
-                              homeNavWidth: 160,
-                              homeNavText: const Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    'To Do',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF0B6BA7),
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'View All',
-                                    style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Color(0xFF57BA5E),
-                                      fontSize: 7,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              navContent: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                        width: 160,
-                                        height: 40,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.all(12.0),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'To do item here',
-                                                style: TextStyle(
-                                                  fontFamily: 'Poppins',
-                                                  color: Color(0xFF0B6BA7),
-                                                  fontSize: 10,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Icon(
-                                                Icons.chevron_right_rounded,
-                                                size: 14,
-                                                color: Color(0xFF0B6BA7),
-                                              ),
-                                            ],
-                                          ),
-                                        )),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Container(
-                                          width: 160,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(12.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'To do item here',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    color: Color(0xFF0B6BA7),
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.chevron_right_rounded,
-                                                  size: 14,
-                                                  color: Color(0xFF0B6BA7),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 8.0),
-                                      child: Container(
-                                          width: 160,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                          ),
-                                          child: const Padding(
-                                            padding: EdgeInsets.all(12.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  'To do item here',
-                                                  style: TextStyle(
-                                                    fontFamily: 'Poppins',
-                                                    color: Color(0xFF0B6BA7),
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                Icon(
-                                                  Icons.chevron_right_rounded,
-                                                  size: 14,
-                                                  color: Color(0xFF0B6BA7),
-                                                ),
-                                              ],
-                                            ),
-                                          )),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ))
-                          ]),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 12, 0, 0),
-                      child: HomeNavGesture(
-                        // navigator: HomeNavButtonWidget(),
-                        navContainer: HomeNavButtonWidget(
-                          homeNavColor: Colors.transparent,
-                          homeNavColorText: Color(0xFF0B6BA7),
-                          homeNavHeight: 150,
-                          homeNavWidth: 400,
-                          homeNavText: Container(),
-                          navContent: Expanded(
-                              child:
-                                  ListView.builder(
-                                    itemCount: homeWidget.length,
-                                    itemBuilder: (context, index) => HomeTiles(
-                                    model: homeWidget[index]),
-                                  )),
-                        ),
-                      ),
-                    ),
-                  ],
+      drawer: const NavDrawer(),
+      appBar: SharedAppBar(
+        titlePic: titlePic(context),
+        withPic: withPic(context),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const HomeNavGesture(
+                navigator: Pomodoro(),
+                navContainer: HomeNavButtonWidget(
+                  navText: 'POMODORO',
+                  navDesc:
+                      'Supercharge your \nproductivity with our \nPomodoro technic',
+                  navColor: Color(0xFF818C80),
+                  navPic: kIsWeb
+                      ? 'assets/images/pomodoro.png'
+                      : 'assets/images/pomodoro.png',
                 ),
-              ],
-            ),
+              ),
+              HomeNavGesture(
+                navigator: StudyCalendar(),
+                navContainer: const HomeNavButtonWidget(
+                  navText: 'CALENDAR',
+                  navDesc:
+                      'Master your schedule \neffortlessly with our \nuser-friendly \ncalendar app.',
+                  navColor: Color(0xFF7E7F7A),
+                  navPic: kIsWeb
+                      ? 'assets/images/calendar.png'
+                      : 'assets/images/calendar.png',
+                ),
+              ),
+              const HomeNavGesture(
+                navigator: StudyToDo(),
+                navContainer: HomeNavButtonWidget(
+                  navText: 'TO DO',
+                  navDesc: 'Unleash your \nproductivity \nwith our to-do app',
+                  navColor: Color(0xFF734429),
+                  navPic: kIsWeb
+                      ? 'assets/images/to do.png'
+                      : 'assets/images/to do.png',
+                ),
+              ),
+              HomeNavGesture(
+                navigator: StudyReviewer(),
+                navContainer: const HomeNavButtonWidget(
+                  navText: 'REVIEWER',
+                  navDesc: 'Elevate your studies \nwith our \nReviewer tool',
+                  navColor: Color(0xFF405568),
+                  navPic: kIsWeb
+                      ? 'assets/images/reviewer.png'
+                      : 'assets/images/reviewer.png',
+                ),
+              ),
+              HomeNavGesture(
+                navigator: StudyQuiz(),
+                navContainer: const HomeNavButtonWidget(
+                  navText: 'QUIZ',
+                  navDesc: 'Take a quiz, \nchallenge \nyourself.',
+                  navColor: Color(0xFF598F78),
+                  navPic: kIsWeb
+                      ? 'assets/images/quiz.png'
+                      : 'assets/images/quiz.png',
+                ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
