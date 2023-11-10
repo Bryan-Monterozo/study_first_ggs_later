@@ -22,7 +22,7 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.transparent,
       iconTheme: const IconThemeData(
         color: Color(0xFF1C1C1C),
       ),
@@ -60,7 +60,7 @@ Widget withPic(BuildContext context) {
     child: Padding(
       padding: const EdgeInsetsDirectional.fromSTEB(2, 2, 2, 2),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(50),
         child: kIsWeb
             ? Image.network(
                 'assets/images/dp.jpg',

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
@@ -16,13 +17,11 @@ class StudyHome extends StatefulWidget {
   static const String routeName = '/';
   const StudyHome({super.key});
 
-
   @override
   State<StudyHome> createState() => _HomeState();
 }
 
 class _HomeState extends State<StudyHome> {
-
   NavController navController = Get.put(NavController());
 
   @override
@@ -38,33 +37,46 @@ class _HomeState extends State<StudyHome> {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        titlePic: titlePic(context),
         withPic: withPic(context),
       ),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Center(
           child: Column(
             mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const Row(
+                children: [
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Text("Hello User06969,",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF2C2929),
+                      )),
+                ],
+              ),
               const HomeNavGesture(
                 navigator: Pomodoro(),
                 navContainer: HomeNavButtonWidget(
-                  navText: 'POMODORO',
-                  navDesc:
-                      'Supercharge your \nproductivity with our \nPomodoro technic',
-                  navColor: Color(0xFF818C80),
+                  navText: 'Pomodoro',
+                  navDesc: 'Notifications!',
+                  navColor: Color(0xff009598),
                   navPic: kIsWeb
-                      ? 'assets/images/pomodoro.png'
-                      : 'assets/images/pomodoro.png',
+                      ? 'assets/images/time-management.png'
+                      : 'assets/images/time-management.png',
                 ),
               ),
               HomeNavGesture(
                 navigator: StudyCalendar(),
                 navContainer: const HomeNavButtonWidget(
-                  navText: 'CALENDAR',
-                  navDesc:
-                      'Master your schedule \neffortlessly with our \nuser-friendly \ncalendar app.',
-                  navColor: Color(0xFF7E7F7A),
+                  navText: 'Calendar',
+                  navDesc: 'Notifications!',
+                  navColor: Color(0xffFFAB91),
                   navPic: kIsWeb
                       ? 'assets/images/calendar.png'
                       : 'assets/images/calendar.png',
@@ -73,20 +85,20 @@ class _HomeState extends State<StudyHome> {
               const HomeNavGesture(
                 navigator: StudyToDo(),
                 navContainer: HomeNavButtonWidget(
-                  navText: 'TO DO',
-                  navDesc: 'Unleash your \nproductivity \nwith our to-do app',
-                  navColor: Color(0xFF734429),
+                  navText: 'To Do',
+                  navDesc: 'Notifications',
+                  navColor: Color(0xffB388FF),
                   navPic: kIsWeb
-                      ? 'assets/images/to do.png'
-                      : 'assets/images/to do.png',
+                      ? 'assets/images/to-do-list.png'
+                      : 'assets/images/to-do-list.png',
                 ),
               ),
               HomeNavGesture(
                 navigator: StudyReviewer(),
                 navContainer: const HomeNavButtonWidget(
-                  navText: 'REVIEWER',
-                  navDesc: 'Elevate your studies \nwith our \nReviewer tool',
-                  navColor: Color(0xFF405568),
+                  navText: 'Reviewer',
+                  navDesc: 'Notifications!',
+                  navColor: Color(0xffFF8A80),
                   navPic: kIsWeb
                       ? 'assets/images/reviewer.png'
                       : 'assets/images/reviewer.png',
@@ -95,9 +107,9 @@ class _HomeState extends State<StudyHome> {
               HomeNavGesture(
                 navigator: StudyQuiz(),
                 navContainer: const HomeNavButtonWidget(
-                  navText: 'QUIZ',
-                  navDesc: 'Take a quiz, \nchallenge \nyourself.',
-                  navColor: Color(0xFF598F78),
+                  navText: 'Quiz',
+                  navDesc: 'Notifications!',
+                  navColor: Color(0xffB388FF),
                   navPic: kIsWeb
                       ? 'assets/images/quiz.png'
                       : 'assets/images/quiz.png',
