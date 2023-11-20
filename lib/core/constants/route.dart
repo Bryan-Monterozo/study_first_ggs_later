@@ -5,6 +5,7 @@ enum CurrentRoute {
   quiz,
   calendar,
   todo,
+  settings,
 }
 
 
