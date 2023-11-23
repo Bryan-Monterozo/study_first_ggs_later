@@ -1,12 +1,18 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
-import 'package:study_first_ggs_later/modules/settings/view/screens/settingspage.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_buttons.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
-import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+
+// import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_user_card.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
 
 class StudySettings extends StatelessWidget {
   static const String routeName = '/settings';
@@ -19,24 +25,119 @@ class StudySettings extends StatelessWidget {
       currentRoute: CurrentRoute.settings,
     );
     return Scaffold(
-      drawer: const NavDrawer(),
-      appBar: SharedAppBar(
-        titlePic: titlePic(context),
-        withPic: withPic(context),
+       backgroundColor: Color.fromARGB(255, 218, 218, 218).withOpacity(.94),
+      appBar: AppBar(
+        leading: leadingBack(context),
+        title: const Text(
+          "Settings",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: ListView(
           children: [
-            SettingsButton(
+            // User card
+            UserCard(
+              cardColor: Colors.blue.withOpacity(0.3),
+              userName: "User06969",
+              userProfilePic: const AssetImage('assets/images/Ellipse1.png'),
+              cardActionWidget: SettingsItem(
+                icons: Icons.edit,
+                iconStyle: IconStyle(
+                  withBackground: true,
+                  borderRadius: 50,
+                  backgroundColor: Colors.yellow[600],
+                ),
+                title: "Modify",
+                subtitle: "Tap to change your data",
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const SettingsPage()));
+                  print("OK");
                 },
-                text: 'Settings Page')
+              ),
+            ),
+            SettingsGroup(
+              items: [
+                SettingsItem(
+                  onTap: () {},
+                  icons: CupertinoIcons.pencil_outline,
+                  iconStyle: IconStyle(),
+                  title:
+                      'Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance',
+                  subtitle:
+                      "Make Ziar'App yours Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance",
+                  titleMaxLine: 1,
+                  subtitleMaxLine: 1,
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.fingerprint,
+                  iconStyle: IconStyle(
+                    iconsColor: Colors.white,
+                    withBackground: true,
+                    backgroundColor: Colors.red,
+                  ),
+                  title: 'Privacy',
+                  subtitle: "Lock Ziar'App to improve your privacy",
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.dark_mode_rounded,
+                  iconStyle: IconStyle(
+                    iconsColor: Colors.white,
+                    withBackground: true,
+                    backgroundColor: Colors.red,
+                  ),
+                  title: 'Dark mode',
+                  subtitle: "Automatic",
+                  trailing: Switch.adaptive(
+                    value: false,
+                    onChanged: (value) {},
+                  ),
+                ),
+              ],
+            ),
+            SettingsGroup(
+              items: [
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.info_rounded,
+                  iconStyle: IconStyle(
+                    backgroundColor: Colors.purple,
+                  ),
+                  title: 'About',
+                  subtitle: "Learn more about Ziar'App",
+                ),
+              ],
+            ),
+            // You can add a settings title
+            SettingsGroup(
+              settingsGroupTitle: "Account",
+              items: [
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.exit_to_app_rounded,
+                  title: "Sign Out",
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: CupertinoIcons.repeat,
+                  title: "Change email",
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: CupertinoIcons.delete_solid,
+                  title: "Delete account",
+                  titleStyle: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
