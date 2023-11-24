@@ -19,8 +19,50 @@ class SignUp extends StatelessWidget {
               Text('Start Your Journey!'),
               Text('Register today and be part of the community.'),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 20.0)
-
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text('Last Name'),
+                        prefixIcon: Icon(Icons.person),
+                        border: OutlineInputBorder(),
+                        ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text('First Name'),
+                        border: OutlineInputBorder(),
+                        ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text('E-mail'),
+                        prefixIcon: Icon(Icons.email),
+                        border: OutlineInputBorder(),
+                        ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text('Contact Number'),
+                        prefixIcon: Icon(Icons.phone),
+                        border: OutlineInputBorder(),
+                        ),
+                    ),
+                    const SizedBox(height: 30),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        label: Text('Password'),
+                        prefixIcon: Icon(Icons.fingerprint),
+                        border: OutlineInputBorder(),
+                        ),
+                    ),
+                  ],
+                )
               )
             ],
           
