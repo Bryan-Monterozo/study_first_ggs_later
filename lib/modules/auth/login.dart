@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class Login extends StatelessWidget {
-  //stl
   const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //final size = MediaQuery.of(context).size;
     return SafeArea(
         child: Scaffold(
             appBar: SharedAppBar(
@@ -59,16 +58,19 @@ class Login extends StatelessWidget {
                                   ))),
                           const SizedBox(height: 30),
                           const Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: null, 
-                              child: Text('Forget Password?'))),
+                              alignment: Alignment.centerRight,
+                              child: TextButton(
+                                  onPressed: null,
+                                  child: Text('Forgot Password?'))),
                           ElevatedButton(
-                            onPressed: (){},
+                            onPressed: () {},
                             child: const Text('Login'),
-                            ),
-                            
-
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: Text('Sign up here!') 
+                              )
+                            ))
                         ]))
                   ]),
             )));
