@@ -1,0 +1,32 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/material.dart';
+import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
+  
+  @override
+  Widget build(BuildContext context){
+    return SafeArea(
+      child:(Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children:[
+              Text('Image ng SF logo dito'),
+              Text('Start Your Journey!'),
+              Text('Register today and be part of the community.'),
+              Container(
+                padding: const EdgeInsets.symmetric(vertical: 20.0)
+
+              )
+            ],
+          
+        ),
+        
+      ))
+    ));
+  }
+}
