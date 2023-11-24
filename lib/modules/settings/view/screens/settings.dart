@@ -1,13 +1,10 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
-import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 
-// import 'package:babstrap_settings_screen/babstrap_settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_user_card.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
@@ -15,7 +12,7 @@ import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_ite
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
 
 class StudySettings extends StatelessWidget {
-  static const String routeName = '/settings';
+  static String routeName = '/settings';
   final NavController navController = Get.put(NavController());
   StudySettings({super.key});
 
@@ -25,16 +22,22 @@ class StudySettings extends StatelessWidget {
       currentRoute: CurrentRoute.settings,
     );
     return Scaffold(
-       backgroundColor: Color.fromARGB(255, 218, 218, 218).withOpacity(.94),
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: leadingBack(context),
+        backgroundColor: const Color.fromARGB(255, 39, 66, 85),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.close_rounded),
+          color: Colors.white,
+        ),
         title: const Text(
           "Settings",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 1,
       ),
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -43,58 +46,64 @@ class StudySettings extends StatelessWidget {
             // User card
             UserCard(
               cardColor: Colors.blue.withOpacity(0.3),
-              userName: "User06969",
-              userProfilePic: const AssetImage('assets/images/Ellipse1.png'),
               cardActionWidget: SettingsItem(
-                icons: Icons.edit,
+                icons: Icons.workspace_premium_rounded,
                 iconStyle: IconStyle(
-                  withBackground: true,
-                  borderRadius: 50,
-                  backgroundColor: Colors.yellow[600],
+                  iconsColor: Colors.white,
+                  backgroundColor: Colors.white.withOpacity(0.3),
                 ),
-                title: "Modify",
-                subtitle: "Tap to change your data",
+                subtitle: "More info >>",
                 onTap: () {
-                  print("OK");
+                  print("In App purchase");
                 },
               ),
             ),
             SettingsGroup(
+              settingsGroupTitle: "General",
               items: [
                 SettingsItem(
                   onTap: () {},
-                  icons: CupertinoIcons.pencil_outline,
-                  iconStyle: IconStyle(),
-                  title:
-                      'Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance',
-                  subtitle:
-                      "Make Ziar'App yours Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance Appearance",
-                  titleMaxLine: 1,
-                  subtitleMaxLine: 1,
-                ),
-                SettingsItem(
-                  onTap: () {},
                   icons: Icons.fingerprint,
-                  iconStyle: IconStyle(
-                    iconsColor: Colors.white,
-                    withBackground: true,
-                    backgroundColor: Colors.red,
-                  ),
                   title: 'Privacy',
-                  subtitle: "Lock Ziar'App to improve your privacy",
+                  subtitle: "Lock Study First to improve your privacy",
                 ),
                 SettingsItem(
                   onTap: () {},
                   icons: Icons.dark_mode_rounded,
-                  iconStyle: IconStyle(
-                    iconsColor: Colors.white,
-                    withBackground: true,
-                    backgroundColor: Colors.red,
-                  ),
                   title: 'Dark mode',
                   subtitle: "Automatic",
                   trailing: Switch.adaptive(
                     value: false,
+                    onChanged: (value) {},
+                  ),
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.notifications_rounded,
+                  title: 'Sound',
+                  subtitle: "Sound Notification on session finished",
+                  trailing: Switch.adaptive(
+                    value: true,
+                    onChanged: (value) {},
+                  ),
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.vibration_rounded,
+                  title: 'Vibration',
+                  subtitle: "Vibration on session finish",
+                  trailing: Switch.adaptive(
+                    value: false,
+                    onChanged: (value) {},
+                  ),
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.notifications_rounded,
+                  title: 'Always Screen ON/OFF',
+                  subtitle: "Screen will always be ON during the session",
+                  trailing: Switch.adaptive(
+                    value: true,
                     onChanged: (value) {},
                   ),
                 ),
@@ -105,11 +114,33 @@ class StudySettings extends StatelessWidget {
                 SettingsItem(
                   onTap: () {},
                   icons: Icons.info_rounded,
-                  iconStyle: IconStyle(
-                    backgroundColor: Colors.purple,
-                  ),
                   title: 'About',
-                  subtitle: "Learn more about Ziar'App",
+                  subtitle: "Learn more about Study First, GGS Later",
+                ),
+              ],
+            ),
+            SettingsGroup(
+              settingsGroupTitle: "Others",
+              items: [
+                SettingsItem(
+                  onTap: () {},
+                  icons: CupertinoIcons.flag_circle_fill,
+                  title: "Change Language",
+                  subtitle: "English",
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: CupertinoIcons.delete_solid,
+                  title: "Delete account",
+                  titleStyle: const TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.exit_to_app_rounded,
+                  title: "Sign Out",
                 ),
               ],
             ),
@@ -119,11 +150,6 @@ class StudySettings extends StatelessWidget {
               items: [
                 SettingsItem(
                   onTap: () {},
-                  icons: Icons.exit_to_app_rounded,
-                  title: "Sign Out",
-                ),
-                SettingsItem(
-                  onTap: () {},
                   icons: CupertinoIcons.repeat,
                   title: "Change email",
                 ),
@@ -131,10 +157,15 @@ class StudySettings extends StatelessWidget {
                   onTap: () {},
                   icons: CupertinoIcons.delete_solid,
                   title: "Delete account",
-                  titleStyle: TextStyle(
+                  titleStyle: const TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.bold,
                   ),
+                ),
+                SettingsItem(
+                  onTap: () {},
+                  icons: Icons.exit_to_app_rounded,
+                  title: "Sign Out",
                 ),
               ],
             ),

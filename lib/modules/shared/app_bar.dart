@@ -20,6 +20,7 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 
   @override
+
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.white,
@@ -47,7 +48,7 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       elevation: 0,
     );
-  }
+  }  
 }
 
 Widget withPic(BuildContext context) {

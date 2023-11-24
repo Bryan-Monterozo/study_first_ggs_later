@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_screen_utils.dart ';
 
-
 class SettingsItem extends StatelessWidget {
   final IconData icons;
   final IconStyle? iconStyle;
@@ -17,12 +16,10 @@ class SettingsItem extends StatelessWidget {
   final int? subtitleMaxLine;
   final TextOverflow? overflow;
 
-  
-
-  SettingsItem(
-      {required this.icons,
+  const SettingsItem(
+      {super.key, required this.icons,
       this.iconStyle,
-      required this.title,
+      this.title = "PRO VERSION",
       this.titleStyle,
       this.subtitle,
       this.subtitleStyle,
@@ -45,7 +42,7 @@ class SettingsItem extends StatelessWidget {
                   color: iconStyle!.backgroundColor,
                   borderRadius: BorderRadius.circular(iconStyle!.borderRadius!),
                 ),
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(3),
                 child: Icon(
                   icons,
                   size: SettingsScreenUtils.settingsGroupIconSize,
@@ -53,7 +50,7 @@ class SettingsItem extends StatelessWidget {
                 ),
               )
             : Padding(
-                padding: EdgeInsets.all(5),
+                padding: const EdgeInsets.all(5),
                 child: Icon(
                   icons,
                   size: SettingsScreenUtils.settingsGroupIconSize,
@@ -61,7 +58,7 @@ class SettingsItem extends StatelessWidget {
               ),
         title: Text(
           title,
-          style: titleStyle ?? TextStyle(fontWeight: FontWeight.bold),
+          style: titleStyle ?? const TextStyle(fontWeight: FontWeight.bold),
           maxLines: titleMaxLine,
           overflow: titleMaxLine != null ? overflow : null,
         ),
@@ -74,7 +71,7 @@ class SettingsItem extends StatelessWidget {
                     subtitleMaxLine != null ? TextOverflow.ellipsis : null,
               )
             : null,
-        trailing: (trailing != null) ? trailing : Icon(Icons.navigate_next),
+        trailing: (trailing != null) ? trailing : const Icon(Icons.navigate_next),
       ),
     );
   }
