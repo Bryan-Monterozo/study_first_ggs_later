@@ -1,5 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
-import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
+//import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
@@ -16,6 +18,7 @@ class Login extends StatelessWidget {
             ),
             drawer: const NavDrawer(),
             body: Center(
+              child: SingleChildScrollView(
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -30,7 +33,7 @@ class Login extends StatelessWidget {
                           fontSize: 30,
                           fontWeight: FontWeight.bold),
                     ),
-                    const Text('Study First. GGS later.',
+                    const Text('Welcome back!',
                         style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -57,22 +60,22 @@ class Login extends StatelessWidget {
                                     icon: Icon(Icons.remove_red_eye_sharp),
                                   ))),
                           const SizedBox(height: 30),
-                          const Align(
+                          Align(
                               alignment: Alignment.centerRight,
                               child: TextButton(
                                   onPressed: null,
-                                  child: Text('Forgot Password?'))),
+                                  child: const Text('Forgot Password?'))),
                           ElevatedButton(
                             onPressed: () {},
                             child: const Text('Login'),
                           ),
                           TextButton(
                             onPressed: () {},
-                            child: Text('Sign up here!') 
+                            child: const Text('Sign up here!') 
                               )
-                            ))
-                        ]))
-                  ]),
-            )));
+                  ])
+            )])))
+                  ),
+            );
   }
 }
