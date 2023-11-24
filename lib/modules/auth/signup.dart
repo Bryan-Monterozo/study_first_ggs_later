@@ -61,6 +61,12 @@ class SignUp extends StatelessWidget {
                         border: OutlineInputBorder(),
                         ),
                     ),
+                    const SizedBox(height: 30,),
+                    SizedBox(
+                      width:double.infinity,
+                      child:ElevatedButton(
+                        onPressed: (){},
+                        child: Text('Sign Up')))
                   ],
                 )
               )
