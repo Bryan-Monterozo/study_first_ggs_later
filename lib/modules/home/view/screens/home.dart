@@ -10,6 +10,7 @@ import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
+import 'package:study_first_ggs_later/modules/shared/home_app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
 
@@ -36,8 +37,10 @@ class _HomeState extends State<StudyHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar: SharedAppBar(
-        withPic: withPic(context),
+      appBar:  HomeAppBar(
+        leading: leadingTitle(context),
+        title: "",
+        withPic: withHPic(context),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -45,20 +48,8 @@ class _HomeState extends State<StudyHome> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              const Row(
-                children: [
-                  SizedBox(
-                    width: 24,
-                  ),
-                  Text("Hello User06969,",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF2C2929),
-                      )),
-                ],
+              const SizedBox(
+                height: 24,
               ),
               const HomeNavGesture(
                 navigator: Pomodoro(),

@@ -22,7 +22,7 @@ class StudyCalendar extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        titlePic: titlePic(context),
+        title: "Calendar",
         withPic: withPic(context),
       ),
       body: const Center(

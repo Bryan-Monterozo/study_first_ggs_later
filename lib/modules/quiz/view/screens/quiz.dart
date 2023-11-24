@@ -22,7 +22,7 @@ class StudyQuiz extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        titlePic: titlePic(context),
+        title: "Quiz",
         withPic: withPic(context),
       ),
       body: Center(

@@ -18,50 +18,18 @@ class HomeNavButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.only(top: 24),
+      padding: const EdgeInsetsDirectional.only(bottom: 24),
       child: Container(
-        width: 400,
+        width: 350,
         height: 200,
         decoration: BoxDecoration(
           color: navColor,
           borderRadius: BorderRadius.circular(12),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: Stack(
+          alignment: Alignment.centerRight,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(12),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Align(
-                    alignment: const AlignmentDirectional(0.00, 0.00),
-                    child: Text(navText!,
-                        style: const TextStyle(
-                          fontFamily: "Poppins",
-                          fontWeight: FontWeight.w600,
-                          fontSize: 25,
-                          color: Colors.white,
-                        )),
-                  ),
-                  Align(
-                    alignment: const AlignmentDirectional(0.00, 0.00),
-                    child: Text(navDesc!,
-                        textAlign: TextAlign.start,
-                        style: const TextStyle(
-                          fontFamily: "Poppins",
-                          fontSize: 12,
-                          color: Colors.white,
-                        )),
-                  ),
-                ],
-              ),
-            ),
-            Align(
-              alignment: const AlignmentDirectional(0.00, 0.00),
+            Positioned(
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: kIsWeb
@@ -73,10 +41,40 @@ class HomeNavButtonWidget extends StatelessWidget {
                       )
                     : Image.asset(
                         navPic!,
-                        width: 150,
+                        width: 200,
                         height: 200,
                         fit: BoxFit.cover,
                       ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(-1.00, 0.00),
+                    child: Text(navText!,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w600,
+                          fontSize: 25,
+                          color: Colors.white,
+                        )),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.00, 0.00),
+                    child: Text(navDesc!,
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 12,
+                          color: Colors.white,
+                        )),
+                  ),
+                ],
               ),
             ),
           ],
