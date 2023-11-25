@@ -424,12 +424,12 @@ class NavDrawer extends StatelessWidget {
                         navIcon: navController.currentNav.value ==
                                 CurrentRoute.settings
                             ? const Icon(
-                                Icons.settings_suggest,
+                                Icons.settings,
                                 color: Color(0xFF0B6BA7),
                                 size: 20,
                               )
                             : const Icon(
-                                Icons.settings_suggest,
+                                Icons.settings,
                                 color: Color(0xffbcbcbc),
                                 size: 20,
                               ),

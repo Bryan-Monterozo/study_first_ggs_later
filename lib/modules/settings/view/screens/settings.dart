@@ -6,6 +6,7 @@ import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 
 import 'package:flutter/cupertino.dart';
+
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_user_card.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
@@ -19,19 +20,31 @@ class StudySettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     navController.initNav(
-      currentRoute: CurrentRoute.settings,
+      currentRoute: CurrentRoute.home,
     );
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 39, 66, 85),
-        leading: IconButton(
-          onPressed: () {
-            Navigator.pop(context);
+        leading: Builder(
+          builder: (BuildContext context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            );
           },
-          icon: const Icon(Icons.close_rounded),
-          color: Colors.white,
         ),
+
+        // IconButton(
+        //   onPressed: () {
+        //     Navigator.pop(context);
+        //   },
+        //   icon: const Icon(Icons.close_rounded),
+        //   color: Colors.white,
+        // ),
+
         title: const Text(
           "Settings",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -130,17 +143,21 @@ class StudySettings extends StatelessWidget {
                 ),
                 SettingsItem(
                   onTap: () {},
-                  icons: CupertinoIcons.delete_solid,
-                  title: "Delete account",
-                  titleStyle: const TextStyle(
-                    color: Colors.red,
-                    fontWeight: FontWeight.bold,
+                  icons: Icons.wifi_rounded,
+                  title: 'Connect Only on Wi-Fi',
+                  trailing: Switch.adaptive(
+                    value: false,
+                    onChanged: (value) {},
                   ),
                 ),
-                SettingsItem(
+                 SettingsItem(
                   onTap: () {},
-                  icons: Icons.exit_to_app_rounded,
-                  title: "Sign Out",
+                  icons: Icons.report_rounded,
+                  title: 'Automatically Send Usage and Crash Reports',
+                  trailing: Switch.adaptive(
+                    value: true,
+                    onChanged: (value) {},
+                  ),
                 ),
               ],
             ),
