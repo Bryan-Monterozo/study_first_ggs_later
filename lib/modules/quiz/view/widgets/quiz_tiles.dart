@@ -53,7 +53,7 @@ class QuizTileWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
         child: Container(
-          height: 50,
+          height: 80,
           decoration: BoxDecoration(
               color: colorNotes,
               borderRadius: const BorderRadius.all(
