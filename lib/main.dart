@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'firebase_options.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   runApp(const MyApp());
 }
 // class MyApp extends StatelessWidget {
@@ -29,7 +31,6 @@ void main() async {
 //   }
 // }
 
-
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -46,13 +47,10 @@ class _MyAppState extends State<MyApp> {
       title: "Study First",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        fontFamily: 'Product Sans'
-      ),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          fontFamily: 'Product Sans'),
       // ignore: prefer_const_constructors
       home: StudyHome(),
     );
   }
 }
-
-

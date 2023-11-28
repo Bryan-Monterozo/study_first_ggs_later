@@ -41,76 +41,88 @@ class QuizCatalogue extends StatelessWidget {
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          Container(
-            height: 200.0,
-            width: double.maxFinite,
-            decoration: const BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage('assets/images/quizbg.jpg'),
-                    fit: BoxFit.cover)),
-            child: const Row(
-              children: [
-                SizedBox(
-                  width: 24,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("All Quizzes",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        )),
-                    Text("Description",
-                        style: TextStyle(
-                          fontSize: 12,
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        )),
-                    SizedBox(
-                      height: 12,
-                    )
-                  ],
-                ),
-              ],
+          Positioned(
+            left: 0,
+            right: 0,
+            child: Container(
+              height: 200.0,
+              width: double.maxFinite,
+              decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/quiz.png'),
+                      fit: BoxFit.cover)),
+              child: const Row(
+                children: [
+                  SizedBox(
+                    width: 24,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("All Quizzes",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            fontFamily: 'Poppins',
+                            color: Color(0xff1c1c1c),
+                          )),
+                      Text("Description",
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontFamily: 'Poppins',
+                            color: Color(0xff1c1c1c),
+                          )),
+                      SizedBox(
+                        height: 12,
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
-          Stack(
-            alignment: Alignment.topCenter,
-            children: [
-              Container(
-                height: 400,
+          Positioned(
+            top: 200,
+            left: 0,
+            right: 0,
+            child: MediaQuery.removePadding(
+              context: context, removeTop: true,
+              child: Container(
+                height: 600,
+                width: 300,
                 decoration: const BoxDecoration(
-                  color: Colors.transparent,
+                    color: Color(0xffB388FF),
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(24),
+                      topLeft: Radius.circular(24),
+                    )),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: ref.snapshots(),
+                    builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+                      return ListView.builder(
+                          itemCount: snapshot.data!.docs.length,
+                          itemBuilder: (context, index) {
+                            final quizDataMap = snapshot.data!.docs[index];
+                            QuizModel quizModel = QuizModel.fromMap(
+                                quizDataMap.data() as Map<String, dynamic>);
+                            return QuizTileWidget(
+                                quizModel: quizModel,
+                                colorNotes:
+                                    NoteColors().noteColorsList[index % 15]);
+                          });
+                    },
+                  ),
                 ),
               ),
-              Positioned.fill(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: ref.snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    return ListView.builder(
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final quizDataMap = snapshot.data!.docs[index];
-                          QuizModel quizModel = QuizModel.fromMap(
-                              quizDataMap.data() as Map<String, dynamic>);
-                          return QuizTileWidget(
-                              quizModel: quizModel,
-                              colorNotes:
-                                  NoteColors().noteColorsList[index % 15]);
-                        });
-                  },
-                ),
-              ),
-            ],
+            ),
           ),
         ],
       ),
