@@ -70,7 +70,7 @@ class _PomodoroState extends State<Pomodoro> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: SharedAppBar(
-          titlePic: titlePic(context),
+          title: "Pomodoro",
           withPic: withPic(context),
         ),
       drawer: const NavDrawer(),

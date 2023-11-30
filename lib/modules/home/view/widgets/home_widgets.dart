@@ -1,80 +1,83 @@
 import 'package:flutter/material.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:flutter/foundation.dart';
 
 class HomeNavButtonWidget extends StatelessWidget {
-  final Color? homeNavColor;
-  final Color? homeNavColorText;
-  final double? homeNavHeight;
-  final double? homeNavWidth;
-  final Widget? homeNavText;
-  final Widget navContent;
+  final String? navText;
+  final String? navDesc;
+  final Color navColor;
+  final String? navPic;
 
-  const HomeNavButtonWidget(
-      {super.key,
-      this.homeNavColor,
-      this.homeNavColorText,
-      this.homeNavHeight,
-      this.homeNavWidth,
-      this.homeNavText,
-      required this.navContent});
+  const HomeNavButtonWidget({
+    super.key,
+    this.navText,
+    this.navDesc,
+    required this.navColor,
+    this.navPic,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: homeNavWidth,
-      height: homeNavHeight,
-      decoration: BoxDecoration(
-        color: homeNavColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Align(
-        alignment: const AlignmentDirectional(0.00, 0.00),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            homeNavText!,
-            navContent,
-          ],
+    return Padding(
+      padding: const EdgeInsetsDirectional.only(bottom: 24),
+      child: Container(
+        width: 350,
+        height: 200,
+        decoration: BoxDecoration(
+          color: navColor,
+          borderRadius: BorderRadius.circular(12),
         ),
-      ),
-    );
-  }
-}
-
-class HomeNavGetStarted extends StatelessWidget {
-  final Color? homeNavColor;
-  final Color? homeNavColorText;
-  final double? homeNavHeight;
-  final double? homeNavWidth;
-  final String? homeNavText;
-
-  const HomeNavGetStarted(
-      {super.key,
-      this.homeNavColor,
-      this.homeNavColorText,
-      this.homeNavHeight,
-      this.homeNavWidth,
-      this.homeNavText});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: homeNavWidth,
-      height: homeNavHeight,
-      decoration: BoxDecoration(
-        color: homeNavColor,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Align(
-        alignment: const AlignmentDirectional(0.00, 0.00),
-        child: Text(
-          homeNavText!,
-          style: TextStyle(
-            fontFamily: 'Poppins',
-            color: homeNavColorText!,
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
-          ),
+        child: Stack(
+          alignment: Alignment.centerRight,
+          children: [
+            Positioned(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: kIsWeb
+                    ? Image.network(
+                        navPic!,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      )
+                    : Image.asset(
+                        navPic!,
+                        width: 200,
+                        height: 200,
+                        fit: BoxFit.cover,
+                      ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Align(
+                    alignment: const AlignmentDirectional(-1.00, 0.00),
+                    child: Text(navText!,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.w600,
+                          fontSize: 25,
+                          color: Colors.white,
+                        )),
+                  ),
+                  Align(
+                    alignment: const AlignmentDirectional(-1.00, 0.00),
+                    child: Text(navDesc!,
+                        textAlign: TextAlign.start,
+                        style: const TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 12,
+                          color: Colors.white,
+                        )),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -85,11 +88,7 @@ class HomeNavGesture extends StatelessWidget {
   final Widget? navigator;
   final Widget? navContainer;
 
-  const HomeNavGesture({
-    super.key,
-    this.navigator,
-    this.navContainer,
-  });
+  const HomeNavGesture({super.key, required this.navigator, this.navContainer});
 
   @override
   Widget build(BuildContext context) {
@@ -106,74 +105,4 @@ class HomeNavGesture extends StatelessWidget {
       child: navContainer,
     );
   }
-}
-
-Widget homeCalendar() {
-  return TableCalendar(
-    calendarStyle: (const CalendarStyle(
-      cellMargin: EdgeInsets.all(0.0),
-      defaultTextStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 8,
-        color: Color(0xFF0B6BA7),
-      ),
-      outsideTextStyle: TextStyle(
-          fontFamily: 'Poppins', fontSize: 8, color: Colors.transparent),
-      todayTextStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 8,
-        color: Colors.white,
-      ),
-      weekendTextStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 8,
-        color: Color(0xFF0B6BA7),
-      ),
-      todayDecoration: BoxDecoration(
-        color: Color(0xFF0B6BA7),
-        shape: BoxShape.circle,
-      ),
-    )),
-    locale: "en_US",
-    rowHeight: 21,
-    daysOfWeekStyle: const DaysOfWeekStyle(
-      weekdayStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 8,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF0B6BA7),
-      ),
-      weekendStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 8,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF0B6BA7),
-      ),
-    ),
-    headerStyle: const HeaderStyle(
-      formatButtonVisible: false,
-      headerPadding: EdgeInsets.symmetric(vertical: 0.0),
-      leftChevronMargin: EdgeInsets.all(0.0),
-      leftChevronIcon: Icon(
-        Icons.chevron_left_rounded,
-        color: Color(0xFF0B6BA7),
-      ),
-      rightChevronIcon: Icon(
-        Icons.chevron_right_rounded,
-        color: Color(0xFF0B6BA7),
-      ),
-      titleCentered: true,
-      titleTextStyle: TextStyle(
-        fontFamily: 'Poppins',
-        fontSize: 14,
-        fontWeight: FontWeight.bold,
-        color: Color(0xFF0B6BA7),
-      ),
-    ),
-    availableGestures: AvailableGestures.horizontalSwipe,
-    focusedDay: DateTime.now(),
-    firstDay: DateTime.utc(2010, 10, 16),
-    lastDay: DateTime.utc(2030, 3, 14),
-    startingDayOfWeek: StartingDayOfWeek.monday,
-  );
 }

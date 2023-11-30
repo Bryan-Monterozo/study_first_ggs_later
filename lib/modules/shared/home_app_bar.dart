@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const SharedAppBar(
+class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const HomeAppBar(
       {super.key,
       this.title,
       this.actions,
@@ -45,13 +45,14 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : titlePic!,
       actions: withPic == null ? actions : [withPic!],
-      centerTitle: true,
+      centerTitle: false,
       elevation: 0,
+      leadingWidth: double.infinity,
     );
   }
 }
 
-Widget withPic(BuildContext context) {
+Widget withHPic(BuildContext context) {
   return Container(
     padding: const EdgeInsets.fromLTRB(0, 18, 24, 12),
     decoration:  const BoxDecoration(
@@ -107,3 +108,16 @@ Widget leadingBack(BuildContext context) {
 }
 // if (withPic != null) withPic!, ...?actions
 
+Widget leadingTitle(BuildContext context){
+  return const Padding(
+    padding: EdgeInsets.fromLTRB(24, 18, 0, 12),
+    child: Text(
+                'Hello User06969',
+                style: TextStyle(
+                    color: Color(0xFF1C1C1C),
+                    fontFamily: 'Poppins',
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700),
+              ),
+  );
+}

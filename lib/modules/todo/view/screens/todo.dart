@@ -40,7 +40,7 @@ class StudyToDo extends StatelessWidget {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        titlePic: titlePic(context),
+        title: "To Do",
         withPic: withPic(context),
       ),
       body: Stack(
