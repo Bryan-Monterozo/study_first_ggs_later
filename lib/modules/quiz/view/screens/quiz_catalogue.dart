@@ -1,15 +1,13 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_create.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class QuizCatalogue extends StatelessWidget {
   final QuizModel? quizModel;
@@ -24,8 +22,8 @@ class QuizCatalogue extends StatelessWidget {
 
     return Scaffold(
       extendBodyBehindAppBar: true,
+      drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        leading: leadingBack(context),
         title: "",
         actions: [
           IconButton(
@@ -51,7 +49,7 @@ class QuizCatalogue extends StatelessWidget {
               width: double.maxFinite,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/quiz.png'),
+                      image: NetworkImage('assets/images/quiz.png'),
                       fit: BoxFit.cover)),
               child: const Row(
                 children: [

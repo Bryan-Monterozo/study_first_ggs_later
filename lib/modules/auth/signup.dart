@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 //import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
 //import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 //import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
@@ -66,7 +68,9 @@ class SignUp extends StatelessWidget {
                     SizedBox(
                       width:double.infinity,
                       child:ElevatedButton(
-                        onPressed: (){},
+                        onPressed: (){
+                          Get.to(StudyHome());
+                        },
                         child: Text('Sign Up'))) //sign up form ends
                   ],
                 )

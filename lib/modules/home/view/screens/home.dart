@@ -1,14 +1,14 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
+// import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
-import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer.dart';
-import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+// import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/home_app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
@@ -95,9 +95,9 @@ class _HomeState extends State<StudyHome> {
                       : 'assets/images/reviewer.png',
                 ),
               ),
-              HomeNavGesture(
-                navigator: StudyQuiz(),
-                navContainer: const HomeNavButtonWidget(
+              const HomeNavGesture(
+                navigator: QuizCatalogue(),
+                navContainer: HomeNavButtonWidget(
                   navText: 'Quiz',
                   navDesc: 'Notifications!',
                   navColor: Color(0xffB388FF),

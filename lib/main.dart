@@ -6,6 +6,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:provider/provider.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_provider.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
+import 'package:study_first_ggs_later/modules/auth/signup.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -46,7 +47,7 @@ class _MyAppState extends State<MyApp> {
           visualDensity: VisualDensity.adaptivePlatformDensity,
           fontFamily: 'Product Sans'),
       // ignore: prefer_const_constructors
-      home: StudyHome(),
+      home: SignUp(),
     ));
   }
 }

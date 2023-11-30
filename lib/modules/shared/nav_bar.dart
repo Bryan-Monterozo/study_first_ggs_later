@@ -4,7 +4,7 @@ import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
-import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/widgets/drawer_widgets.dart';
@@ -349,7 +349,7 @@ class NavDrawer extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => StudyQuiz(),
+                              builder: (context) => const QuizCatalogue(),
                             ),
                           );
                         },
