@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
@@ -12,24 +13,12 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // ignore: unused_local_variable
+  final db = FirebaseFirestore.instance;
+  // await db
+  //   .enablePersistence(const PersistenceSettings(synchronizeTabs: true));
   runApp(const MyApp());
 }
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   // This widget is the root of your application.
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       // title: 'Study First, GGS Later',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//           primarySwatch: Colors.yellow,
-//           visualDensity: VisualDensity.adaptivePlatformDensity),
-//       // home: const StudyHome(),
-//     );
-//   }
-// }
 
 
 class MyApp extends StatefulWidget {

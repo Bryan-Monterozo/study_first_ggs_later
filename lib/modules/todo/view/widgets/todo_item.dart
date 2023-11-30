@@ -23,89 +23,98 @@ class TodoItem extends StatelessWidget {
     final TodoController todoController = Get.put(TodoController());
     return Container(
       padding: const EdgeInsets.all(5),
-      child: ListTile(
-        hoverColor: Colors.blue.shade50,
-        onTap: () {
-          if (toDoModel.isDone) {
-            toDoModel.isDone = false;
-            toDoDB.isDoneToDo(
-              id: toDoModel.id,
-              isDone: toDoModel.isDone,
-            );
-          } else {
-            toDoModel.isDone = true;
-            toDoDB.isDoneToDo(
-              id: toDoModel.id,
-              isDone: toDoModel.isDone,
-            );
-          }
-          todoController.update(['todoList']);
-        },
+      child: Card(
         shape: RoundedRectangleBorder(
-          side: BorderSide(
-            color: Colors.grey.shade300,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-        tileColor: Colors.white,
-        leading: Icon(
-          toDoModel.isDone ? Icons.check_box : Icons.check_box_outline_blank,
-          color: Colors.blue,
-        ),
-        title: Text(
-          toDoModel.todoTitle,
-          style: TextStyle(
-            fontSize: 16,
-            color: Colors.black,
-            decoration: toDoModel.isDone ? TextDecoration.lineThrough : null,
-          ),
-        ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            GestureDetector(
-              child: Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: const Icon(
-                  Icons.edit,
-                  color: Colors.white,
-                  size: 15,
-                ),
-              ),
-              onTap: () {
-                Get.dialog(ToDoDialogWidget(toDoModel: toDoModel));
-              },
+            side: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1,
             ),
-            const Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
-            GestureDetector(
-              child: Container(
-                height: 25,
-                width: 25,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: const Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                  size: 15,
-                ),
-              ),
-              onTap: () {
-                toDoDB.deleteToDo(
-                  id: toDoModel.id,
-                );
-                todoController.update(['todoList']);
-              },
+            borderRadius: BorderRadius.circular(20),
+          ),
+        child: ListTile(
+          hoverColor: Colors.blue.shade50,
+          onTap: () {
+            if (toDoModel.isDone) {
+              toDoModel.isDone = false;
+              toDoDB.isDoneToDo(
+                id: toDoModel.id,
+                isDone: toDoModel.isDone,
+              );
+            } else {
+              toDoModel.isDone = true;
+              toDoDB.isDoneToDo(
+                id: toDoModel.id,
+                isDone: toDoModel.isDone,
+              );
+            }
+            todoController.update(['todoList']);
+          },
+          shape: RoundedRectangleBorder(
+            side: BorderSide(
+              color: Colors.grey.shade300,
+              width: 1,
             ),
-          ],
+            borderRadius: BorderRadius.circular(20),
+          ),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+          tileColor: Colors.white,
+          leading: Icon(
+            toDoModel.isDone ? Icons.check_box : Icons.check_box_outline_blank,
+            color: Colors.blue,
+          ),
+          title: Text(
+            toDoModel.todoTitle,
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black,
+              decoration: toDoModel.isDone ? TextDecoration.lineThrough : null,
+            ),
+          ),
+          trailing: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                ),
+                onTap: () {
+                  Get.dialog(ToDoDialogWidget(toDoModel: toDoModel));
+                },
+              ),
+              const Padding(padding: EdgeInsets.symmetric(horizontal: 4)),
+              GestureDetector(
+                child: Container(
+                  height: 25,
+                  width: 25,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: const Icon(
+                    Icons.delete,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                ),
+                onTap: () {
+                  toDoDB.deleteToDo(
+                    id: toDoModel.id,
+                  );
+                  todoController.update(['todoList']);
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
