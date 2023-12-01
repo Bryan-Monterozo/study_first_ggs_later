@@ -11,13 +11,13 @@ class ProgressIcons extends StatelessWidget {
     final iconSize = 25.0;
 
     final doneIcon = Icon(
-      Icons.check_box_sharp,
+      Icons.rectangle_rounded,
       color: Color(0xFF0B6BA7),
       size: iconSize,
     );
 
     final notDoneIcon = Icon(
-      Icons.check_box_sharp,
+      Icons.rectangle_rounded,
       color: Color(0xFFCECECE),
       size: iconSize,
     );
