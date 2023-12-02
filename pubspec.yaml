@@ -51,6 +51,7 @@ dependencies:
   confetti: ^0.7.0
   syncfusion_flutter_core: ^23.1.42
   table_calendar: ^3.0.8
+  firebase_auth: ^4.15.0
 
 dev_dependencies:
   flutter_test:

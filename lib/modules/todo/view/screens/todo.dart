@@ -27,10 +27,12 @@ class StudyToDo extends StatelessWidget {
 
   // final todosList = ToDo.todoList();
   // final _todoController = TextEditingController();
-  final TodoController todoController = Get.put(TodoController());
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('reloadedxxxxxxxxxxx');
+    Get.delete<TodoController>();
+    final TodoController todoController = Get.put(TodoController());
     final NavController navController = Get.put(NavController());
     // final TodoController todoController = Get.find<TodoController>();
     navController.initNav(
@@ -62,8 +64,8 @@ class StudyToDo extends StatelessWidget {
                       Flexible(
                         child: StreamBuilder<QuerySnapshot>(
                             stream: controller.ref,
-                            builder:
-                                (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                            builder: (context,
+                                AsyncSnapshot<QuerySnapshot> snapshot) {
                               int number = 0;
                               if (snapshot.connectionState ==
                                   ConnectionState.waiting) {
@@ -100,31 +102,31 @@ class StudyToDo extends StatelessWidget {
                         ),
                       ),
                       Flexible(
-                         child: StreamBuilder<QuerySnapshot>(
-                            stream: controller.isDoneRef,
-                            builder:
-                                (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return const Center(
-                                    child: CircularProgressIndicator());
-                              }
-                              return ListView.builder(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: snapshot.data!.docs.length,
-                                  itemBuilder: (context, index) {
-                                    final todoDataMap =
-                                        snapshot.data!.docs[index];
-                                    ToDoModel toDoModel = ToDoModel.fromMap(
-                                        todoDataMap.data()
-                                            as Map<String, dynamic>);
-                                    return TodoItem(
-                                      toDoModel: toDoModel,
-                                    );
-                                  });
-                            })
-                      ),
+                          child: StreamBuilder<QuerySnapshot>(
+                              stream: controller.isDoneRef,
+                              builder: (context,
+                                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                                if (snapshot.connectionState ==
+                                    ConnectionState.waiting) {
+                                  return const Center(
+                                      child: CircularProgressIndicator());
+                                }
+                                return ListView.builder(
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    shrinkWrap: true,
+                                    itemCount: snapshot.data!.docs.length,
+                                    itemBuilder: (context, index) {
+                                      final todoDataMap =
+                                          snapshot.data!.docs[index];
+                                      ToDoModel toDoModel = ToDoModel.fromMap(
+                                          todoDataMap.data()
+                                              as Map<String, dynamic>);
+                                      return TodoItem(
+                                        toDoModel: toDoModel,
+                                      );
+                                    });
+                              })),
                     ],
                   ),
                 ),
