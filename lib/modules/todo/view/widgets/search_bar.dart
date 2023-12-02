@@ -77,6 +77,7 @@ Widget searchBox() {
                 style: const TextStyle(
                       color: Color(0xFF1c1c1c),
                       fontSize: 14,
+                      fontFamily: 'Poppins',
                       fontWeight: FontWeight.normal,
                     ),
               ),

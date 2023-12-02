@@ -46,10 +46,12 @@ class ToDoDialogWidget extends StatelessWidget {
                       validator: (value) =>
                           value!.isEmpty ? 'Enter an Item' : null,
                       controller: todoController.editTitleController,
+                      style: const TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Color(0xff1c1c1c)),
                       decoration: const InputDecoration(
                           hintText: 'Add a new todo item',
                           border: InputBorder.none,
                           errorStyle: TextStyle(
+                            fontFamily: 'Poppins',
                             fontSize: 0.1,
                             color: Colors.red,
                           ),
