@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:study_first_ggs_later/modules/calendar/services/calendar_collection.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_provider.dart';
 import 'package:study_first_ggs_later/utils.dart';
 import 'meeting.dart';
@@ -254,23 +255,26 @@ class _EventEditingPageState extends State<EventEditingPage> {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
-      final meeting = Meeting(
+
+      final CalendarDB calendarDB = CalendarDB();
+      
+      calendarDB.addEventToDB(
         eventName: titleController.text,
         eventDescription: descriptionController.text,
-        from: fromDate,
-        to: toDate,
+        from: fromDate.toString(),
+        to: toDate.toString(),
         isAllDay: allDay,
       );
 
       final isEditing = widget.meeting != null;
       final provider = Provider.of<MeetingProvider>(context, listen: false);
 
-      if (isEditing) {
-        provider.editMeeting(meeting, widget.meeting!);
-        Navigator.of(context).pop();
-      } else {
-        provider.addMeeting(meeting);
-      }
+      // if (isEditing) {
+      //   provider.editMeeting(meeting, widget.meeting!);
+      //   Navigator.of(context).pop();
+      // } else {
+      //   provider.addMeeting(meeting);
+      // }
 
       Navigator.of(context).pop();
     }
