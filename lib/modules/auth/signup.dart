@@ -88,6 +88,7 @@ class SignUp extends StatelessWidget {
                         icon: Icon(Icons.public),
                         label: Text('Sign Up with Google'),)
               ),
+              SizedBox(height: 30.0),
               TextButton(
                 onPressed: (){}, 
                 child: Text.rich(

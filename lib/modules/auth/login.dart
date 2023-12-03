@@ -56,9 +56,18 @@ class Login extends StatelessWidget {
                             onPressed: () {},
                             child: const Text('Login'),
                           ),
+                          SizedBox(height: 30.0),
+                          SizedBox(
+                            width: double.infinity,
+                            child: OutlinedButton.icon(
+                            onPressed: (){}, 
+                            icon: Icon(Icons.public),
+                            label: Text('Login with Google'),)
+                          ),
+                          SizedBox(height: 30.0),
                           TextButton(
                             onPressed: () {},
-                            child: const Text('Sign up here!') 
+                            child: const Text('No account yet? Sign up here!') 
                               )
                   ])
             )]))
