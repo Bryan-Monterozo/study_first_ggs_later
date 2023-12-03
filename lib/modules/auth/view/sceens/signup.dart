@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/auth/controller/auth_get_controller.dart';
@@ -85,14 +87,22 @@ class SignUp extends StatelessWidget {
                                 icon: const Icon(Icons.public),
                                 label: const Text('Sign Up with Google'),
                               )),
-                          TextButton(
-                              onPressed: () {
-                                Get.off(const Login());
-                              },
-                              child: const Text.rich(TextSpan(children: [
-                                TextSpan(text: 'Already have an account?'),
-                                TextSpan(text: ' Log In')
-                              ])))
+                          Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('Already have an account?'),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.off(const Login());
+                                      },
+                                      child: Text(
+                                        'Login here!',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                         ]),
                       ],
                     ),

@@ -104,7 +104,7 @@ class _LoginState extends State<Login> {
                                         Get.off(const SignUp());
                                       },
                                       child: Text(
-                                        'Sign Up here!',
+                                        'Sign Up!',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       ),
