@@ -11,13 +11,13 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-            appBar: SharedAppBar(
-              titlePic: titlePic(context),
-              withPic: withPic(context),
-            ),
-            drawer: const NavDrawer(),
-            body: SingleChildScrollView(
+      child: Scaffold(
+          appBar: SharedAppBar(
+            titlePic: titlePic(context),
+            withPic: withPic(context),
+          ),
+          drawer: const NavDrawer(),
+          body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 50.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,21 +57,24 @@ class Login extends StatelessWidget {
                             child: const Text('Login'),
                           ),
                           SizedBox(height: 30.0),
-                          SizedBox(
-                            width: double.infinity,
-                            child: OutlinedButton.icon(
-                            onPressed: (){}, 
-                            icon: Icon(Icons.public),
-                            label: Text('Login with Google'),)
-                          ),
+                          Column(children: [
+                            Text('OR'),
+                            SizedBox(height: 30.0),
+                            SizedBox(
+                                width: double.infinity,
+                                child: OutlinedButton.icon(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.public),
+                                  label: Text('Login with Google'),
+                                )),
+                          ]),
                           SizedBox(height: 30.0),
                           TextButton(
-                            onPressed: () {},
-                            child: const Text('No account yet? Sign up here!') 
-                              )
-                  ])
-            )]))
-                  ),
-            );
+                              onPressed: () {},
+                              child:
+                                  const Text('No account yet? Sign up here!'))
+                        ]))
+                  ]))),
+    );
   }
 }
