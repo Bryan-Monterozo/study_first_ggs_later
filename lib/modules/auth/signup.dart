@@ -1,9 +1,9 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
-//import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
-//import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
-//import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
+import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class SignUp extends StatelessWidget {
   const SignUp({super.key});
@@ -12,6 +12,11 @@ class SignUp extends StatelessWidget {
   Widget build(BuildContext context){
     return SafeArea(
       child:(Scaffold(
+        appBar: SharedAppBar(
+              titlePic: titlePic(context),
+              withPic: withPic(context),
+        ),
+        drawer: const NavDrawer(),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 50.0),
           child: Column(
@@ -92,15 +97,10 @@ class SignUp extends StatelessWidget {
                       TextSpan(text: ' Log In')
                     ]
                   )
-                ))
-              
-              
+                ))              
               ]),
-            ],
-          
-          
+            ],         
         ),
-        
       ))
     ));
   }

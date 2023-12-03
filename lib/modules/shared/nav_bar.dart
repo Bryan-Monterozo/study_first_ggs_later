@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:study_first_ggs_later/modules/auth/login.dart';
-import 'package:study_first_ggs_later/modules/auth/signup.dart';
+import 'package:study_first_ggs_later/modules/auth/login.dart';
+//import 'package:study_first_ggs_later/modules/auth/signup.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
@@ -181,7 +181,7 @@ class NavDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const SignUp(),
+                  builder: (context) => const Login(),
                 ),
               );
             },

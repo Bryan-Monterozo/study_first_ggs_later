@@ -17,27 +17,14 @@ class Login extends StatelessWidget {
               withPic: withPic(context),
             ),
             drawer: const NavDrawer(),
-            body: Center(
-              child: SingleChildScrollView(
+            body: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 50.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const Image(
-                        image: AssetImage('assets/images/Rectangle1.png'),
-                        width: 500.0,
-                        height: 300.0),
-                    const Text(
-                      'Login',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const Text('Welcome back!',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 20,
-                        )),
+                    Text('Image ng SF logo dito'),
+                    Text('Welcome back, Partner!'),
+                    Text('Continue your journey.'), //header end
                     Form(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -74,7 +61,7 @@ class Login extends StatelessWidget {
                             child: const Text('Sign up here!') 
                               )
                   ])
-            )])))
+            )]))
                   ),
             );
   }
