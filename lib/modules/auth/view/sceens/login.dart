@@ -64,11 +64,13 @@ class _LoginState extends State<Login> {
                                       labelText: 'E-mail',
                                       hintText: 'E-mail',
                                       border: OutlineInputBorder()),
+                                  keyboardType: TextInputType.emailAddress,
                                   controller: authController.emailController,
                                 ),
                                 const SizedBox(height: 30),
-                                TextFormField(
-                                  decoration: const InputDecoration(
+                                SizedBox(
+                                child:TextFormField(
+                                  decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.fingerprint),
                                       labelText: 'Password',
                                       hintText: 'Password',
@@ -76,14 +78,24 @@ class _LoginState extends State<Login> {
                                       suffixIcon: IconButton(
                                         onPressed: null,
                                         icon: Icon(Icons.remove_red_eye_sharp),
-                                      )),
+                                      ),
+                                      suffix: InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            passwordToggle = !passwordToggle;
+                                          });
+                                        },
+                                        child: Icon(passwordToggle ? Icons.visibility: Icons.visibility_off),
+                                      )
+                                      ),
+                                  keyboardType: TextInputType.emailAddress,
                                   controller: authController.passwordController,
-                                ),
+                                )),
                                 const SizedBox(height: 30),
-                                const Align(
+                                Align(
                                     alignment: Alignment.centerRight,
                                     child: TextButton(
-                                        onPressed: null,
+                                        onPressed: () {},
                                         child: Text('Forgot Password?'))),
                                 ElevatedButton(
                                   //ADMIN AUTH
