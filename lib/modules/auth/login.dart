@@ -2,18 +2,18 @@
 
 import 'package:flutter/material.dart';
 //import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
-import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
-import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+//import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+//import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
 
   @override
-  State<Login> createState() => _Login();
+  State<Login> createState() => _LoginState();
 }
 
-class _Login extends State<Login> {
-  final _formfield = GlobalKey<Login>();
+class _LoginState extends State<Login> {
+  final _formfield = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool passwordToggle = true;
@@ -22,11 +22,6 @@ class _Login extends State<Login> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: SharedAppBar(
-            titlePic: titlePic(context),
-            withPic: withPic(context),
-          ),
-          drawer: const NavDrawer(),
           body: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 50.0),
               child: Column(
@@ -36,6 +31,7 @@ class _Login extends State<Login> {
                     Text('Welcome back, Partner!'),
                     Text('Continue your journey.'), //header end
                     Form(
+                      key: _formfield,
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
@@ -95,7 +91,7 @@ class _Login extends State<Login> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('New here?'),
-                              TextButton(onPressed: (){}, child: Text('Sign Up here!')),
+                              TextButton(onPressed: (){}, child: Text('Sign Up here!', style: TextStyle(fontWeight: FontWeight.bold),),),
                             ],
                           ),
                         ]))
