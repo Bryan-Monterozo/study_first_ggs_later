@@ -5,8 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({super.key});
+
+  @override
+  State<Login> createState() => _Login();
+}
+
+class _Login extends State<Login> {
+  final _formfield = GlobalKey<Login>();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  bool passwordToggle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +40,8 @@ class Login extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                           TextFormField(
+                              keyboardType: TextInputType.emailAddress,
+                              controller: emailController,
                               decoration: const InputDecoration(
                                   prefixIcon: Icon(Icons.email),
                                   labelText: 'E-mail',
@@ -37,7 +49,9 @@ class Login extends StatelessWidget {
                                   border: OutlineInputBorder())),
                           const SizedBox(height: 30),
                           TextFormField(
-                              decoration: const InputDecoration(
+                              keyboardType: TextInputType.emailAddress,
+                              controller: passwordController,
+                              decoration: InputDecoration(
                                   prefixIcon: Icon(Icons.fingerprint),
                                   labelText: 'Password',
                                   hintText: 'Password',
@@ -45,6 +59,14 @@ class Login extends StatelessWidget {
                                   suffixIcon: IconButton(
                                     onPressed: null,
                                     icon: Icon(Icons.remove_red_eye_sharp),
+                                  ),
+                                  suffix: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        passwordToggle = !passwordToggle;
+                                      });
+                                    },
+                                    child: Icon(passwordToggle ? Icons.visibility: Icons.visibility_off)
                                   ))),
                           const SizedBox(height: 30),
                           Align(
@@ -69,10 +91,13 @@ class Login extends StatelessWidget {
                                 )),
                           ]),
                           SizedBox(height: 30.0),
-                          TextButton(
-                              onPressed: () {},
-                              child:
-                                  const Text('No account yet? Sign up here!'))
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('New here?'),
+                              TextButton(onPressed: (){}, child: Text('Sign Up here!')),
+                            ],
+                          ),
                         ]))
                   ]))),
     );
