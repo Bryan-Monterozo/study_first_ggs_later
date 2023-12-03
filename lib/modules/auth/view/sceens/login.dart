@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/auth/controller/auth_get_controller.dart';
 import 'package:study_first_ggs_later/modules/auth/view/sceens/signup.dart';
 //import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
-import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+//import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -15,10 +16,6 @@ class Login extends StatelessWidget {
 
     return SafeArea(
       child: Scaffold(
-          appBar: SharedAppBar(
-            titlePic: titlePic(context),
-            withPic: withPic(context),
-          ),
           body: authController.isLoading
               ? Container(
                   child: const Center(
@@ -76,13 +73,12 @@ class Login extends StatelessWidget {
                                 child: TextButton(
                                     onPressed: null,
                                     child: Text('Forgot Password?'))),
-                            ElevatedButton(
+                            ElevatedButton( //ADMIN AUTH
                               onPressed: () {
                                 if (authController.authEmail == 'ad' &&
                                     authController.authPassword == 'ad') {
                                     authController.adminLogin();
                                   }
-                                
                               },
                               child: const Text('Login'),
                             ),
