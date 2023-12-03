@@ -73,12 +73,8 @@ class _LoginState extends State<Login> {
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.fingerprint),
                                       labelText: 'Password',
-                                      hintText: 'Password',
+                                      hintText: 'Password',   
                                       border: OutlineInputBorder(),
-                                      suffixIcon: IconButton(
-                                        onPressed: null,
-                                        icon: Icon(Icons.remove_red_eye_sharp),
-                                      ),
                                       suffix: InkWell(
                                         onTap: () {
                                           setState(() {
@@ -90,6 +86,7 @@ class _LoginState extends State<Login> {
                                       ),
                                   keyboardType: TextInputType.emailAddress,
                                   controller: authController.passwordController,
+                                  obscureText: passwordToggle,
                                 )),
                                 const SizedBox(height: 30),
                                 Align(
