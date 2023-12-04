@@ -20,9 +20,8 @@ class EventViewingPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.edit),
-            onPressed: () => Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => EventEditingPage(meeting: meeting))),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => EventEditingPage(meeting: meeting))),
           ),
           IconButton(
             icon: const Icon(Icons.delete),
@@ -36,39 +35,50 @@ class EventViewingPage extends StatelessWidget {
         ],
       ),
       body: ListView(padding: const EdgeInsets.all(32), children: <Widget>[
-        buildDateTime(meeting),
-        const SizedBox(height: 32),
         Text(
           meeting.eventName,
           style: (const TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 16),
         Text(meeting.eventDescription,
-            style: const TextStyle(color: Colors.black, fontSize: 18))
+            style: const TextStyle(color: Colors.black, fontSize: 18)),
+        const SizedBox(height: 16),
+        buildDateTime(meeting),
+        const SizedBox(height: 16),
+        if (meeting.isAllDay)
+          const Text(
+            "Meeting is All Day",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
       ]));
 
   Widget buildDateTime(Meeting meeting) {
     return Column(
       children: [
-        buildDate(
+        buildDateFrom(
           meeting.isAllDay ? 'All-Day' : 'From',
           meeting.from,
         ),
-        if (!meeting.isAllDay) buildDate('To', meeting.to)
+        if (!meeting.isAllDay) buildDateTo('TO', meeting.to),
       ],
     );
   }
 
-  Widget buildDate(String title, DateTime date) => buildHeader(
+  Widget buildDateFrom(String title, DateTime date) => buildHeader(
       header: 'FROM',
       child: Row(
         children: [
           Expanded(flex: 2, child: Text(Utils.toDate(meeting.from))),
           Expanded(child: Text(Utils.toTime(meeting.from))),
-          Expanded(flex: 2, child: Text(Utils.toDate(meeting.to))),
-          Expanded(child: Text(Utils.toTime(meeting.to))),
         ],
       ));
+
+  Widget buildDateTo(String title, DateTime date) => buildHeader(
+      header: 'TO',
+      child: Row(children: [
+        Expanded(flex: 2, child: Text(Utils.toDate(meeting.to))),
+        Expanded(child: Text(Utils.toTime(meeting.to))),
+      ]));
 
   Widget buildHeader({
     required String header,

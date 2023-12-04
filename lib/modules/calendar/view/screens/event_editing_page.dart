@@ -37,6 +37,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
       titleController.text = meeting.eventName;
       descriptionController.text = meeting.eventDescription;
+      allDay = meeting.isAllDay;
       fromDate = meeting.from;
       toDate = meeting.to;
     }
