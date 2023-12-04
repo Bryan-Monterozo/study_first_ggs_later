@@ -36,7 +36,12 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
                 child: Text(
                   cardModel!.cardFront,
-                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      color: Colors.white),
                 ),
               ),
             ],
@@ -54,7 +59,12 @@ class ReviewerFcShuffleWidget extends StatelessWidget {
                 padding: const EdgeInsetsDirectional.fromSTEB(24, 24, 24, 24),
                 child: Text(
                   cardModel!.cardBack,
-                  style: const TextStyle(fontSize: 30, color: Colors.white),
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 16,
+                      fontFamily: 'Poppins',
+                      color: Colors.white),
                 ),
               ),
             ],

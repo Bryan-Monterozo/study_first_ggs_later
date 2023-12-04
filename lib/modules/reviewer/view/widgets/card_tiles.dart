@@ -16,36 +16,41 @@ class CardTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.all(3.0),
-        child: GestureDetector(
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ReviewerFcShowCard(
-                    cardModel: cardModel,
-                    deckModel: deckModel,
-                  ),
-                ));
-          },
-          child: Container(
-            decoration: BoxDecoration(
-                color: colorNotes,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(8),
-                )),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  cardModel.cardFront,
-                  style: const TextStyle(fontSize: 30, color: Colors.white),
-                ),
-              ],
-            ),
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ReviewerFcShowCard(
+                cardModel: cardModel,
+                deckModel: deckModel,
+              ),
+            ));
+      },
+      child: Container(
+        height: 250,
+        decoration: BoxDecoration(
+            color: colorNotes,
+            borderRadius: const BorderRadius.all(
+              Radius.circular(12),
+            )),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                cardModel.cardFront,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.w700,
+                    fontFamily: 'Poppins', color: Colors.white),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

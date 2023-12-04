@@ -13,13 +13,11 @@ import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 class StudyReviewer extends StatelessWidget {
   final NavController navController = Get.put(NavController());
   StudyReviewer({super.key});
-  
+
   static const String routeName = '/reviewer';
 
   @override
   Widget build(BuildContext context) {
-
-    
     navController.initNav(
       currentRoute: CurrentRoute.reviewer,
     );
@@ -31,40 +29,36 @@ class StudyReviewer extends StatelessWidget {
         withPic: withPic(context),
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsetsDirectional.all(48),
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ReviewerGesture(
-                    revNavigator: ReviewerFcMyDecks(),
-                    revContainer: const ReviewerWidget(
-                      reviewerText: 'Flash Cards',
-                      reviewerColor: Color(0xFF0B6BA7),
-                      reviewerPic: kIsWeb
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ReviewerGesture(
+                revNavigator: ReviewerFcMyDecks(),
+                revContainer: const ReviewerWidget(
+                  reviewerText: 'Flash Cards',
+                  reviewerColor: Color(0xFF0B6BA7),
+                  reviewerPic: kIsWeb
                       ? 'assets/images/flash-card.png'
                       : 'assets/images/flash-card.png',
-                    ),
-                  ),
-                  ReviewerGesture(
-                    revNavigator: ReviewerNotes(),
-                    revContainer: const ReviewerWidget(
-                      reviewerText: 'Notes',
-                      reviewerColor: Color(0xFF57BA5E),
-                      reviewerPic: kIsWeb
+                ),
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              ReviewerGesture(
+                revNavigator: ReviewerNotes(),
+                revContainer: const ReviewerWidget(
+                  reviewerText: 'Notes',
+                  reviewerColor: Color(0xFF57BA5E),
+                  reviewerPic: kIsWeb
                       ? 'assets/images/notes.png'
                       : 'assets/images/notes.png',
-                    ),
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

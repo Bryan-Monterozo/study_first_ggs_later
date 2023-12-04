@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/note_tiles.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/search_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes/reviewer_notes_add.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
-
 
 class ReviewerNotes extends StatelessWidget {
   ReviewerNotes({super.key});
@@ -19,38 +19,43 @@ class ReviewerNotes extends StatelessWidget {
     return Scaffold(
         appBar: SharedAppBar(
           leading: leadingBack(context),
-          titlePic: titlePic(context),
+          title: 'Notes',
           withPic: withPic(context),
         ),
         floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ReviewerAddNote()));
-          },
-        ),
+            elevation: 0,
+            backgroundColor: const Color(0xFF0B6BA7),
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ReviewerAddNote()));
+            }),
         body: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   searchBox(),
                   Expanded(
                     child: StreamBuilder<QuerySnapshot>(
                         stream: ref.snapshots(),
-                        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const Center(child: CircularProgressIndicator());
+                        builder:
+                            (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
                           }
-                          return GridView.builder(
+                          return MasonryGridView.builder(
+                              mainAxisSpacing: 10,
+                              crossAxisSpacing: 10,
                               gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      mainAxisExtent: 300,
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 24,
-                                      mainAxisSpacing: 24),
+                                  const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                              ),
                               itemCount: snapshot.data!.docs.length,
                               itemBuilder: (context, index) {
                                 final noteDataMap = snapshot.data!.docs[index];
@@ -58,8 +63,8 @@ class ReviewerNotes extends StatelessWidget {
                                     noteDataMap.data() as Map<String, dynamic>);
                                 return NoteTileWidget(
                                     noteModel: noteModel,
-                                    colorNotes:
-                                        NoteColors().noteColorsList[index % 15]);
+                                    colorNotes: NoteColors()
+                                        .noteColorsList[index % 15]);
                               });
                         }),
                   ),

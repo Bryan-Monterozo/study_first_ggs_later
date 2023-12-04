@@ -17,58 +17,63 @@ class ReviewerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsetsDirectional.all(12),
-      child: Container(
-        width: 200,
-        height: 200,
-        decoration: BoxDecoration(
-          color: reviewerColor,
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Column(
-          children: [
-            Expanded(
-              child: Stack(
-                alignment: AlignmentDirectional.center,
-                clipBehavior: Clip.none,
-                children: [
-                  Align(
-                    alignment: const AlignmentDirectional(-1.25, 1.25),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: kIsWeb
-                            ? Image.network(
-                                reviewerPic!,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              )
-                            : Image.asset(
-                                reviewerPic!,
-                                width: 80,
-                                height: 80,
-                                fit: BoxFit.cover,
-                              ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
-                    child: Text(reviewerText!,
-                        style: const TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.w700,
-                          fontFamily: 'Poppins',
-                          color: Colors.white,
-                        )),
-                  ),
-                ],
-              ),
+      child: Center(
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            width: 200,
+            height: 200,
+            decoration: BoxDecoration(
+              color: reviewerColor,
+              borderRadius: BorderRadius.circular(12),
             ),
-          ],
+            child: Column(
+              children: [
+                Expanded(
+                  child: Stack(
+                    alignment: AlignmentDirectional.bottomStart,
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.50, 1.50),
+                        child: Positioned(
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8),
+                            child: kIsWeb
+                                ? Image.network(
+                                    reviewerPic!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Image.asset(
+                                    reviewerPic!,
+                                    width: 100,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(0, 0, 0, 0),
+                        child: Align(
+                          alignment: const AlignmentDirectional(0.00, 0.00),
+                          child: Text(reviewerText!,
+                              style: const TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700,
+                                fontFamily: 'Poppins',
+                                color: Colors.white,
+                              )),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
