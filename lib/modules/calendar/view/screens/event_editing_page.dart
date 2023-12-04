@@ -48,7 +48,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(widget.calendarModel!.eventID);
     return Scaffold(
         appBar: AppBar(
           leading: const CloseButton(),
