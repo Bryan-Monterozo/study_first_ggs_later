@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:provider/provider.dart';
 import 'package:study_first_ggs_later/modules/auth/view/sceens/login.dart';
-import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_provider.dart';
 // import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 // import 'package:study_first_ggs_later/modules/auth/view/sceens/signup.dart';
 import 'firebase_options.dart';
@@ -37,11 +35,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => MeetingProvider(),),
-    ],
-    child: GetMaterialApp(
+    return GetMaterialApp(
       title: "Study First",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -49,6 +43,6 @@ class _MyAppState extends State<MyApp> {
           fontFamily: 'Product Sans'),
       // ignore: prefer_const_constructors
       home: Login(),
-    ));
+    );
   }
 }

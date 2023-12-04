@@ -3,40 +3,36 @@ import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/calendar/controller/calendar_get_controller.dart';
 import 'package:study_first_ggs_later/modules/calendar/models/calendar_model.dart';
 import 'package:study_first_ggs_later/modules/calendar/services/calendar_collection.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
 import 'package:study_first_ggs_later/utils.dart';
 
-class EventEditingPage extends StatefulWidget {
+class EventAddingPage extends StatefulWidget {
   final CalendarModel? calendarModel;
 
-  const EventEditingPage({
+  const EventAddingPage({
     Key? key,
     this.calendarModel,
   }) : super(key: key);
 
   @override
   // ignore: library_private_types_in_public_api
-  _EventEditingPageState createState() => _EventEditingPageState();
+  _EventAddingPageState createState() => _EventAddingPageState();
 }
 
-class _EventEditingPageState extends State<EventEditingPage> {
-  final CalendarGetController calendarController = Get.put(CalendarGetController());
+class _EventAddingPageState extends State<EventAddingPage> {
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   late DateTime fromDate;
   late DateTime toDate;
   late bool allDay = false;
+  final CalendarGetController calendarController = Get.put(CalendarGetController());
 
   @override
   void initState() {
     super.initState();
-    final meeting = widget.calendarModel!;
-
-    titleController.text = meeting.eventName;
-    descriptionController.text = meeting.eventDescription;
-    fromDate = DateTime.parse(meeting.from);
-    toDate = DateTime.parse(meeting.to);
-    allDay = meeting.isAllDay;
+      fromDate = DateTime.now();
+      toDate = DateTime.now().add(const Duration(hours: 2));
   }
 
   @override
@@ -48,7 +44,6 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(widget.calendarModel!.eventID);
     return Scaffold(
         appBar: AppBar(
           leading: const CloseButton(),
@@ -255,16 +250,17 @@ class _EventEditingPageState extends State<EventEditingPage> {
 
     if (isValid) {
       final CalendarDB calendarDB = CalendarDB();
-      calendarDB.editEventToDB(
-          eventName: titleController.text,
-          eventDescription: descriptionController.text,
-          from: fromDate.toString(),
-          to: toDate.toString(),
-          isAllDay: allDay,
-          eventID: widget.calendarModel!.eventID);
-
+      calendarDB.addEventToDB(
+        eventName: titleController.text,
+        eventDescription: descriptionController.text,
+        from: fromDate.toString(),
+        to: toDate.toString(),
+        isAllDay: allDay,
+      );
       Navigator.of(context).pop();
       calendarController.saveController();
+
+      StudyCalendarState().getDataFromFireStore();
     }
   }
 }
