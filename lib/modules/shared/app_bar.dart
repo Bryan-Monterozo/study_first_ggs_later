@@ -98,8 +98,8 @@ Widget titlePic(BuildContext context) {
 Widget leadingBack(BuildContext context) {
   return IconButton(
     icon: const Icon(
-      Icons.arrow_back_ios_new,
-      color: Colors.black,
+      Icons.arrow_back_ios_new_rounded,
+      color: Color(0xff1c1c1c),
     ),
     onPressed: () {
       Navigator.pop(context);

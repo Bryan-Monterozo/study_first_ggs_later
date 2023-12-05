@@ -19,53 +19,49 @@ class ReviewerFcShowCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: SharedAppBar(
-          leading: leadingBack(context),
-          titlePic: titlePic(context),
-          actions: [
-            IconButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ReviewerFcEditCard(
-                              deckId: deckModel!.deckId,
-                              cardModel: cardModel!,
-                              deckModel: deckModel!,
-                            )));
-              },
-              icon: const Icon(Icons.edit),
+      appBar: SharedAppBar(
+        leading: leadingBack(context),
+        title: '',
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ReviewerFcEditCard(
+                            deckId: deckModel!.deckId,
+                            cardModel: cardModel!,
+                            deckModel: deckModel!,
+                          )));
+            },
+            icon: const Icon(Icons.edit),
+          ),
+          IconButton(
+            onPressed: () {
+              ReviewerFcDB().deleteCardFromDeck(
+                  deckId: cardModel!.deckId, cardId: cardModel!.cardId);
+              Navigator.pop(context);
+            },
+            padding: const EdgeInsets.only(right: 12),
+            icon: const Icon(Icons.delete),
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ReviewerFlashCardWidget(
+              cardModel: cardModel,
             ),
-            IconButton(
-              onPressed: () {
-                ReviewerFcDB().deleteCardFromDeck(
-                    deckId: cardModel!.deckId, cardId: cardModel!.cardId);
-                Navigator.pop(context);
-              },
-              icon: const Icon(Icons.delete),
+            const SizedBox(
+              height: 48,
             ),
           ],
         ),
-        body: Stack(fit: StackFit.expand, children: <Widget>[
-          Container(
-            decoration: const BoxDecoration(color: Colors.white),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              Expanded(
-                flex: 4,
-                child: ReviewerFlashCardWidget(
-                  cardModel: cardModel,
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Container(),
-              )
-            ],
-          ),
-        ]));
+      ),
+    );
   }
 }
 

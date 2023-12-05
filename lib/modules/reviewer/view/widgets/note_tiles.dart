@@ -32,31 +32,45 @@ class NoteTileWidget extends StatelessWidget {
                       )));
         },
         child: Container(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.all(12.0),
             decoration: BoxDecoration(
                 color: colorNotes,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(8),
                 )),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   overflow: TextOverflow.ellipsis,
                   noteModel.title,
-                  style: const TextStyle(fontSize: 20, color: Colors.black),
+                  style: const TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Poppins',
+                      color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 12,
                 ),
                 Text(
                   overflow: TextOverflow.ellipsis,
-                  maxLines:10,
+                  maxLines: 10,
                   noteModel.content,
-                  style: const TextStyle(fontSize: 14, color: Colors.black),
+                  style: const TextStyle(
+                      fontSize: 14, fontFamily: 'Poppins', color: Colors.white),
+                ),
+                const SizedBox(
+                  height: 12,
                 ),
                 Text(
                   overflow: TextOverflow.ellipsis,
                   dateCreated,
-                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                  style: const TextStyle(
+                      fontSize: 12,
+                      fontFamily: 'Poppins',
+                      color: Colors.white),
                 ),
               ],
             )),

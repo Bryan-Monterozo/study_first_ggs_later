@@ -6,7 +6,6 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_coll
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcEditCard extends StatefulWidget {
-
   static const String routeName = '/reviewer/reviewer_fc_edit_card';
   final deckId;
   final CardModel cardModel;
@@ -24,7 +23,6 @@ class ReviewerFcEditCard extends StatefulWidget {
 }
 
 class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
-
   TextEditingController cardFront = TextEditingController();
   TextEditingController cardBack = TextEditingController();
 
@@ -36,7 +34,6 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
 
     cardFront = TextEditingController(text: cardModel.cardFront);
     cardBack = TextEditingController(text: cardModel.cardBack);
-    
   }
 
   @override
@@ -53,20 +50,25 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
         leading: leadingBack(context),
         title: 'Edit Card',
         actions: [
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
             child: const Text(
               'Cancel',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.red,
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           IconButton(
+            padding: const EdgeInsets.only(right: 12),
             icon: const Icon(Icons.save),
             onPressed: () {
               ReviewerFcDB().editCardFromDeck(
@@ -75,7 +77,9 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
                 deckId: widget.deckId,
                 cardId: widget.cardModel.cardId,
               );
-              Navigator.of(context)..pop()..pop();
+              Navigator.of(context)
+                ..pop()
+                ..pop();
               // Navigator.po(
               //     context,
               //     MaterialPageRoute(
@@ -90,32 +94,55 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
         ],
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Column(
           children: [
-            Container(
-              padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-              decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(width: 2, color: const Color(0xFFcecece))),
-              child: TextField(
-                maxLength: 60,
-                controller: cardFront,
-                decoration: const InputDecoration(hintText: 'Input a Question'),
+            TextField(
+              style: const TextStyle(
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w700,
+              ),
+              maxLength: 60,
+              maxLines: 2,
+              controller: cardFront,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                counterStyle: TextStyle(
+                  height: double.minPositive,
+                ),
+                counterText: "",
+                hintText: 'Input a Question',
+                labelStyle: TextStyle(
+                  color: Color(0xffcecece),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                ),
+                labelText: 'Question',
               ),
             ),
-            const SizedBox(
-              height: 50,
-            ),
-            Container(
-              padding: const EdgeInsetsDirectional.fromSTEB(12, 12, 12, 12),
-              decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(width: 2, color: const Color(0xFFcecece))),
-              child: TextField(
-                maxLength: 200,
-                controller: cardBack,
-                decoration: const InputDecoration(hintText: 'Input an Answer'),
+            TextField(
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 16,
+                fontFamily: 'Poppins',
+              ),
+              maxLength: 200,
+              maxLines: 10,
+              controller: cardBack,
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                counterStyle: TextStyle(
+                  height: double.minPositive,
+                ),
+                counterText: "",
+                hintText: 'Input an Answer',
+                labelStyle: TextStyle(
+                  color: Color(0xffcecece),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold,
+                ),
+                labelText: 'Answer',
               ),
             ),
           ],

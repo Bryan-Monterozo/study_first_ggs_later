@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_add_card.dart';
@@ -17,28 +18,28 @@ class ReviewerFcShowDeck extends StatelessWidget {
     Key? key,
     required this.deckModel,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        titlePic: titlePic(context),
+        title: 'View Cards',
         actions: [
+          // IconButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //         context,
+          //         MaterialPageRoute(
+          //             builder: (context) => ReviewerFcAddCard(
+          //                   deckId: deckModel!.deckId,
+          //                   deckModel: deckModel,
+          //                 )));
+          //   },
+          //   icon: const Icon(Icons.add_circle_outline),
+          // ),
           IconButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcAddCard(
-                            deckId: deckModel!.deckId,
-                            deckModel: deckModel,
-                          )));
-            },
-            icon: const Icon(Icons.add_circle_outline),
-          ),
-          IconButton(
+            padding: const EdgeInsets.only(right: 12),
             onPressed: () {
               Navigator.push(
                   context,
@@ -52,6 +53,20 @@ class ReviewerFcShowDeck extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 0,
+          backgroundColor: const Color(0xFF0B6BA7),
+          foregroundColor: Colors.white,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) =>  ReviewerFcAddCard(
+                          deckId: deckModel!.deckId,
+                          deckModel: deckModel,
+                        )));
+          }),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -68,12 +83,13 @@ class ReviewerFcShowDeck extends StatelessWidget {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     }
-                    return GridView.builder(
-                       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 300,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 24,
-                        mainAxisSpacing: 24),
+                    return MasonryGridView.builder(
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 20,
+                        gridDelegate:
+                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           final fcDataMap = snapshot.data!.docs[index];
@@ -84,13 +100,14 @@ class ReviewerFcShowDeck extends StatelessWidget {
                               : CardTileWidget(
                                   deckModel: deckModel!,
                                   cardModel: cardModel,
-                                  colorNotes: NoteColors().noteColorsList[index % 15]
-                                  ,);
+                                  colorNotes:
+                                      NoteColors().noteColorsList[index % 15],
+                                );
                         });
                   },
                 ),
               ),
-            ],
+            ]
           ),
         ),
       ),

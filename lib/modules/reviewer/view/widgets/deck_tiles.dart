@@ -46,23 +46,40 @@ class DeckTileWidget extends StatelessWidget {
             }
           },
           child: Container(
+            height: 250,
             decoration: BoxDecoration(
                 color: colorNotes,
                 borderRadius: const BorderRadius.all(
                   Radius.circular(12),
                 )),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  deckModel.deckName,
-                  style: const TextStyle(fontSize: 20, color: Colors.white),
-                ),
-                Text(deckModel.deckDesc,
-                style: const TextStyle(fontSize: 14 , color: Colors.white),
-                ),
-              ],
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    deckModel.deckName,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontFamily: 'Poppins',
+                        color: Colors.white),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    deckModel.deckDesc,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Poppins',
+                        color: Colors.white),
+                  ),
+                ],
+              ),
             ),
           ),
         ));

@@ -25,9 +25,7 @@ class ReviewerShowNote extends StatelessWidget {
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        title: noteModel!.title.length > 20
-            ? '${noteModel!.title.substring(0, 20)}...'
-            : noteModel!.title,
+        title: '',
         actions: [
           IconButton(
             onPressed: () {
@@ -39,20 +37,23 @@ class ReviewerShowNote extends StatelessWidget {
                             noteModel: noteModel!,
                           )));
             },
-            icon: const Icon(Icons.edit),
+            icon: const Icon(Icons.edit_rounded),
+            color: const Color(0xff1c1c1c),
           ),
           IconButton(
             onPressed: () {
               ReviewerNotesDB().deleteNoteDB(noteModel!.noteId);
               Navigator.pop(context);
             },
-            icon: const Icon(Icons.delete),
+            padding: const EdgeInsets.only(right: 12),
+            icon: const Icon(Icons.delete_rounded),
+            color: const Color(0xff1c1c1c),
           ),
         ],
       ),
       backgroundColor: Colors.white,
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 24),
         child: SafeArea(
             child: SingleChildScrollView(
           child: Column(
@@ -60,18 +61,21 @@ class ReviewerShowNote extends StatelessWidget {
             children: [
               Text(
                 noteModel!.title,
-                style: const TextStyle(fontSize: 24, color: Colors.black),
+                style: const TextStyle(
+                    fontSize: 30, fontFamily: 'Poppins', fontWeight: FontWeight.w700,
+                    color: Colors.black),
               ),
-              const SizedBox(height: 9),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Text(
                     'Date Modified: $dateCreated',
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    style:
+                        const TextStyle(fontSize: 14, color: Color(0xffcecece)),
                   )
                 ],
               ),
-              const SizedBox(height: 9),
+              const SizedBox(height: 10),
               Text(
                 noteModel!.content,
                 style: const TextStyle(fontSize: 14, color: Colors.black),

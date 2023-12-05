@@ -40,25 +40,29 @@ class _ReviewerEditNoteState extends State<ReviewerEditNote> {
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        title: widget.noteModel.title.length > 20
-            ? 'Editing ${widget.noteModel.title.substring(0, 20)}...'
-            : 'Editing ${widget.noteModel.title}',
+        title: '',
         actions: [
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
             child: const Text(
               'Cancel',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.red,
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           IconButton(
+            padding: const EdgeInsets.only(right: 12),
             icon: const Icon(Icons.save),
+            color: const Color(0xff1c1c1c),
             onPressed: () {
               ReviewerNotesDB().editNoteDB(
                 title: title.text,
@@ -73,29 +77,36 @@ class _ReviewerEditNoteState extends State<ReviewerEditNote> {
         ],
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Column(
           children: [
-            Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  maxLength: 60,
-                  controller: title,
-                  decoration: const InputDecoration(hintText: 'Title'),
-                )),
-            const SizedBox(
-              height: 10,
+            TextField(
+              style: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w700,
+              ),
+              maxLength: 60,
+              controller: title,
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  counterStyle: TextStyle(
+                    height: double.minPositive,
+                  ),
+                  counterText: "",
+                  hintText: 'Title'),
             ),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  controller: content,
-                  maxLines: null,
-                  expands: true,
-                  decoration:
-                      const InputDecoration(hintText: 'Write Something...'),
+              child: TextField(
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Poppins',
                 ),
+                controller: content,
+                maxLines: null,
+                expands: true,
+                decoration:
+                    const InputDecoration(hintText: 'Write Something...'),
               ),
             )
           ],

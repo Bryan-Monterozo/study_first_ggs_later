@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
@@ -22,58 +23,87 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        title: "Create a Note",
+        title: "",
         actions: [
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
+          TextButton(
+            child: const Text(
+              'Cancel',
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 12,
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.bold),
             ),
-            child: const Text('Cancel', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           IconButton(
-            icon: const Icon(Icons.save),
+            padding: const EdgeInsets.only(right: 12),
+            color: const Color(0xff1c1c1c),
+            icon: const Icon(Icons.save_rounded),
             onPressed: () {
               ReviewerNotesDB().addNoteToDB(
-                title: title, 
-                content: content,);
+                title: title,
+                content: content,
+              );
               Navigator.pop(context);
             },
           ),
         ],
       ),
       body: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        margin: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              decoration: BoxDecoration(border: Border.all()),
-              child: TextField(
-                maxLength: 60,
-                onChanged: (value) {
-                  title = value;
-                },
-                decoration: const InputDecoration(hintText: 'Title'),
+            TextField(
+              style: const TextStyle(
+                fontSize: 30,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w700,
               ),
+              maxLength: 60,
+              onChanged: (value) {
+                title = value;
+              },
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  counterStyle: TextStyle(
+                    height: double.minPositive,
+                  ),
+                  counterText: "",
+                  hintStyle: TextStyle(
+                    color: Color(0xffcecece),
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  hintText: 'Title'),
             ),
-            const SizedBox(
-              height: 10,
-            ),
+            Text((DateFormat('d MMMM h:mm a').format(DateTime.now())),
+                style: const TextStyle(
+                    fontSize: 14,
+                    fontFamily: 'Poppins',
+                    color: Colors.black54)),
             Expanded(
-              child: Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  onChanged: (value) {
-                    content = value;
-                  },
-                  maxLines: null,
-                  expands: true,
-                  decoration:
-                      const InputDecoration(hintText: 'Write Something...'),
+              child: TextField(
+                style: const TextStyle(
+                  fontSize: 20,
+                  fontFamily: 'Poppins',
                 ),
+                onChanged: (value) {
+                  content = value;
+                },
+                maxLines: null,
+                expands: true,
+                decoration: const InputDecoration(
+                    hintStyle: TextStyle(
+                      color: Color(0xffcecece),
+                      fontSize: 20,
+                      fontFamily: 'Poppins',
+                    ),
+                    hintText: 'Write Something...'),
               ),
             )
           ],

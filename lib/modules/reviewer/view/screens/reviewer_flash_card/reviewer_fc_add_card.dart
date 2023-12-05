@@ -5,7 +5,6 @@ import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_coll
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcAddCard extends StatefulWidget {
-
   static const String routeName = '/reviewer/reviewer_fc_add_card';
   final deckId;
   final DeckModel? deckModel;
@@ -29,22 +28,27 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
-        title: 'Create a Deck',
+        title: 'Create Card',
         actions: [
-          ElevatedButton(
+          TextButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.transparent,
               shadowColor: Colors.transparent,
             ),
             child: const Text(
               'Cancel',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.red,
+                  fontFamily: 'Poppins',
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold),
             ),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           IconButton(
+            padding: const EdgeInsets.only(right: 12),
             icon: const Icon(Icons.save),
             onPressed: () {
               ReviewerFcDB().addCardToDeck(
@@ -61,25 +65,44 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Column(
           children: [
-            Container(
-              decoration: BoxDecoration(border: Border.all()),
-              child: TextField(
-                maxLength: 60,
-                onChanged: (value) {
-                  cardFront = value;
-                },
-                decoration: const InputDecoration(hintText: 'Input a Question'),
+            TextField(
+              style: const TextStyle(
+                fontSize: 16,
+                fontFamily: 'Poppins',
+                fontWeight: FontWeight.w700,
+              ),
+              maxLength: 60,
+              maxLines: 2,
+              onChanged: (value) {
+                cardFront = value;
+              },
+              decoration: const InputDecoration(
+                border: InputBorder.none,
+                counterStyle: TextStyle(
+                  height: double.minPositive,
+                ),
+                counterText: "",
+                hintText: 'Input a Question',
               ),
             ),
-            Container(
-              decoration: BoxDecoration(border: Border.all()),
-              child: TextField(
-                maxLength: 200,
-                onChanged: (value) {
-                  cardBack = value;
-                },
-                decoration: const InputDecoration(hintText: 'Input an Answer'),
+            TextField(
+              style: const TextStyle(
+                fontStyle: FontStyle.italic,
+                fontSize: 16,
+                fontFamily: 'Poppins',
               ),
+              maxLength: 200,
+              maxLines: 10,
+              onChanged: (value) {
+                cardBack = value;
+              },
+              decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  counterStyle: TextStyle(
+                    height: double.minPositive,
+                  ),
+                  counterText: "",
+                  hintText: 'Input an Answer'),
             ),
           ],
         ),
