@@ -1,4 +1,3 @@
-
 class CalendarModel {
 
   final String eventName;
@@ -7,8 +6,9 @@ class CalendarModel {
   final String to;
   // final Color background;
   final bool isAllDay;
+  final String eventID;
 
-  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay});
+  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay, required this.eventID});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -18,10 +18,9 @@ class CalendarModel {
       'to': to,
       // 'background': background,
       'isAllDay': isAllDay,
+      'eventID': eventID,
     };
   }
-
-  // DateTime.fromMillisecondsSinceEpoch(map['from'] as int),
 
   factory CalendarModel.fromMap(Map<String, dynamic> map) {
     return CalendarModel(
@@ -29,12 +28,11 @@ class CalendarModel {
       eventDescription: map['eventDescription'] as String,
       from: 
       map['from'] as String,
-      // DateTime(map['from'] as int),
       to: 
       map['to'] as String,
-      // DateTime(map['to'] as int),
       // background: Colors.red,
       isAllDay: map['isAllDay'] as bool,
+      eventID: map['eventID'] as String,
     );
   }
 }

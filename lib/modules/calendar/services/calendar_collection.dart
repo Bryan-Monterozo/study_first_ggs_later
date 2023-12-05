@@ -19,11 +19,31 @@ class CalendarDB {
       from: from,
       to: to,
       isAllDay: isAllDay,
+      eventID: collection.id,
     );
 
     await collection.set(calendarModel.toMap());
-
   }
 
+  void editEventToDB({
+    required eventName,
+    required eventDescription,
+    required from,
+    required to,
+    required isAllDay,
+    required eventID,
+  }) async {
 
+    await firestore.collection('Calendar').doc(eventID).update({
+      'eventName': eventName,
+      'eventDescription': eventDescription,
+      'from': from,
+      'to': to,
+      'isAllDay': isAllDay,
+    });
+  }
+
+  void deleteEventToDB({required eventID}) async {
+    await firestore.collection('Calendar').doc(eventID).delete();
+  }
 }

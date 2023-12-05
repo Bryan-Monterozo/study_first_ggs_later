@@ -1,32 +1,27 @@
-import 'dart:ui';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_first_ggs_later/modules/calendar/models/calendar_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
-import 'meeting.dart';
+
 
 class MeetingDataSource extends CalendarDataSource{
-
-  MeetingDataSource(List<Meeting> source) {
+  MeetingDataSource(List<CalendarModel> source) {
     appointments = source;
   }
 
+  CalendarModel getEvent(int index) => appointments![index] as CalendarModel;
+
+  @override
+  String getSubject(int index) => getEvent(index).eventName;
   
+  String getDescription(int index) => getEvent(index).eventDescription;
 
-  // Meeting getEvent(int index) => appointments![index] as Meeting;
+  @override
+  DateTime getStartTime(int index) => DateTime.parse(getEvent(index).from);
 
-  // @override
-  // String getSubject(int index) => getEvent(index).eventName;
-
-  // String getDescription(int index) => getEvent(index).eventDescription;
-
-  // @override
-  // DateTime getStartTime(int index) => getEvent(index).from;
+  @override
+  DateTime getEndTime(int index) => DateTime.parse(getEvent(index).to);
 
   // @override
-  // DateTime getEndTime(int index) => getEvent(index).to;
-
-  // @override
-  // // Color getColor(int index) => getEvent(index).background;
+  // Color getColor(int index) => getEvent(index).background;
 
   // @override
   // bool isAllDay(int index) => getEvent(index).isAllDay;
