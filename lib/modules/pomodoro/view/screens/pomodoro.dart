@@ -1,6 +1,7 @@
 library pomodoro_lib;
 
 import 'dart:async';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -48,6 +49,7 @@ class _PomodoroState extends State<Pomodoro> {
   Timer? _timer;
   int pomodoroNum = 0;
   int setNum = 0;
+  bool toggle = false;
 
   NavController navController = Get.put(NavController());
 
@@ -70,81 +72,114 @@ class _PomodoroState extends State<Pomodoro> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: SharedAppBar(
-          title: "Pomodoro",
-          withPic: withPic(context),
-        ),
+        title: "Pomodoro",
+        withPic: withPic(context),
+      ),
       drawer: const NavDrawer(),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('Pomodoro',
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Color(0xFF0B6BA7),)),
-              const SizedBox(
-                height: 20,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text('Pomodoro number: $pomodoroNum',
-                  style: const TextStyle(fontSize: 14, color:Color(0xFF1C1C1C))),
-              const SizedBox(
-                height: 10,
-              ),
-              Text('Set: $setNum',
-                  style: const TextStyle(fontSize: 14, color: Color(0xFF1C1C1C))),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircularPercentIndicator(
-                      backgroundColor:Color(0xFFCECECE),
-                      radius: 220.0,
-                      lineWidth: 15.0,
-                      percent: _getPomodoroPercentage(),
-                      center: Text(
-                        _secToString(remainingTime),
-                        style:
-                            const TextStyle(fontSize: 40, color:Color(0xFF1C1C1C)),
-                      ),
-                      progressColor: statusColor[pomodoroStatus],
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ProgressIcons(
-                      total: pomodoroPerSet,
-                      done: pomodoroNum - (setNum * pomodoroPerSet),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      statusText[pomodoroStatus]!,
-                      style: const TextStyle(color:Color(0xFF1C1C1C)),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    PomodoroButton(
-                      onTap: _mainBtnPressed,
-                      text: pomodoroBtnText,
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    PomodoroButton(
-                      onTap: _resetPomodoroCount,
-                      text: _btnTextReset,
-                    ),
-                  ],
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                height: 40,
+                width: 300,
+                decoration: const BoxDecoration(
+                    color: Color(0xFF0B6BA7),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12),
+                    )),
+                child: Align(
+                  alignment: const AlignmentDirectional(0.00, 0.00),
+                  child: Text('$pomodoroStatus',
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          color: Colors.white)),
                 ),
               ),
-            ],
-          ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            CircularPercentIndicator(
+              arcType: ArcType.FULL,
+              arcBackgroundColor: const Color(0xffcecece),
+              radius: 220.0,
+              circularStrokeCap: CircularStrokeCap.round,
+              lineWidth: 15.0,
+              percent: _getPomodoroPercentage(),
+              center: Text(
+                _secToString(remainingTime),
+                style: const TextStyle(
+                    fontSize: 60,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF0B6BA7)),
+              ),
+              progressColor: statusColor[pomodoroStatus],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('$pomodoroNum',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF0B6BA7))),
+                ProgressIcons(
+                  total: pomodoroPerSet,
+                  done: pomodoroNum - (setNum * pomodoroPerSet),
+                ),
+                Text('$setNum',
+                    style: const TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.w700,
+                        color: Color(0xFF0B6BA7))),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                PomodoroButton(
+                  onTap: _resetPomodoroCount,
+                  buttonIcon: const Icon(Icons.restart_alt_rounded, size: 30),
+                ),
+                PomodoroButton(
+                    onTap: _mainBtnPressed,
+                    buttonIcon: toggle == false
+                        ? const Icon(
+                            Icons.play_arrow_rounded,
+                            size: 80,
+                          )
+                        : const Icon(
+                            Icons.pause_rounded,
+                            size: 80,
+                          )),
+                PomodoroButton(
+                  onTap: _resetPomodoroCount,
+                  buttonIcon: const Icon(
+                    Icons.stop_rounded,
+                    size: 40,
+                  ),
+                ),
+              ],
+            ),
+            PomodoroButton(
+              onTap: _resetPomodoroCount,
+              buttonIcon: const Icon(
+                Icons.keyboard_control_rounded,
+                size: 40,
+                color: Color(0xffcecece),
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -233,6 +268,9 @@ class _PomodoroState extends State<Pomodoro> {
     pomodoroStatus = PomodoroStatus.runningPomodoro;
 
     _cancelTimer();
+    setState(() {
+      toggle = true;
+    });
 
     _timer = Timer.periodic(
         const Duration(seconds: 1),
@@ -274,6 +312,9 @@ class _PomodoroState extends State<Pomodoro> {
       pomodoroBtnText = _btnTextPause;
     });
     _cancelTimer();
+    setState(() {
+      toggle = true;
+    });
     _timer = Timer.periodic(
         const Duration(seconds: 1),
         (timer) => {
@@ -301,6 +342,10 @@ class _PomodoroState extends State<Pomodoro> {
       pomodoroBtnText = _btnTextPause;
     });
     _cancelTimer();
+    setState(() {
+      toggle = true;
+    });
+
     _timer = Timer.periodic(
         const Duration(seconds: 1),
         (timer) => {
@@ -363,6 +408,9 @@ class _PomodoroState extends State<Pomodoro> {
   }
 
   _cancelTimer() {
+    setState(() {
+      toggle = false;
+    });
     if (_timer != null) {
       _timer!.cancel();
     }
