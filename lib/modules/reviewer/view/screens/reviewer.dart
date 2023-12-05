@@ -41,9 +41,9 @@ class StudyReviewer extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ReviewerGesture(
+                  const ReviewerGesture(
                     revNavigator: ReviewerFcMyDecks(),
-                    revContainer: const ReviewerWidget(
+                    revContainer: ReviewerWidget(
                       reviewerText: 'Flash Cards',
                       reviewerColor: Color(0xFF0B6BA7),
                       reviewerPic: kIsWeb

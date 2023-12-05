@@ -65,10 +65,9 @@ class Login extends StatelessWidget {
                                   hintText: 'Password',
                                   border: const OutlineInputBorder(),
                                   suffixIcon: IconButton(
-                                    onPressed: (){
-                                      
-                                    },
-                                    icon: const Icon(Icons.remove_red_eye_sharp),
+                                    onPressed: () {},
+                                    icon:
+                                        const Icon(Icons.remove_red_eye_sharp),
                                   )),
                               controller: authController.passwordController,
                             ),
@@ -84,6 +83,7 @@ class Login extends StatelessWidget {
                                     authController.authPassword == 'ad') {
                                   authController.adminLogin();
                                 } else {
+                                  authController.userLogin();
                                   Get.snackbar('TITE', 'Wrong credentials');
                                 }
                               },

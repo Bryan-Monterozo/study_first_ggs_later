@@ -83,7 +83,7 @@ class AuthController extends GetxController {
   }
   void userLogin() async {
     await userAuth
-        .login(email: 'admin@gmail.com', password: 'adminpass')
+        .login(email: authEmail, password: authPassword)
         .then((value) async {
       if (value != null) {
         isLoading = false;

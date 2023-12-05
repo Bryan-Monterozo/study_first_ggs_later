@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
@@ -18,7 +19,10 @@ class QuizShowQuestions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     final ref = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
         .collection('Quiz')
         .doc(quizModel!.quizId)
         .collection('questions');

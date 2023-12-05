@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
@@ -8,12 +9,15 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcMyDecks extends StatelessWidget {
   static const String routeName = '/reviewer/reviewer_fc_my_decks';
-  ReviewerFcMyDecks({super.key});
-
-  final ref = FirebaseFirestore.instance.collection('Decks');
+  const ReviewerFcMyDecks({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final ref = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .collection('Decks');
     debugPrint('Widget Rebuild');
     return Scaffold(
       appBar: SharedAppBar(
@@ -48,11 +52,12 @@ class ReviewerFcMyDecks extends StatelessWidget {
                       return const Center(child: CircularProgressIndicator());
                     }
                     return GridView.builder(
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        mainAxisExtent: 300,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 24,
-                        mainAxisSpacing: 24),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                mainAxisExtent: 300,
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 24),
                         itemCount: snapshot.data!.docs.length,
                         itemBuilder: (context, index) {
                           final fcDataMap = snapshot.data!.docs[index];
@@ -60,7 +65,8 @@ class ReviewerFcMyDecks extends StatelessWidget {
                               fcDataMap.data() as Map<String, dynamic>);
                           return DeckTileWidget(
                               deckModel: deckModel,
-                              colorNotes: NoteColors().noteColorsList[index % 15]);
+                              colorNotes:
+                                  NoteColors().noteColorsList[index % 15]);
                         });
                   },
                 ),
