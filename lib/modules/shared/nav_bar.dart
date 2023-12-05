@@ -6,6 +6,7 @@ import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer.dart';
+import 'package:study_first_ggs_later/modules/settings/view/screens/settings.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/widgets/drawer_widgets.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
@@ -393,6 +394,58 @@ class NavDrawer extends StatelessWidget {
                         ),
                       ),
                     ),
+                    Padding(
+                    padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                    child: GestureDetector(
+                      onTap: () {
+                        navController.currentNav.value = CurrentRoute.settings;
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StudySettings(),
+                          ),
+                        );
+                      },
+                      child: DrawerNavButton(
+                        navText: navController.currentNav.value ==
+                                CurrentRoute.settings
+                            ? const Text(
+                                'Settings',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xFF0B6BA7),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            : const Text(
+                                'Settings',
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  color: Color(0xffbcbcbc),
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                        navIcon: navController.currentNav.value ==
+                                CurrentRoute.settings
+                            ? const Icon(
+                                Icons.settings,
+                                color: Color(0xFF0B6BA7),
+                                size: 20,
+                              )
+                            : const Icon(
+                                Icons.settings,
+                                color: Color(0xffbcbcbc),
+                                size: 20,
+                              ),
+                        navShadow: navController.currentNav.value ==
+                                CurrentRoute.settings
+                            ? const Color(0x33000000)
+                            : Colors.white,
+                      ),
+                    ),
+                  ),
                     const Expanded(
                       child: NavBarStatus(),
                     ),

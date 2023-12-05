@@ -1,3 +1,7 @@
 {
-    "editor.inlineSuggest.showToolbar": "always"
+    "editor.tokenColorCustomizations": {
+        "comments": "",
+        "textMateRules": []
+    },
+    "editor.inlineSuggest.showToolbar": "onHover"
 }
