@@ -22,14 +22,14 @@ class TodoItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final TodoController todoController = Get.put(TodoController());
     return Container(
-      padding: const EdgeInsets.all(5),
+      padding: EdgeInsets.all(5),
       child: Card(
         shape: RoundedRectangleBorder(
             side: BorderSide(
               color: Colors.grey.shade300,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
           ),
         child: ListTile(
           hoverColor: Colors.blue.shade50,
@@ -54,7 +54,7 @@ class TodoItem extends StatelessWidget {
               color: Colors.grey.shade300,
               width: 1,
             ),
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
           ),
           contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
           tileColor: Colors.white,
@@ -66,6 +66,7 @@ class TodoItem extends StatelessWidget {
             toDoModel.todoTitle,
             style: TextStyle(
               fontSize: 16,
+              fontFamily: 'Poppins',
               color: Colors.black,
               decoration: toDoModel.isDone ? TextDecoration.lineThrough : null,
             ),
@@ -78,7 +79,7 @@ class TodoItem extends StatelessWidget {
                   height: 25,
                   width: 25,
                   decoration: BoxDecoration(
-                    color: Colors.blue,
+                    color: Color(0xFF0B6BA7),
                     borderRadius: BorderRadius.circular(5),
                   ),
                   child: const Icon(

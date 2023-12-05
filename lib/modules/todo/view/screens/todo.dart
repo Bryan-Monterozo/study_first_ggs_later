@@ -30,8 +30,6 @@ class StudyToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('reloadedxxxxxxxxxxx');
-    Get.delete<TodoController>();
     final TodoController todoController = Get.put(TodoController());
     final NavController navController = Get.put(NavController());
     // final TodoController todoController = Get.find<TodoController>();
@@ -44,6 +42,18 @@ class StudyToDo extends StatelessWidget {
       appBar: SharedAppBar(
         title: "To Do",
         withPic: withPic(context),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(right: 8, bottom: 4),
+        child: FloatingActionButton.small(
+            backgroundColor: const Color(0xFF0B6BA7),
+            foregroundColor: Colors.white,
+            child: const Icon(Icons.add),
+            onPressed: () {
+              todoController.addTodoValidation();
+              todoController.titleController.clear();
+              todoController.update(['todoList']);
+            }),
       ),
       body: Stack(
         children: [
@@ -91,14 +101,18 @@ class StudyToDo extends StatelessWidget {
                             }),
                       ),
                       Flexible(
-                        child: Container(
-                          alignment: Alignment.centerLeft,
-                          child: const Text('Done Tasks',
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey,
-                              )),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Container(
+                            alignment: Alignment.centerLeft,
+                            child: const Text('Done Tasks',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontFamily: 'Poppins',
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(0xffcecece),
+                                )),
+                          ),
                         ),
                       ),
                       Flexible(
@@ -151,7 +165,7 @@ class StudyToDo extends StatelessWidget {
                   builder: (controller) => Expanded(
                     child: Container(
                         margin: const EdgeInsets.only(
-                          bottom: 20,
+                          bottom: 15,
                           right: 20,
                           left: 20,
                         ),
@@ -181,6 +195,7 @@ class StudyToDo extends StatelessWidget {
                                 hintText: 'Add a new todo item',
                                 border: InputBorder.none,
                                 errorStyle: TextStyle(
+                                  fontFamily: 'Poppins',
                                   fontSize: 0.1,
                                   color: Colors.red,
                                 ),
@@ -193,28 +208,29 @@ class StudyToDo extends StatelessWidget {
                         )),
                   ),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 20,
-                    right: 20,
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      todoController.addTodoValidation();
-                      // todoController.titleController.clear();
-                      // todoController.update(['todoList']);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      minimumSize: const Size(60, 60),
-                      elevation: 10,
-                    ),
-                    child: const Text(
-                      '+',
-                      style: TextStyle(fontSize: 40),
-                    ),
-                  ),
-                )
+
+                // Container(
+                //   margin: const EdgeInsets.only(
+                //     bottom: 20,
+                //     right: 20,
+                //   ),
+                //   child: ElevatedButton(
+                //     onPressed: () {
+                //       todoController.addTodoValidation();
+                //       // todoController.titleController.clear();
+                //       // todoController.update(['todoList']);
+                //     },
+                //     style: ElevatedButton.styleFrom(
+                //       backgroundColor: Colors.blue,
+                //       minimumSize: const Size(60, 60),
+                //       elevation: 10,
+                //     ),
+                //     child: const Text(
+                //       '+',
+                //       style: TextStyle(fontSize: 40),
+                //     ),
+                //   ),
+                // )
               ])),
         ],
       ),
