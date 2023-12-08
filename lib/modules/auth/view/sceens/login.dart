@@ -19,6 +19,7 @@ class _LoginState extends State<Login> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool passwordToggle = true;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -64,9 +65,21 @@ class _LoginState extends State<Login> {
                                       labelText: 'E-mail',
                                       hintText: 'E-mail',
                                       border: OutlineInputBorder()),
+                                  validator: (value){
+
+                                    if(value!.isEmpty){
+                                      return "Enter Email!";
+                                    }
+                                    bool emailValidation = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
+
+                                    if(!emailValidation){
+                                      return "Enter Valid Email";
+                                    }
+                                  } ,
                                   keyboardType: TextInputType.emailAddress,
                                   controller: authController.emailController,
                                 ),
+
                                 const SizedBox(height: 30),
                                 SizedBox(
                                 child:TextFormField(
