@@ -7,6 +7,8 @@ import 'package:study_first_ggs_later/modules/auth/view/sceens/signup.dart';
 //import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
 //import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
+
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -23,17 +25,17 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    final AuthController authController = Get.put(AuthController());
-    authController.isLoading = false;
+    //final AuthController authController = Get.put(AuthController());
+    //authController.isLoading = false;
 
     return SafeArea(
       child: Scaffold(
-          body: authController.isLoading
-              ? Container(
-                  child: const Center(
-                  child: CircularProgressIndicator(),
-                ))
-              : Center(
+          body: //authController.isLoading
+             // ? Container(
+                 // child: const Center(
+                 // child: CircularProgressIndicator(),
+                //))
+               Center(
                   child: SingleChildScrollView(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -65,19 +67,14 @@ class _LoginState extends State<Login> {
                                       labelText: 'E-mail',
                                       hintText: 'E-mail',
                                       border: OutlineInputBorder()),
-                                  validator: (value){
-
-                                    if(value!.isEmpty){
-                                      return "Enter Email!";
-                                    }
-                                    bool emailValidation = RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value);
-
-                                    if(!emailValidation){
-                                      return "Enter Valid Email";
-                                    }
-                                  } ,
                                   keyboardType: TextInputType.emailAddress,
-                                  controller: authController.emailController,
+                                  //controller: authController.emailController,
+                                  validator:(email) {
+                                    if(email == null || email.isEmpty){
+                                      return "Enter email";
+                                    }
+                                    return null;
+                                  }
                                 ),
 
                                 const SizedBox(height: 30),
@@ -97,8 +94,14 @@ class _LoginState extends State<Login> {
                                         child: Icon(passwordToggle ? Icons.visibility: Icons.visibility_off),
                                       )
                                       ),
+                                  validator: (password){
+                                    if(password == null || password.isEmpty){
+                                      return "Enter password";
+                                    }
+                                    return null;
+                                  },
                                   keyboardType: TextInputType.emailAddress,
-                                  controller: authController.passwordController,
+                                  //controller: authController.passwordController,
                                   obscureText: passwordToggle,
                                 )),
                                 const SizedBox(height: 30),
@@ -110,10 +113,12 @@ class _LoginState extends State<Login> {
                                 ElevatedButton(
                                   //ADMIN AUTH
                                   onPressed: () {
-                                    if (authController.authEmail == 'ad' &&
-                                        authController.authPassword == 'ad') {
-                                      authController.adminLogin();
-                                    }
+                                    //if (authController.authEmail == 'ad' &&
+                                       // authController.authPassword == 'ad') {
+                                      //authController.adminLogin();
+                                   // }
+
+                                    _formfield.currentState!.validate();
                                   },
                                   child: const Text('Login'),
                                 ),
