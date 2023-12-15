@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class UserAuth {
@@ -16,9 +17,15 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        wrongCredentials();
         return null;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        wrongCredentials();
+        return null;
+      } else if (e.code == 'invalid-email') {
+        print('The email address is badly formatted.');
+        wrongCredentials();
         return null;
       }
     }
@@ -40,9 +47,15 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        wrongCredentials();
         return null;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        wrongCredentials();
+        return null;
+      } else if (e.code == 'invalid-email') {
+        print('The email address is badly formatted.');
+        wrongCredentials();
         return null;
       }
     } catch (e) {
@@ -71,5 +84,13 @@ class UserAuth {
       'timeCreated': timeCreated,
       'userId': userId,
     });
+  }
+
+  void wrongCredentials(){
+    Get.snackbar(
+        'Signup',
+        'Invalid Credentials',
+        snackPosition: SnackPosition.BOTTOM,
+      );
   }
 }

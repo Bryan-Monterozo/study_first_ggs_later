@@ -62,6 +62,7 @@ class AuthController extends GetxController {
   // Make this into a Validation look into todo_get_controller.dart
   void createNewUser() async {
     // final user = FirebaseAuth.instance.currentUser;
+    // isLoading = true;
     await userAuth
         .signUp(
             email: authEmail, password: authPassword, userName: authUsername)
@@ -74,28 +75,36 @@ class AuthController extends GetxController {
   }
 
   void adminLogin() async {
+    isLoading = true;
+    update(['loading']);
     await userAuth
         .login(email: 'admin@gmail.com', password: 'adminpass')
         .then((value) async {
       if (value != null) {
         isLoading = false;
+        update(['loading']);
         Get.off(const StudyHome());
       } else {
         isLoading = false;
+        update(['loading']);
         Get.snackbar('Login', 'Something went wrong');
       }
     });
   }
 
   void userLogin() async {
+    isLoading = true;
+    update(['loading']);
     await userAuth
         .login(email: authEmail, password: authPassword)
         .then((value) async {
       if (value != null) {
         isLoading = false;
+        update(['loading']);
         Get.off(const StudyHome());
       } else {
         isLoading = false;
+        update(['loading']);
         Get.snackbar('Login', 'Something went wrong');
       }
     });
@@ -116,6 +125,6 @@ class AuthController extends GetxController {
 
   void togglePasswordVisibility() {
     togglePassword = !togglePassword;
-    update();
+    update(['password']);
   }
 }
