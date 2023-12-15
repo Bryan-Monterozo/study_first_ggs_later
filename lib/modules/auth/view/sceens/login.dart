@@ -7,21 +7,9 @@ import 'package:study_first_ggs_later/modules/auth/view/sceens/signup.dart';
 //import 'package:study_first_ggs_later/modules/auth/constants_login.dart';
 //import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
-
-
-class Login extends StatefulWidget {
+class Login extends StatelessWidget {
   const Login({super.key});
-
-  @override
-  State<Login> createState() => _LoginState();
-}
-
-class _LoginState extends State<Login> {
-  final _formfield = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool passwordToggle = true;
-  
+  // bool passwordToggle = true;
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +19,11 @@ class _LoginState extends State<Login> {
     return SafeArea(
       child: Scaffold(
           body: authController.isLoading
-             ? Container(
+              ? Container(
                   child: const Center(
                   child: CircularProgressIndicator(),
                 ))
-               : Center(
+              : Center(
                   child: SingleChildScrollView(
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -57,52 +45,53 @@ class _LoginState extends State<Login> {
                             fontSize: 20,
                           )),
                       Form(
-                          key: _formfield,
+                          key: authController.authFormField,
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 TextFormField(
-                                  decoration: const InputDecoration(
-                                      prefixIcon: Icon(Icons.email),
-                                      labelText: 'E-mail',
-                                      hintText: 'E-mail',
-                                      border: OutlineInputBorder()),
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: authController.emailController,
-                                  validator:(emailLogIn) {
-                                    if(emailLogIn == null || emailLogIn.isEmpty){
-                                      return "Enter email";
-                                    }
-                                    return null;
-                                  }
-                                ),
-
+                                    decoration: const InputDecoration(
+                                        prefixIcon: Icon(Icons.email),
+                                        labelText: 'E-mail',
+                                        hintText: 'E-mail',
+                                        border: OutlineInputBorder()),
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: authController.emailController,
+                                    validator: (emailLogIn) {
+                                      if (emailLogIn == null ||
+                                          emailLogIn.isEmpty) {
+                                        return "Enter email";
+                                      }
+                                      return null;
+                                    }),
                                 const SizedBox(height: 30),
                                 SizedBox(
-                                child:TextFormField(
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.fingerprint),
-                                      labelText: 'Password',
-                                      hintText: 'Password',   
-                                      border: OutlineInputBorder(),
-                                      suffix: InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            passwordToggle = !passwordToggle;
-                                          });
-                                        },
-                                        child: Icon(passwordToggle ? Icons.visibility: Icons.visibility_off),
-                                      )
-                                      ),
-                                  validator: (passwordLogIn){
-                                    if(passwordLogIn == null || passwordLogIn.isEmpty){
-                                      return "Enter password";
-                                    }
-                                    return null;
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  controller: authController.passwordController,
-                                  obscureText: passwordToggle,
+                                    child: GetBuilder<AuthController>(
+                                  builder: (controller) => TextFormField(
+                                    decoration: InputDecoration(
+                                        prefixIcon: Icon(Icons.fingerprint),
+                                        labelText: 'Password',
+                                        hintText: 'Password',
+                                        border: OutlineInputBorder(),
+                                        suffix: InkWell(
+                                          onTap: () {
+                                            controller.togglePasswordVisibility();
+                                          },
+                                          child: Icon(controller.togglePassword
+                                              ? Icons.visibility
+                                              : Icons.visibility_off),
+                                        )),
+                                    validator: (passwordLogIn) {
+                                      if (passwordLogIn == null ||
+                                          passwordLogIn.isEmpty) {
+                                        return "Enter password";
+                                      }
+                                      return null;
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    controller: controller.passwordController,
+                                    obscureText: controller.togglePassword,
+                                  ),
                                 )),
                                 const SizedBox(height: 30),
                                 Align(
@@ -114,11 +103,15 @@ class _LoginState extends State<Login> {
                                   //ADMIN AUTH
                                   onPressed: () {
                                     if (authController.authEmail == 'ad' &&
-                                       authController.authPassword == 'ad') {
+                                        authController.authPassword == 'ad') {
                                       authController.adminLogin();
                                     }
+                                    //USER AUTH
+                                    else {
+                                      authController.addUserValidation();
+                                    }
 
-                                    _formfield.currentState!.validate();
+                                    // formfield.currentState!.validate();
                                   },
                                   child: const Text('Login'),
                                 ),
