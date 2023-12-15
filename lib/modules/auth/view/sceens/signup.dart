@@ -38,11 +38,17 @@ class SignUp extends StatelessWidget {
                             TextFormField(
                               decoration: const InputDecoration(
                                 label: Text('Username'),
-                                hintText: 'This will be your character name',
+                                hintText: 'Username',
                                 prefixIcon: Icon(Icons.person),
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.usernameController,
+                              validator: (usernameSignUp){
+                                if(usernameSignUp == null || usernameSignUp.isEmpty){
+                                      return "Enter username";
+                                    }
+                                    return null;
+                              }
                             ),
                             const SizedBox(height: 30),
                             TextFormField(
@@ -52,6 +58,12 @@ class SignUp extends StatelessWidget {
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.emailController,
+                              validator: (emailSignUp){
+                                if(emailSignUp == null || emailSignUp.isEmpty){
+                                      return "Enter email";
+                                    }
+                                    return null;
+                              }
                             ),
                             const SizedBox(height: 30),
                             TextFormField(
@@ -61,6 +73,12 @@ class SignUp extends StatelessWidget {
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.passwordController,
+                              validator: (passwordSignUp){
+                                if(passwordSignUp == null || passwordSignUp.isEmpty){
+                                      return "Enter password";
+                                    }
+                                    return null;
+                              },
                               obscureText: true,
                             ),
                             const SizedBox(

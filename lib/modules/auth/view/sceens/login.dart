@@ -69,8 +69,8 @@ class _LoginState extends State<Login> {
                                       border: OutlineInputBorder()),
                                   keyboardType: TextInputType.emailAddress,
                                   //controller: authController.emailController,
-                                  validator:(email) {
-                                    if(email == null || email.isEmpty){
+                                  validator:(emailLogIn) {
+                                    if(emailLogIn == null || emailLogIn.isEmpty){
                                       return "Enter email";
                                     }
                                     return null;
@@ -94,8 +94,8 @@ class _LoginState extends State<Login> {
                                         child: Icon(passwordToggle ? Icons.visibility: Icons.visibility_off),
                                       )
                                       ),
-                                  validator: (password){
-                                    if(password == null || password.isEmpty){
+                                  validator: (passwordLogIn){
+                                    if(passwordLogIn == null || passwordLogIn.isEmpty){
                                       return "Enter password";
                                     }
                                     return null;
