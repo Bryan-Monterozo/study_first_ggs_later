@@ -29,6 +29,7 @@ class UserAuth {
         return null;
       } else{
         print('Something went wrong.');
+        loginLastException();
       }
     }
   }
@@ -135,6 +136,14 @@ class UserAuth {
   void signUpLastException(){
     Get.snackbar(
         'Sign Up',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void loginLastException(){
+    Get.snackbar(
+        'Login',
         'Something went wrong. Please try again later.',
         snackPosition: SnackPosition.BOTTOM,
       );
