@@ -17,7 +17,7 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
-        wrongCredentials();
+        userNotFound();
         return null;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
@@ -94,8 +94,16 @@ class UserAuth {
 
   void wrongCredentials(){
     Get.snackbar(
-        'Signup',
+        'Login',
         'Invalid Credentials',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+   void userNotFound(){
+    Get.snackbar(
+        'Login',
+        'User not found',
         snackPosition: SnackPosition.BOTTOM,
       );
   }
