@@ -49,7 +49,7 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
-        wrongCredentials();
+        weakPassword();
         return null;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
@@ -88,6 +88,9 @@ class UserAuth {
     });
   }
 
+
+//snackbar exceptions
+
   void wrongCredentials(){
     Get.snackbar(
         'Signup',
@@ -95,4 +98,13 @@ class UserAuth {
         snackPosition: SnackPosition.BOTTOM,
       );
   }
+
+  void weakPassword(){
+    Get.snackbar(
+        'Login',
+        'Weak Password',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
 }
