@@ -27,6 +27,8 @@ class UserAuth {
         print('The email address is badly formatted.');
         wrongCredentials();
         return null;
+      } else{
+        print('Something went wrong.');
       }
     }
   }
@@ -59,7 +61,7 @@ class UserAuth {
         return null;
       }
     } catch (e) {
-      print(e);
+      print('Something went wrong');
       return null;
     }
   }
