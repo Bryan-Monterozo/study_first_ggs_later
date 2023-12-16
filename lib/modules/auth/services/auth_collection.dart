@@ -53,15 +53,16 @@ class UserAuth {
         return null;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
-        wrongCredentials();
+        usedEmail();
         return null;
       } else if (e.code == 'invalid-email') {
         print('The email address is badly formatted.');
-        wrongCredentials();
+        invalidEmailFormat();
         return null;
       }
     } catch (e) {
       print('Something went wrong');
+      signUpLastException();
       return null;
     }
   }
@@ -101,10 +102,35 @@ class UserAuth {
 
   void weakPassword(){
     Get.snackbar(
-        'Login',
+        'Sign Up',
         'Weak Password',
         snackPosition: SnackPosition.BOTTOM,
       );
   }
+
+  void usedEmail(){
+    Get.snackbar(
+        'Sign Up',
+        'Email address is already in use',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+   void invalidEmailFormat(){
+    Get.snackbar(
+        'Sign Up',
+        'Invalid email address',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void signUpLastException(){
+    Get.snackbar(
+        'Sign Up',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
 
 }
