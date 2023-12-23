@@ -197,6 +197,7 @@ class OptionsController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt('questionTotalInt', questionTotal.value);
     questionTotalInt = prefs.getInt('questionTotalInt')!;
+    prefs.setInt('quizPoints', quizPoints);
     Get.off(const QuizResult());
   }
 

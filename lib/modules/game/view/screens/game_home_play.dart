@@ -9,10 +9,14 @@ class GameHomePlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+    // reinitialize controllers
+    Get.delete<PlayerController>();
+    Get.delete<EnemyController>();
+    Get.delete<BattleController>();
     PlayerController playerController = Get.put(PlayerController());
     EnemyController enemyController = Get.put(EnemyController());
     BattleController battleController = Get.put(BattleController());
+
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: const SharedAppBar(
@@ -47,23 +51,35 @@ class GameHomePlay extends StatelessWidget {
                             const Align(
                                 alignment: Alignment.topLeft,
                                 child: Text('Player')),
-                            Align(
-                              alignment: Alignment.center,
-                              child: GetBuilder<PlayerController>(
-                                  // init: PlayerController(),
-                                  id: 'playerName',
-                                  builder: (controller) {
-                                    return Text(controller.playerName);
-                                  }),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GetBuilder<PlayerController>(
+                            //       // init: PlayerController(),
+                            //       id: 'playerName',
+                            //       builder: (controller) {
+                            //         return Text(controller.playerName);
+                            //       }),
+                            // ),
+                            // Align(
+                            //   alignment: Alignment.bottomCenter,
+                            //   child: GetBuilder<PlayerController>(
+                            //       id: 'playerHealth',
+                            //       builder: (controller) {
+                            //         return Text(
+                            //             'HP: ${controller.playerHealth}');
+                            //       }),
+                            // ),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.center,
+                                child: Text(playerController.playerName.value),
+                              ),
                             ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: GetBuilder<PlayerController>(
-                                  id: 'playerHealth',
-                                  builder: (controller) {
-                                    return Text(
-                                        'HP: ${controller.playerHealth}');
-                                  }),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text('HP: ${playerController.playerHealth.value}'),
+                              ),
                             ),
                           ],
                         )),
@@ -89,23 +105,36 @@ class GameHomePlay extends StatelessWidget {
                             const Align(
                                 alignment: Alignment.topRight,
                                 child: Text('Enemy')),
-                            Align(
-                              alignment: Alignment.center,
-                              child: GetBuilder<EnemyController>(
-                                  init: EnemyController(),
-                                  id: 'enemyName',
-                                  builder: (controller) {
-                                    return Text(controller.enemyName);
-                                  }),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GetBuilder<EnemyController>(
+                            //       // init: EnemyController(),
+                            //       id: 'enemyName',
+                            //       builder: (controller) {
+                            //         return Text(Get.find<EnemyController>().enemyName);
+                            //       }),
+                            // ),
+                            // Align(
+                            //   alignment: Alignment.center,
+                            //   child: GetBuilder<EnemyController>(
+                            //       // init: EnemyController(),
+                            //       id: 'enemyHealth',
+                            //       builder: (controller) {
+                            //         return Text('HP: ${Get.find<EnemyController>().enemyHealth}');
+                            //       }),
+                            // ),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.center,
+                                child: Text(enemyController.enemyName.value),
+                              ),
                             ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: GetBuilder<EnemyController>(
-                                  id: 'enemyHealth',
-                                  builder: (controller) {
-                                    return Text(
-                                        'HP: ${controller.enemyHealth}');
-                                  }),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.bottomCenter,
+                                child: Text(
+                                    'HP: ${enemyController.enemyHealth.value}'),
+                              ),
                             ),
                           ],
                         )),
@@ -129,7 +158,6 @@ class GameHomePlay extends StatelessWidget {
                     onTap: () {
                       print('Attack');
                       battleController.playerAttack();
-                      enemyController.damageEnemy();
                     },
                     child: Stack(
                       children: [
@@ -139,9 +167,11 @@ class GameHomePlay extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: Text('Attack'),
+                        Obx(
+                          () => Align(
+                            alignment: Alignment.center,
+                            child: Text('Attack Damage: ${battleController.totalBattlePoints.value}'),
+                          ),
                         ),
                       ],
                     ),
@@ -163,6 +193,7 @@ class GameHomePlay extends StatelessWidget {
                         child: InkWell(
                           onTap: () {
                             print('Stats');
+                            playerController.resetIsPlaying();
                           },
                           child: Stack(
                             children: [
