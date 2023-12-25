@@ -19,7 +19,7 @@ class SettingsItem extends StatelessWidget {
   const SettingsItem(
       {super.key, required this.icons,
       this.iconStyle,
-      this.title = "PRO VERSION",
+      required this.title,
       this.titleStyle,
       this.subtitle,
       this.subtitleStyle,

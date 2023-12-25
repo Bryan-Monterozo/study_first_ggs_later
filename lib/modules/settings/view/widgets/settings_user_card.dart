@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class UserCard extends StatelessWidget {
   final Color? cardColor;
@@ -8,7 +9,8 @@ class UserCard extends StatelessWidget {
   final Widget? cardActionWidget;
   final Widget? userMoreInfo;
 
-  const UserCard({super.key, 
+  const UserCard({
+    super.key,
     required this.cardColor,
     this.backgroundColor,
     this.cardRadius = 10,
@@ -17,7 +19,7 @@ class UserCard extends StatelessWidget {
     this.userMoreInfo,
   });
 
-  @override
+@override
   Widget build(BuildContext context) {
     var mediaQueryHeight = MediaQuery.of(context).size.height;
     return Container(

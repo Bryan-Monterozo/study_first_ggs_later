@@ -8,6 +8,7 @@ import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.d
 import 'package:flutter/cupertino.dart';
 
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_user_card.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_premium_card.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
@@ -24,29 +25,10 @@ class StudySettings extends StatelessWidget {
       currentRoute: CurrentRoute.home,
     );
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey,
       drawer: const NavDrawer(),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 39, 66, 85),
-        // leading: Builder(
-        //   builder: (BuildContext context) {
-        //     return IconButton(
-        //       icon: const Icon(Icons.menu),
-        //       onPressed: () {
-        //         Navigator.pop(context);
-        //       },
-        //     );
-        //   },
-        // ),
-
-        // IconButton(
-        //   onPressed: () {
-        //     Navigator.pop(context);
-        //   },
-        //   icon: const Icon(Icons.close_rounded),
-        //   color: Colors.white,
-        // ),
-
         title: const Text(
           "Settings",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
@@ -58,21 +40,28 @@ class StudySettings extends StatelessWidget {
         padding: const EdgeInsets.all(10),
         child: ListView(
           children: [
-            // User card
-            UserCard(
-              cardColor: Colors.blue.withOpacity(0.3),
-              cardActionWidget: SettingsItem(
-                icons: Icons.workspace_premium_rounded,
-                iconStyle: IconStyle(
-                  iconsColor: Colors.white,
-                  backgroundColor: Colors.white.withOpacity(0.3),
-                ),
-                subtitle: "More info >>",
-                onTap: () {
-                  print("In App purchase");
-                },
+            //Premium Card (In App Purchase)
+            const PremiumCard(
+              colorNotes: Color(0xFF0B6BA7), 
+              cardColor: Colors.white, 
+              cardModel: null,
               ),
-            ),
+
+            // User card
+            // UserCard(
+            //   cardColor: const Color(0xFF0B6BA7),
+            //   cardActionWidget: SettingsItem(
+            //     title: "PRO VERSION",
+            //     icons: Icons.workspace_premium_rounded,
+            //     iconStyle: IconStyle(
+            //       iconsColor: Colors.white,
+            //       backgroundColor: Colors.white.withOpacity(0.3),
+            //     ),
+            //     onTap: () {
+            //       print("In App purchase");
+            //     },
+            //   ),
+            // ),
             SettingsGroup(
               settingsGroupTitle: "General",
               items: [

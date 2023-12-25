@@ -13,11 +13,12 @@ class SettingsGroup extends StatelessWidget {
   final double? iconItemSize;
 
   const SettingsGroup(
-      {super.key, this.settingsGroupTitle,
+      {super.key,
+      this.settingsGroupTitle,
       this.settingsGroupTitleStyle,
       required this.items,
       this.margin,
-      this.iconItemSize = 25});
+      this.iconItemSize = 40});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,8 @@ class SettingsGroup extends StatelessWidget {
                   child: Text(
                     settingsGroupTitle!,
                     style: (settingsGroupTitleStyle == null)
-                        ? const TextStyle(fontSize: 25, fontWeight: FontWeight.bold)
+                        ? const TextStyle(
+                            fontSize: 25, fontWeight: FontWeight.bold)
                         : settingsGroupTitleStyle,
                   ),
                 )
