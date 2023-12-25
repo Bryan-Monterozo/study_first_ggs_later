@@ -54,6 +54,9 @@ dependencies:
   table_calendar: ^3.0.8
   firebase_auth: ^4.15.0
 
+#for settings ni joy na sticky header eme
+  sticky_headers: "^0.3.0"
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

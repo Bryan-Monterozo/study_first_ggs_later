@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
-
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 
 
 class PremiumCard extends StatelessWidget {
@@ -9,22 +9,29 @@ class PremiumCard extends StatelessWidget {
   final Color? colorNotes;
   final CardModel? cardModel;
 
+  final VoidCallback? onTap;
+
+  final IconData icons;
+  final IconStyle? iconStyle;
+
 
   const PremiumCard({
     super.key,
     required this.colorNotes,
     required this.cardColor,
-    required this.cardModel,
+    required this.cardModel, 
+
+    this.onTap,
+
+    this.iconStyle,
+    required this.icons,
 
   });
  @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        print("In App purchase");
-      },
-      child: Container(
-        height: 100,
+    return Container(
+        height: 120,
+        width: double.infinity,
         decoration: BoxDecoration(
             color: colorNotes,
             borderRadius: const BorderRadius.all(
@@ -34,8 +41,12 @@ class PremiumCard extends StatelessWidget {
           padding: EdgeInsets.all(12.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              Icon(
+                Icons.workspace_premium_rounded,
+                size: 50,
+                color: Colors.white,
+              ),
               Text(
                 "Upgrade to PRO",
                 textAlign: TextAlign.center,
@@ -46,7 +57,6 @@ class PremiumCard extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
