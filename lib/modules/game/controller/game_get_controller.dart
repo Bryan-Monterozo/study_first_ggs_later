@@ -1,12 +1,27 @@
-import 'dart:math';
-
+import 'package:multiple_random_choice/multiple_random_choice.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/game/services/game_collection.dart';
+
+class GamePageController extends GetxController {
+  // controller
+  late PageController pageController;
+  int selectedIndex = 0;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    pageController = PageController(initialPage: 0);
+  }
+
+  onPageChanged(int index) {
+    selectedIndex = index;
+    update();
+  }
+}
 
 class EnemyController extends GetxController {
   // Variables
@@ -44,6 +59,13 @@ class EnemyController extends GetxController {
 
     if (prefs.getBool('isEnemySpawned') == null) {
       await prefs.setBool('isEnemySpawned', false);
+      await prefs.setString('enemyId', enemyId.value);
+      await prefs.setString('enemyName', enemyName.value);
+      await prefs.setInt('enemyHealth', enemyHealth.value);
+      await prefs.setInt('enemyDamage', enemyDamage.value);
+      await prefs.setInt('enemyDefense', enemyDefense.value);
+      await prefs.setInt('enemyExp', enemyExp.value);
+      await prefs.setInt('enemySilver', enemySilver.value);
     }
 
     if (prefs.getBool('isEnemySpawned') == false) {
@@ -80,13 +102,20 @@ class EnemyController extends GetxController {
 
   fetchEnemy() async {
     FirebaseFirestore firestore = FirebaseFirestore.instance;
-    final list = ['0', '1'];
-    final index = Random().nextInt(list.length);
-    final randomizer = list[index];
+    final encounterChance = {
+      '0': 10.0,
+      '1': 10.0,
+    };
+    final encounterSet =
+        randomMultipleWeightedChoice<String>(encounterChance, 1, null);
+    // final index = Random().nextInt(randEnemy.length);
+    // final randomizer = randEnemy[index];
+    String randEnemy = encounterSet.join();
+    print(randEnemy);
 
     await firestore
         .collection('Enemy')
-        .doc(randomizer)
+        .doc(randEnemy)
         .get()
         .then((value) async {
       enemyId.value = value['enemyId'];
@@ -103,17 +132,65 @@ class EnemyController extends GetxController {
 
   scaleEnemy() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    const playerLevel = 1;
+    int playerLvl = prefs.getInt('playerLevel')!;
+    Map<int, num> scaler = {};
+    if (playerLvl > 5) {
+      scaler = {
+        (playerLvl - 5): 0.5,
+        (playerLvl - 4): 1.0,
+        (playerLvl - 3): 5.0,
+        (playerLvl - 2): 10.0,
+        (playerLvl - 1): 30.0,
+        playerLvl: 20,
+        (playerLvl + 1): 10.0,
+        (playerLvl + 2): 5.0,
+        (playerLvl + 3): 3.0,
+        (playerLvl + 4): 1.0,
+        (playerLvl + 5): 0.5,
+      };
+    }
+    if (playerLvl > 4) {
+      scaler = {
+        (playerLvl - 4): 1.0,
+        (playerLvl - 3): 5.0,
+        (playerLvl - 2): 10.0,
+        (playerLvl - 1): 30.0,
+        playerLvl: 20,
+        (playerLvl + 1): 9.0,
+        (playerLvl + 2): 5.0,
+        (playerLvl + 3): 1.0,
+        (playerLvl + 4): 0.7,
+      };
+    }
+    if (playerLvl > 3) {
+      scaler = {
+        (playerLvl - 3): 5.0,
+        (playerLvl - 2): 10.0,
+        (playerLvl - 1): 30.0,
+        playerLvl: 20,
+        (playerLvl + 1): 10.0,
+        (playerLvl + 2): 5.0,
+        (playerLvl + 3): 3.0,
+      };
+    } else {
+      scaler = {
+        playerLvl: 100.0,
+      };
+    }
+
+    final randLvl = randomMultipleWeightedChoice(scaler, 1, null);
+    String lvlString = randLvl.join();
+    int scaledLvl = int.parse(lvlString);
+
     enemyHealth.value =
-        enemyHealth.value * playerLevel; //prefs.getInt('playerLevel')!
+        enemyHealth.value * scaledLvl; //prefs.getInt('playerLevel')!
     enemyDamage.value =
-        enemyDamage.value * playerLevel; //prefs.getInt('playerLevel')!
+        enemyDamage.value * scaledLvl; //prefs.getInt('playerLevel')!
     enemyDefense.value =
-        enemyDefense.value * playerLevel; //prefs.getInt('playerLevel')!
-    enemyExp.value =
-        enemyExp.value * playerLevel; //prefs.getInt('playerLevel')!
+        enemyDefense.value * scaledLvl; //prefs.getInt('playerLevel')!
+    enemyExp.value = enemyExp.value * scaledLvl; //prefs.getInt('playerLevel')!
     enemySilver.value =
-        enemySilver.value * playerLevel; //prefs.getInt('playerLevel')!
+        enemySilver.value * scaledLvl; //prefs.getInt('playerLevel')!
 
     // print('Enemy Spawned: $isEnemySpawned');
     print('Enemy Name: $enemyName');
@@ -138,6 +215,7 @@ class EnemyController extends GetxController {
     // isEnemySpawned.value = prefs.getBool('isEnemySpawned')!;
     print('Enemy Health: $enemyHealth');
     if (enemyHealth <= 0) {
+      prefs.setBool('isEnemySpawned', false);
       deadEnemy();
       // await prefs.setBool('isEnemySpawned', false);
       // spawnEnemy();
@@ -155,7 +233,6 @@ class EnemyController extends GetxController {
         onPressed: () async {
           // prefs.setInt('playerExp', prefs.getInt('playerExp')! + enemyExp);
           // prefs.setInt('playerSilver', prefs.getInt('playerSilver')! + enemySilver);
-          prefs.setBool('isEnemySpawned', false);
           spawnEnemy();
           Get.back();
         },
@@ -193,7 +270,7 @@ class PlayerController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    initPlayer();
+    await initPlayer();
   }
 
   initPlayer() async {
@@ -208,8 +285,10 @@ class PlayerController extends GetxController {
       if (prefs.getBool('isPlaying') == null) {
         await prefs.setBool('isPlaying', false);
         initPlayer();
+        prefs.setInt('totalBattlePoints', 0);
       } else {
         if (prefs.getBool('isPlaying') == false) {
+          Get.find<BattleController>().initBattleSystem();
           fetchPlayerFromDB();
         } else {
           fetchCurrentPlayer();
@@ -217,7 +296,8 @@ class PlayerController extends GetxController {
         }
       }
     } else {
-      createNewPlayer();
+      await createNewPlayer();
+      initPlayer();
     }
   }
 
@@ -350,9 +430,10 @@ class BattleController extends GetxController {
   // Variables
 
   RxInt totalBattlePoints = 0.obs;
+  RxBool isAttackDisabled = true.obs;
   int quizPoints = 0;
   int fcPoints = 0;
-  int pomodorPoints = 0;
+  int pomodoroPoints = 0;
   int todoPoints = 0;
 
   // Methods
@@ -362,10 +443,24 @@ class BattleController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    battlePointsQuiz();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    await initBattleSystem();
   }
 
-  playerAttack() async {
+  initBattleSystem() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getInt('totalBattlePoints') == null) {
+      await prefs.setInt('totalBattlePoints', 0);
+      await prefs.setInt('quizPoints', 0);
+      await prefs.setInt('fcPoints', 0);
+      await prefs.setInt('pomodoroPoints', 0);
+      await prefs.setInt('todoPoints', 0);
+    } else {
+      battlePointsQuiz();
+    }
+  }
+
+  void playerAttack() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int enemyHealth = prefs.getInt('enemyHealth')!;
     int enemyDefense = prefs.getInt('enemyDefense')!;
@@ -385,7 +480,7 @@ class BattleController extends GetxController {
     Get.find<EnemyController>().damageEnemy();
   }
 
-  enemyAttack() async {
+  void enemyAttack() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int playerHealth = prefs.getInt('playerHealth')!;
     int playerDefense = prefs.getInt('playerDefense')!;
@@ -403,18 +498,37 @@ class BattleController extends GetxController {
     Get.find<PlayerController>().damagePlayer();
   }
 
-  battlePointsQuiz() async {
+  void battlePointsQuiz() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    totalBattlePoints.value = prefs.getInt('totalBattlePoints')!;
     quizPoints = prefs.getInt('quizPoints')!;
-    totalBattlePoints.value = quizPoints + fcPoints + pomodorPoints + todoPoints;
-
+    // quizPoints = prefs.getInt('quizPoints')!;
+    totalBattlePoints.value = quizPoints +
+        fcPoints +
+        pomodoroPoints +
+        todoPoints +
+        totalBattlePoints.value;
+    await prefs.setInt('quizPoints', 0);
     await prefs.setInt('totalBattlePoints', totalBattlePoints.value);
+    disableAttackButton(); // disable attack button if total battle points is 0
   }
 
-  clearBattlePoints() async {
+  void clearBattlePoints() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setInt('quizPoints', 0);
     await prefs.setInt('totalBattlePoints', 0);
     totalBattlePoints.value = prefs.getInt('totalBattlePoints')!;
+    disableAttackButton(); // disable attack button if total battle points is 0
+  }
+
+  void disableAttackButton() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getInt('totalBattlePoints')! <= 0) {
+      isAttackDisabled.value = true;
+    } else {
+      isAttackDisabled.value = false;
+    }
   }
 }
+
+class PlayerStatsController extends GetxController {}

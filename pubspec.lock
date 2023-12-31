@@ -280,6 +280,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.1"
+  multiple_random_choice:
+    dependency: "direct main"
+    description:
+      name: multiple_random_choice
+      sha256: "20d23b5c6c37f77eb21d91a20e72a2092e1d97c385dc18a16ffb3cde420be2f7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.1.3+1"
   nested:
     dependency: transitive
     description:

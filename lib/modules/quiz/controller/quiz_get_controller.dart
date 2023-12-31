@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_result.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
@@ -195,9 +196,10 @@ class OptionsController extends GetxController {
 
   finishQuiz() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('questionTotalInt', questionTotal.value);
+    await prefs.setInt('questionTotalInt', questionTotal.value);
     questionTotalInt = prefs.getInt('questionTotalInt')!;
-    prefs.setInt('quizPoints', quizPoints);
+    await prefs.setInt('quizPoints', quizPoints);
+    Get.find<BattleController>().battlePointsQuiz();
     Get.off(const QuizResult());
   }
 

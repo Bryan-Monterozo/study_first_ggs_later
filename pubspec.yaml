@@ -52,6 +52,7 @@ dependencies:
   syncfusion_flutter_core: ^23.1.42
   table_calendar: ^3.0.8
   firebase_auth: ^4.15.0
+  multiple_random_choice: ^0.1.3+1
   # hive: ^2.2.3
   # hive_flutter: ^1.1.0
 
@@ -114,6 +115,9 @@ flutter:
         - asset: fonts/Poppins-BoldItalic.ttf
           weight: 700
           style: italic
+    - family:  CustomGameIcons
+      fonts:
+        - asset: fonts/CustomGameIcons.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

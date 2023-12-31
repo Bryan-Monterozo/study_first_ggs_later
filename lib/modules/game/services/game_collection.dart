@@ -32,3 +32,10 @@ class GameDB {
     await collection.set(playerModel.toMap());
   }
 }
+
+class GameShopDB {
+  final firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
+
+  
+}
