@@ -3,15 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_content.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 
-import 'package:flutter/cupertino.dart';
-
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_user_card.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_premium_card.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 
@@ -39,20 +36,20 @@ class StudySettings extends StatelessWidget {
         centerTitle: true,
         elevation: 1,
       ),
-      body: Padding(
+      body: Container(
         padding: EdgeInsets.all(10),
-        // ignore: prefer_const_literals_to_create_immutables, 
         child: ListView(
           children: [
-            //Premium Card (In App Purchase)
             StickyHeader(
-              header: const PremiumCard(
+              header:            //Premium Card (In App Purchase)
+              const PremiumCard(
                       colorNotes: Color(0xFF0B6BA7), 
                       cardColor: Colors.white, 
                       cardModel: null, 
                       icons: Icons.workspace_premium_rounded,
                       ),
-              content: 
+              content:
+              SingleChildScrollView(child: Column(children: [
                 SettingsGroup(
                         settingsGroupTitle: "General",
                         items: [
@@ -71,173 +68,22 @@ class StudySettings extends StatelessWidget {
                               value: false,
                               onChanged: (value) {},
                             ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.vibration_rounded,
-                            title: 'Vibration',
-                            subtitle: "Vibration on session finish",
-                            trailing: Switch.adaptive(
-                              value: false,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Always Screen ON/OFF',
-                            subtitle: "Screen will always be ON during the session",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          SettingsItem(
-                            onTap: () {},
-                            icons: Icons.notifications_rounded,
-                            title: 'Sound',
-                            subtitle: "Sound Notification on session finished",
-                            trailing: Switch.adaptive(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ),
-                          
+                          ),                       
                         ],
                       ),
-                      // SettingsGroup(
-                      //   items: [
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: Icons.info_rounded,
-                      //       title: 'About',
-                      //       subtitle: "Learn more about Study First, GGS Later",
-                      //     ),
-                      //   ],
-                      // ),
-                      // SettingsGroup(
-                      //   settingsGroupTitle: "Others",
-                      //   items: [
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: CupertinoIcons.flag_circle_fill,
-                      //       title: "Change Language",
-                      //       subtitle: "English",
-                      //     ),
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: Icons.wifi_rounded,
-                      //       title: 'Connect Only on Wi-Fi',
-                      //       trailing: Switch.adaptive(
-                      //         value: false,
-                      //         onChanged: (value) {},
-                      //       ),
-                      //     ),
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: Icons.report_rounded,
-                      //       title: 'Automatically Send Usage and Crash Reports',
-                      //       trailing: Switch.adaptive(
-                      //         value: true,
-                      //         onChanged: (value) {},
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
-                      // // You can add a settings title
-                      // SettingsGroup(
-                      //   settingsGroupTitle: "Account",
-                      //   items: [
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: CupertinoIcons.repeat,
-                      //       title: "Change email",
-                      //     ),
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: CupertinoIcons.delete_solid,
-                      //       title: "Delete account",
-                      //       titleStyle: const TextStyle(
-                      //         color: Colors.red,
-                      //         fontWeight: FontWeight.bold,
-                      //       ),
-                      //     ),
-                      //     SettingsItem(
-                      //       onTap: () {},
-                      //       icons: Icons.exit_to_app_rounded,
-                      //       title: "Sign Out",
-                      //     ),
-                        // ],
+                      SettingsGroup(
+                        settingsGroupTitle: "General",
+                        items: [
+                          SettingsItem(
+                            onTap: () {},
+                            icons: Icons.fingerprint,
+                            title: 'Privacy',
+                            subtitle: "Lock Study First to improve your privacy",
+                          ),                              
+                        ],
+                      ),   
+
+              ]),)
               ),     
           ],
         ),
