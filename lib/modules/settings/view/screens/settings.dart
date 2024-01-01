@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_content.dart';
+import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_group.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
@@ -41,13 +41,17 @@ class StudySettings extends StatelessWidget {
         child: ListView(
           children: [
             StickyHeader(
-              header:            //Premium Card (In App Purchase)
-              const PremiumCard(
+              header:
+              const PremiumCardGesture( //Premium Card (In App Purchase)
+                premNavigator: StudyHome(), //placeholder for now
+                premContainer: PremiumCard(
                       colorNotes: Color(0xFF0B6BA7), 
                       cardColor: Colors.white, 
                       cardModel: null, 
                       icons: Icons.workspace_premium_rounded,
                       ),
+                      ),  
+                        
               content:
               SingleChildScrollView(child: Column(children: [
                 SettingsGroup(
@@ -82,9 +86,10 @@ class StudySettings extends StatelessWidget {
                           ),                              
                         ],
                       ),   
-
-              ]),)
-              ),     
+              ]
+              ),
+              )     
+            ),
           ],
         ),
       ),

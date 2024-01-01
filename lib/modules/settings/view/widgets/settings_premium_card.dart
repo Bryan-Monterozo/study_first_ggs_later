@@ -57,3 +57,26 @@ class PremiumCard extends StatelessWidget {
     );
   }
 }
+
+class PremiumCardGesture extends StatelessWidget {
+  final Widget? premNavigator;
+  final Widget? premContainer;
+
+  const PremiumCardGesture(
+      {super.key, required this.premNavigator, this.premContainer});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => premNavigator!,
+          ),
+        );
+      },
+      child: premContainer,
+    );
+  }
+}
