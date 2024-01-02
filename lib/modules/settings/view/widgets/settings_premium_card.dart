@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
-import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 
 class PremiumCard extends StatelessWidget {
   final Color? cardColor;
   final Color? colorNotes;
-  final CardModel? cardModel;
-
-  final VoidCallback? onTap;
 
   final IconData icons;
   final IconStyle? iconStyle;
@@ -17,8 +13,6 @@ class PremiumCard extends StatelessWidget {
     super.key,
     required this.colorNotes,
     required this.cardColor,
-    required this.cardModel,
-    this.onTap,
     this.iconStyle,
     required this.icons,
   });

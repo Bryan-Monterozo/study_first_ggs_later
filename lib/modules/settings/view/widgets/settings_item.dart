@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_screen_utils.dart ';
 
 class SettingsItem extends StatelessWidget {
-  final IconData icons;
-  final IconStyle? iconStyle;
-  final String title;
-  final TextStyle? titleStyle;
+  final String name;
+  final TextStyle? nameStyle;
+  
   final String? subtitle;
   final TextStyle? subtitleStyle;
   final Widget? trailing;
@@ -17,10 +14,9 @@ class SettingsItem extends StatelessWidget {
   final TextOverflow? overflow;
 
   const SettingsItem(
-      {super.key, required this.icons,
-      this.iconStyle,
-      required this.title,
-      this.titleStyle,
+      {super.key, 
+      required this.name,
+      this.nameStyle,
       this.subtitle,
       this.subtitleStyle,
       this.backgroundColor,
@@ -36,29 +32,9 @@ class SettingsItem extends StatelessWidget {
       borderRadius: BorderRadius.circular(15),
       child: ListTile(
         onTap: onTap,
-        leading: (iconStyle != null && iconStyle!.withBackground!)
-            ? Container(
-                decoration: BoxDecoration(
-                  color: iconStyle!.backgroundColor,
-                  borderRadius: BorderRadius.circular(iconStyle!.borderRadius!),
-                ),
-                padding: const EdgeInsets.all(3),
-                child: Icon(
-                  icons,
-                  size: SettingsScreenUtils.settingsGroupIconSize,
-                  color: iconStyle!.iconsColor,
-                ),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(5),
-                child: Icon(
-                  icons,
-                  size: SettingsScreenUtils.settingsGroupIconSize,
-                ),
-              ),
         title: Text(
-          title,
-          style: titleStyle ?? const TextStyle(fontWeight: FontWeight.bold),
+          name,
+          style: nameStyle ?? const TextStyle(fontWeight: FontWeight.bold),
           maxLines: titleMaxLine,
           overflow: titleMaxLine != null ? overflow : null,
         ),
@@ -76,3 +52,5 @@ class SettingsItem extends StatelessWidget {
     );
   }
 }
+
+
