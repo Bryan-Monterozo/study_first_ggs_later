@@ -59,53 +59,150 @@ class StudySettings extends StatelessWidget {
                   child: Column(
                     children: [
                       const SettingsTitle(
-                            icons: Icons.settings,
-                            title: "Settings",
+                            icons: Icons.person,
+                            title: "Account",
                           ),
                       SettingsItem(
                         onTap:() {},
-                        name: "Account",
-                        trailing: Switch.adaptive(
-                          value: false, 
-                          onChanged: (value){},
-                          ),
+                        name: "Edit Profile", 
                       ),
                       SettingsItem(
                         onTap:() {},
-                        name: "Account",
-                        trailing: Switch.adaptive(
-                          value: false, 
-                          onChanged: (value){},
-                          ),
+                        name: "Forgot Password", 
                       ),
-                      SettingsItem(
-                        onTap:() {},
-                        name: "Account",
-                        trailing: Switch.adaptive(
-                          value: false, 
-                          onChanged: (value){},
-                          ),
-                      ),
-                      SettingsItem(
-                        onTap:() {},
-                        name: "Account",
-                        trailing: Switch.adaptive(
-                          value: false, 
-                          onChanged: (value){},
-                          ),
-                      ),
-                      SettingsItem(
-                        onTap:() {},
-                        name: "Account",
-                        trailing: Switch.adaptive(
-                          value: false, 
-                          onChanged: (value){},
-                          ),
-                      ),
+                     
                       const SettingsTitle(
                             icons: Icons.settings,
-                            title: "Settings",
+                            title: "General",
                           ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Always Screen ON/OFF", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Vibration", 
+                      ),
+
+                      const SettingsTitle(
+                            icons: Icons.notifications,
+                            title: "Notifications",
+                          ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Daily Reminder", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Sound Effects", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Countdown Notification", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Reminder Sound", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Reminder Vibration", 
+                      ),
+
+                      const SettingsTitle(
+                            icons: Icons.color_lens,
+                            title: "Other",
+                          ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Theme", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Connect only to Wi-Fi", 
+                        trailing: Switch(
+                          value: true,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Automatically Send Usage and Crash Reports",
+                        trailing: Switch(
+                          value: true,
+                          onChanged: (value) {},
+                        ),
+                      ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "About", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Privacy Policy", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Terms of Service", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Rate Us", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Share", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Feedback", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "FAQ", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Help", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Contact Us", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Version", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Licenses", 
+                        ),
+                        SettingsItem(
+                          onTap:() {},
+                          name: "Open Source Libraries",
+                        ),
+                       
+
+                      const SettingsTitle(
+                            icons: Icons.security,
+                            title: "Security",
+                          ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Change Password", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Change Email", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Delete Account", 
+                      ),
+                       SettingsItem(
+                        onTap:() {},
+                        name: "Sign Out", 
+                      ),
                           
                     ],
                   ),

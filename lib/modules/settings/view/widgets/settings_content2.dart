@@ -26,7 +26,7 @@ class SettingsGroup2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 120,
-      width: double.infinity,
+      width: 120,
       decoration: BoxDecoration(
           color: colorNotes,
           borderRadius: const BorderRadius.all(
@@ -133,12 +133,6 @@ class SettingsCardGesture extends StatelessWidget {
     );
   }
 }
-
-
-
-                      
-
-
 
   GestureDetector buildAccountOption(BuildContext context, String title){
     return GestureDetector(
