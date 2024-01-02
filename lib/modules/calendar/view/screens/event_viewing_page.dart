@@ -6,7 +6,7 @@ import 'package:study_first_ggs_later/modules/calendar/services/calendar_collect
 import 'package:study_first_ggs_later/utils.dart';
 import 'event_editing_page.dart';
 
-class EventViewingPage extends StatelessWidget {
+class EventViewingPage extends StatefulWidget {
   final CalendarModel calendarModel;
 
   const EventViewingPage({
@@ -14,6 +14,11 @@ class EventViewingPage extends StatelessWidget {
     required this.calendarModel,
   }) : super(key: key);
 
+  @override
+  State<EventViewingPage> createState() => _EventViewingPageState();
+}
+
+class _EventViewingPageState extends State<EventViewingPage> {
   @override
   Widget build(BuildContext context) {
     // CalendarGetController calendarController = Get.put(CalendarGetController());
@@ -25,12 +30,12 @@ class EventViewingPage extends StatelessWidget {
               icon: const Icon(Icons.edit),
               onPressed: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) =>
-                      EventEditingPage(calendarModel: calendarModel))),
+                      EventEditingPage(calendarModel: widget.calendarModel))).then((_) => setState((){})),
             ),
             IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () {
-                CalendarDB().deleteEventToDB(eventID: calendarModel.eventID);
+                CalendarDB().deleteEventToDB(eventID: widget.calendarModel.eventID);
                 Navigator.of(context).pop();
               },
             ),
@@ -42,18 +47,18 @@ class EventViewingPage extends StatelessWidget {
             builder: (controller) =>
                 ListView(padding: const EdgeInsets.all(32), children: <Widget>[
                   Text(
-                    calendarModel.eventName,
+                    widget.calendarModel.eventName,
                     style: (const TextStyle(
                         fontSize: 24, fontWeight: FontWeight.bold)),
                   ),
                   const SizedBox(height: 16),
-                  Text(calendarModel.eventDescription,
+                  Text(widget.calendarModel.eventDescription,
                       style:
                           const TextStyle(color: Colors.black, fontSize: 18)),
                   const SizedBox(height: 16),
-                  buildDateTime(calendarModel),
+                  buildDateTime(widget.calendarModel),
                   const SizedBox(height: 16),
-                  if (calendarModel.isAllDay)
+                  if (widget.calendarModel.isAllDay)
                     const Text(
                       "Meeting is All Day",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -80,9 +85,9 @@ class EventViewingPage extends StatelessWidget {
         children: [
           Expanded(
               flex: 2,
-              child: Text(Utils.toDate(DateTime.parse(calendarModel.from)))),
+              child: Text(Utils.toDate(DateTime.parse(widget.calendarModel.from)))),
           Expanded(
-              child: Text(Utils.toTime(DateTime.parse(calendarModel.from)))),
+              child: Text(Utils.toTime(DateTime.parse(widget.calendarModel.from)))),
         ],
       ));
 
@@ -91,8 +96,8 @@ class EventViewingPage extends StatelessWidget {
       child: Row(children: [
         Expanded(
             flex: 2,
-            child: Text(Utils.toDate(DateTime.parse(calendarModel.to)))),
-        Expanded(child: Text(Utils.toTime(DateTime.parse(calendarModel.to)))),
+            child: Text(Utils.toDate(DateTime.parse(widget.calendarModel.to)))),
+        Expanded(child: Text(Utils.toTime(DateTime.parse(widget.calendarModel.to)))),
       ]));
 
   Widget buildHeader({
