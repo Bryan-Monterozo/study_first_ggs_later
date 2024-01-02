@@ -19,7 +19,8 @@ class EventEditingPage extends StatefulWidget {
 }
 
 class _EventEditingPageState extends State<EventEditingPage> {
-  final CalendarGetController calendarController = Get.put(CalendarGetController());
+  final CalendarGetController calendarController =
+      Get.put(CalendarGetController());
   final _formKey = GlobalKey<FormState>();
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();

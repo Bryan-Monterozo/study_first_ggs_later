@@ -52,8 +52,16 @@ class StudyCalendarState extends State<StudyCalendar> {
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const EventAddingPage()))),
+          onPressed: () => Navigator.of(context)
+                  .push(
+                MaterialPageRoute(
+                    builder: (context) => const EventAddingPage()),
+              )
+                  .then((value) {
+                getDataFromFireStore().then((_) {
+                  setState(() {});
+                });
+              })),
       body: GetBuilder<CalendarGetController>(
         init: CalendarGetController(),
         id: 'calendarView',
@@ -107,14 +115,21 @@ class StudyCalendarState extends State<StudyCalendar> {
                 dataSource: events,
                 controller: _controller,
                 monthViewSettings: const MonthViewSettings(
-                    appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
+                    appointmentDisplayMode:
+                        MonthAppointmentDisplayMode.indicator,
                     showAgenda: true),
                 initialSelectedDate: DateTime.now(),
                 onLongPress: (details) {
                   final meeting = details.appointments!.first;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          EventViewingPage(calendarModel: meeting)));
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(
+                          builder: (context) =>
+                              EventViewingPage(calendarModel: meeting)))
+                      .then((value) {
+                    getDataFromFireStore().then((_) {
+                      setState(() {});
+                    });
+                  });
                 },
                 todayHighlightColor: Colors.blue,
                 selectionDecoration: BoxDecoration(

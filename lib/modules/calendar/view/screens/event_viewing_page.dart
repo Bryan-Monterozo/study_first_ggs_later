@@ -16,7 +16,7 @@ class EventViewingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    CalendarGetController calendarController = Get.put(CalendarGetController());
+    // CalendarGetController calendarController = Get.put(CalendarGetController());
     return Scaffold(
         appBar: AppBar(
           leading: const CloseButton(),
