@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_icon_style.dart';
 
-
 class SettingsGroup2 extends StatelessWidget {
   final Color? cardColor;
   final Color? colorNotes;
@@ -10,17 +9,13 @@ class SettingsGroup2 extends StatelessWidget {
   final IconData icons;
   final IconStyle? iconStyle;
 
-
-
- const SettingsGroup2({
+  const SettingsGroup2({
     super.key,
     required this.colorNotes,
     required this.cardColor,
-
     this.iconStyle,
     required this.icons,
-
-    });
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +31,7 @@ class SettingsGroup2 extends StatelessWidget {
         padding: EdgeInsets.all(12.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          ],
+          children: [],
         ),
       ),
     );
@@ -50,28 +44,23 @@ class SettingsTitle extends StatelessWidget {
   final int? titleMaxLine;
 
   final TextOverflow? overflow;
-    
+
   final IconData icons;
   final IconStyle? iconStyle;
 
-
-
-  const SettingsTitle({
-    super.key,
-
-    required this.icons,
-    this.iconStyle,
-
-    required this.title,
+  const SettingsTitle(
+      {super.key,
+      required this.icons,
+      this.iconStyle,
+      required this.title,
       this.titleStyle,
       this.titleMaxLine,
-      this.overflow = TextOverflow.ellipsis
-  });
+      this.overflow = TextOverflow.ellipsis});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:const EdgeInsets.all(5),
+      padding: const EdgeInsets.all(3),
       child: ListTile(
         leading: (iconStyle != null && iconStyle!.withBackground!)
             ? Container(
@@ -79,7 +68,7 @@ class SettingsTitle extends StatelessWidget {
                   color: iconStyle!.backgroundColor,
                   borderRadius: BorderRadius.circular(iconStyle!.borderRadius!),
                 ),
-                padding: const EdgeInsets.all(3),
+                padding: const EdgeInsets.all(0),
                 child: Icon(
                   icons,
                   size: SettingsScreenUtils.settingsGroupIconSize,
@@ -114,9 +103,7 @@ class SettingsCardGesture extends StatelessWidget {
   final Widget? set2Container;
 
   const SettingsCardGesture(
-      {super.key, 
-      required this.set2Navigator, 
-      this.set2Container});
+      {super.key, required this.set2Navigator, this.set2Container});
 
   @override
   Widget build(BuildContext context) {
@@ -134,10 +121,13 @@ class SettingsCardGesture extends StatelessWidget {
   }
 }
 
-  GestureDetector buildAccountOption(BuildContext context, String title){
-    return GestureDetector(
-      onTap: () {
-        showDialog(context: context, builder: (BuildContext context){
+//not yet used will use for Account/ forgot password
+GestureDetector buildAccountOption(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
           return AlertDialog(
             title: Text(title),
             content: const Column(
@@ -148,31 +138,30 @@ class SettingsCardGesture extends StatelessWidget {
               ],
             ),
             actions: [
-              TextButton(onPressed: () {
-                Navigator.of(context).pop();
-              }, 
-              child: const Text("Close"),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Close"),
               ),
             ],
           );
-        },);
-      },
-
-
-
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: const TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w500,
-              color: Colors.black,
-            )),
-          ],
-        ),
+        },
+      );
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title,
+              style: const TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+                color: Colors.black,
+              )),
+        ],
       ),
-      
-    );
-  }
+    ),
+  );
+}

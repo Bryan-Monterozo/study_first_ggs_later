@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class SettingsItem extends StatelessWidget {
   final String name;
   final TextStyle? nameStyle;
-  
+
   final String? subtitle;
   final TextStyle? subtitleStyle;
   final Widget? trailing;
@@ -14,7 +14,7 @@ class SettingsItem extends StatelessWidget {
   final TextOverflow? overflow;
 
   const SettingsItem(
-      {super.key, 
+      {super.key,
       required this.name,
       this.nameStyle,
       this.subtitle,
@@ -47,10 +47,9 @@ class SettingsItem extends StatelessWidget {
                     subtitleMaxLine != null ? TextOverflow.ellipsis : null,
               )
             : null,
-        trailing: (trailing != null) ? trailing : const Icon(Icons.navigate_next),
+        trailing:
+            (trailing != null) ? trailing : const Icon(Icons.navigate_next),
       ),
     );
   }
 }
-
-

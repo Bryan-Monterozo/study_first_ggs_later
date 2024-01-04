@@ -1,5 +1,4 @@
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
-import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_screen_utils.dart';
 import 'package:flutter/material.dart';
 
 /// This component group the Settings items (BabsComponentSettingsItem)
@@ -67,4 +66,9 @@ class SettingsGroup extends StatelessWidget {
       ),
     );
   }
+}
+
+class SettingsScreenUtils {
+  static double? settingsGroupIconSize;
+  static TextStyle? settingsGroupTitleStyle;
 }
