@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/calendar/controller/calendar_get_controller.dart';
 import 'package:study_first_ggs_later/modules/calendar/models/calendar_model.dart';
 import 'package:study_first_ggs_later/modules/calendar/services/calendar_collection.dart';
+import 'package:study_first_ggs_later/modules/calendar/view/screens/meeting_data_source.dart';
 import 'package:study_first_ggs_later/utils.dart';
 import 'event_editing_page.dart';
 
@@ -19,6 +20,7 @@ class EventViewingPage extends StatefulWidget {
 }
 
 class _EventViewingPageState extends State<EventViewingPage> {
+  MeetingDataSource? events;
   @override
   Widget build(BuildContext context) {
     // CalendarGetController calendarController = Get.put(CalendarGetController());
@@ -28,14 +30,18 @@ class _EventViewingPageState extends State<EventViewingPage> {
           actions: [
             IconButton(
               icon: const Icon(Icons.edit),
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      EventEditingPage(calendarModel: widget.calendarModel))).then((_) => setState((){})),
+              onPressed: () async => await Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      maintainState: false,
+                      builder: (context) => EventEditingPage(
+                          calendarModel: widget.calendarModel)))
+                  .then((_) => setState(() {})),
             ),
             IconButton(
               icon: const Icon(Icons.delete),
               onPressed: () {
-                CalendarDB().deleteEventToDB(eventID: widget.calendarModel.eventID);
+                CalendarDB()
+                    .deleteEventToDB(eventID: widget.calendarModel.eventID);
                 Navigator.of(context).pop();
               },
             ),
@@ -73,6 +79,7 @@ class _EventViewingPageState extends State<EventViewingPage> {
           calendarModel.isAllDay ? 'All-Day' : 'From',
           DateTime.parse(calendarModel.from),
         ),
+        const SizedBox(height: 20),
         if (!calendarModel.isAllDay)
           buildDateTo('TO', DateTime.parse(calendarModel.to)),
       ],
@@ -80,24 +87,28 @@ class _EventViewingPageState extends State<EventViewingPage> {
   }
 
   Widget buildDateFrom(String title, DateTime date) => buildHeader(
-      header: 'FROM',
+      header: 'FROM: ',
       child: Row(
         children: [
           Expanded(
               flex: 2,
-              child: Text(Utils.toDate(DateTime.parse(widget.calendarModel.from)))),
+              child: Text(
+                  Utils.toDate(DateTime.parse(widget.calendarModel.from)))),
           Expanded(
-              child: Text(Utils.toTime(DateTime.parse(widget.calendarModel.from)))),
+              child: Text(
+                  Utils.toTime(DateTime.parse(widget.calendarModel.from)))),
         ],
       ));
 
   Widget buildDateTo(String title, DateTime date) => buildHeader(
-      header: 'TO',
+      header: 'TO: ',
+      
       child: Row(children: [
         Expanded(
             flex: 2,
             child: Text(Utils.toDate(DateTime.parse(widget.calendarModel.to)))),
-        Expanded(child: Text(Utils.toTime(DateTime.parse(widget.calendarModel.to)))),
+        Expanded(
+            child: Text(Utils.toTime(DateTime.parse(widget.calendarModel.to)))),
       ]));
 
   Widget buildHeader({

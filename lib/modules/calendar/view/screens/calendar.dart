@@ -70,18 +70,18 @@ class StudyCalendarState extends State<StudyCalendar> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Calendar',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+                // const Column(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Text(
+                //       'Calendar',
+                //       style: TextStyle(
+                //           color: Colors.black,
+                //           fontSize: 30,
+                //           fontWeight: FontWeight.bold),
+                //     ),
+                //   ],
+                // ),
                 OutlinedButton(
                     onPressed: () {
                       setState(() {

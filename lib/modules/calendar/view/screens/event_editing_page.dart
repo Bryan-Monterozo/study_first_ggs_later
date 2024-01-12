@@ -27,6 +27,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
   late DateTime fromDate;
   late DateTime toDate;
   late bool allDay = false;
+  late int count;
 
   @override
   void initState() {
@@ -263,6 +264,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           isAllDay: allDay,
           eventID: widget.calendarModel!.eventID);
 
+      Navigator.of(context).pop();
       Navigator.of(context).pop();
       calendarController.saveController();
     }
