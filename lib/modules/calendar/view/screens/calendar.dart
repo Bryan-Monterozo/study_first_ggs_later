@@ -207,6 +207,25 @@ class StudyCalendarState extends State<StudyCalendar> {
                       appointmentDisplayMode:
                           MonthAppointmentDisplayMode.indicator,
                       showAgenda: true,
+                      agendaStyle: AgendaStyle(
+                        appointmentTextStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 14,
+                            fontStyle: FontStyle.italic,
+                            color: Colors.white),
+                        dateTextStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontStyle: FontStyle.italic,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w300,
+                            color: Color(0xff1c1c1c)),
+                        dayTextStyle: TextStyle(
+                          fontFamily: 'Poppins',
+                            fontStyle: FontStyle.normal,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            color: Color(0xff1c1c1c)),
+                      ),
                       monthCellStyle: MonthCellStyle(
                         textStyle: TextStyle(
                             fontFamily: 'Poppins',
@@ -228,11 +247,11 @@ class StudyCalendarState extends State<StudyCalendar> {
                         builder: (context) =>
                             EventViewingPage(calendarModel: meeting)));
                   },
-                  todayHighlightColor: Colors.blue,
+                  todayHighlightColor: const Color(0xFF0B6BA7),
                   selectionDecoration: BoxDecoration(
                     color: Colors.transparent,
                     border: Border.all(color: Colors.green, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    borderRadius: const BorderRadius.all(Radius.circular(12)),
                     shape: BoxShape.rectangle,
                   ),
                   cellBorderColor: Colors.transparent,
