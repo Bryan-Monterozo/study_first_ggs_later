@@ -25,13 +25,13 @@ class GameSatsPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.05,
           ),
           //player show box
-          Expanded(
+          Flexible(
             child: Center(
               child: Container(
                 padding: const EdgeInsets.all(10),
                 child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.width * 0.4,
+                    height: MediaQuery.of(context).size.width * 0.5,
                     child: Stack(
                       children: [
                         Container(
@@ -53,7 +53,7 @@ class GameSatsPage extends StatelessWidget {
                           () => Align(
                             alignment: Alignment.bottomCenter,
                             child: Text(
-                                'HP: ${playerController.playerHealth.value}'),
+                                'HP: ${playerController.playerTotalHealth.value}'),
                           ),
                         ),
                       ],
@@ -65,7 +65,7 @@ class GameSatsPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.02,
           ),
           //player name and level
-          Expanded(
+          Flexible(
               child: Column(
             children: [
               Row(
@@ -97,22 +97,24 @@ class GameSatsPage extends StatelessWidget {
           //   height: MediaQuery.of(context).size.height * 0.05,
           // ),
           //player stats
-          Expanded(
+          Flexible(
             child: Container(
-              width: MediaQuery.of(context).size.width * 0.8,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        statsText(' HP'),
-                        statsText('DMG'),
-                        statsText('DEF'),
-                        statsText('EXP'),
+                        statsText(' HP', null),
+                        statsText('DMG', null),
+                        statsText('DEF', null),
+                        statsText('EXP', null),
                       ],
                     ),
                   ),
@@ -121,19 +123,22 @@ class GameSatsPage extends StatelessWidget {
                     thickness: 2,
                   ),
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
+                    width: MediaQuery.of(context).size.width * 0.3,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Obx(() => statsText(
-                            playerController.playerHealth.value.toString())),
+                            playerController.playerHealth.value.toString(),
+                            playerController.equipHealth.value.toString())),
                         Obx(() => statsText(
-                            playerController.playerDamage.value.toString())),
+                            playerController.playerDamage.value.toString(),
+                            playerController.equipDamage.value.toString())),
                         Obx(() => statsText(
-                            playerController.playerDefense.value.toString())),
+                            playerController.playerDefense.value.toString(),
+                            playerController.equipDefense.value.toString())),
                         Obx(() => statsText(
-                            playerController.playerExp.value.toString())),
+                            playerController.playerExp.value.toString(), null)),
                       ],
                     ),
                   ),
@@ -141,36 +146,90 @@ class GameSatsPage extends StatelessWidget {
                     color: Colors.black,
                     thickness: 2,
                   ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        statsUpButton(() {}, null ,Colors.transparent, Colors.yellow[800]!),
-                        statsUpButton(() {}, null, Colors.transparent, Colors.yellow[800]!),
-                        statsUpButton(() {}, Colors.yellow, Colors.yellow[600]!, Colors.white),
-                        statsText('100'),
-                        // Obx(() => IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //         Icons.keyboard_double_arrow_up_sharp))), // HP
-                        // Obx(() => IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //         Icons.keyboard_double_arrow_up_sharp))), // DMG
-                        // Obx(() => IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //         Icons.keyboard_double_arrow_up_sharp))), // DEF
-                        // Obx(() => statsText('100')), // EXP
-                      ],
+                  Obx(
+                    () => SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: playerController.skillUpPoints.value > 0
+                              ? <Widget>[
+                                  statsUpButton(() {
+                                    playerController.upgradeStat(1);
+                                  }, Colors.yellow, Colors.yellow[600]!,
+                                      Colors.white),
+                                  statsUpButton(() {
+                                    playerController.upgradeStat(2);
+                                  }, Colors.yellow,
+                                      Colors.yellow[600]!, Colors.white),
+                                  statsUpButton(() {
+                                    playerController.upgradeStat(3);
+                                  }, Colors.yellow,
+                                      Colors.yellow[600]!, Colors.white),
+                                  statsText(
+                                      playerController.nextLevelExp.value
+                                          .toString(),
+                                      null),
+                                  // Obx(() => IconButton(
+                                  //     onPressed: () {},
+                                  //     icon: const Icon(
+                                  //         Icons.keyboard_double_arrow_up_sharp))), // HP
+                                  // Obx(() => IconButton(
+                                  //     onPressed: () {},
+                                  //     icon: const Icon(
+                                  //         Icons.keyboard_double_arrow_up_sharp))), // DMG
+                                  // Obx(() => IconButton(
+                                  //     onPressed: () {},
+                                  //     icon: const Icon(
+                                  //         Icons.keyboard_double_arrow_up_sharp))), // DEF
+                                  // Obx(() => statsText('100')), // EXP
+                                ]
+                              : <Widget>[
+                                  statsUpButton(() {}, null, Colors.transparent,
+                                      Colors.yellow[800]!),
+                                  statsUpButton(() {}, null, Colors.transparent,
+                                      Colors.yellow[800]!),
+                                  statsUpButton(() {}, null, Colors.transparent,
+                                      Colors.yellow[800]!),
+                                  statsText(
+                                      playerController.nextLevelExp.value
+                                          .toString(),
+                                      null),
+                                ]),
                     ),
                   )
                 ],
               ),
             ),
-          )
+          ),
+          Flexible(
+              child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text('Skill Points Left:'),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  Obx(() => Text('${playerController.skillUpPoints.value}')),
+                ],
+              ),
+              // const SizedBox(
+              //   height: 5,
+              // ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.center,
+              //   children: [
+              //     const Text('Character Level:'),
+              //     const SizedBox(
+              //       width: 10,
+              //     ),
+              //     Obx(() => Text('${playerController.playerLevel.value}')),
+              //   ],
+              // ),
+            ],
+          )),
         ],
       ),
     );

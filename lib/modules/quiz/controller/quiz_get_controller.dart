@@ -199,7 +199,7 @@ class OptionsController extends GetxController {
     await prefs.setInt('questionTotalInt', questionTotal.value);
     questionTotalInt = prefs.getInt('questionTotalInt')!;
     await prefs.setInt('quizPoints', quizPoints);
-    Get.find<BattleController>().battlePointsQuiz();
+    Get.find<BattleController>().battlePoints();
     Get.off(const QuizResult());
   }
 

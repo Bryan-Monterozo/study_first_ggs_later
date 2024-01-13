@@ -58,7 +58,7 @@ class GameBattlePage extends StatelessWidget {
                               () => Align(
                                 alignment: Alignment.bottomCenter,
                                 child: Text(
-                                    'HP: ${playerController.playerHealth.value}'),
+                                    'HP: ${playerController.playerTotalHealth.value}'),
                               ),
                             ),
                           ],
@@ -157,7 +157,7 @@ class GameBattlePage extends StatelessWidget {
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                                'Attack Damage: ${battleController.totalBattlePoints.value}'),
+                                'Attack Damage: ${battleController.totalBattleDamage.value}'),
                           ),
                         ],
                       ),

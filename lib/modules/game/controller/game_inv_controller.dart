@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -24,29 +25,30 @@ class PlayerInvController extends GetxController {
 
   initInventory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    final ref = await firestore
-        .collection('Users')
-        .doc(uid)
-        .collection('Player')
-        .doc('Inventory')
-        .get();
-    if (ref.exists) {
-      if (prefs.getBool('hasInv') == null) {
+    
+    if (prefs.getBool('hasInv') == null) {
+      final ref = await firestore
+          .collection('Users')
+          .doc(uid)
+          .collection('Player')
+          .doc('Inventory')
+          .get();
+      if (ref.exists) {
         await prefs.setBool('hasInv', false);
         initInventory();
+        prefs.setInt('totalBattlePoints', 0);
       } else {
-        if (prefs.getBool('hasInv') == false) {
-          await fetchItemFromDB();
-          print('db');
-        } else {
-          await fetchCurrentItem();
-          print(prefs.getInt('apple'));
-          print('prefs');
-        }
+        await createNewPlayerInv();
+        initInventory();
       }
     } else {
-      await createNewPlayerInv();
-      initInventory();
+      if (prefs.getBool('hasInv') == false) {
+        // Get.find<BattleController>().initBattleSystem();
+        fetchItemFromDB();
+      } else {
+        fetchCurrentItem();
+        print(prefs.getBool('hasInv'));
+      }
     }
   }
 
@@ -132,13 +134,15 @@ class PlayerInvController extends GetxController {
 
   healPlayer(int heal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getInt('playerHealth')! < prefs.getInt('basePlayerHealth')!) {
-      if (prefs.getInt('playerHealth')! + heal >=
-          prefs.getInt('basePlayerHealth')!) {
-        await prefs.setInt('playerHealth', prefs.getInt('basePlayerHealth')!);
+    int currentHealth = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
+    int baseHealth = prefs.getInt('basePlayerHealth')! + prefs.getInt('equipHealth')!;
+    if (currentHealth < baseHealth) {
+      if (currentHealth + heal >=
+          baseHealth) {
+        await prefs.setInt('playerTotalHealth', baseHealth);
       } else {
         await prefs.setInt(
-            'playerHealth', prefs.getInt('playerHealth')! + heal);
+            'playerTotalHealth', currentHealth + heal);
       }
     }
   }
@@ -162,4 +166,30 @@ class PlayerInvController extends GetxController {
         return 0;
     }
   }
+}
+
+class InvPageController extends GetxController
+    with GetSingleTickerProviderStateMixin {
+  // controller
+  late TabController tabController;
+  // late PageController pageController;
+  // int selectedIndex = 0;
+
+  @override
+  void onInit() async {
+    super.onInit();
+    // pageController = PageController(initialPage: 0);
+    tabController = TabController(length: 2, vsync: this, initialIndex: 0);
+  }
+
+  @override
+  void onClose() {
+    tabController.dispose();
+    // pageController.dispose();
+    super.onClose();
+  }
+
+  // onPageChanged(int index) {
+  //   selectedIndex = index;
+  // }
 }

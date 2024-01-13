@@ -6,6 +6,7 @@ class PlayerStatModel {
   int playerDamage;
   int playerDefense;
   int playerExp;
+  int skillUpPoints;
 
   PlayerStatModel(
       {required this.playerId,
@@ -14,7 +15,8 @@ class PlayerStatModel {
       required this.playerHealth,
       required this.playerDamage,
       required this.playerDefense,
-      required this.playerExp});
+      required this.playerExp,
+      required this.skillUpPoints,});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -25,6 +27,7 @@ class PlayerStatModel {
       'playerDamage': playerDamage,
       'playerDefense': playerDefense,
       'playerExp': playerExp,
+      'skillUpPoints': skillUpPoints,
     };
   }
 
@@ -37,6 +40,7 @@ class PlayerStatModel {
       playerDamage: map['playerDamage'] as int,
       playerDefense: map['playerDefense'] as int,
       playerExp: map['playerExp'] as int,
+      skillUpPoints: map['skillUpPoints'] as int,
     );
   }
 }

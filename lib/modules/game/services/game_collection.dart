@@ -12,6 +12,7 @@ class GameDB {
     required playerDamage,
     required playerDefense,
     required playerExp,
+    required skillUpPoints,
   }) async {
     final collection = firestore
         .collection('Users')
@@ -28,6 +29,7 @@ class GameDB {
       playerDamage: playerDamage,
       playerDefense: playerDefense,
       playerExp: playerExp,
+      skillUpPoints: skillUpPoints,
     );
     await collection.set(playerModel.toMap());
   }
