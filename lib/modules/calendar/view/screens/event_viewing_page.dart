@@ -45,19 +45,27 @@ class EventViewingPage extends StatelessWidget {
                   Text(
                     calendarModel.eventName,
                     style: (const TextStyle(
-                        fontSize: 24, fontWeight: FontWeight.bold)),
+                        color: Color(0xff1c1c1c),
+                        fontSize: 24,
+                        fontFamily: 'Poppins',
+                        fontWeight: FontWeight.bold)),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 10),
                   Text(calendarModel.eventDescription,
-                      style:
-                          const TextStyle(color: Colors.black, fontSize: 18)),
-                  const SizedBox(height: 16),
+                      style: const TextStyle(
+                          color: Color(0xff1c1c1c),
+                          fontFamily: 'Poppins',
+                          fontSize: 18)),
+                  const SizedBox(height: 20),
                   buildDateTime(calendarModel),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 20),
                   if (calendarModel.isAllDay)
                     const Text(
                       "Meeting is All Day",
-                      style: TextStyle(fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Color(0xff1c1c1c),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.bold),
                     ),
                 ])));
   }
@@ -69,6 +77,7 @@ class EventViewingPage extends StatelessWidget {
           calendarModel.isAllDay ? 'All-Day' : 'From',
           DateTime.parse(calendarModel.from),
         ),
+        const SizedBox(height: 10,),
         if (!calendarModel.isAllDay)
           buildDateTo('TO', DateTime.parse(calendarModel.to)),
       ],
@@ -80,10 +89,16 @@ class EventViewingPage extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              flex: 2,
-              child: Text(Utils.toDate(DateTime.parse(calendarModel.from)))),
+              flex: 5,
+              child: Text(
+                Utils.toDate(DateTime.parse(calendarModel.from)),
+                style: const TextStyle(fontFamily: 'Poppins'),
+              )),
           Expanded(
-              child: Text(Utils.toTime(DateTime.parse(calendarModel.from)))),
+              child: Text(
+            Utils.toTime(DateTime.parse(calendarModel.from)),
+            style: const TextStyle(fontFamily: 'Poppins'),
+          )),
         ],
       ));
 
@@ -91,9 +106,16 @@ class EventViewingPage extends StatelessWidget {
       header: 'TO',
       child: Row(children: [
         Expanded(
-            flex: 2,
-            child: Text(Utils.toDate(DateTime.parse(calendarModel.to)))),
-        Expanded(child: Text(Utils.toTime(DateTime.parse(calendarModel.to)))),
+            flex: 5,
+            child: Text(
+              Utils.toDate(DateTime.parse(calendarModel.to)),
+              style: const TextStyle(fontFamily: 'Poppins'),
+            )),
+        Expanded(
+            child: Text(
+          Utils.toTime(DateTime.parse(calendarModel.to)),
+          style: const TextStyle(fontFamily: 'Poppins'),
+        )),
       ]));
 
   Widget buildHeader({
@@ -105,7 +127,11 @@ class EventViewingPage extends StatelessWidget {
         children: [
           Text(
             header,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              color: Color(0xff1c1c1c),
+              fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold,
+            ),
           ),
           child,
         ],

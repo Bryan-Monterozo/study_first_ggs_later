@@ -27,6 +27,9 @@ class StudyCalendarState extends State<StudyCalendar> {
   CalendarView calendarView = CalendarView.month;
   MeetingDataSource? events;
   CalendarGetController calendarController = Get.put(CalendarGetController());
+  bool isPressedMonth = true;
+  bool isPressedWeek = false;
+  bool isPressedDay = false;
 
   @override
   void initState() {
@@ -47,87 +50,197 @@ class StudyCalendarState extends State<StudyCalendar> {
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: SharedAppBar(
-        titlePic: titlePic(context),
+        title: 'Calendar',
         withPic: withPic(context),
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const EventAddingPage()))),
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const EventAddingPage()))),
       body: GetBuilder<CalendarGetController>(
         init: CalendarGetController(),
         id: 'calendarView',
-        builder: (controller) => Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Calendar',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-                OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        calendarView = CalendarView.month;
-                        _controller.view = calendarView;
-                      });
-                    },
-                    child: const Text("Month View")),
-                OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        calendarView = CalendarView.week;
-                        _controller.view = calendarView;
-                      });
-                    },
-                    child: const Text("Week View")),
-                OutlinedButton(
-                    onPressed: () {
-                      setState(() {
-                        calendarView = CalendarView.day;
-                        _controller.view = calendarView;
-                      });
-                    },
-                    child: const Text("Day View"))
-              ],
-            ),
-            Expanded(
-              child: SfCalendar(
-                view: calendarView,
-                firstDayOfWeek: 7,
-                dataSource: events,
-                controller: _controller,
-                monthViewSettings: const MonthViewSettings(
-                    appointmentDisplayMode: MonthAppointmentDisplayMode.indicator,
-                    showAgenda: true),
-                initialSelectedDate: DateTime.now(),
-                onLongPress: (details) {
-                  final meeting = details.appointments!.first;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          EventViewingPage(calendarModel: meeting)));
-                },
-                todayHighlightColor: Colors.blue,
-                selectionDecoration: BoxDecoration(
-                  color: Colors.transparent,
-                  border: Border.all(color: Colors.green, width: 2),
-                  borderRadius: const BorderRadius.all(Radius.circular(4)),
-                  shape: BoxShape.rectangle,
-                ),
-                cellBorderColor: Colors.transparent,
-                showNavigationArrow: true,
+        builder: (controller) => Padding(
+          padding: const EdgeInsets.fromLTRB(24, 12, 24, 12),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: isPressedMonth
+                              ? const Color(0xFF0B6BA7)
+                              : Colors.transparent),
+                      onPressed: () {
+                        setState(() {
+                          isPressedMonth = true;
+                          isPressedWeek = false;
+                          isPressedDay = false;
+                          calendarView = CalendarView.month;
+                          _controller.view = calendarView;
+                        });
+                      },
+                      child: isPressedMonth
+                          ? const Text(
+                              "Month View",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          : const Text(
+                              "Month View",
+                              style: TextStyle(
+                                color: Color(0xFF0B6BA7),
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: isPressedWeek
+                              ? const Color(0xFF0B6BA7)
+                              : Colors.transparent),
+                      onPressed: () {
+                        setState(() {
+                          isPressedMonth = false;
+                          isPressedWeek = true;
+                          isPressedDay = false;
+                          calendarView = CalendarView.week;
+                          _controller.view = calendarView;
+                        });
+                      },
+                      child: isPressedWeek
+                          ? const Text(
+                              "Week View",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          : const Text(
+                              "Week View",
+                              style: TextStyle(
+                                color: Color(0xFF0B6BA7),
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )),
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          elevation: 0,
+                          backgroundColor: isPressedDay
+                              ? const Color(0xFF0B6BA7)
+                              : Colors.transparent),
+                      onPressed: () {
+                        setState(() {
+                          isPressedMonth = false;
+                          isPressedWeek = false;
+                          isPressedDay = true;
+                          calendarView = CalendarView.day;
+                          _controller.view = calendarView;
+                        });
+                      },
+                      child: isPressedDay
+                          ? const Text(
+                              "Day View",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )
+                          : const Text(
+                              "Day View",
+                              style: TextStyle(
+                                color: Color(0xFF0B6BA7),
+                                fontSize: 12,
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w700,
+                              ),
+                            )),
+                ],
               ),
-            )
-          ],
+              const SizedBox(height: 20),
+              Expanded(
+                child: SfCalendar(
+                  headerStyle: const CalendarHeaderStyle(
+                      textAlign: TextAlign.center,
+                      textStyle: TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          color: Color(0xff1c1c1c),
+                          fontWeight: FontWeight.w700)),
+                  todayTextStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  appointmentTextStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  blackoutDatesTextStyle: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontFamily: 'Poppins',
+                    fontWeight: FontWeight.w700,
+                  ),
+                  view: calendarView,
+                  firstDayOfWeek: 7,
+                  dataSource: events,
+                  controller: _controller,
+                  monthViewSettings: const MonthViewSettings(
+                      appointmentDisplayMode:
+                          MonthAppointmentDisplayMode.indicator,
+                      showAgenda: true,
+                      monthCellStyle: MonthCellStyle(
+                        textStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            color: Color(0xff1c1c1c)),
+                        trailingDatesTextStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            color: Color(0xffcecece)),
+                        leadingDatesTextStyle: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            color: Color(0xffcecece)),
+                      )),
+                  initialSelectedDate: DateTime.now(),
+                  onLongPress: (details) {
+                    final meeting = details.appointments!.first;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+                            EventViewingPage(calendarModel: meeting)));
+                  },
+                  todayHighlightColor: Colors.blue,
+                  selectionDecoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.green, width: 2),
+                    borderRadius: const BorderRadius.all(Radius.circular(4)),
+                    shape: BoxShape.rectangle,
+                  ),
+                  cellBorderColor: Colors.transparent,
+                  showNavigationArrow: true,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

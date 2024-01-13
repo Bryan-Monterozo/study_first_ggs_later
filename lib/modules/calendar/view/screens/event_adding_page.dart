@@ -26,13 +26,14 @@ class _EventAddingPageState extends State<EventAddingPage> {
   late DateTime fromDate;
   late DateTime toDate;
   late bool allDay = false;
-  final CalendarGetController calendarController = Get.put(CalendarGetController());
+  final CalendarGetController calendarController =
+      Get.put(CalendarGetController());
 
   @override
   void initState() {
     super.initState();
-      fromDate = DateTime.now();
-      toDate = DateTime.now().add(const Duration(hours: 2));
+    fromDate = DateTime.now();
+    toDate = DateTime.now().add(const Duration(hours: 2));
   }
 
   @override
@@ -50,7 +51,7 @@ class _EventAddingPageState extends State<EventAddingPage> {
           actions: buildEditingActions(),
         ),
         body: SingleChildScrollView(
-            padding: const EdgeInsets.all(12),
+            padding: const EdgeInsets.all(24),
             child: Form(
               key: _formKey,
               child: Column(
@@ -69,25 +70,39 @@ class _EventAddingPageState extends State<EventAddingPage> {
   }
 
   List<Widget> buildEditingActions() => [
-        ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            shadowColor: Colors.transparent,
+        Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: ElevatedButton.icon(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF0B6BA7),
+              shadowColor: Colors.transparent,
+            ),
+            onPressed: () {
+              saveForm();
+            },
+            icon: const Icon(
+              Icons.done,
+              color: Colors.white,
+            ),
+            label: const Text(
+              "Save",
+              style: TextStyle(color: Colors.white, fontFamily: 'Poppins'),
+            ),
           ),
-          onPressed: () {
-            saveForm();
-          },
-          icon: const Icon(Icons.done),
-          label: const Text("Save"),
         )
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontSize: 24),
+        style: const TextStyle(fontFamily: 'Poppins', fontSize: 24),
         decoration: const InputDecoration(
-          border: UnderlineInputBorder(),
+          border: InputBorder.none,
+          counterStyle: TextStyle(
+            height: double.minPositive,
+          ),
+          counterText: "",
           hintText: 'Add Title',
         ),
+        maxLength: 30,
         validator: (title) =>
             title != null && title.isEmpty ? 'Title cannot be empty' : null,
         controller: titleController,
@@ -96,14 +111,21 @@ class _EventAddingPageState extends State<EventAddingPage> {
   Widget buildDateTimePickers() => Column(
         children: [
           buildFrom(),
+          const SizedBox(
+            height: 20,
+          ),
           buildTo(),
         ],
       );
 
   Widget buildAllDay() => Row(children: [
-        const Text('Is the Meeting All Day?'),
+        const Text(
+          'Is the Meeting All Day?',
+          style: TextStyle(fontFamily: 'Poppins'),
+        ),
         Checkbox(
             value: allDay,
+            activeColor: const Color(0xFF0B6BA7),
             onChanged: (bool? value) {
               setState(() {
                 allDay = value!;
@@ -112,15 +134,16 @@ class _EventAddingPageState extends State<EventAddingPage> {
       ]);
 
   Widget buildDescription() => TextFormField(
-        style: const TextStyle(fontSize: 16),
+        style: const TextStyle(
+            color: Color(0xff1c1c1c), fontFamily: 'Poppins', fontSize: 16),
         decoration: InputDecoration(
           hintText: 'Add Description',
           enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(width: 1, color: Colors.black),
-              borderRadius: BorderRadius.circular(3)),
+              borderSide: const BorderSide(width: 1, color: Color(0xffcecece)),
+              borderRadius: BorderRadius.circular(12)),
           focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(width: 1, color: Colors.black),
-              borderRadius: BorderRadius.circular(3)),
+              borderSide: const BorderSide(width: 1, color: Color(0xffcecece)),
+              borderRadius: BorderRadius.circular(12)),
         ),
         controller: descriptionController,
         maxLines: null,
@@ -137,10 +160,11 @@ class _EventAddingPageState extends State<EventAddingPage> {
                 onClicked: () => pickFromDateTime(pickDate: true),
               )),
           Expanded(
+              flex: 2,
               child: buildDropDownField(
-            text: Utils.toTime(fromDate),
-            onClicked: () => pickFromDateTime(pickDate: false),
-          )),
+                text: Utils.toTime(fromDate),
+                onClicked: () => pickFromDateTime(pickDate: false),
+              )),
         ],
       ));
 
@@ -155,10 +179,11 @@ class _EventAddingPageState extends State<EventAddingPage> {
                 onClicked: () => pickToDateTime(pickDate: true),
               )),
           Expanded(
+              flex: 2,
               child: buildDropDownField(
-            text: Utils.toTime(toDate),
-            onClicked: () => pickToDateTime(pickDate: false),
-          )),
+                text: Utils.toTime(toDate),
+                onClicked: () => pickToDateTime(pickDate: false),
+              )),
         ],
       ));
 
@@ -225,8 +250,8 @@ class _EventAddingPageState extends State<EventAddingPage> {
     required VoidCallback onClicked,
   }) =>
       ListTile(
-        title: Text(text),
-        trailing: const Icon(Icons.arrow_drop_down),
+        title: Text(text,style: const TextStyle(fontFamily: 'Poppins'),),
+        trailing: const Icon(Icons.arrow_drop_down_rounded),
         onTap: onClicked,
       );
 
@@ -239,7 +264,8 @@ class _EventAddingPageState extends State<EventAddingPage> {
         children: [
           Text(
             header,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontFamily: 'Poppins',
+              fontWeight: FontWeight.bold),
           ),
           child,
         ],
