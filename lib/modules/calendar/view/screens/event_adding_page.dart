@@ -93,7 +93,7 @@ class _EventAddingPageState extends State<EventAddingPage> {
       ];
 
   Widget buildTitle() => TextFormField(
-        style: const TextStyle(fontFamily: 'Poppins', fontSize: 24),
+        style: const TextStyle(fontFamily: 'Poppins', fontSize: 24, fontWeight: FontWeight.bold),
         decoration: const InputDecoration(
           border: InputBorder.none,
           counterStyle: TextStyle(
