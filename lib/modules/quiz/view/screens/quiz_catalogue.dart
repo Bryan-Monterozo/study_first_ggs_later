@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:get/get.dart';
-
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
+import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_create.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_tiles.dart';
@@ -21,6 +23,8 @@ class QuizCatalogue extends StatelessWidget {
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final ref = FirebaseFirestore.instance.collection('Users').doc(uid).collection('Quiz');
+    // ignore: unused_local_variable
+    final quizController = Get.put(QuizController());
 
     return Scaffold(
       extendBodyBehindAppBar: true,

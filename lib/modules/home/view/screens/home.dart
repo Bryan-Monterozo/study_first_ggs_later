@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_home_play.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
@@ -13,30 +14,23 @@ import 'package:study_first_ggs_later/modules/shared/home_app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 import 'package:study_first_ggs_later/modules/todo/view/screens/todo.dart';
 
-class StudyHome extends StatefulWidget {
+class StudyHome extends StatelessWidget {
   static const String routeName = '/';
   const StudyHome({super.key});
 
   @override
-  State<StudyHome> createState() => _HomeState();
-}
-
-class _HomeState extends State<StudyHome> {
-  NavController navController = Get.put(NavController());
-
-  @override
-  void initState() {
+  Widget build(BuildContext context) {
+    NavController navController = Get.put(NavController());
     navController.initNav(
       currentRoute: CurrentRoute.home,
     );
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
+    Get.delete<PlayerController>();
+    Get.delete<BattleController>();
+    Get.put(PlayerController());
+    Get.put(BattleController());
     return Scaffold(
       drawer: const NavDrawer(),
-      appBar:  HomeAppBar(
+      appBar: HomeAppBar(
         leading: leadingTitle(context),
         title: "",
         withPic: withHPic(context),

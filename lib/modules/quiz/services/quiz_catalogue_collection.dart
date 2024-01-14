@@ -9,7 +9,7 @@ class QuizCatDB {
   final uid = FirebaseAuth.instance.currentUser!.uid;
   RxString quizId = ''.obs;
 
-  void addQuizToDB({
+  addQuizToDB({
     required quizTitle,
     required quizDesc,
   }) async {
@@ -143,6 +143,8 @@ class QuizCatDB {
       'option4': option4,
     });
   }
+
+  premadeQuizName(int i) {}
 
   // retrieveOptions({required quizId, required questionId}) async {
   //   final optionsRef = firestore

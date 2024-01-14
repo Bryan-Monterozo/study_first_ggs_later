@@ -1,9 +1,12 @@
 // import 'package:flutter/material.dart';
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
+import 'package:study_first_ggs_later/modules/quiz/model/quiz_premade.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_result.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
@@ -11,8 +14,11 @@ import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_result.dart
 
 class QuizController extends GetxController {
   QuizCatDB quizCatDB = QuizCatDB();
+  PremadeQuiz premade = PremadeQuiz();
   final quizFormKey = GlobalKey<FormState>();
   final quizFormKeyTop = GlobalKey<FormState>();
+  final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   TextEditingController questionController = TextEditingController();
   TextEditingController option1Controller = TextEditingController();
@@ -66,6 +72,40 @@ class QuizController extends GetxController {
     option4Controller.dispose();
     Get.delete<QuizController>();
     super.onClose();
+  }
+
+  premadeQuestion() async {
+    print('premadeQuestion');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getBool('quizLoaded') == null) {
+      final ref =
+          await firestore.collection('Users').doc(uid).collection('Quiz').get();
+      await prefs.setBool('quizLoaded', true);
+      // if (ref.docs.isEmpty) {
+      for (int i = 1; i <= 3; i++) {
+        quizCatDB
+            .addQuizToDB(
+                quizTitle: premade.premadeQuizName(i),
+                quizDesc: premade.premadeQuizDesc(i))
+            .then((value) {
+          String id = prefs.getString('quizId')!;
+          print('premadeQuizName: ${premade.premadeQuizName(i)}');
+          print('premadeQuizDesc: ${premade.premadeQuizDesc(i)}');
+          for (int j = 1; j <= 3; j++) {
+            quizCatDB.addQuestionToQuiz(
+                question: premade.premadeQuestion(j),
+                option1: premade.premadeOptions(j)[0],
+                option2: premade.premadeOptions(j)[1],
+                option3: premade.premadeOptions(j)[2],
+                option4: premade.premadeOptions(j)[3],
+                quizId: id);
+            print('premadeQuestion: ${premade.premadeQuestion(j)}');
+            print('premadeOptions: ${premade.premadeOptions(j)}');
+          }
+        });
+      }
+      // }
+    }
   }
 
   questionValidation() async {

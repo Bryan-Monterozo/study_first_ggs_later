@@ -157,7 +157,7 @@ class _StudyCalendarState extends State<StudyCalendar> {
               // DateFormat('dd/MM/yyyy HH:mm:ss').format(DateTime.parse(e.data()['from'])),
               to: DateFormat('dd-MM-yyyy HH:mm:ss').parse(e.data()['to']),
               // DateFormat('dd/MM/yyyy HH:mm:ss').format(DateTime.parse(e.data()['to'])),
-              // background: _colorCollection[random.nextInt(9)],
+              background: Colors.red,
               isAllDay: e.data()['isAllDay'],
             ))
         .toList();

@@ -1,14 +1,16 @@
 
+import 'package:flutter/material.dart';
+
 class CalendarModel {
 
   final String eventName;
   final String eventDescription;
   final String from;
   final String to;
-  // final Color background;
+  Color background;
   final bool isAllDay;
 
-  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay});
+  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay, this.background = Colors.red});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{

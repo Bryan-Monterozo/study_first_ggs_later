@@ -6,6 +6,7 @@ class PlayerStatModel {
   int playerDamage;
   int playerDefense;
   int playerExp;
+  int nextLevelExp;
   int skillUpPoints;
 
   PlayerStatModel(
@@ -16,6 +17,7 @@ class PlayerStatModel {
       required this.playerDamage,
       required this.playerDefense,
       required this.playerExp,
+      required this.nextLevelExp,
       required this.skillUpPoints,});
 
   Map<String, dynamic> toMap() {
@@ -27,6 +29,7 @@ class PlayerStatModel {
       'playerDamage': playerDamage,
       'playerDefense': playerDefense,
       'playerExp': playerExp,
+      'nextLevelExp': nextLevelExp,
       'skillUpPoints': skillUpPoints,
     };
   }
@@ -40,6 +43,7 @@ class PlayerStatModel {
       playerDamage: map['playerDamage'] as int,
       playerDefense: map['playerDefense'] as int,
       playerExp: map['playerExp'] as int,
+      nextLevelExp: map['nextLevelExp'] as int,
       skillUpPoints: map['skillUpPoints'] as int,
     );
   }
