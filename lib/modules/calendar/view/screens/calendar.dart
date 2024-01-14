@@ -203,6 +203,8 @@ class StudyCalendarState extends State<StudyCalendar> {
                   firstDayOfWeek: 7,
                   dataSource: events,
                   controller: _controller,
+                  timeSlotViewSettings: const TimeSlotViewSettings(
+                      timeTextStyle: TextStyle(fontFamily: 'Poppins')),
                   monthViewSettings: const MonthViewSettings(
                       appointmentDisplayMode:
                           MonthAppointmentDisplayMode.indicator,
@@ -220,7 +222,7 @@ class StudyCalendarState extends State<StudyCalendar> {
                             fontWeight: FontWeight.w300,
                             color: Color(0xff1c1c1c)),
                         dayTextStyle: TextStyle(
-                          fontFamily: 'Poppins',
+                            fontFamily: 'Poppins',
                             fontStyle: FontStyle.normal,
                             fontSize: 20,
                             fontWeight: FontWeight.w700,
@@ -255,7 +257,7 @@ class StudyCalendarState extends State<StudyCalendar> {
                     shape: BoxShape.rectangle,
                   ),
                   cellBorderColor: Colors.transparent,
-                  showNavigationArrow: true,
+                  showNavigationArrow: false,
                 ),
               )
             ],
