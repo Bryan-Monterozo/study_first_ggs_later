@@ -1,14 +1,16 @@
+import 'dart:ui';
+
 class CalendarModel {
 
   final String eventName;
   final String eventDescription;
   final String from;
   final String to;
-  // final Color background;
+  final Color background;
   final bool isAllDay;
   final String eventID;
 
-  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay, required this.eventID});
+  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay, required this.eventID, this.background = const Color(0xFF0B6BA7)});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -16,7 +18,7 @@ class CalendarModel {
       'eventDescription': eventDescription,
       'from': from,
       'to': to,
-      // 'background': background,
+      'background': background,
       'isAllDay': isAllDay,
       'eventID': eventID,
     };
@@ -30,7 +32,7 @@ class CalendarModel {
       map['from'] as String,
       to: 
       map['to'] as String,
-      // background: Colors.red,
+      background: const Color(0xFF0B6BA7),
       isAllDay: map['isAllDay'] as bool,
       eventID: map['eventID'] as String,
     );
