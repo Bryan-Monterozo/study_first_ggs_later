@@ -28,12 +28,15 @@ class EventViewingPage extends StatelessWidget {
                   builder: (context) =>
                       EventEditingPage(calendarModel: calendarModel))),
             ),
-            IconButton(
-              icon: const Icon(Icons.delete),
-              onPressed: () {
-                CalendarDB().deleteEventToDB(eventID: calendarModel.eventID);
-                Navigator.of(context).pop();
-              },
+            Padding(
+              padding: const EdgeInsets.only(right: 12),
+              child: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  CalendarDB().deleteEventToDB(eventID: calendarModel.eventID);
+                  Navigator.of(context).pop();
+                },
+              ),
             ),
           ],
         ),
@@ -77,7 +80,9 @@ class EventViewingPage extends StatelessWidget {
           calendarModel.isAllDay ? 'All-Day' : 'From',
           DateTime.parse(calendarModel.from),
         ),
-        const SizedBox(height: 10,),
+        const SizedBox(
+          height: 10,
+        ),
         if (!calendarModel.isAllDay)
           buildDateTo('TO', DateTime.parse(calendarModel.to)),
       ],
