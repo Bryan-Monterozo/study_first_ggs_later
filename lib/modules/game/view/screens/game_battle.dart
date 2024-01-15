@@ -1,7 +1,9 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_sprite.dart';
 
 class GameBattlePage extends StatelessWidget {
   const GameBattlePage({super.key});
@@ -103,12 +105,14 @@ class GameBattlePage extends StatelessWidget {
                             //         return Text('HP: ${Get.find<EnemyController>().enemyHealth}');
                             //       }),
                             // ),
-                            Obx(
-                              () => Align(
-                                alignment: Alignment.center,
-                                child: Text(enemyController.enemyName.value),
-                              ),
+                            // Obx(
+                            //   () =>
+                            Align(
+                              alignment: Alignment.center,
+                              child: Expanded(
+                                  child: GameWidget(game: EnemySprite())),
                             ),
+                            // ),
                             Obx(
                               () => Align(
                                 alignment: Alignment.bottomCenter,

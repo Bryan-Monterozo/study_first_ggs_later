@@ -36,7 +36,7 @@ class PlayerEquipController extends GetxController {
       if (ref.exists) {
         await prefs.setBool('hasEquip', false);
         initEquipment();
-        prefs.setInt('totalBattlePoints', 0);
+        // prefs.setInt('totalBattlePoints', 0);
       } else {
         await createNewPlayerEquip();
         initEquipment();
@@ -130,6 +130,7 @@ class PlayerEquipController extends GetxController {
         await prefs.setInt('106', 2);
         prefs.setInt('equipHealth', 10);
         leatherTunic.value = prefs.getInt('106')!;
+        await prefs.setInt('playerTotalHealth', prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!);
         break;
       case 7:
         await prefs.setInt('107', 2);

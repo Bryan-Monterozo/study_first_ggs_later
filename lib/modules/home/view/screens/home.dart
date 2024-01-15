@@ -24,10 +24,10 @@ class StudyHome extends StatelessWidget {
     navController.initNav(
       currentRoute: CurrentRoute.home,
     );
-    Get.delete<PlayerController>();
-    Get.delete<BattleController>();
-    Get.put(PlayerController());
-    Get.put(BattleController());
+    // Get.delete<PlayerController>();
+    // Get.delete<BattleController>();
+    // Get.put(PlayerController());
+    // Get.put(BattleController());
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: HomeAppBar(

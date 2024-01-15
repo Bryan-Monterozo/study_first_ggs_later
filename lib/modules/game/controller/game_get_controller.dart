@@ -221,7 +221,6 @@ class EnemyController extends GetxController {
           (prefs.getInt('playerExp')! + prefs.getInt('enemyExp')! + 50));
       prefs.setBool('isEnemySpawned', false);
       deadEnemy();
-      Get.find<PlayerController>().nextLevel();
       // await prefs.setBool('isEnemySpawned', false);
       // spawnEnemy();
     }
@@ -231,6 +230,7 @@ class EnemyController extends GetxController {
   deadEnemy() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     enemyName.value = prefs.getString('enemyName')!;
+    Get.find<PlayerController>().nextLevel();
     Get.defaultDialog(
       title: 'You Won!',
       middleText: 'You have defeated the $enemyName',
@@ -360,8 +360,6 @@ class PlayerController extends GetxController {
     equipHealth.value = prefs.getInt('equipHealth')!;
     equipDamage.value = prefs.getInt('equipDamage')!;
     equipDefense.value = prefs.getInt('equipDefense')!;
-    await prefs.setInt(
-        'playerTotalHealth', (equipHealth.value + playerHealth.value));
     playerTotalHealth.value = prefs.getInt('playerTotalHealth')!;
 
     // update(['playerName', 'playerHealth']);
@@ -373,8 +371,6 @@ class PlayerController extends GetxController {
     print('Player Defense: $playerDefense');
     print('Player Exp: $playerExp');
     print('Skill Up Points: $skillUpPoints');
-
-    nextLevel();
   }
 
   fetchPlayerFromDB() async {
@@ -419,6 +415,8 @@ class PlayerController extends GetxController {
     await prefs.setInt('equipHealth', 0);
     await prefs.setInt('equipDamage', 0);
     await prefs.setInt('equipDefense', 0);
+    await prefs.setInt(
+        'playerTotalHealth', (prefs.getInt('equipHealth')! + prefs.getInt('playerHealth')!));
 
     // print('Player Name: $playerName');
     // print('Player Level: $playerLevel');
@@ -475,12 +473,13 @@ class PlayerController extends GetxController {
       for (var i = 1; i <= 4; i++) {
         if (playerlvl == i) {
           if (playerxp >= nextLvlXp) {
-            levelUp();
+            await levelUp();
+            playerxp = prefs.getInt('playerExp')!;
+            nextLvlXp = prefs.getInt('nextLevelExp')!;
+            // break;
           } else {
             break;
           }
-        } else {
-          break;
         }
       }
     }
@@ -490,7 +489,10 @@ class PlayerController extends GetxController {
           // int nextLvlXp = (prefs.getInt('nextLevelExp')! * 3);
           // await prefs.setInt('nextLevelExp', nextLvlXp);
           if (playerxp >= nextLvlXp) {
-            levelUp();
+            await levelUp();
+            playerxp = prefs.getInt('playerExp')!;
+            nextLvlXp = prefs.getInt('nextLevelExp')!;
+            // break;
           } else {
             break;
           }
@@ -507,11 +509,12 @@ class PlayerController extends GetxController {
   levelUp() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int playerlvl = prefs.getInt('playerLevel')!;
-    int skillpts = prefs.getInt('skillUpPoints')!;
+    // int skillpts = prefs.getInt('skillUpPoints')!;
     if (playerlvl < 5) {
       for (var i = 1; i <= 4; i++) {
         if (playerlvl == i) {
-          await prefs.setInt('playerLevel', playerlvl++);
+          await prefs.setInt('playerLevel', prefs.getInt('playerLevel')! + 1);
+          // playerlvl = prefs.getInt('playerLevel')!;
           await prefs.setInt(
               'skillUpPoints', prefs.getInt('skillUpPoints')! + 3);
           int nextLvlXp = (prefs.getInt('nextLevelExp')! * 2);
@@ -519,13 +522,12 @@ class PlayerController extends GetxController {
           await prefs.setInt('nextLevelExp', nextLvlXp);
           // playerLevel.value = prefs.getInt('playerLevel')!;
           // skillUpPoints.value = skillpts;
-        } else {
-          break;
         }
       }
     }
     if (playerlvl == 5) {
       prefs.setInt('playerLevel', 6);
+      playerlvl = prefs.getInt('playerLevel')!;
       prefs.setInt('skillUpPoints', prefs.getInt('skillUpPoints')! + 5);
       int nextLvlXp = (prefs.getInt('nextLevelExp')! * 3);
       nextLevelExp.value = nextLvlXp;
@@ -537,6 +539,7 @@ class PlayerController extends GetxController {
       for (var i = 6; i <= 9; i++) {
         if (playerlvl == i) {
           prefs.setInt('playerLevel', playerlvl++);
+          playerlvl = prefs.getInt('playerLevel')!;
           prefs.setInt('skillUpPoints', prefs.getInt('skillUpPoints')! + 3);
           int nextLvlXp = (prefs.getInt('nextLevelExp')! * 3);
           nextLevelExp.value = nextLvlXp;

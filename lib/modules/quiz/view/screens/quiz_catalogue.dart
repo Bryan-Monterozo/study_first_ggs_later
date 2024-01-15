@@ -25,6 +25,7 @@ class QuizCatalogue extends StatelessWidget {
     final ref = FirebaseFirestore.instance.collection('Users').doc(uid).collection('Quiz');
     // ignore: unused_local_variable
     final quizController = Get.put(QuizController());
+    // QuizController().premadeQuestion();
 
     return Scaffold(
       extendBodyBehindAppBar: true,

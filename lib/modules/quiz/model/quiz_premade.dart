@@ -1,7 +1,3 @@
-import 'dart:js_util';
-
-import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
-
 class PremadeQuiz {
   premadeQuizName(int x) {
     switch (x) {
@@ -31,11 +27,11 @@ class PremadeQuiz {
 
   premadeQuestion(int x) {
     switch (x) {
-      case 1:
+      case 101:
         return 'Johnny Bee offered a 25% discount on all its food items.';
-      case 2:
+      case 102:
         return 'Decreasing a number by 40% and then decreasing the result by 30%';
-      case 3:
+      case 103:
         return 'Suppose that 48 workers can build a tower in 60 days.';
       default:
         return 'Question';
@@ -44,21 +40,21 @@ class PremadeQuiz {
 
   premadeOptions(int x) {
     switch (x) {
-      case 1:
+      case 101:
         return [
           '140.00',
           '120.00',
           '150.00',
           '175.00',
         ];
-      case 2:
+      case 102:
         return [
           '140.00',
           '120.00',
           '150.00',
           '175.00',
         ];
-      case 3:
+      case 103:
         return [
           '140.00',
           '120.00',
