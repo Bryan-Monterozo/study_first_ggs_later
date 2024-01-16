@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play.dart';
-// import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play_v2.dart';
+import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_play_v2.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_show_questions.dart';
 
 class QuizDialogWidget extends StatelessWidget {
@@ -92,7 +92,7 @@ class QuizDialogWidget extends StatelessWidget {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Get.off(QuizPlay(
+                        Get.off(QuizPlayv2(
                             quizModel: quizModel, quizId: quizModel.quizId));
                       },
                       child: const Text('Play'),

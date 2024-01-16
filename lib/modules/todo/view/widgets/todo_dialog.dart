@@ -68,6 +68,7 @@ class ToDoDialogWidget extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                         Get.back();
+                        todoController.editTitleController.clear();
                       },
                       child: const Text('Cancel'),
                     ),

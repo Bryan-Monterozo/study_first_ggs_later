@@ -4,12 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
-import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/quiz/controller/quiz_get_controller.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_create.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class QuizCatalogue extends StatelessWidget {
@@ -22,10 +23,18 @@ class QuizCatalogue extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final uid = FirebaseAuth.instance.currentUser!.uid;
-    final ref = FirebaseFirestore.instance.collection('Users').doc(uid).collection('Quiz');
+    final ref = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .collection('Quiz');
     // ignore: unused_local_variable
     final quizController = Get.put(QuizController());
     // QuizController().premadeQuestion();
+    Get.delete<NavController>();
+    NavController navController = Get.put(NavController());
+    navController.initNav(
+      currentRoute: CurrentRoute.quiz,
+    );
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -94,9 +103,10 @@ class QuizCatalogue extends StatelessWidget {
             left: 0,
             right: 0,
             child: MediaQuery.removePadding(
-              context: context, removeTop: true,
+              context: context,
+              removeTop: true,
               child: Container(
-                height: 600,
+                height: MediaQuery.of(context).size.height - 200,
                 width: 300,
                 decoration: const BoxDecoration(
                     color: Color(0xffB388FF),

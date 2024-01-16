@@ -30,7 +30,7 @@ class Login extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                       const Image(
-                          image: AssetImage('assets/images/Rectangle1.png'),
+                          image: NetworkImage('assets/images/Rectangle1.png'),
                           width: 500.0,
                           height: 300.0),
                       const Text(
