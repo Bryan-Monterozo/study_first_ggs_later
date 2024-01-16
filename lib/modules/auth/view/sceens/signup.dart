@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/modules/auth/controller/auth_get_controller.dart';
@@ -36,11 +38,17 @@ class SignUp extends StatelessWidget {
                             TextFormField(
                               decoration: const InputDecoration(
                                 label: Text('Username'),
-                                hintText: 'This will be your character name',
+                                hintText: 'Username',
                                 prefixIcon: Icon(Icons.person),
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.usernameController,
+                              validator: (usernameSignUp){
+                                if(usernameSignUp == null || usernameSignUp.isEmpty){
+                                      return "Enter username";
+                                    }
+                                    return null;
+                              }
                             ),
                             const SizedBox(height: 30),
                             TextFormField(
@@ -50,6 +58,12 @@ class SignUp extends StatelessWidget {
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.emailController,
+                              validator: (emailSignUp){
+                                if(emailSignUp == null || emailSignUp.isEmpty){
+                                      return "Enter email";
+                                    }
+                                    return null;
+                              }
                             ),
                             const SizedBox(height: 30),
                             TextFormField(
@@ -59,6 +73,12 @@ class SignUp extends StatelessWidget {
                                 border: OutlineInputBorder(),
                               ),
                               controller: authController.passwordController,
+                              validator: (passwordSignUp){
+                                if(passwordSignUp == null || passwordSignUp.isEmpty){
+                                      return "Enter password";
+                                    }
+                                    return null;
+                              },
                               obscureText: true,
                             ),
                             const SizedBox(
@@ -85,14 +105,22 @@ class SignUp extends StatelessWidget {
                                 icon: const Icon(Icons.public),
                                 label: const Text('Sign Up with Google'),
                               )),
-                          TextButton(
-                              onPressed: () {
-                                Get.off(const Login());
-                              },
-                              child: const Text.rich(TextSpan(children: [
-                                TextSpan(text: 'Already have an account?'),
-                                TextSpan(text: ' Log In')
-                              ])))
+                          Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text('Already have an account?'),
+                                    TextButton(
+                                      onPressed: () {
+                                        Get.off(const Login());
+                                      },
+                                      child: Text(
+                                        'Login here!',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                         ]),
                       ],
                     ),

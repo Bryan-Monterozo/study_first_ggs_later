@@ -7,11 +7,15 @@ import 'package:study_first_ggs_later/modules/auth/services/auth_collection.dart
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 
 class AuthController extends GetxController {
+  // Keys
+  final authFormField = GlobalKey<FormState>();
+
   // Methods
   UserAuth userAuth = UserAuth();
 
   // Variables
   bool isLoading = false;
+  bool togglePassword = true;
 
   // Text Editing Controllers
   TextEditingController usernameController = TextEditingController();
@@ -58,6 +62,7 @@ class AuthController extends GetxController {
   // Make this into a Validation look into todo_get_controller.dart
   void createNewUser() async {
     // final user = FirebaseAuth.instance.currentUser;
+    // isLoading = true;
     await userAuth
         .signUp(
             email: authEmail, password: authPassword, userName: authUsername)
@@ -68,30 +73,58 @@ class AuthController extends GetxController {
       }
     });
   }
+
   void adminLogin() async {
+    isLoading = true;
+    update(['loading']);
     await userAuth
         .login(email: 'admin@gmail.com', password: 'adminpass')
         .then((value) async {
       if (value != null) {
         isLoading = false;
+        update(['loading']);
         Get.off(const StudyHome());
       } else {
         isLoading = false;
+        update(['loading']);
         Get.snackbar('Login', 'Something went wrong');
       }
     });
   }
+
   void userLogin() async {
+    isLoading = true;
+    update(['loading']);
     await userAuth
-        .login(email: 'admin@gmail.com', password: 'adminpass')
+        .login(email: authEmail, password: authPassword)
         .then((value) async {
       if (value != null) {
         isLoading = false;
+        update(['loading']);
         Get.off(const StudyHome());
       } else {
         isLoading = false;
+        update(['loading']);
         Get.snackbar('Login', 'Something went wrong');
       }
     });
+  }
+
+  void addUserValidation() async {
+    final isValid = authFormField.currentState!.validate();
+    if (isValid) {
+      userLogin();
+    } else {
+      Get.snackbar(
+        'Login',
+        'Please enter an email and password',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
+
+  void togglePasswordVisibility() {
+    togglePassword = !togglePassword;
+    update(['password']);
   }
 }

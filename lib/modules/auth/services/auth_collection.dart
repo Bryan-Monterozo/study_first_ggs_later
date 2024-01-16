@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 
 class UserAuth {
@@ -16,10 +17,19 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
+        userNotFound();
         return null;
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
+        wrongCredentials();
         return null;
+      } else if (e.code == 'invalid-email') {
+        print('The email address is badly formatted.');
+        wrongCredentials();
+        return null;
+      } else{
+        print('Something went wrong.');
+        loginLastException();
       }
     }
   }
@@ -40,13 +50,20 @@ class UserAuth {
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
+        weakPassword();
         return null;
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+        usedEmail();
+        return null;
+      } else if (e.code == 'invalid-email') {
+        print('The email address is badly formatted.');
+        invalidEmailFormat();
         return null;
       }
     } catch (e) {
-      print(e);
+      print('Something went wrong');
+      signUpLastException();
       return null;
     }
   }
@@ -72,4 +89,65 @@ class UserAuth {
       'userId': userId,
     });
   }
+
+
+//snackbar exceptions
+
+  void wrongCredentials(){
+    Get.snackbar(
+        'Login',
+        'Invalid Credentials',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+   void userNotFound(){
+    Get.snackbar(
+        'Login',
+        'User not found',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void weakPassword(){
+    Get.snackbar(
+        'Sign Up',
+        'Weak Password',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void usedEmail(){
+    Get.snackbar(
+        'Sign Up',
+        'Email address is already in use',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+   void invalidEmailFormat(){
+    Get.snackbar(
+        'Sign Up',
+        'Invalid email address',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void signUpLastException(){
+    Get.snackbar(
+        'Sign Up',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+  void loginLastException(){
+    Get.snackbar(
+        'Login',
+        'Something went wrong. Please try again later.',
+        snackPosition: SnackPosition.BOTTOM,
+      );
+  }
+
+
 }
