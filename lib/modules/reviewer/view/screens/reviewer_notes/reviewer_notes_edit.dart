@@ -67,9 +67,7 @@ class _ReviewerEditNoteState extends State<ReviewerEditNote> {
                 content: content.text,
                 noteId: widget.noteId,
               );
-              Navigator.of(context)
-                ..pop()
-                ..pop();
+              Get.close(2);
             },
           ),
         ],

@@ -77,7 +77,7 @@ class _ReviewerFcEditCardState extends State<ReviewerFcEditCard> {
                 deckId: widget.deckId,
                 cardId: widget.cardModel.cardId,
               );
-              Navigator.of(context)..pop()..pop();
+              Get.close(2);
               // Navigator.po(
               //     context,
               //     MaterialPageRoute(
