@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class FlashCardButtonWidget extends StatelessWidget {
   final String? flashCardButtonText;
@@ -59,14 +61,10 @@ class FlashCardButtonGesture extends StatelessWidget {
     return GestureDetector(
       onTap: flashCardButtonNavigator != null
           ? () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => flashCardButtonNavigator!,
-                ),
-              );
+              Get.to(flashCardButtonNavigator!,
+        );
             }
-          : () => Navigator.pop(context),
+          : () => Get.back(),
       child: flashCardButtonContainer,
     );
   }

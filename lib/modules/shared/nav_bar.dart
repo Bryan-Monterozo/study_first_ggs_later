@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/core/icons/custom_game_icons.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
+import 'package:study_first_ggs_later/modules/game/view/screens/game_home_play.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_catalogue.dart';
@@ -99,6 +101,60 @@ class NavDrawer extends StatelessWidget {
                                         )
                                       : const Icon(
                                           Icons.home_filled,
+                                          color: Color(0xffbcbcbc),
+                                          size: 20,
+                                        ),
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.home
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Obx(
+                            () => Padding(
+                              padding:
+                                  const EdgeInsetsDirectional.fromSTEB(0, 36, 0, 0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const GameHomePlay(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.game
+                                      ? const Text(
+                                          'Game',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'Game',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.home
+                                      ? const Icon(
+                                          CustomGameIcons.sword_cross,
+                                          color: Color(0xFF0B6BA7),
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          CustomGameIcons.sword_cross,
                                           color: Color(0xffbcbcbc),
                                           size: 20,
                                         ),

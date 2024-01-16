@@ -40,6 +40,7 @@ class QuizController extends GetxController {
   void onInit() async {
     super.onInit();
     premadeQuestion();
+    premadeQuestion();
     hasQuestionField.value = false;
     questionController = TextEditingController(text: question.value);
     option1Controller = TextEditingController(text: option1.value);
@@ -76,37 +77,32 @@ class QuizController extends GetxController {
   }
 
   premadeQuestion() async {
-    print('premadeQuestion');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('quizLoaded') == true) {
       final ref =
           await firestore.collection('Users').doc(uid).collection('Quiz').get();
       await prefs.setBool('quizLoaded', true);
       if (ref.docs.isEmpty) {
-        for (int i = 1; i <= 3; i++) {
-          quizCatDB
-              .addQuizToDB(
-                  quizTitle: premade.premadeQuizName(i),
-                  quizDesc: premade.premadeQuizDesc(i))
-              .then((value) {
-            String id = prefs.getString('quizId')!;
-            print('premadeQuizName: ${premade.premadeQuizName(i)}');
-            print('premadeQuizDesc: ${premade.premadeQuizDesc(i)}');
-            for (int j = 1; j <= 3; j++) {
-              int x = i * 100;
-              quizCatDB.addQuestionToQuiz(
-                  question: premade.premadeQuestion(j + x),
-                  option1: premade.premadeOptions(j + x)[0],
-                  option2: premade.premadeOptions(j + x)[1],
-                  option3: premade.premadeOptions(j + x)[2],
-                  option4: premade.premadeOptions(j + x)[3],
-                  quizId: id);
-              print('premadeQuestion: ${premade.premadeQuestion(j + x)}');
-              print('premadeOptions: ${premade.premadeOptions(j + x)}');
-            }
-          });
-        }
+      for (int i = 1; i <= 3; i++) {
+        quizCatDB
+            .addQuizToDB(
+                quizTitle: premade.premadeQuizName(i),
+                quizDesc: premade.premadeQuizDesc(i))
+            .then((value) {
+          String id = prefs.getString('quizId')!;
+          for (int j = 1; j <= 15; j++) {
+            int x = i * 100;
+            quizCatDB.addQuestionToQuiz(
+                question: premade.premadeQuestion(j + x),
+                option1: premade.premadeOptions(j + x)[0],
+                option2: premade.premadeOptions(j + x)[1],
+                option3: premade.premadeOptions(j + x)[2],
+                option4: premade.premadeOptions(j + x)[3],
+                quizId: id);
+          }
+        });
       }
+     }
     }
   }
 

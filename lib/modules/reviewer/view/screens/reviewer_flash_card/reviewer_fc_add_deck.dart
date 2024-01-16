@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
@@ -35,7 +37,7 @@ class _ReviewerAddDeckState extends State<ReviewerFcAddDeck> {
                   fontWeight: FontWeight.bold),
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
           IconButton(
@@ -44,10 +46,9 @@ class _ReviewerAddDeckState extends State<ReviewerFcAddDeck> {
             color: const Color(0xff1c1c1c),
             onPressed: () {
               ReviewerFcDB().addDeckToDB(
-                deckName: deckName,
-                deckDesc: deckDesc,
-              );
-              Navigator.pop(context);
+                deckName: deckName, 
+                deckDesc: deckDesc,);
+              Get.back();
             },
           ),
         ],

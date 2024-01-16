@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
@@ -29,13 +31,10 @@ class ReviewerShowNote extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerEditNote(
+              Get.to(ReviewerEditNote(
                             noteId: noteModel!.noteId,
                             noteModel: noteModel!,
-                          )));
+                          ));
             },
             icon: const Icon(Icons.edit_rounded),
             color: const Color(0xff1c1c1c),
@@ -43,7 +42,7 @@ class ReviewerShowNote extends StatelessWidget {
           IconButton(
             onPressed: () {
               ReviewerNotesDB().deleteNoteDB(noteModel!.noteId);
-              Navigator.pop(context);
+              Get.back();
             },
             padding: const EdgeInsets.only(right: 12),
             icon: const Icon(Icons.delete_rounded),

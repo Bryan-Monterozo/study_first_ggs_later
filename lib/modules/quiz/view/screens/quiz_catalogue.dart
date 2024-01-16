@@ -29,7 +29,6 @@ class QuizCatalogue extends StatelessWidget {
         .collection('Quiz');
     // ignore: unused_local_variable
     final quizController = Get.put(QuizController());
-    // QuizController().premadeQuestion();
     Get.delete<NavController>();
     NavController navController = Get.put(NavController());
     navController.initNav(
@@ -48,8 +47,7 @@ class QuizCatalogue extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const QuizCreate()));
+              Get.to(const QuizCreate());
             },
             icon: const Icon(Icons.add),
           ),

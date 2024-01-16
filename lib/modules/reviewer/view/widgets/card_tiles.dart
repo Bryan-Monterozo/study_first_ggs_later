@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_show_card.dart';
 
@@ -18,14 +20,11 @@ class CardTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ReviewerFcShowCard(
-                cardModel: cardModel,
-                deckModel: deckModel,
-              ),
-            ));
+        Get.to(ReviewerFcShowCard(
+                    cardModel: cardModel,
+                    deckModel: deckModel,
+                  ),
+                );
       },
       child: Container(
         height: 250,

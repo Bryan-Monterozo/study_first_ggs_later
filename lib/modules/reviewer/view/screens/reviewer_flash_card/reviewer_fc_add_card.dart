@@ -1,5 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
@@ -44,7 +46,7 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
                   fontWeight: FontWeight.bold),
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
           IconButton(
@@ -56,7 +58,7 @@ class _ReviewerFcAddCardState extends State<ReviewerFcAddCard> {
                 cardBack: cardBack,
                 deckId: widget.deckId,
               );
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ],

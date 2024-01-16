@@ -2,6 +2,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
@@ -42,15 +44,21 @@ class ReviewerFcShowDeck extends StatelessWidget {
           //   icon: const Icon(Icons.add_circle_outline),
           // ),
           IconButton(
+            onPressed: () {
+              Get.to(ReviewerFcAddCard(
+                            deckId: deckModel!.deckId,
+                            deckModel: deckModel,
+                          ));
+            },
+            icon: const Icon(Icons.add_circle_outline),
+          ),
+          IconButton(
             padding: const EdgeInsets.only(right: 12),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ReviewerFcShuffleCard(
+              Get.to(ReviewerFcShuffleCard(
                             // deckId: deckModel!.deckId,
                             deckModel: deckModel,
-                          )));
+                          ));
             },
             icon: const Icon(Icons.shuffle),
           ),

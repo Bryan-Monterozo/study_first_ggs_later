@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class ReviewerWidget extends StatelessWidget {
   final String? reviewerText;
@@ -91,11 +93,7 @@ class ReviewerGesture extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => revNavigator!,
-          ),
+        Get.to(revNavigator!,
         );
       },
       child: revContainer,

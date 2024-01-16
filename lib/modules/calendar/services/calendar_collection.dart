@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_first_ggs_later/modules/calendar/models/calendar_model.dart';
 
 class CalendarDB {
   final firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   void addEventToDB({
     required eventName,
@@ -11,7 +13,7 @@ class CalendarDB {
     required to,
     required isAllDay,
   }) async {
-    final collection = firestore.collection('Calendar').doc();
+    final collection = firestore.collection('Users').doc(uid).collection('Calendar').doc();
 
     CalendarModel calendarModel = CalendarModel(
       eventName: eventName,
@@ -34,7 +36,7 @@ class CalendarDB {
     required eventID,
   }) async {
 
-    await firestore.collection('Calendar').doc(eventID).update({
+    await firestore.collection('Users').doc(uid).collection('Calendar').doc(eventID).update({
       'eventName': eventName,
       'eventDescription': eventDescription,
       'from': from,
@@ -44,6 +46,6 @@ class CalendarDB {
   }
 
   void deleteEventToDB({required eventID}) async {
-    await firestore.collection('Calendar').doc(eventID).delete();
+    await firestore.collection('Users').doc(uid).collection('Calendar').doc(eventID).delete();
   }
 }

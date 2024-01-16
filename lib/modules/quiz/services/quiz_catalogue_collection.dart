@@ -31,7 +31,7 @@ class QuizCatDB {
     required option2,
     required option3,
     required option4,
-    required quizId,
+    required quizId, 
   }) async {
     final collection = firestore
         .collection('Users')

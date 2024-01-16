@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/scheduler.dart';
@@ -18,7 +19,6 @@ import 'event_adding_page.dart';
 
 class StudyCalendar extends StatefulWidget {
   static const String routeName = '/calendar';
-  final NavController navController = Get.put(NavController());
   StudyCalendar({super.key});
 
   @override
@@ -29,6 +29,7 @@ class StudyCalendarState extends State<StudyCalendar> {
   CalendarController _controller = CalendarController();
   CalendarView calendarView = CalendarView.month;
   MeetingDataSource? events;
+  final NavController navController = Get.put(NavController());
   CalendarGetController calendarController = Get.put(CalendarGetController());
   bool isPressedMonth = true;
   bool isPressedWeek = false;
@@ -36,7 +37,7 @@ class StudyCalendarState extends State<StudyCalendar> {
 
   @override
   void initState() {
-    widget.navController.initNav(
+    navController.initNav(
       currentRoute: CurrentRoute.calendar,
     );
     getDataFromFireStore().then((results) {
@@ -289,7 +290,12 @@ class StudyCalendarState extends State<StudyCalendar> {
 
   Future<void> getDataFromFireStore() async {
     final firestore = FirebaseFirestore.instance;
-    var snapShotsValue = await firestore.collection('Calendar').get();
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    var snapShotsValue = await firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Calendar')
+        .get();
     List<CalendarModel> list = snapShotsValue.docs
         .map((e) => CalendarModel(
               eventName: e.data()['eventName'],

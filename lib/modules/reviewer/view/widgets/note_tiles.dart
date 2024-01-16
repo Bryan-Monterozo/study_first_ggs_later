@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:intl/intl.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_notes/reviewer_notes_show.dart';
@@ -24,12 +26,9 @@ class NoteTileWidget extends StatelessWidget {
       padding: const EdgeInsets.all(3.0),
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ReviewerShowNote(
+          Get.to(ReviewerShowNote(
                         noteModel: noteModel,
-                      )));
+                      ));
         },
         child: Container(
             padding: const EdgeInsets.all(12.0),

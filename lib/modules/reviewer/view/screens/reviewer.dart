@@ -18,6 +18,10 @@ class StudyReviewer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    
+    Get.delete<NavController>();
+    NavController navController = Get.put(NavController());
     navController.initNav(
       currentRoute: CurrentRoute.reviewer,
     );
