@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_first_ggs_later/modules/todo/models/todo_model.dart';
 
 class ToDoDB {
   final firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
   
   createToDo({
     required todoTitle,
   }) async {
-    final collection = firestore.collection('Todos').doc();
+    final collection = firestore.collection('Users').doc(uid).collection('Todos').doc();
     final timeCreated = DateTime.now().toString();
     ToDoModel toDoModel = ToDoModel(
       id: collection.id,
@@ -22,7 +24,7 @@ class ToDoDB {
     required id,
     required isDone,
   }) async {
-    final collection = firestore.collection('Todos').doc(id);
+    final collection = firestore.collection('Users').doc(uid).collection('Todos').doc(id);
     await collection.update({
       'isDone': isDone,
     });
@@ -31,7 +33,7 @@ class ToDoDB {
   deleteToDo ({
     required id,
   }) async {
-    final collection = firestore.collection('Todos').doc(id);
+    final collection = firestore.collection('Users').doc(uid).collection('Todos').doc(id);
     await collection.delete();
   }
 
@@ -39,7 +41,7 @@ class ToDoDB {
     required id,
     required todoTitle,
   }) async {
-    final collection = firestore.collection('Todos').doc(id);
+    final collection = firestore.collection('Users').doc(uid).collection('Todos').doc(id);
     await collection.update({
       'todoTitle': todoTitle,
     });

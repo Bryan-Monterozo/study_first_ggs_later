@@ -1,18 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 
 class QuizCatDB {
   final firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
   RxString quizId = ''.obs;
 
-  void addQuizToDB({
+  addQuizToDB({
     required quizTitle,
     required quizDesc,
   }) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final collection = firestore.collection('Quiz').doc();
+    final collection = firestore.collection('Users').doc(uid).collection('Quiz').doc();
 
     QuizModel quizModel = QuizModel(
         quizTitle: quizTitle, quizDesc: quizDesc, quizId: collection.id);
@@ -31,8 +33,13 @@ class QuizCatDB {
     required option4,
     required quizId,
   }) async {
-    final collection =
-        firestore.collection('Quiz').doc(quizId).collection('questions').doc();
+    final collection = firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Quiz')
+        .doc(quizId)
+        .collection('questions')
+        .doc();
 
     QuestionModel questionModel = QuestionModel(
       question: question,
@@ -48,7 +55,8 @@ class QuizCatDB {
 
   saveCatalogueToDB(
       {required quizTitle, required quizDesc, required quizId}) async {
-    final collection = firestore.collection('Quiz').doc(quizId);
+    final collection =
+        firestore.collection('Users').doc(uid).collection('Quiz').doc(quizId);
     await collection.update({
       'quizTitle': quizTitle,
       'quizDesc': quizDesc,
@@ -58,8 +66,15 @@ class QuizCatDB {
   cancelQuizCreation({
     required quizId,
   }) async {
-    await firestore.collection('Quiz').doc(quizId).delete();
     await firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Quiz')
+        .doc(quizId)
+        .delete();
+    await firestore
+        .collection('Users')
+        .doc(uid)
         .collection('Quiz')
         .doc(quizId)
         .collection('questions')
@@ -74,7 +89,12 @@ class QuizCatDB {
   deleteQuizFromDB({
     required quizId,
   }) async {
-    await firestore.collection('Quiz').doc(quizId).delete();
+    await firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Quiz')
+        .doc(quizId)
+        .delete();
     // await firestore
     //     .collection('Quiz')
     //     .doc(quizId)
@@ -91,6 +111,8 @@ class QuizCatDB {
     required quizId,
   }) async {
     final quizRef = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
         .collection('Quiz')
         .doc(quizId)
         .collection('questions')
@@ -107,7 +129,7 @@ class QuizCatDB {
     required option3,
     required option4,
   }) async {
-    final collection = firestore
+    final collection = firestore.collection('Users').doc(uid)
         .collection('Quiz')
         .doc(quizId)
         .collection('questions')
@@ -121,6 +143,8 @@ class QuizCatDB {
       'option4': option4,
     });
   }
+
+  premadeQuizName(int i) {}
 
   // retrieveOptions({required quizId, required questionId}) async {
   //   final optionsRef = firestore

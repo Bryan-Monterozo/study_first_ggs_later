@@ -159,24 +159,28 @@ class PomodoroState extends State<Pomodoro> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 PomodoroButton(
                   onTap: _resetPomodoroCount,
-                  buttonIcon: const Icon(Icons.restart_alt_rounded, size: 30),
+                  buttonIcon: const Icon(Icons.restart_alt_rounded),
+                  buttonSize: 30,
                 ),
                 PomodoroButton(
                     onTap: _mainBtnPressed,
+                    buttonSize: 80,
                     buttonIcon: toggle == false
                         ? const Icon(
                             Icons.play_arrow_rounded,
-                            size: 80,
+                            // size: 40,
                           )
                         : const Icon(
                             Icons.pause_rounded,
-                            size: 80,
+                            // size: 40,
                           )),
                 PomodoroButton(
                   onTap: _resetPomodoroCount,
+                  buttonSize: 40,
                   buttonIcon: const Icon(
                     Icons.stop_rounded,
                     size: 40,
@@ -186,9 +190,10 @@ class PomodoroState extends State<Pomodoro> {
             ),
             PomodoroButton(
               onTap: () => Get.off(const pomodoroViewPage()),
+              buttonSize: 40,
               buttonIcon: const Icon(
                 Icons.keyboard_control_rounded,
-                size: 40,
+                // size: 40,
                 color: Color(0xffcecece),
               ),
             ),

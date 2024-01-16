@@ -1,14 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 
 class ReviewerFcDB {
   final firestore = FirebaseFirestore.instance;
+  final uid = FirebaseAuth.instance.currentUser!.uid;
 
   void addDeckToDB({
     required deckName,
     required deckDesc,
   }) async {
-    final collection = firestore.collection('Decks').doc();
+    final collection =
+        firestore.collection('Users').doc(uid).collection('Decks').doc();
 
     DeckModel deckModel = DeckModel(
         deckName: deckName, deckDesc: deckDesc, deckId: collection.id);
@@ -21,8 +24,13 @@ class ReviewerFcDB {
     required cardBack,
     required deckId,
   }) async {
-    final collection =
-        firestore.collection('Decks').doc(deckId).collection('cards').doc();
+    final collection = firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Decks')
+        .doc(deckId)
+        .collection('cards')
+        .doc();
 
     CardModel cardModel = CardModel(
         cardFront: cardFront,
@@ -40,6 +48,8 @@ class ReviewerFcDB {
     required cardId,
   }) async {
     final collection = firestore
+        .collection('Users')
+        .doc(uid)
         .collection('Decks')
         .doc(deckId)
         .collection('cards')
@@ -55,8 +65,20 @@ class ReviewerFcDB {
     required deckId,
     required cardId,
   }) async {
-    await firestore.collection('Decks').doc(deckId).delete();
-    await firestore.collection('Decks').doc(deckId).collection('cards').get().then((cards) {
+    await firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Decks')
+        .doc(deckId)
+        .delete();
+    await firestore
+        .collection('Users')
+        .doc(uid)
+        .collection('Decks')
+        .doc(deckId)
+        .collection('cards')
+        .get()
+        .then((cards) {
       for (DocumentSnapshot doc in cards.docs) {
         doc.reference.delete();
       }
@@ -79,6 +101,8 @@ class ReviewerFcDB {
     required cardId,
   }) async {
     await firestore
+        .collection('Users')
+        .doc(uid)
         .collection('Decks')
         .doc(deckId)
         .collection('cards')
@@ -89,7 +113,9 @@ class ReviewerFcDB {
   getCardCount({
     required deckId,
   }) async {
-    QuerySnapshot collection = await FirebaseFirestore.instance
+    QuerySnapshot collection = await firestore
+        .collection('Users')
+        .doc(uid)
         .collection('Decks')
         .doc(deckId)
         .collection('cards')

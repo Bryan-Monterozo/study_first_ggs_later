@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
@@ -21,6 +22,8 @@ class ReviewerFcShowDeck extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final firestore = FirebaseFirestore.instance;
+    final uid = FirebaseAuth.instance.currentUser!.uid;
     return Scaffold(
       appBar: SharedAppBar(
         leading: leadingBack(context),
@@ -62,7 +65,7 @@ class ReviewerFcShowDeck extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>  ReviewerFcAddCard(
+                    builder: (context) => ReviewerFcAddCard(
                           deckId: deckModel!.deckId,
                           deckModel: deckModel,
                         )));
@@ -70,45 +73,45 @@ class ReviewerFcShowDeck extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            children: [
-              Expanded(
-                child: StreamBuilder<QuerySnapshot>(
-                  stream: FirebaseFirestore.instance
-                      .collection('Decks')
-                      .doc(deckModel!.deckId)
-                      .collection('cards')
-                      .snapshots(),
-                  builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    }
-                    return MasonryGridView.builder(
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 20,
-                        gridDelegate:
-                            const SliverSimpleGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                        ),
-                        itemCount: snapshot.data!.docs.length,
-                        itemBuilder: (context, index) {
-                          final fcDataMap = snapshot.data!.docs[index];
-                          CardModel cardModel = CardModel.fromMap(
-                              fcDataMap.data() as Map<String, dynamic>);
-                          return snapshot.data!.docs.isEmpty
-                              ? const Center(child: Text('No Cards'))
-                              : CardTileWidget(
-                                  deckModel: deckModel!,
-                                  cardModel: cardModel,
-                                  colorNotes:
-                                      NoteColors().noteColorsList[index % 15],
-                                );
-                        });
-                  },
-                ),
+          child: Column(children: [
+            Expanded(
+              child: StreamBuilder<QuerySnapshot>(
+                stream: firestore
+                    .collection('Users')
+                    .doc(uid)
+                    .collection('Decks')
+                    .doc(deckModel!.deckId)
+                    .collection('cards')
+                    .snapshots(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return MasonryGridView.builder(
+                      mainAxisSpacing: 20,
+                      crossAxisSpacing: 20,
+                      gridDelegate:
+                          const SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                      ),
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final fcDataMap = snapshot.data!.docs[index];
+                        CardModel cardModel = CardModel.fromMap(
+                            fcDataMap.data() as Map<String, dynamic>);
+                        return snapshot.data!.docs.isEmpty
+                            ? const Center(child: Text('No Cards'))
+                            : CardTileWidget(
+                                deckModel: deckModel!,
+                                cardModel: cardModel,
+                                colorNotes:
+                                    NoteColors().noteColorsList[index % 15],
+                              );
+                      });
+                },
               ),
-            ]
-          ),
+            ),
+          ]),
         ),
       ),
     );

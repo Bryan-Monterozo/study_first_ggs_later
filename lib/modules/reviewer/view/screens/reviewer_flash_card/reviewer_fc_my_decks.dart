@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
@@ -10,12 +11,15 @@ import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 
 class ReviewerFcMyDecks extends StatelessWidget {
   static const String routeName = '/reviewer/reviewer_fc_my_decks';
-  ReviewerFcMyDecks({super.key});
-
-  final ref = FirebaseFirestore.instance.collection('Decks');
+  const ReviewerFcMyDecks({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final uid = FirebaseAuth.instance.currentUser!.uid;
+    final ref = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(uid)
+        .collection('Decks');
     debugPrint('Widget Rebuild');
     return Scaffold(
       appBar: SharedAppBar(
@@ -24,7 +28,7 @@ class ReviewerFcMyDecks extends StatelessWidget {
         withPic: withPic(context),
       ),
       floatingActionButton: FloatingActionButton(
-        elevation: 0,
+          elevation: 0,
           backgroundColor: const Color(0xFF0B6BA7),
           foregroundColor: Colors.white,
           child: const Icon(Icons.add),

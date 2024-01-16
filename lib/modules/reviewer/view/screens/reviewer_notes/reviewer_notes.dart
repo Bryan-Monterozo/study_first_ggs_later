@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -10,12 +11,12 @@ import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
 
 class ReviewerNotes extends StatelessWidget {
   ReviewerNotes({super.key});
-
-  final ref = FirebaseFirestore.instance.collection('Notes');
   static const String routeName = '/reviewer/mynotes';
+  final ref = FirebaseFirestore.instance.collection('Users').doc(FirebaseAuth.instance.currentUser!.uid).collection('Notes');
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
         appBar: SharedAppBar(
           leading: leadingBack(context),

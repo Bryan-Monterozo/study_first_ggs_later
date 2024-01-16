@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,14 +9,19 @@ class TodoController extends GetxController {
   //Keys
   final todoFormKey = GlobalKey<FormState>();
   final todoEditFormKey = GlobalKey<FormState>();
+  // final uid = FirebaseAuth.instance.currentUser!.uid;
 
   //SERVICES
   Stream<QuerySnapshot> ref = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('Todos')
       .where('isDone', isEqualTo: false)
       .orderBy('todoTitle', descending: false)
       .snapshots();
   Stream<QuerySnapshot> isDoneRef = FirebaseFirestore.instance
+      .collection('Users')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
       .collection('Todos')
       .where('isDone', isEqualTo: true)
       .orderBy('todoTitle', descending: false)
@@ -121,17 +127,23 @@ class TodoController extends GetxController {
   searchTodoList(String query) {
     if (searchTodoController.text.isEmpty) {
       ref = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Todos')
           .where('isDone', isEqualTo: false)
           .orderBy('todoTitle', descending: false)
           .snapshots();
       isDoneRef = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Todos')
           .where('isDone', isEqualTo: true)
           .orderBy('todoTitle', descending: false)
           .snapshots();
     } else {
       ref = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Todos')
           // .where('isDone', isEqualTo: false)
           .where('todoTitle', isGreaterThanOrEqualTo: query)
@@ -139,6 +151,8 @@ class TodoController extends GetxController {
           .where('isDone', isEqualTo: false)
           .snapshots();
       isDoneRef = FirebaseFirestore.instance
+          .collection('Users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('Todos')
           .where('todoTitle', isGreaterThanOrEqualTo: query)
           .where('todoTitle', isLessThan: query + '\uf8ff')

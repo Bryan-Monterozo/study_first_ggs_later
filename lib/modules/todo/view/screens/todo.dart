@@ -30,6 +30,8 @@ class StudyToDo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('reloadedxxxxxxxxxxx');
+    Get.delete<TodoController>();
     final TodoController todoController = Get.put(TodoController());
     final NavController navController = Get.put(NavController());
     // final TodoController todoController = Get.find<TodoController>();
