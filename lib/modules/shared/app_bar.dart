@@ -20,7 +20,6 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   Size get preferredSize => const Size.fromHeight(60);
 
   @override
-
   Widget build(BuildContext context) {
     return AppBar(
       backgroundColor: Colors.transparent,
@@ -49,29 +48,29 @@ class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: true,
       elevation: 0,
     );
-  }  
+  }
 }
 
 Widget withPic(BuildContext context) {
   return Container(
     padding: const EdgeInsets.fromLTRB(0, 18, 24, 12),
-    decoration:  const BoxDecoration(
+    decoration: const BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(8.0)),
     ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(100),
-        child: kIsWeb
-            ? Image.network(
-                'assets/images/dp.jpg',
-                fit: BoxFit.fill,
-                alignment: const Alignment(0.00, -0.50),
-              )
-            : Image.asset(
-                'assets/images/dp.jpg',
-                fit: BoxFit.fill,
-                alignment: const Alignment(0.00, -0.50),
-              ),
-      ),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(100),
+      child: kIsWeb
+          ? Image.network(
+              'assets/images/dp.jpg',
+              fit: BoxFit.fill,
+              alignment: const Alignment(0.00, -0.50),
+            )
+          : Image.asset(
+              'assets/images/dp.jpg',
+              fit: BoxFit.fill,
+              alignment: const Alignment(0.00, -0.50),
+            ),
+    ),
   );
 }
 
