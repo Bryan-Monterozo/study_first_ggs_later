@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:study_first_ggs_later/modules/calendar/models/calendar_model.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-
-class MeetingDataSource extends CalendarDataSource{
+class MeetingDataSource extends CalendarDataSource {
   MeetingDataSource(List<CalendarModel> source) {
     appointments = source;
   }
@@ -11,7 +12,7 @@ class MeetingDataSource extends CalendarDataSource{
 
   @override
   String getSubject(int index) => getEvent(index).eventName;
-  
+
   String getDescription(int index) => getEvent(index).eventDescription;
 
   @override
@@ -20,9 +21,9 @@ class MeetingDataSource extends CalendarDataSource{
   @override
   DateTime getEndTime(int index) => DateTime.parse(getEvent(index).to);
 
-  // @override
-  // Color getColor(int index) => getEvent(index).background;
+  @override
+  Color getColor(int index) => const Color(0xFF0B6BA7);
 
-  // @override
-  // bool isAllDay(int index) => getEvent(index).isAllDay;
+  @override
+  bool isAllDay(int index) => getEvent(index).isAllDay;
 }

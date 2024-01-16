@@ -30,25 +30,30 @@ class ToDoDialogWidget extends StatelessWidget {
           child: Container(
             // padding: const EdgeInsets.all(8.0),
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Colors.white,
               borderRadius: BorderRadius.all(
                 Radius.circular(15),
               ),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  child: Form(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(18, 6, 18, 12),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Form(
                     key: todoController.todoEditFormKey,
                     child: TextFormField(
                       validator: (value) =>
                           value!.isEmpty ? 'Enter an Item' : null,
                       controller: todoController.editTitleController,
-                      style: const TextStyle(fontSize: 14, fontFamily: 'Poppins', color: Color(0xff1c1c1c)),
+                      style: const TextStyle(
+                          fontSize: 14,
+                          fontFamily: 'Poppins',
+                          color: Color(0xff1c1c1c)),
                       decoration: const InputDecoration(
-                          hintText: 'Add a new todo item',
+                          hintText: 'Edit a new todo item',
                           border: InputBorder.none,
                           errorStyle: TextStyle(
                             fontFamily: 'Poppins',
@@ -62,30 +67,45 @@ class ToDoDialogWidget extends StatelessWidget {
                           )),
                     ),
                   ),
-                ),
-                const SizedBox(height: 3),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: const Text('Cancel'),
-                    ),
-                    ElevatedButton(
-                      onPressed: () async {
-                        SharedPreferences prefs =
-                            await SharedPreferences.getInstance();
-                        prefs.setString('todoId', id);
-                        todoController.editTodoValidation();
-                        Get.back();
-                      },
-                      child: const Text('Save'),
-                    ),
-                  ],
-                ),
-              ],
+                  const SizedBox(height: 3),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                            foregroundColor: const Color(0xFF0B6BA7)),
+                        onPressed: () async {
+                          SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          prefs.setString('todoId', id);
+                          todoController.editTodoValidation();
+                          Get.back();
+                        },
+                        child: const Text(
+                          'Save',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                      TextButton(
+                        style:
+                            TextButton.styleFrom(foregroundColor: Colors.red),
+                        onPressed: () {
+                          Get.back();
+                          todoController.editTitleController.clear();
+                        },
+                        child: const Text(
+                          'Cancel',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

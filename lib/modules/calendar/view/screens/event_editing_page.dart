@@ -287,6 +287,7 @@ class _EventEditingPageState extends State<EventEditingPage> {
           eventID: widget.calendarModel!.eventID);
 
       Navigator.of(context).pop();
+      Navigator.of(context).pop();
       calendarController.saveController();
     }
   }

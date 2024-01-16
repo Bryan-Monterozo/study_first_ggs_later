@@ -1,5 +1,6 @@
-class CalendarModel {
 
+
+class CalendarModel {
   final String eventName;
   final String eventDescription;
   final String from;
@@ -8,7 +9,15 @@ class CalendarModel {
   final bool isAllDay;
   final String eventID;
 
-  CalendarModel({required this.eventName, required this.eventDescription, required this.from, required this.to, required this.isAllDay, required this.eventID});
+  CalendarModel(
+      {required this.eventName,
+      required this.eventDescription,
+      required this.from,
+      required this.to,
+      required this.isAllDay,
+      required this.eventID,
+      // this.background = const Color(0xFF0B6BA7)
+      });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -26,14 +35,11 @@ class CalendarModel {
     return CalendarModel(
       eventName: map['eventName'] as String,
       eventDescription: map['eventDescription'] as String,
-      from: 
-      map['from'] as String,
-      to: 
-      map['to'] as String,
-      // background: Colors.red,
+      from: map['from'] as String,
+      to: map['to'] as String,
+      // background: const Color(0xFF0B6BA7),
       isAllDay: map['isAllDay'] as bool,
       eventID: map['eventID'] as String,
     );
   }
 }
-

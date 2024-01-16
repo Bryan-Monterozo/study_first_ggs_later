@@ -6,7 +6,7 @@ import 'package:study_first_ggs_later/modules/calendar/services/calendar_collect
 import 'package:study_first_ggs_later/utils.dart';
 import 'event_editing_page.dart';
 
-class EventViewingPage extends StatelessWidget {
+class EventViewingPage extends StatefulWidget {
   final CalendarModel calendarModel;
 
   const EventViewingPage({
@@ -14,6 +14,11 @@ class EventViewingPage extends StatelessWidget {
     required this.calendarModel,
   }) : super(key: key);
 
+  @override
+  State<EventViewingPage> createState() => _EventViewingPageState();
+}
+
+class _EventViewingPageState extends State<EventViewingPage> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
@@ -24,16 +29,19 @@ class EventViewingPage extends StatelessWidget {
           actions: [
             IconButton(
               icon: const Icon(Icons.edit),
-              onPressed: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
-                      EventEditingPage(calendarModel: calendarModel))),
+              onPressed: () async => await Navigator.of(context)
+                  .push(MaterialPageRoute(
+                      builder: (context) => EventEditingPage(
+                          calendarModel: widget.calendarModel)))
+                  .then((_) => setState(() {})),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 12),
               child: IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  CalendarDB().deleteEventToDB(eventID: calendarModel.eventID);
+                  CalendarDB()
+                      .deleteEventToDB(eventID: widget.calendarModel.eventID);
                   Navigator.of(context).pop();
                 },
               ),
@@ -46,7 +54,7 @@ class EventViewingPage extends StatelessWidget {
             builder: (controller) =>
                 ListView(padding: const EdgeInsets.all(32), children: <Widget>[
                   Text(
-                    calendarModel.eventName,
+                    widget.calendarModel.eventName,
                     style: (const TextStyle(
                         color: Color(0xff1c1c1c),
                         fontSize: 24,
@@ -54,15 +62,15 @@ class EventViewingPage extends StatelessWidget {
                         fontWeight: FontWeight.bold)),
                   ),
                   const SizedBox(height: 10),
-                  Text(calendarModel.eventDescription,
+                  Text(widget.calendarModel.eventDescription,
                       style: const TextStyle(
                           color: Color(0xff1c1c1c),
                           fontFamily: 'Poppins',
                           fontSize: 18)),
                   const SizedBox(height: 20),
-                  buildDateTime(calendarModel),
+                  buildDateTime(widget.calendarModel),
                   const SizedBox(height: 20),
-                  if (calendarModel.isAllDay)
+                  if (widget.calendarModel.isAllDay)
                     const Text(
                       "Meeting is All Day",
                       style: TextStyle(
@@ -96,12 +104,12 @@ class EventViewingPage extends StatelessWidget {
           Expanded(
               flex: 5,
               child: Text(
-                Utils.toDate(DateTime.parse(calendarModel.from)),
+                Utils.toDate(DateTime.parse(widget.calendarModel.from)),
                 style: const TextStyle(fontFamily: 'Poppins'),
               )),
           Expanded(
               child: Text(
-            Utils.toTime(DateTime.parse(calendarModel.from)),
+            Utils.toTime(DateTime.parse(widget.calendarModel.from)),
             style: const TextStyle(fontFamily: 'Poppins'),
           )),
         ],
@@ -113,12 +121,12 @@ class EventViewingPage extends StatelessWidget {
         Expanded(
             flex: 5,
             child: Text(
-              Utils.toDate(DateTime.parse(calendarModel.to)),
+              Utils.toDate(DateTime.parse(widget.calendarModel.to)),
               style: const TextStyle(fontFamily: 'Poppins'),
             )),
         Expanded(
             child: Text(
-          Utils.toTime(DateTime.parse(calendarModel.to)),
+          Utils.toTime(DateTime.parse(widget.calendarModel.to)),
           style: const TextStyle(fontFamily: 'Poppins'),
         )),
       ]));
