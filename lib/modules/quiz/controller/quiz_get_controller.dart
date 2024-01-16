@@ -76,7 +76,6 @@ class QuizController extends GetxController {
   }
 
   premadeQuestion() async {
-    print('premadeQuestion');
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('quizLoaded') == null) {
       final ref =
@@ -90,8 +89,6 @@ class QuizController extends GetxController {
                 quizDesc: premade.premadeQuizDesc(i))
             .then((value) {
           String id = prefs.getString('quizId')!;
-          print('premadeQuizName: ${premade.premadeQuizName(i)}');
-          print('premadeQuizDesc: ${premade.premadeQuizDesc(i)}');
           for (int j = 1; j <= 15; j++) {
             int x = i * 100;
             quizCatDB.addQuestionToQuiz(
@@ -101,8 +98,6 @@ class QuizController extends GetxController {
                 option3: premade.premadeOptions(j + x)[2],
                 option4: premade.premadeOptions(j + x)[3],
                 quizId: id);
-            print('premadeQuestion: ${premade.premadeQuestion(j)}');
-            print('premadeOptions: ${premade.premadeOptions(j)}');
           }
         });
       }

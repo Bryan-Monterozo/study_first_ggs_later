@@ -56,8 +56,7 @@ class _StudyCalendarState extends State<StudyCalendar> {
       ),
       floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
-          onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => EventEditingPage()))),
+          onPressed: () => Get.to(const EventEditingPage())),
       body: Column(
         children: [
           Row(

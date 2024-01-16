@@ -1,6 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/note_tiles.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/search_bar.dart';
@@ -26,10 +28,7 @@ class ReviewerNotes extends StatelessWidget {
         floatingActionButton: FloatingActionButton(
           child: const Icon(Icons.add),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const ReviewerAddNote()));
+            Get.to(const ReviewerAddNote());
           },
         ),
         body: SafeArea(

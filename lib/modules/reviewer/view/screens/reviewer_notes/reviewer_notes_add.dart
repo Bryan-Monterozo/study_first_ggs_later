@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 // import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
@@ -31,7 +33,7 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
             ),
             child: const Text('Cancel', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),),
             onPressed: () {
-              Navigator.pop(context);
+              Get.to(context);
             },
           ),
           IconButton(
@@ -40,7 +42,7 @@ class _ReviewerAddNoteState extends State<ReviewerAddNote> {
               ReviewerNotesDB().addNoteToDB(
                 title: title, 
                 content: content,);
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ],

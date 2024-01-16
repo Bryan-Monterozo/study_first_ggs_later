@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class HomeNavButtonWidget extends StatelessWidget {
   final String? navText;
@@ -95,12 +97,7 @@ class HomeNavGesture extends StatelessWidget {
     return GestureDetector(
       behavior: HitTestBehavior.translucent,
       onTap: () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => navigator!,
-          ),
-        );
+        Get.to(navigator!);
       },
       child: navContainer,
     );

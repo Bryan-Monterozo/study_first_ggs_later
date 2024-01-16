@@ -1,7 +1,3 @@
-import 'dart:js_util';
-
-import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
-
 class PremadeQuiz {
   premadeQuizName(int x) {
     switch (x) {

@@ -32,7 +32,7 @@ class StudyQuiz extends StatelessWidget {
           children: [
             QuizButton(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const QuizCatalogue()));
+                Get.to(const QuizCatalogue());
               }, 
               text: 'Quiz Catalogue')
           ],

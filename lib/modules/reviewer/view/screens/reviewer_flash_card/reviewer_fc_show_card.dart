@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_fc_collection.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_edit_card.dart';
@@ -25,14 +27,11 @@ class ReviewerFcShowCard extends StatelessWidget {
           actions: [
             IconButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ReviewerFcEditCard(
+                Get.to(ReviewerFcEditCard(
                               deckId: deckModel!.deckId,
                               cardModel: cardModel!,
                               deckModel: deckModel!,
-                            )));
+                            ));
               },
               icon: const Icon(Icons.edit),
             ),
@@ -40,7 +39,7 @@ class ReviewerFcShowCard extends StatelessWidget {
               onPressed: () {
                 ReviewerFcDB().deleteCardFromDeck(
                     deckId: cardModel!.deckId, cardId: cardModel!.cardId);
-                Navigator.pop(context);
+                Get.back();
               },
               icon: const Icon(Icons.delete),
             ),

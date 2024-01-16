@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 import 'package:study_first_ggs_later/modules/reviewer/models/note_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/services/reviewer_notes_collection.dart';
@@ -54,7 +56,7 @@ class _ReviewerEditNoteState extends State<ReviewerEditNote> {
               style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Get.back();
             },
           ),
           IconButton(
