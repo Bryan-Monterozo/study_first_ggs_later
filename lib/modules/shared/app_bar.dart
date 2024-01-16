@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:get/get_core/get_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 class SharedAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SharedAppBar(
@@ -101,7 +103,7 @@ Widget leadingBack(BuildContext context) {
       color: Colors.black,
     ),
     onPressed: () {
-      Navigator.pop(context);
+      Get.back();
     },
   );
 }

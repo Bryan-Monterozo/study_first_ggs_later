@@ -81,11 +81,7 @@ class NavDrawer extends StatelessWidget {
                             const EdgeInsetsDirectional.fromSTEB(0, 36, 0, 0),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const StudyHome(),
-                              ),
+                            Get.off(const StudyHome(),
                             );
                           },
                           child: DrawerNavButton(
@@ -135,11 +131,7 @@ class NavDrawer extends StatelessWidget {
                             const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const GameHomePlay(),
-                              ),
+                            Get.off(const GameHomePlay(),
                             );
                           },
                           child: DrawerNavButton(
@@ -189,11 +181,7 @@ class NavDrawer extends StatelessWidget {
                             const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                         child: GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const Pomodoro(),
-                              ),
+                            Get.off(const Pomodoro(),
                             );
                           },
                           child: DrawerNavButton(
@@ -242,12 +230,8 @@ class NavDrawer extends StatelessWidget {
                           const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
                       child: GestureDetector(
                         onTap: () {
-                          navController.currentNav.value = CurrentRoute.calendar;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StudyCalendar(),
-                            ),
+                          // navController.currentNav.value = CurrentRoute.calendar;
+                          Get.off(StudyCalendar(),
                           );
                         },
                         child: DrawerNavButton(
@@ -296,11 +280,7 @@ class NavDrawer extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           navController.currentNav.value = CurrentRoute.todo;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StudyToDo(),
-                            ),
+                          Get.off(StudyToDo(),
                           );
                         },
                         child: DrawerNavButton(
@@ -349,11 +329,7 @@ class NavDrawer extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           navController.currentNav.value = CurrentRoute.reviewer;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StudyReviewer(),
-                            ),
+                          Get.off(StudyReviewer(),
                           );
                         },
                         child: DrawerNavButton(
@@ -402,11 +378,7 @@ class NavDrawer extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () {
                           navController.currentNav.value = CurrentRoute.quiz;
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const QuizCatalogue(),
-                            ),
+                          Get.off(const QuizCatalogue(),
                           );
                         },
                         child: DrawerNavButton(

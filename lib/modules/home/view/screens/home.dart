@@ -45,9 +45,9 @@ class StudyHome extends StatelessWidget {
                 height: 24,
               ),
               const HomeNavGesture(
-                navigator: Pomodoro(),
+                navigator: GameHomePlay(),
                 navContainer: HomeNavButtonWidget(
-                  navText: 'Pomodoro',
+                  navText: 'Game',
                   navDesc: 'Notifications!',
                   navColor: Color(0xff009598),
                   navPic: kIsWeb
@@ -56,9 +56,9 @@ class StudyHome extends StatelessWidget {
                 ),
               ),
               const HomeNavGesture(
-                navigator: GameHomePlay(),
+                navigator: Pomodoro(),
                 navContainer: HomeNavButtonWidget(
-                  navText: 'Game',
+                  navText: 'Pomodoro',
                   navDesc: 'Notifications!',
                   navColor: Color(0xff009598),
                   navPic: kIsWeb

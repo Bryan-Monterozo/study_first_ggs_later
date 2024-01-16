@@ -18,7 +18,6 @@ import 'meeting_provider.dart';
 
 class StudyCalendar extends StatefulWidget {
   static const String routeName = '/calendar';
-  final NavController navController = Get.put(NavController());
   StudyCalendar({super.key});
 
   @override
@@ -29,10 +28,11 @@ class _StudyCalendarState extends State<StudyCalendar> {
   CalendarController _controller = CalendarController();
   CalendarView calendarView = CalendarView.month;
   MeetingDataSource? events;
+  final NavController navController = Get.put(NavController());
 
   @override
   void initState() {
-    widget.navController.initNav(
+    navController.initNav(
       currentRoute: CurrentRoute.calendar,
     );
     getDataFromFireStore().then((results) {
