@@ -22,7 +22,7 @@ class MeetingDataSource extends CalendarDataSource{
   DateTime getEndTime(int index) => DateTime.parse(getEvent(index).to);
 
   @override
-  Color getColor(int index) => getEvent(index).background;
+  Color getColor(int index) => const Color(0xFF0B6BA7);
 
   @override
   bool isAllDay(int index) => getEvent(index).isAllDay;
