@@ -1,5 +1,6 @@
 enum CurrentRoute {
   home,
+  game,
   pomodoro,
   reviewer,
   quiz,

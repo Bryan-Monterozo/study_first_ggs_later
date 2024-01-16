@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_battle.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_inventory.dart';
@@ -7,6 +8,7 @@ import 'package:study_first_ggs_later/modules/game/view/screens/game_shop.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_stats.dart';
 import 'package:study_first_ggs_later/modules/game/view/widgets/bottom_navbar.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class GameHomePlay extends StatelessWidget {
@@ -15,6 +17,11 @@ class GameHomePlay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GamePageController gamePageController = Get.put(GamePageController());
+    Get.delete<NavController>();
+    NavController navController = Get.put(NavController());
+    navController.initNav(
+      currentRoute: CurrentRoute.game,
+    );
     return Scaffold(
       drawer: const NavDrawer(),
       appBar: const SharedAppBar(
