@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
 class SettingsUI extends StatelessWidget {
@@ -23,7 +21,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(),
+      drawer: const NavDrawer(),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 39, 66, 85),
         title: const Text(
@@ -31,6 +29,89 @@ class _EditProfilePageState extends State<EditProfilePage> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-    );
+      body: Container(
+        padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+        child: GestureDetector(
+          onTap: () {
+            FocusScope.of(context).unfocus(),
+          }
+          child: ListView(
+            children: [
+              Text(
+                "Edit Profile",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
+              ), //text
+              SizedBox(
+                height: 15,
+              ), //SizedBox
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context)
+                                  .scaffoldBackgroundColor), //Border.all
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1)
+                                offset: Offset(0.10)
+                                )
+                              ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "https://pbs.twimg.com/media/F4LozrQbYAA9lE1.jpg")
+                                  ) //DecorationImage
+                          ), //BoxDecoration
+                    ) //Container
+                    Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      height: 40,
+                      width: 40,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor
+                        ), // Border.all
+                        color: Colors.green,
+                      ), //BoxDecoration
+                      child: Icon(
+                        Icons.edit, 
+                        color: Colors.white,
+                        ), //Icon
+                    )) //container // positioned
+                  ],
+                ), // Stack
+              ), //Center
+              SizedBox(
+                height: 35,
+              ) //SizedBox
+              TextField(
+                decoration: InputDecoration(
+                  contentPadding: EdgeInsets.only(bottom: 3),
+                  labelText: "Full Name",
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                  hintText: "Jen Jenny",
+                  hintStyle: TextStyle(
+                    fontSize: 16, fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ) //TextStyle
+                ), //InputDecoration
+              ) //TextField
+            ],
+          ),
+        ), //listview
+      ), //container
+    ); //scaffold
   }
 }

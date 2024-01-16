@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_content2.dart';
 import 'package:study_first_ggs_later/modules/settings/view/widgets/settings_item.dart';
 import 'package:flutter/material.dart';
 
@@ -34,13 +36,10 @@ class SettingsGroup extends StatelessWidget {
           (settingsGroupTitle != null)
               ? Padding(
                   padding: const EdgeInsets.only(bottom: 5),
-                  child: Text(
-                    settingsGroupTitle!,
-                    style: (settingsGroupTitleStyle == null)
-                        ? const TextStyle(
-                            fontSize: 25, fontWeight: FontWeight.bold)
-                        : settingsGroupTitleStyle,
-                  ),
+                  child: SettingsTitle(
+                      title: settingsGroupTitle!,
+                      titleStyle: settingsGroupTitleStyle,
+                      icons: Icons.ac_unit_outlined),
                 )
               : Container(),
           // The SettingsGroup sections
