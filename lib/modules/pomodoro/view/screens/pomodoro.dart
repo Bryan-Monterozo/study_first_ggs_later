@@ -5,7 +5,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro_view.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.dart';
@@ -37,21 +39,31 @@ class Pomodoro extends StatefulWidget {
   const Pomodoro({Key? key}) : super(key: key);
 
   @override
-  State<Pomodoro> createState() => _PomodoroState();
+  State<Pomodoro> createState() => PomodoroState();
 }
 
 // TODO: put to constants folder
 
-class _PomodoroState extends State<Pomodoro> {
-  int remainingTime = pomodoroTotalTime;
+class PomodoroState extends State<Pomodoro> {
   String pomodoroBtnText = _btnTextStart;
   PomodoroStatus pomodoroStatus = PomodoroStatus.pausedPomodoro;
   Timer? _timer;
   int pomodoroNum = 0;
   int setNum = 0;
   bool toggle = false;
+  int minutesLong = 0;
+  int minutesShort = 0;
+  int minutesRunning = 0;
+  int secondsShort = 0;
+  int secondsLong = 0;
+  int secondsRunning = 0;
+  int totalRunning = 0;
+  int totalShort = 0;
+  int totalLong = 0;
+  int remainingTime = 0;
 
   NavController navController = Get.put(NavController());
+  // PomodoroController pomodoroController = Get.put(PomodoroController());
 
   @override
   void dispose() {
@@ -64,6 +76,7 @@ class _PomodoroState extends State<Pomodoro> {
     navController.initNav(
       currentRoute: CurrentRoute.pomodoro,
     );
+    initTimer();
     super.initState();
   }
 
@@ -172,7 +185,7 @@ class _PomodoroState extends State<Pomodoro> {
               ],
             ),
             PomodoroButton(
-              onTap: _resetPomodoroCount,
+              onTap: () => Get.off(const pomodoroViewPage()),
               buttonIcon: const Icon(
                 Icons.keyboard_control_rounded,
                 size: 40,
@@ -186,6 +199,23 @@ class _PomodoroState extends State<Pomodoro> {
   }
 
 // TODO: Refactor this to core/utils named (sec_to_string.dart)
+
+  initTimer() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    minutesRunning = prefs.getInt('minRunning') ?? 1;
+    secondsRunning = prefs.getInt('secRunning') ?? 0;
+    minutesShort = prefs.getInt('minShort') ?? 1;
+    secondsShort = prefs.getInt('secShort') ?? 0;
+    minutesLong = prefs.getInt('minLong') ?? 1;
+    secondsLong = prefs.getInt('secLong') ?? 0;
+    totalRunning = (minutesRunning * 60) + (secondsRunning);
+    totalShort = (minutesShort * 60) + (secondsShort);
+    totalLong = (minutesLong * 60) + (secondsLong);
+    remainingTime = totalRunning;
+    setState(() {
+      
+    });
+  }
 
   _secToString(int seconds) {
     int roundedMinutes = seconds ~/ 60;
@@ -205,25 +235,25 @@ class _PomodoroState extends State<Pomodoro> {
     int totalTime;
     switch (pomodoroStatus) {
       case PomodoroStatus.runningPomodoro:
-        totalTime = pomodoroTotalTime;
+        totalTime = totalRunning;
         break;
       case PomodoroStatus.pausedPomodoro:
-        totalTime = pomodoroTotalTime;
+        totalTime = totalRunning;
         break;
       case PomodoroStatus.runningShortBreak:
-        totalTime = shortBreakTime;
+        totalTime = totalShort;
         break;
       case PomodoroStatus.pausedShortBreak:
-        totalTime = shortBreakTime;
+        totalTime = totalShort;
         break;
       case PomodoroStatus.runningLongBreak:
-        totalTime = longBreakTime;
+        totalTime = totalLong;
         break;
       case PomodoroStatus.pausedLongBreak:
-        totalTime = longBreakTime;
+        totalTime = totalLong;
         break;
       case PomodoroStatus.setFinished:
-        totalTime = pomodoroTotalTime;
+        totalTime = totalRunning;
         break;
       // case null:
       //   {}
@@ -290,7 +320,7 @@ class _PomodoroState extends State<Pomodoro> {
                     {
                       pomodoroStatus = PomodoroStatus.pausedLongBreak,
                       setState(() {
-                        remainingTime = longBreakTime;
+                        remainingTime = totalLong;
                         pomodoroBtnText = _btnTextLongBreak;
                       })
                     }
@@ -298,7 +328,7 @@ class _PomodoroState extends State<Pomodoro> {
                     {
                       pomodoroStatus = PomodoroStatus.pausedShortBreak,
                       setState(() {
-                        remainingTime = shortBreakTime;
+                        remainingTime = totalShort;
                         pomodoroBtnText = _btnTextShortBreak;
                       })
                     }
@@ -326,7 +356,7 @@ class _PomodoroState extends State<Pomodoro> {
                 }
               else
                 {
-                  remainingTime = pomodoroTotalTime,
+                  remainingTime = totalRunning,
                   _cancelTimer(),
                   pomodoroStatus = PomodoroStatus.pausedPomodoro,
                   setState(() {
@@ -357,7 +387,7 @@ class _PomodoroState extends State<Pomodoro> {
                 }
               else
                 {
-                  remainingTime = pomodoroTotalTime,
+                  remainingTime = totalRunning,
                   _cancelTimer(),
                   pomodoroStatus = PomodoroStatus.setFinished,
                   setState(() {
@@ -402,7 +432,7 @@ class _PomodoroState extends State<Pomodoro> {
   _stopCountdown() {
     pomodoroStatus = PomodoroStatus.pausedPomodoro;
     setState(() {
-      remainingTime = pomodoroTotalTime;
+      remainingTime = totalRunning;
       pomodoroBtnText = _btnTextStart;
     });
   }
