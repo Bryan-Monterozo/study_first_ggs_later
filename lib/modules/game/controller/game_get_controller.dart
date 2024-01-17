@@ -38,6 +38,7 @@ class EnemyController extends GetxController {
   RxString enemyId = ''.obs;
   RxString enemyName = ''.obs;
   RxInt enemyHealth = 0.obs;
+  RxInt enemyMaxHealth = 0.obs;
   RxInt enemyDamage = 0.obs;
   RxInt enemyDefense = 0.obs;
   RxInt enemyExp = 0.obs;
@@ -77,6 +78,7 @@ class EnemyController extends GetxController {
 
       enemyName.value = prefs.getString('enemyName')!;
       enemyHealth.value = prefs.getInt('enemyHealth')!;
+      enemyMaxHealth.value = prefs.getInt('enemyMaxHealth')!;
       enemyDamage.value = prefs.getInt('enemyDamage')!;
       enemyDefense.value = prefs.getInt('enemyDefense')!;
       enemyExp.value = prefs.getInt('enemyExp')!;
@@ -91,6 +93,7 @@ class EnemyController extends GetxController {
       enemyId.value = prefs.getString('enemyId')!;
       enemyName.value = prefs.getString('enemyName')!;
       enemyHealth.value = prefs.getInt('enemyHealth')!;
+      enemyMaxHealth.value = prefs.getInt('enemyMaxHealth')!;
       enemyDamage.value = prefs.getInt('enemyDamage')!;
       enemyDefense.value = prefs.getInt('enemyDefense')!;
       enemyExp.value = prefs.getInt('enemyExp')!;
@@ -107,6 +110,8 @@ class EnemyController extends GetxController {
     final encounterChance = {
       '0': 10.0,
       '1': 10.0,
+      '2': 10.0,
+      '3': 10.0,
     };
     final encounterSet =
         randomMultipleWeightedChoice<String>(encounterChance, 1, null);
@@ -123,6 +128,7 @@ class EnemyController extends GetxController {
       enemyId.value = value['enemyId'];
       enemyName.value = value['enemyName'];
       enemyHealth.value = value['baseHealth'];
+      enemyMaxHealth.value = value['baseHealth'];
       enemyDamage.value = value['baseDamage'];
       enemyDefense.value = value['baseDefense'];
       enemyExp.value = value['baseExp'];
@@ -186,6 +192,7 @@ class EnemyController extends GetxController {
 
     enemyHealth.value =
         enemyHealth.value * scaledLvl; //prefs.getInt('playerLevel')!
+    enemyMaxHealth.value = enemyHealth.value; //prefs.getInt('playerLevel')!
     enemyDamage.value =
         enemyDamage.value * scaledLvl; //prefs.getInt('playerLevel')!
     enemyDefense.value =
@@ -205,6 +212,7 @@ class EnemyController extends GetxController {
     await prefs.setString('enemyId', enemyId.value);
     await prefs.setString('enemyName', enemyName.value);
     await prefs.setInt('enemyHealth', enemyHealth.value);
+    await prefs.setInt('enemyMaxHealth', enemyMaxHealth.value);
     await prefs.setInt('enemyDamage', enemyDamage.value);
     await prefs.setInt('enemyDefense', enemyDefense.value);
     await prefs.setInt('enemyExp', enemyExp.value);
@@ -218,7 +226,7 @@ class EnemyController extends GetxController {
     print('Enemy Health: $enemyHealth');
     if (enemyHealth <= 0) {
       await prefs.setInt('playerExp',
-          (prefs.getInt('playerExp')! + prefs.getInt('enemyExp')! + 50));
+          (prefs.getInt('playerExp')! + prefs.getInt('enemyExp')!) + 10);
       prefs.setBool('isEnemySpawned', false);
       deadEnemy();
       // await prefs.setBool('isEnemySpawned', false);
@@ -273,6 +281,7 @@ class PlayerController extends GetxController {
   RxInt playerExp = 0.obs;
   RxInt skillUpPoints = 0.obs;
   RxInt nextLevelExp = 50.obs;
+  RxInt playerMaxHealth = 10.obs;
 
   RxInt playerTotalHealth = 10.obs;
   RxInt equipHealth = 0.obs;
@@ -361,7 +370,7 @@ class PlayerController extends GetxController {
     equipDamage.value = prefs.getInt('equipDamage')!;
     equipDefense.value = prefs.getInt('equipDefense')!;
     playerTotalHealth.value = prefs.getInt('playerTotalHealth')!;
-
+    playerMaxHealth.value = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
     // update(['playerName', 'playerHealth']);
 
     print('Player Name: $playerName');
@@ -415,8 +424,8 @@ class PlayerController extends GetxController {
     await prefs.setInt('equipHealth', 0);
     await prefs.setInt('equipDamage', 0);
     await prefs.setInt('equipDefense', 0);
-    await prefs.setInt(
-        'playerTotalHealth', (prefs.getInt('equipHealth')! + prefs.getInt('playerHealth')!));
+    await prefs.setInt('playerTotalHealth',
+        (prefs.getInt('equipHealth')! + prefs.getInt('playerHealth')!));
 
     // print('Player Name: $playerName');
     // print('Player Level: $playerLevel');
@@ -514,38 +523,31 @@ class PlayerController extends GetxController {
       for (var i = 1; i <= 4; i++) {
         if (playerlvl == i) {
           await prefs.setInt('playerLevel', prefs.getInt('playerLevel')! + 1);
-          // playerlvl = prefs.getInt('playerLevel')!;
           await prefs.setInt(
               'skillUpPoints', prefs.getInt('skillUpPoints')! + 3);
           int nextLvlXp = (prefs.getInt('nextLevelExp')! * 2);
           nextLevelExp.value = nextLvlXp;
           await prefs.setInt('nextLevelExp', nextLvlXp);
-          // playerLevel.value = prefs.getInt('playerLevel')!;
-          // skillUpPoints.value = skillpts;
         }
       }
     }
     if (playerlvl == 5) {
-      prefs.setInt('playerLevel', 6);
-      playerlvl = prefs.getInt('playerLevel')!;
-      prefs.setInt('skillUpPoints', prefs.getInt('skillUpPoints')! + 5);
+      await prefs.setInt('playerLevel', 6);
+      await prefs.setInt('skillUpPoints', prefs.getInt('skillUpPoints')! + 5);
       int nextLvlXp = (prefs.getInt('nextLevelExp')! * 3);
       nextLevelExp.value = nextLvlXp;
       await prefs.setInt('nextLevelExp', nextLvlXp);
-      // playerLevel.value = prefs.getInt('playerLevel')!;
-      // skillUpPoints.value = prefs.getInt('skillUpPoints')!;
     }
     if (playerlvl > 5) {
       for (var i = 6; i <= 9; i++) {
         if (playerlvl == i) {
-          prefs.setInt('playerLevel', playerlvl++);
-          playerlvl = prefs.getInt('playerLevel')!;
-          prefs.setInt('skillUpPoints', prefs.getInt('skillUpPoints')! + 3);
+          await prefs.setInt('playerLevel', prefs.getInt('playerLevel')! + 1);
+          // playerlvl = prefs.getInt('playerLevel')!;
+          await prefs.setInt(
+              'skillUpPoints', prefs.getInt('skillUpPoints')! + 3);
           int nextLvlXp = (prefs.getInt('nextLevelExp')! * 3);
           nextLevelExp.value = nextLvlXp;
           await prefs.setInt('nextLevelExp', nextLvlXp);
-          // playerLevel.value = prefs.getInt('playerLevel')!;
-          // skillUpPoints.value = prefs.getInt('skillUpPoints')!;
         } else {
           break;
         }
@@ -596,8 +598,10 @@ class BattleController extends GetxController {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
   // Variables
-
+  
   RxInt totalBattlePoints = 0.obs;
+  RxBool playerBattleSlash = false.obs;
+  RxBool enemyBattleSlash = false.obs;
   RxBool isAttackDisabled = true.obs;
   RxInt totalBattleDamage = 0.obs;
   int quizPoints = 0;
@@ -630,6 +634,10 @@ class BattleController extends GetxController {
   }
 
   void playerAttack() async {
+    playerBattleSlash.value = true;
+    Future.delayed(const Duration(milliseconds: 500), () {
+      playerBattleSlash.value = false;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int enemyHealth = prefs.getInt('enemyHealth')!;
     int enemyDefense = prefs.getInt('enemyDefense')!;
@@ -651,9 +659,12 @@ class BattleController extends GetxController {
   }
 
   void enemyAttack() async {
+    enemyBattleSlash.value = true;
+    Future.delayed(const Duration(milliseconds: 500), () {
+      enemyBattleSlash.value = false;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int playerTotalHealth =
-        prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
+    int playerTotalHealth = prefs.getInt('playerTotalHealth')!;
     int playerDefense =
         prefs.getInt('playerDefense')! + prefs.getInt('equipDefense')!;
     int enemyDamage = prefs.getInt('enemyDamage')!;
@@ -672,8 +683,10 @@ class BattleController extends GetxController {
 
   battlePoints() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    totalBattlePoints.value = prefs.getInt('totalBattlePoints')!;
-    quizPoints = prefs.getInt('quizPoints')!;
+    totalBattlePoints.value = prefs.getInt('totalBattlePoints') ?? 0;
+    fcPoints = prefs.getInt('totalFlipPoints') ?? 0;
+    quizPoints = prefs.getInt('quizPoints') ?? 0;
+    pomodoroPoints = prefs.getInt('pomodoroPoints') ?? 0;
     int equipDmg = prefs.getInt('equipDamage') ?? 0;
     int playerDmg = prefs.getInt('playerDamage') ?? 0;
     int scaledDamage = equipDmg + playerDmg;
@@ -685,7 +698,10 @@ class BattleController extends GetxController {
         totalBattlePoints.value);
     totalBattleDamage.value = totalBattlePoints.value * scaledDamage;
     await prefs.setInt('quizPoints', 0);
+    await prefs.setInt('totalFlipPoints', 0);
+    await prefs.setInt('pomodoroPoints', 0);
     await prefs.setInt('totalBattlePoints', totalBattlePoints.value);
+    print('totalBattlePoints: ${prefs.getInt('totalBattlePoints')!}');
     // print('equiped Damage: ${prefs.getInt('equipDamage')!}');
 
     disableAttackButton(); // disable attack button if total battle points is 0

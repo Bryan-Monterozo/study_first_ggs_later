@@ -1,6 +1,9 @@
+import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_sprite.dart';
 import 'package:study_first_ggs_later/modules/game/view/widgets/game_buttons.dart';
 import 'package:study_first_ggs_later/modules/game/view/widgets/text_styles.dart';
 
@@ -20,47 +23,96 @@ class GameSatsPage extends StatelessWidget {
     return Container(
       color: Colors.yellow[300],
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.05,
           ),
           //player show box
-          Flexible(
-            child: Center(
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.width * 0.5,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            color: Colors.blue[200],
-                            borderRadius: BorderRadius.circular(10),
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Expanded(
+              flex: 3,
+              child: Center(
+                child: Container(
+                  padding: const EdgeInsets.all(10),
+                  child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: MediaQuery.of(context).size.width * 0.5,
+                      child: Stack(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              color: Colors.blue[200],
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                        ),
-                        const Align(
-                            alignment: Alignment.topLeft,
-                            child: Text('Player')),
-                        Obx(
-                          () => Align(
+                          Align(
                             alignment: Alignment.center,
-                            child: Text(playerController.playerName.value),
+                            child: GameWidget(
+                              game: UserSprite(),
+                            ),
                           ),
-                        ),
-                        Obx(
-                          () => Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                                'HP: ${playerController.playerTotalHealth.value}'),
+                          Obx(
+                            () => Align(
+                              alignment: Alignment.topRight
+                                  .add(const Alignment(-0.1, 0.15)),
+                              child: SizedBox(
+                                width: MediaQuery.of(context).size.width * 0.20,
+                                child: LinearPercentIndicator(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.20,
+                                  lineHeight: 10.0,
+                                  animation: true,
+                                  animationDuration: 750,
+                                  percent: playerController
+                                          .playerTotalHealth.value /
+                                      playerController.playerMaxHealth.value,
+                                  progressColor: Colors.green,
+                                  backgroundColor: Colors.red,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                      ],
-                    )),
+                          Obx(
+                            () => Align(
+                              alignment: Alignment.topLeft
+                                  .add(const Alignment(0.1, 0.10)),
+                              child: Text(
+                                  'HP: ${playerController.playerTotalHealth.value}',
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.03,
+                                      fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                          Obx(
+                            () => Align(
+                              // right: MediaQuery.of(context).size.width *
+                              //     0.16, //higher = right
+                              // bottom: MediaQuery.of(context).size.width *
+                              //     0.06, // lower = down
+                              alignment: Alignment.bottomCenter
+                                  .add(const Alignment(0.0, -0.07)),
+                              child: Text(
+                                playerController.playerName.value,
+                                style: TextStyle(
+                                    fontFamily: 'Poppins',
+                                    fontSize:
+                                        MediaQuery.of(context).size.width *
+                                            0.04,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )),
+                ),
               ),
             ),
-          ),
+          ]),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.02,
           ),
@@ -71,11 +123,25 @@ class GameSatsPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Character Name:'),
+                  Text(
+                    'Character Name:',
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: MediaQuery.of(context).size.width * 0.03,
+                        fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Obx(() => Text(playerController.playerName.value)),
+                  Obx(
+                    () => Text(
+                      playerController.playerName.value,
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: MediaQuery.of(context).size.width * 0.04,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  )
                 ],
               ),
               const SizedBox(
@@ -84,11 +150,23 @@ class GameSatsPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('Character Level:'),
+                  Text(
+                    'Character Level:',
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: MediaQuery.of(context).size.width * 0.03,
+                        fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(
                     width: 10,
                   ),
-                  Obx(() => Text('${playerController.playerLevel.value}')),
+                  Obx(() => Text(
+                        '${playerController.playerLevel.value}',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: MediaQuery.of(context).size.width * 0.04,
+                            fontWeight: FontWeight.bold),
+                      )),
                 ],
               ),
             ],
@@ -97,24 +175,29 @@ class GameSatsPage extends StatelessWidget {
           //   height: MediaQuery.of(context).size.height * 0.05,
           // ),
           //player stats
-          Flexible(
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.35,
+              height: MediaQuery.of(context).size.height * 0.45,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        statsText(' HP', null),
-                        statsText('DMG', null),
-                        statsText('DEF', null),
-                        statsText('EXP', null),
+                        statsText(' HP', null,
+                            MediaQuery.of(context).size.width * 0.05),
+                        statsText('DMG', null,
+                            MediaQuery.of(context).size.width * 0.05),
+                        statsText('DEF', null,
+                            MediaQuery.of(context).size.width * 0.05),
+                        statsText('EXP', null,
+                            MediaQuery.of(context).size.width * 0.05),
                       ],
                     ),
                   ),
@@ -124,21 +207,27 @@ class GameSatsPage extends StatelessWidget {
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.4,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Obx(() => statsText(
                             playerController.playerHealth.value.toString(),
-                            playerController.equipHealth.value.toString())),
+                            playerController.equipHealth.value.toString(),
+                            MediaQuery.of(context).size.width * 0.05)),
                         Obx(() => statsText(
                             playerController.playerDamage.value.toString(),
-                            playerController.equipDamage.value.toString())),
+                            playerController.equipDamage.value.toString(),
+                            MediaQuery.of(context).size.width * 0.05)),
                         Obx(() => statsText(
                             playerController.playerDefense.value.toString(),
-                            playerController.equipDefense.value.toString())),
+                            playerController.equipDefense.value.toString(),
+                            MediaQuery.of(context).size.width * 0.05)),
                         Obx(() => statsText(
-                            playerController.playerExp.value.toString(), null)),
+                            playerController.playerExp.value.toString(),
+                            null,
+                            MediaQuery.of(context).size.width * 0.05)),
                       ],
                     ),
                   ),
@@ -149,6 +238,7 @@ class GameSatsPage extends StatelessWidget {
                   Obx(
                     () => SizedBox(
                       width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.4,
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -160,29 +250,17 @@ class GameSatsPage extends StatelessWidget {
                                       Colors.white),
                                   statsUpButton(() {
                                     playerController.upgradeStat(2);
-                                  }, Colors.yellow,
-                                      Colors.yellow[600]!, Colors.white),
+                                  }, Colors.yellow, Colors.yellow[600]!,
+                                      Colors.white),
                                   statsUpButton(() {
                                     playerController.upgradeStat(3);
-                                  }, Colors.yellow,
-                                      Colors.yellow[600]!, Colors.white),
+                                  }, Colors.yellow, Colors.yellow[600]!,
+                                      Colors.white),
                                   statsText(
                                       playerController.nextLevelExp.value
                                           .toString(),
-                                      null),
-                                  // Obx(() => IconButton(
-                                  //     onPressed: () {},
-                                  //     icon: const Icon(
-                                  //         Icons.keyboard_double_arrow_up_sharp))), // HP
-                                  // Obx(() => IconButton(
-                                  //     onPressed: () {},
-                                  //     icon: const Icon(
-                                  //         Icons.keyboard_double_arrow_up_sharp))), // DMG
-                                  // Obx(() => IconButton(
-                                  //     onPressed: () {},
-                                  //     icon: const Icon(
-                                  //         Icons.keyboard_double_arrow_up_sharp))), // DEF
-                                  // Obx(() => statsText('100')), // EXP
+                                      null,
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ]
                               : <Widget>[
                                   statsUpButton(() {}, null, Colors.transparent,
@@ -194,7 +272,8 @@ class GameSatsPage extends StatelessWidget {
                                   statsText(
                                       playerController.nextLevelExp.value
                                           .toString(),
-                                      null),
+                                      null,
+                                      MediaQuery.of(context).size.width * 0.05),
                                 ]),
                     ),
                   )
@@ -202,33 +281,52 @@ class GameSatsPage extends StatelessWidget {
               ),
             ),
           ),
-          Flexible(
-              child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text('Skill Points Left:'),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  Obx(() => Text('${playerController.skillUpPoints.value}')),
-                ],
-              ),
-              // const SizedBox(
-              //   height: 5,
-              // ),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     const Text('Character Level:'),
-              //     const SizedBox(
-              //       width: 10,
-              //     ),
-              //     Obx(() => Text('${playerController.playerLevel.value}')),
-              //   ],
-              // ),
-            ],
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.02,
+          ),
+          Expanded(
+              child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.35,
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Skill Points Left:',
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: MediaQuery.of(context).size.width * 0.03,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Obx(() => Text(
+                          '${playerController.skillUpPoints.value}',
+                          style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.04,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ],
+                ),
+                // const SizedBox(
+                //   height: 5,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.center,
+                //   children: [
+                //     const Text('Character Level:'),
+                //     const SizedBox(
+                //       width: 10,
+                //     ),
+                //     Obx(() => Text('${playerController.playerLevel.value}')),
+                //   ],
+                // ),
+              ],
+            ),
           )),
         ],
       ),

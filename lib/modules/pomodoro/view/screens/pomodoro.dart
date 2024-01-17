@@ -306,6 +306,7 @@ class PomodoroState extends State<Pomodoro> {
         break;
       case PomodoroStatus.setFinished:
         setNum++;
+        PomodoroController().pomodoroPoints(3);
         _startPomodoroCount();
         break;
       // case null:
@@ -336,6 +337,7 @@ class PomodoroState extends State<Pomodoro> {
                 {
                   pomodoroNum++,
                   _cancelTimer(),
+                  PomodoroController().pomodoroPoints(1),
                   if (pomodoroNum % pomodoroPerSet == 0)
                     {
                       pomodoroStatus = PomodoroStatus.pausedLongBreak,

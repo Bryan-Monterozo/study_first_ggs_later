@@ -77,7 +77,7 @@ class LoadingSpriteTrans extends FlameGame {
   Future<void> onLoad() async {
     final image = await images.fromCache('hourglass.png');
     double width = canvasSize.x;
-    double height = canvasSize.y;
+    double height = canvasSize.x;
     print(width);
     print(height);
 
