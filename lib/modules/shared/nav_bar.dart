@@ -112,55 +112,57 @@ class NavDrawer extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 8, 0, 0),
-                            child: GestureDetector(
-                              onTap: () {
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const GameHomePlay(),
-                                  ),
-                                );
-                              },
-                              child: DrawerNavButton(
-                                navText: navController.currentNav.value ==
-                                        CurrentRoute.game
-                                    ? const Text(
-                                        'Game',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const GameHomePlay(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.game
+                                      ? const Text(
+                                          'Game',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'Game',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.game
+                                      ? const Icon(
+                                          CustomGameIcons.sword_cross,
                                           color: Color(0xFF0B6BA7),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : const Text(
-                                        'Game',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          CustomGameIcons.sword_cross,
                                           color: Color(0xffbcbcbc),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          size: 20,
                                         ),
-                                      ),
-                                navIcon: navController.currentNav.value ==
-                                        CurrentRoute.game
-                                    ? const Icon(
-                                        CustomGameIcons.sword_cross,
-                                        color: Color(0xFF0B6BA7),
-                                        size: 20,
-                                      )
-                                    : const Icon(
-                                        CustomGameIcons.sword_cross,
-                                        color: Color(0xffbcbcbc),
-                                        size: 20,
-                                      ),
-                                navShadow: navController.currentNav.value ==
-                                        CurrentRoute.game
-                                    ? const Color(0x33000000)
-                                    : Colors.white,
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.game
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -218,165 +220,171 @@ class NavDrawer extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 8, 0, 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                navController.currentNav.value =
-                                    CurrentRoute.calendar;
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StudyCalendar(),
-                                  ),
-                                );
-                              },
-                              child: DrawerNavButton(
-                                navText: navController.currentNav.value ==
-                                        CurrentRoute.calendar
-                                    ? const Text(
-                                        'Calendar',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  navController.currentNav.value =
+                                      CurrentRoute.calendar;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => StudyCalendar(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.calendar
+                                      ? const Text(
+                                          'Calendar',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'Calendar',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.calendar
+                                      ? const Icon(
+                                          Icons.calendar_month_rounded,
                                           color: Color(0xFF0B6BA7),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : const Text(
-                                        'Calendar',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          Icons.calendar_month_rounded,
                                           color: Color(0xffbcbcbc),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          size: 20,
                                         ),
-                                      ),
-                                navIcon: navController.currentNav.value ==
-                                        CurrentRoute.calendar
-                                    ? const Icon(
-                                        Icons.calendar_month_rounded,
-                                        color: Color(0xFF0B6BA7),
-                                        size: 20,
-                                      )
-                                    : const Icon(
-                                        Icons.calendar_month_rounded,
-                                        color: Color(0xffbcbcbc),
-                                        size: 20,
-                                      ),
-                                navShadow: navController.currentNav.value ==
-                                        CurrentRoute.calendar
-                                    ? const Color(0x33000000)
-                                    : Colors.white,
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.calendar
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 8, 0, 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                navController.currentNav.value =
-                                    CurrentRoute.todo;
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StudyToDo(),
-                                  ),
-                                );
-                              },
-                              child: DrawerNavButton(
-                                navText: navController.currentNav.value ==
-                                        CurrentRoute.todo
-                                    ? const Text(
-                                        'To Do',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  navController.currentNav.value =
+                                      CurrentRoute.todo;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => StudyToDo(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.todo
+                                      ? const Text(
+                                          'To Do',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'To Do',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.todo
+                                      ? const Icon(
+                                          Icons.library_add_check_rounded,
                                           color: Color(0xFF0B6BA7),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : const Text(
-                                        'To Do',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          Icons.library_add_check_rounded,
                                           color: Color(0xffbcbcbc),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          size: 20,
                                         ),
-                                      ),
-                                navIcon: navController.currentNav.value ==
-                                        CurrentRoute.todo
-                                    ? const Icon(
-                                        Icons.library_add_check_rounded,
-                                        color: Color(0xFF0B6BA7),
-                                        size: 20,
-                                      )
-                                    : const Icon(
-                                        Icons.library_add_check_rounded,
-                                        color: Color(0xffbcbcbc),
-                                        size: 20,
-                                      ),
-                                navShadow: navController.currentNav.value ==
-                                        CurrentRoute.todo
-                                    ? const Color(0x33000000)
-                                    : Colors.white,
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.todo
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 8, 0, 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                navController.currentNav.value =
-                                    CurrentRoute.reviewer;
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StudyReviewer(),
-                                  ),
-                                );
-                              },
-                              child: DrawerNavButton(
-                                navText: navController.currentNav.value ==
-                                        CurrentRoute.reviewer
-                                    ? const Text(
-                                        'Reviewer',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  navController.currentNav.value =
+                                      CurrentRoute.reviewer;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => StudyReviewer(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.reviewer
+                                      ? const Text(
+                                          'Reviewer',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'Reviewer',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.reviewer
+                                      ? const Icon(
+                                          Icons.my_library_books_rounded,
                                           color: Color(0xFF0B6BA7),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : const Text(
-                                        'Reviewer',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          Icons.my_library_books_rounded,
                                           color: Color(0xffbcbcbc),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          size: 20,
                                         ),
-                                      ),
-                                navIcon: navController.currentNav.value ==
-                                        CurrentRoute.reviewer
-                                    ? const Icon(
-                                        Icons.my_library_books_rounded,
-                                        color: Color(0xFF0B6BA7),
-                                        size: 20,
-                                      )
-                                    : const Icon(
-                                        Icons.my_library_books_rounded,
-                                        color: Color(0xffbcbcbc),
-                                        size: 20,
-                                      ),
-                                navShadow: navController.currentNav.value ==
-                                        CurrentRoute.reviewer
-                                    ? const Color(0x33000000)
-                                    : Colors.white,
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.reviewer
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -434,57 +442,59 @@ class NavDrawer extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0, 8, 0, 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                navController.currentNav.value =
-                                    CurrentRoute.settings;
-                                Navigator.pushReplacement(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => StudySettings(),
-                                  ),
-                                );
-                              },
-                              child: DrawerNavButton(
-                                navText: navController.currentNav.value ==
-                                        CurrentRoute.settings
-                                    ? const Text(
-                                        'Settings',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                          Obx(
+                            () => Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  navController.currentNav.value =
+                                      CurrentRoute.settings;
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => StudySettings(),
+                                    ),
+                                  );
+                                },
+                                child: DrawerNavButton(
+                                  navText: navController.currentNav.value ==
+                                          CurrentRoute.settings
+                                      ? const Text(
+                                          'Settings',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xFF0B6BA7),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      : const Text(
+                                          'Settings',
+                                          style: TextStyle(
+                                            fontFamily: 'Poppins',
+                                            color: Color(0xffbcbcbc),
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                  navIcon: navController.currentNav.value ==
+                                          CurrentRoute.settings
+                                      ? const Icon(
+                                          Icons.settings,
                                           color: Color(0xFF0B6BA7),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      )
-                                    : const Text(
-                                        'Settings',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
+                                          size: 20,
+                                        )
+                                      : const Icon(
+                                          Icons.settings,
                                           color: Color(0xffbcbcbc),
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
+                                          size: 20,
                                         ),
-                                      ),
-                                navIcon: navController.currentNav.value ==
-                                        CurrentRoute.settings
-                                    ? const Icon(
-                                        Icons.settings,
-                                        color: Color(0xFF0B6BA7),
-                                        size: 20,
-                                      )
-                                    : const Icon(
-                                        Icons.settings,
-                                        color: Color(0xffbcbcbc),
-                                        size: 20,
-                                      ),
-                                navShadow: navController.currentNav.value ==
-                                        CurrentRoute.settings
-                                    ? const Color(0x33000000)
-                                    : Colors.white,
+                                  navShadow: navController.currentNav.value ==
+                                          CurrentRoute.settings
+                                      ? const Color(0x33000000)
+                                      : Colors.white,
+                                ),
                               ),
                             ),
                           ),

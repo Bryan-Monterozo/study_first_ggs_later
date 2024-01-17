@@ -134,8 +134,8 @@ class PlayerInvController extends GetxController {
 
   healPlayer(int heal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    int currentHealth = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
-    int baseHealth = prefs.getInt('basePlayerHealth')! + prefs.getInt('equipHealth')!;
+    int currentHealth = prefs.getInt('playerTotalHealth')!;
+    int baseHealth = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
     if (currentHealth < baseHealth) {
       if (currentHealth + heal >=
           baseHealth) {

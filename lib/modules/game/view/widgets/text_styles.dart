@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 
-Widget statsText(String playerStat, dynamic equipStat) {
+Widget statsText(String playerStat, dynamic equipStat, double fSize) {
   return equipStat == null
       ? Text(
           playerStat,
-          style: const TextStyle(
-            fontSize: 25,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: fSize,
             fontWeight: FontWeight.bold,
           ),
         )
       : Text(
           '$playerStat + $equipStat',
-          style: const TextStyle(
-            fontSize: 25,
+          style: TextStyle(
+            fontFamily: 'Poppins',
+            fontSize: fSize,
             fontWeight: FontWeight.bold,
           ),
         );

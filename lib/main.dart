@@ -14,7 +14,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await LoadAllAsset().initAssets();
+  // await LoadAllAsset().initAssets();
   // ignore: unused_local_variable
   final db = FirebaseFirestore.instance;
   // await db

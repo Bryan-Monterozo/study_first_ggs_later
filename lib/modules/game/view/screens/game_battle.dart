@@ -1,6 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 import 'package:study_first_ggs_later/modules/game/controller/game_sprite.dart';
@@ -18,13 +19,15 @@ class GameBattlePage extends StatelessWidget {
     EnemyController enemyController = Get.put(EnemyController());
     BattleController battleController = Get.put(BattleController());
     print('rebuilt');
-
     return Container(
-      color: Colors.brown[200],
+      color: const Color(0xFFD4D5D5),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
+          const SizedBox(
+            height: 20,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -37,8 +40,8 @@ class GameBattlePage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.5,
                         child: Stack(
                           children: [
                             Container(
@@ -47,22 +50,75 @@ class GameBattlePage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
-                            const Align(
-                                alignment: Alignment.topLeft,
-                                child: Text('Player')),
-                            Obx(
-                              () => Align(
-                                alignment: Alignment.center,
-                                child: Text(playerController.playerName.value),
+                            Align(
+                              alignment: Alignment.center,
+                              child: GameWidget(
+                                game: UserSprite(),
                               ),
                             ),
                             Obx(
                               () => Align(
-                                alignment: Alignment.bottomCenter,
+                                alignment: Alignment.topRight
+                                    .add(const Alignment(-0.1, 0.15)),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.20,
+                                  child: LinearPercentIndicator(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    lineHeight: 10.0,
+                                    animation: true,
+                                    animationDuration: 750,
+                                    percent: playerController
+                                            .playerTotalHealth.value /
+                                        playerController.playerMaxHealth.value,
+                                    progressColor: Colors.green,
+                                    backgroundColor: Colors.red,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.topLeft
+                                    .add(const Alignment(0.1, 0.10)),
                                 child: Text(
-                                    'HP: ${playerController.playerTotalHealth.value}'),
+                                    'HP: ${playerController.playerTotalHealth.value}',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                        fontWeight: FontWeight.bold)),
                               ),
                             ),
+                            Obx(
+                              () => Align(
+                                // right: MediaQuery.of(context).size.width *
+                                //     0.16, //higher = right
+                                // bottom: MediaQuery.of(context).size.width *
+                                //     0.06, // lower = down
+                                alignment: Alignment.bottomCenter
+                                    .add(const Alignment(0.0, -0.07)),
+                                child: Text(
+                                  playerController.playerName.value,
+                                  style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.04,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            Obx(
+                              () => battleController.enemyBattleSlash.value
+                                  ? Align(
+                                      alignment: Alignment.center,
+                                      child: GameWidget(game: SlashSprite()),
+                                    )
+                                  : Container(),
+                            )
                           ],
                         )),
                   ),
@@ -74,8 +130,8 @@ class GameBattlePage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(10),
                     child: SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        height: MediaQuery.of(context).size.width * 0.4,
+                        width: MediaQuery.of(context).size.width * 0.4,
+                        height: MediaQuery.of(context).size.width * 0.5,
                         child: Stack(
                           children: [
                             Container(
@@ -87,39 +143,68 @@ class GameBattlePage extends StatelessWidget {
                             const Align(
                                 alignment: Alignment.topRight,
                                 child: Text('Enemy')),
-                            // Align(
-                            //   alignment: Alignment.center,
-                            //   child: GetBuilder<EnemyController>(
-                            //       // init: EnemyController(),
-                            //       id: 'enemyName',
-                            //       builder: (controller) {
-                            //         return Text(Get.find<EnemyController>().enemyName);
-                            //       }),
-                            // ),
-                            // Align(
-                            //   alignment: Alignment.center,
-                            //   child: GetBuilder<EnemyController>(
-                            //       // init: EnemyController(),
-                            //       id: 'enemyHealth',
-                            //       builder: (controller) {
-                            //         return Text('HP: ${Get.find<EnemyController>().enemyHealth}');
-                            //       }),
-                            // ),
-                            // Obx(
-                            //   () =>
-                            Align(
-                              alignment: Alignment.center,
-                              child: Expanded(
-                                  child: GameWidget(game: EnemySprite())),
-                            ),
-                            // ),
                             Obx(
                               () => Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Text(
-                                    'HP: ${enemyController.enemyHealth.value}'),
+                                alignment: Alignment.center,
+                                child: () {
+                                  if (enemyController.enemyName.value == 'Ghost') {
+                                    return GameWidget(game: GhostSprite());
+                                  } if (enemyController.enemyName.value == 'Skeleton') {
+                                    return GameWidget(game: SkeletonSprite());
+                                  } if (enemyController.enemyName.value == 'Ninja') {
+                                    return GameWidget(game: NinjaSprite());
+                                  } if (enemyController.enemyName.value == 'Dwarf') {
+                                    return GameWidget(game: DwarfSprite());
+                                  } else {
+                                    return Container();
+                                  }
+                                }(),
                               ),
                             ),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.topLeft
+                                    .add(const Alignment(0.1, 0.15)),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.20,
+                                  child: LinearPercentIndicator(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    lineHeight: 10.0,
+                                    animation: true,
+                                    animationDuration: 750,
+                                    percent: enemyController.enemyHealth.value /
+                                        enemyController.enemyMaxHealth.value,
+                                    progressColor: Colors.green,
+                                    backgroundColor: Colors.red,
+                                    isRTL: true,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Obx(
+                              () => Align(
+                                alignment: Alignment.topRight
+                                    .add(const Alignment(-0.1, 0.10)),
+                                child: Text(
+                                    'HP: ${enemyController.enemyHealth.value}',
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                        fontWeight: FontWeight.bold)),
+                              ),
+                            ),
+                            Obx(
+                              () => battleController.playerBattleSlash.value
+                                  ? Align(
+                                      alignment: Alignment.center,
+                                      child: GameWidget(game: SlashSprite()),
+                                    )
+                                  : Container(),
+                            )
                           ],
                         )),
                   ),
@@ -154,14 +239,20 @@ class GameBattlePage extends StatelessWidget {
                             decoration: BoxDecoration(
                               color: battleController.isAttackDisabled.value
                                   ? Colors.grey[400]
-                                  : Colors.blue[200],
+                                  : Colors.green,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
                           Align(
                             alignment: Alignment.center,
                             child: Text(
-                                'Attack Damage: ${battleController.totalBattleDamage.value}'),
+                              'Attack Damage: ${battleController.totalBattleDamage.value}',
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize:
+                                      MediaQuery.of(context).size.width * 0.04,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
@@ -174,13 +265,13 @@ class GameBattlePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const SizedBox(
-                    width: 10,
+                    width: 45,
                   ),
                   Expanded(
                     flex: 3,
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.08,
                         child: InkWell(
                           onTap: () {
                             print('Skills');
@@ -196,19 +287,28 @@ class GameBattlePage extends StatelessWidget {
                               Align(
                                 alignment: Alignment.center,
                                 child: RichText(
-                                  text: const TextSpan(
+                                  text: TextSpan(
                                     children: <TextSpan>[
                                       TextSpan(
                                           text: 'Skills',
                                           style: TextStyle(
+                                            fontFamily: 'Poppins',
                                             color: Colors.black,
-                                            fontSize: 20,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
+                                            fontWeight: FontWeight.bold,
                                           )),
                                       TextSpan(
                                           text: '\nComing Soon',
                                           style: TextStyle(
+                                            fontFamily: 'Poppins',
                                             color: Colors.black,
-                                            fontSize: 10,
+                                            fontSize: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.03,
                                           ))
                                     ],
                                   ),
@@ -225,7 +325,7 @@ class GameBattlePage extends StatelessWidget {
                     flex: 3,
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width * 0.2,
-                        height: MediaQuery.of(context).size.height * 0.1,
+                        height: MediaQuery.of(context).size.height * 0.08,
                         child: InkWell(
                           onTap: () async {
                             SharedPreferences prefs =
@@ -242,16 +342,24 @@ class GameBattlePage extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                               ),
-                              const Align(
+                              Align(
                                 alignment: Alignment.center,
-                                child: Text('Run'),
+                                child: Text('Run',
+                                    style: TextStyle(
+                                      fontFamily: 'Poppins',
+                                      color: Colors.black,
+                                      fontSize:
+                                          MediaQuery.of(context).size.width *
+                                              0.03,
+                                      fontWeight: FontWeight.bold,
+                                    )),
                               ),
                             ],
                           ),
                         )),
                   ),
                   const SizedBox(
-                    width: 10,
+                    width: 45,
                   )
                 ],
               )
