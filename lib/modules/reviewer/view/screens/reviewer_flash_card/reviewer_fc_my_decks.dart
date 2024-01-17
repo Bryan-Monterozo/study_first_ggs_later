@@ -2,7 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/reviwer_notes_colors.dart';
+import 'package:study_first_ggs_later/modules/reviewer/controller/fc_get_controller.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_add_deck.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/deck_tiles.dart';
@@ -15,6 +17,7 @@ class ReviewerFcMyDecks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FcController fcController = Get.put(FcController());
     final uid = FirebaseAuth.instance.currentUser!.uid;
     final ref = FirebaseFirestore.instance
         .collection('Users')

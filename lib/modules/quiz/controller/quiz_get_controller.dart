@@ -40,7 +40,6 @@ class QuizController extends GetxController {
   void onInit() async {
     super.onInit();
     premadeQuestion();
-    premadeQuestion();
     hasQuestionField.value = false;
     questionController = TextEditingController(text: question.value);
     option1Controller = TextEditingController(text: option1.value);
@@ -78,7 +77,7 @@ class QuizController extends GetxController {
 
   premadeQuestion() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool('quizLoaded') == true) {
+    if (prefs.getBool('quizLoaded') == null) {
       final ref =
           await firestore.collection('Users').doc(uid).collection('Quiz').get();
       await prefs.setBool('quizLoaded', true);

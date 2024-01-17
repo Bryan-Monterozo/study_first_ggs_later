@@ -1,15 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 
 class ReviewerFcDB {
   final firestore = FirebaseFirestore.instance;
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
-  void addDeckToDB({
+  addDeckToDB({
     required deckName,
     required deckDesc,
   }) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     final collection =
         firestore.collection('Users').doc(uid).collection('Decks').doc();
 
@@ -17,6 +19,7 @@ class ReviewerFcDB {
         deckName: deckName, deckDesc: deckDesc, deckId: collection.id);
 
     await collection.set(deckModel.toMap());
+    await prefs.setString('deckId', collection.id);
   }
 
   addCardToDeck({
