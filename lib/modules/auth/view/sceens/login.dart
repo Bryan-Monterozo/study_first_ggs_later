@@ -87,7 +87,7 @@ class Login extends StatelessWidget {
                                             border: OutlineInputBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(12)),
-                                            suffix: InkWell(
+                                            suffixIcon: InkWell(
                                               onTap: () {
                                                 controller
                                                     .togglePasswordVisibility();
@@ -95,7 +95,9 @@ class Login extends StatelessWidget {
                                               child: Icon(
                                                   controller.togglePassword
                                                       ? Icons.visibility
-                                                      : Icons.visibility_off),
+                                                      : Icons.visibility_off,
+                                                      
+                                                      ),
                                             )),
                                         validator: (passwordLogIn) {
                                           if (passwordLogIn == null ||
