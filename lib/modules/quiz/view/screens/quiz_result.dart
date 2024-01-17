@@ -18,6 +18,7 @@ class QuizResult extends StatelessWidget {
     // optionsController.update();
     return Scaffold(
       appBar: SharedAppBar(
+        leading: Container(),
         titlePic: titlePic(context),
         withPic: withPic(context),
       ),

@@ -1,10 +1,13 @@
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:study_first_ggs_later/modules/auth/models/user_model.dart';
 import 'package:study_first_ggs_later/modules/auth/services/auth_collection.dart';
 import 'package:study_first_ggs_later/modules/home/view/screens/home.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/init_assets.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/loading_controller.dart';
 
 class AuthController extends GetxController {
   // Keys
@@ -26,7 +29,7 @@ class AuthController extends GetxController {
   String authPassword = '';
 
   @override
-  void onInit() {
+  void onInit() async {
     usernameController = TextEditingController(text: authUsername);
     emailController = TextEditingController(text: authEmail);
     passwordController = TextEditingController(text: authPassword);
@@ -39,6 +42,8 @@ class AuthController extends GetxController {
     passwordController.addListener(() {
       authPassword = passwordController.text;
     });
+    await Future.delayed(const Duration(seconds: 3));
+    FlutterNativeSplash.remove();
     super.onInit();
   }
 
@@ -75,7 +80,7 @@ class AuthController extends GetxController {
   }
 
   void adminLogin() async {
-    isLoading = true;
+    Get.find<LoadingController>().isLoading.value = true;
     update(['loading']);
     await userAuth
         .login(email: 'admin@gmail.com', password: 'adminpass')
@@ -85,8 +90,8 @@ class AuthController extends GetxController {
         update(['loading']);
         Get.off(const StudyHome());
       } else {
-        isLoading = false;
-        update(['loading']);
+        Get.find<LoadingController>().isLoading.value = false;
+        // update(['loading']);
         Get.snackbar('Login', 'Something went wrong');
       }
     });

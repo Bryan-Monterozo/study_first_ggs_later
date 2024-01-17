@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/loading_controller.dart';
 import 'package:study_first_ggs_later/modules/todo/services/todo_collection.dart';
 
 class TodoController extends GetxController {
@@ -125,6 +126,8 @@ class TodoController extends GetxController {
   }
 
   searchTodoList(String query) {
+    Get.find<LoadingController>().isLoading.value = true;
+    print(Get.find<LoadingController>().isLoading.value);
     if (searchTodoController.text.isEmpty) {
       ref = FirebaseFirestore.instance
           .collection('Users')
@@ -159,6 +162,8 @@ class TodoController extends GetxController {
           .where('isDone', isEqualTo: true)
           .snapshots();
     }
+    Get.find<LoadingController>().isLoading.value = false;
+    print(Get.find<LoadingController>().isLoading.value);
     update(['todoList']);
   }
 }

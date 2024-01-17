@@ -8,6 +8,7 @@ import 'package:study_first_ggs_later/modules/reviewer/models/fc_model.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_buttons.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_shuffle.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 
 class ReviewerFcShuffleCard extends StatelessWidget {
   static const String routeName = '/reviewer/reviewer_fc_shuffle_card';
@@ -63,7 +64,7 @@ class ReviewerFcShuffleCard extends StatelessWidget {
             stream: ref.snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: LoadingAnimationTransparent());
               }
 
               final random = (snapshot.data! as QuerySnapshot).docs.toList()

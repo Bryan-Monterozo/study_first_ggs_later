@@ -60,8 +60,8 @@ class NavDrawer extends StatelessWidget {
                         child: Column(children: [
                           Obx(
                             () => Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 36, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 36, 0, 0),
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.pushReplacement(
@@ -112,64 +112,62 @@ class NavDrawer extends StatelessWidget {
                               ),
                             ),
                           ),
-                          Obx(
-                            () => Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 36, 0, 0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const GameHomePlay(),
-                                    ),
-                                  );
-                                },
-                                child: DrawerNavButton(
-                                  navText: navController.currentNav.value ==
-                                          CurrentRoute.game
-                                      ? const Text(
-                                          'Game',
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: Color(0xFF0B6BA7),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        )
-                                      : const Text(
-                                          'Game',
-                                          style: TextStyle(
-                                            fontFamily: 'Poppins',
-                                            color: Color(0xffbcbcbc),
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                  navIcon: navController.currentNav.value ==
-                                          CurrentRoute.home
-                                      ? const Icon(
-                                          CustomGameIcons.sword_cross,
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const GameHomePlay(),
+                                  ),
+                                );
+                              },
+                              child: DrawerNavButton(
+                                navText: navController.currentNav.value ==
+                                        CurrentRoute.game
+                                    ? const Text(
+                                        'Game',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
                                           color: Color(0xFF0B6BA7),
-                                          size: 20,
-                                        )
-                                      : const Icon(
-                                          CustomGameIcons.sword_cross,
-                                          color: Color(0xffbcbcbc),
-                                          size: 20,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                  navShadow: navController.currentNav.value ==
-                                          CurrentRoute.home
-                                      ? const Color(0x33000000)
-                                      : Colors.white,
-                                ),
+                                      )
+                                    : const Text(
+                                        'Game',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xffbcbcbc),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                navIcon: navController.currentNav.value ==
+                                        CurrentRoute.game
+                                    ? const Icon(
+                                        CustomGameIcons.sword_cross,
+                                        color: Color(0xFF0B6BA7),
+                                        size: 20,
+                                      )
+                                    : const Icon(
+                                        CustomGameIcons.sword_cross,
+                                        color: Color(0xffbcbcbc),
+                                        size: 20,
+                                      ),
+                                navShadow: navController.currentNav.value ==
+                                        CurrentRoute.game
+                                    ? const Color(0x33000000)
+                                    : Colors.white,
                               ),
                             ),
                           ),
                           Obx(
                             () => Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0, 8, 0, 8),
                               child: GestureDetector(
                                 onTap: () {
                                   Navigator.pushReplacement(
@@ -221,8 +219,8 @@ class NavDrawer extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 8),
                             child: GestureDetector(
                               onTap: () {
                                 navController.currentNav.value =
@@ -275,11 +273,12 @@ class NavDrawer extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 8),
                             child: GestureDetector(
                               onTap: () {
-                                navController.currentNav.value = CurrentRoute.todo;
+                                navController.currentNav.value =
+                                    CurrentRoute.todo;
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -328,8 +327,8 @@ class NavDrawer extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 8),
                             child: GestureDetector(
                               onTap: () {
                                 navController.currentNav.value =
@@ -382,11 +381,12 @@ class NavDrawer extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 8),
                             child: GestureDetector(
                               onTap: () {
-                                navController.currentNav.value = CurrentRoute.quiz;
+                                navController.currentNav.value =
+                                    CurrentRoute.quiz;
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
@@ -430,65 +430,67 @@ class NavDrawer extends StatelessWidget {
                                 navShadow: navController.currentNav.value ==
                                         CurrentRoute.quiz
                                     ? const Color(0x33000000)
-                                  : Colors.white,
-                        ),
-                      ),
-                    ),
-                    Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 8),
-                    child: GestureDetector(
-                      onTap: () {
-                        navController.currentNav.value = CurrentRoute.settings;
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StudySettings(),
-                          ),
-                        );
-                      },
-                      child: DrawerNavButton(
-                        navText: navController.currentNav.value ==
-                                CurrentRoute.settings
-                            ? const Text(
-                                'Settings',
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Color(0xFF0B6BA7),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              )
-                            : const Text(
-                                'Settings',
-                                style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: Color(0xffbcbcbc),
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                                    : Colors.white,
                               ),
-                        navIcon: navController.currentNav.value ==
-                                CurrentRoute.settings
-                            ? const Icon(
-                                Icons.settings,
-                                color: Color(0xFF0B6BA7),
-                                size: 20,
-                              )
-                            : const Icon(
-                                Icons.settings,
-                                color: Color(0xffbcbcbc),
-                                size: 20,
-                              ),
-                        navShadow: navController.currentNav.value ==
-                                CurrentRoute.settings
-                            ? const Color(0x33000000)
-                              : Colors.white,
                             ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0, 8, 0, 8),
+                            child: GestureDetector(
+                              onTap: () {
+                                navController.currentNav.value =
+                                    CurrentRoute.settings;
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => StudySettings(),
+                                  ),
+                                );
+                              },
+                              child: DrawerNavButton(
+                                navText: navController.currentNav.value ==
+                                        CurrentRoute.settings
+                                    ? const Text(
+                                        'Settings',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xFF0B6BA7),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Settings',
+                                        style: TextStyle(
+                                          fontFamily: 'Poppins',
+                                          color: Color(0xffbcbcbc),
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                navIcon: navController.currentNav.value ==
+                                        CurrentRoute.settings
+                                    ? const Icon(
+                                        Icons.settings,
+                                        color: Color(0xFF0B6BA7),
+                                        size: 20,
+                                      )
+                                    : const Icon(
+                                        Icons.settings,
+                                        color: Color(0xffbcbcbc),
+                                        size: 20,
+                                      ),
+                                navShadow: navController.currentNav.value ==
+                                        CurrentRoute.settings
+                                    ? const Color(0x33000000)
+                                    : Colors.white,
+                              ),
                             ),
                           ),
                         ]),
+                      ),
                     ),
-                  ),
                     const Align(
                       alignment: Alignment.bottomCenter,
                       child: NavBarStatus(),
@@ -506,8 +508,8 @@ class NavDrawer extends StatelessWidget {
                               size: 36,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsetsDirectional.fromSTEB(12, 0, 0, 0),
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  12, 0, 0, 0),
                               child: Container(
                                 decoration: const BoxDecoration(
                                   color: Colors.white,

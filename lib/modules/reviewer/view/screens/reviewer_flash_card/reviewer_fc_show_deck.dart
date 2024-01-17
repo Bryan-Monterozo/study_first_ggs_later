@@ -11,6 +11,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fla
 import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_flash_card/reviewer_fc_shuffle_card.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/card_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 
 class ReviewerFcShowDeck extends StatelessWidget {
   static const String routeName = '/reviewer/:reviewer_fc_show_deck';
@@ -93,7 +94,7 @@ class ReviewerFcShowDeck extends StatelessWidget {
                     .snapshots(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(child: LoadingAnimationTransparent());
                   }
                   return MasonryGridView.builder(
                       mainAxisSpacing: 20,

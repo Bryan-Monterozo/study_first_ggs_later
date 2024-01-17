@@ -9,6 +9,7 @@ import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_model.dar
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro_add.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 
 class pomodoroViewPage extends StatelessWidget {
   
@@ -45,7 +46,7 @@ class pomodoroViewPage extends StatelessWidget {
                     stream: ref.snapshots(),
                     builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(child: LoadingAnimationTransparent());
                       }
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
@@ -66,5 +67,4 @@ class pomodoroViewPage extends StatelessWidget {
         )
     );
   }
-  
 }

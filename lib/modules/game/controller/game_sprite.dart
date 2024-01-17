@@ -1,8 +1,6 @@
 import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame/game.dart';
-import 'package:flutter/material.dart';
 
 class EnemySprite extends FlameGame {
   // SpriteComponent enemy = SpriteComponent();

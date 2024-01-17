@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
 import 'package:study_first_ggs_later/modules/calendar/view/screens/calendar.dart';
-import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_home_play.dart';
 import 'package:study_first_ggs_later/modules/home/view/widgets/home_widgets.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
@@ -48,18 +47,18 @@ class StudyHome extends StatelessWidget {
                 navigator: GameHomePlay(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'Game',
-                  navDesc: 'Notifications!',
-                  navColor: Color(0xff009598),
+                  navDesc: 'Play Now!',
+                  navColor: Color(0xff78a2cc),
                   navPic: kIsWeb
-                      ? 'assets/images/time-management.png'
-                      : 'assets/images/time-management.png',
+                      ? 'assets/images/game.png'
+                      : 'assets/images/game.png',
                 ),
               ),
               const HomeNavGesture(
                 navigator: Pomodoro(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'Pomodoro',
-                  navDesc: 'Notifications!',
+                  navDesc: 'Study Time!',
                   navColor: Color(0xff009598),
                   navPic: kIsWeb
                       ? 'assets/images/time-management.png'
@@ -70,7 +69,7 @@ class StudyHome extends StatelessWidget {
                 navigator: StudyCalendar(),
                 navContainer: const HomeNavButtonWidget(
                   navText: 'Calendar',
-                  navDesc: 'Notifications!',
+                  navDesc: 'Set your Schedule!',
                   navColor: Color(0xffFFAB91),
                   navPic: kIsWeb
                       ? 'assets/images/calendar.png'
@@ -81,7 +80,7 @@ class StudyHome extends StatelessWidget {
                 navigator: StudyToDo(),
                 navContainer: const HomeNavButtonWidget(
                   navText: 'To Do',
-                  navDesc: 'Notifications',
+                  navDesc: 'Make your Checklist!',
                   navColor: Color(0xffB388FF),
                   navPic: kIsWeb
                       ? 'assets/images/to-do-list.png'
@@ -92,7 +91,7 @@ class StudyHome extends StatelessWidget {
                 navigator: StudyReviewer(),
                 navContainer: const HomeNavButtonWidget(
                   navText: 'Reviewer',
-                  navDesc: 'Notifications!',
+                  navDesc: 'Visually Train!',
                   navColor: Color(0xffFF8A80),
                   navPic: kIsWeb
                       ? 'assets/images/reviewer.png'
@@ -103,7 +102,7 @@ class StudyHome extends StatelessWidget {
                 navigator: QuizCatalogue(),
                 navContainer: HomeNavButtonWidget(
                   navText: 'Quiz',
-                  navDesc: 'Notifications!',
+                  navDesc: 'Challenge yourself!',
                   navColor: Color(0xffB388FF),
                   navPic: kIsWeb
                       ? 'assets/images/quiz.png'

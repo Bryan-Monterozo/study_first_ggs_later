@@ -10,10 +10,10 @@ class MeetingDataSource extends CalendarDataSource {
 
   CalendarModel getEvent(int index) => appointments![index] as CalendarModel;
 
-  // @override
-  // String getSubject(int index) => getEvent(index).eventName;
+  @override
+  String getSubject(int index) => getEvent(index).eventName;
 
-  // String getDescription(int index) => getEvent(index).eventDescription;
+  String getDescription(int index) => getEvent(index).eventDescription;
 
   @override
   DateTime getStartTime(int index) => DateTime.parse(getEvent(index).from);
@@ -24,6 +24,6 @@ class MeetingDataSource extends CalendarDataSource {
   @override
   Color getColor(int index) => const Color(0xFF0B6BA7);
 
-  // @override
-  // bool isAllDay(int index) => getEvent(index).isAllDay;
+  @override
+  bool isAllDay(int index) => getEvent(index).isAllDay;
 }

@@ -9,6 +9,7 @@ import 'package:study_first_ggs_later/modules/game/controller/game_get_controlle
 import 'package:study_first_ggs_later/modules/quiz/model/quiz_premade.dart';
 import 'package:study_first_ggs_later/modules/quiz/services/quiz_catalogue_collection.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_result.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/loading_controller.dart';
 // import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 // import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_add_question.dart';
 
@@ -78,31 +79,33 @@ class QuizController extends GetxController {
 
   premadeQuestion() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getBool('quizLoaded') == true) {
+    if (prefs.getBool('quizLoaded') == null) {
       final ref =
           await firestore.collection('Users').doc(uid).collection('Quiz').get();
       await prefs.setBool('quizLoaded', true);
       if (ref.docs.isEmpty) {
-      for (int i = 1; i <= 3; i++) {
-        quizCatDB
-            .addQuizToDB(
-                quizTitle: premade.premadeQuizName(i),
-                quizDesc: premade.premadeQuizDesc(i))
-            .then((value) {
-          String id = prefs.getString('quizId')!;
-          for (int j = 1; j <= 15; j++) {
-            int x = i * 100;
-            quizCatDB.addQuestionToQuiz(
-                question: premade.premadeQuestion(j + x),
-                option1: premade.premadeOptions(j + x)[0],
-                option2: premade.premadeOptions(j + x)[1],
-                option3: premade.premadeOptions(j + x)[2],
-                option4: premade.premadeOptions(j + x)[3],
-                quizId: id);
-          }
-        });
+        Get.find<LoadingController>().isLoading.value = true;
+        for (int i = 1; i <= 3; i++) {
+          quizCatDB
+              .addQuizToDB(
+                  quizTitle: premade.premadeQuizName(i),
+                  quizDesc: premade.premadeQuizDesc(i))
+              .then((value) {
+            String id = prefs.getString('quizId')!;
+            for (int j = 1; j <= 15; j++) {
+              int x = i * 100;
+              quizCatDB.addQuestionToQuiz(
+                  question: premade.premadeQuestion(j + x),
+                  option1: premade.premadeOptions(j + x)[0],
+                  option2: premade.premadeOptions(j + x)[1],
+                  option3: premade.premadeOptions(j + x)[2],
+                  option4: premade.premadeOptions(j + x)[3],
+                  quizId: id);
+            }
+          });
+        }
+        Get.find<LoadingController>().isLoading.value = false;
       }
-     }
     }
   }
 
@@ -190,6 +193,7 @@ class OptionsController extends GetxController {
   @override
   void onInit() async {
     nextPage = PageController(initialPage: 0);
+    // LoadingController().isLoading.value = true;
     super.onInit();
   }
 
@@ -197,7 +201,11 @@ class OptionsController extends GetxController {
   void onReady() async {
     // ignore: unused_local_variable
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    startTimer();
+    Future.delayed(const Duration(seconds: 3), () {
+      LoadingController().isLoading.value = false;
+      // update(['loading']);
+      startTimer();
+    });
     debugPrint('Widget Rebuilt');
     super.onReady();
   }

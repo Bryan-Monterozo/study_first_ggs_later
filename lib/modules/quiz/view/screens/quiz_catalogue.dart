@@ -10,8 +10,10 @@ import 'package:study_first_ggs_later/modules/quiz/model/quiz_model.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/screens/quiz_create.dart';
 import 'package:study_first_ggs_later/modules/quiz/view/widgets/quiz_tiles.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/loading_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 
 class QuizCatalogue extends StatelessWidget {
   final QuizModel? quizModel;
@@ -30,7 +32,9 @@ class QuizCatalogue extends StatelessWidget {
     // ignore: unused_local_variable
     final quizController = Get.put(QuizController());
     Get.delete<NavController>();
+    Get.delete<LoadingController>();
     NavController navController = Get.put(NavController());
+    final LoadingController loadingController = Get.put(LoadingController());
     navController.initNav(
       currentRoute: CurrentRoute.quiz,
     );
@@ -120,6 +124,10 @@ class QuizCatalogue extends StatelessWidget {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const Center(child: CircularProgressIndicator());
                       }
+                      if (snapshot.hasError) {
+                        return const Center(
+                            child: Text('Something went wrong'));
+                      }
                       return ListView.builder(
                           itemCount: snapshot.data!.docs.length,
                           itemBuilder: (context, index) {
@@ -137,6 +145,9 @@ class QuizCatalogue extends StatelessWidget {
               ),
             ),
           ),
+          Obx(() => loadingController.isLoading.value
+              ? const LoadingAnimation()
+              : Container()),
         ],
       ),
     );

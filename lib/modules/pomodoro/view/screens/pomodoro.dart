@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/core/constants/route.dart';
+import 'package:study_first_ggs_later/modules/pomodoro/controller/pomodoro_controller.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro_view.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/progress_icons.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/widgets/pomodoro_button.dart';
@@ -14,6 +15,7 @@ import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_status.da
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 part 'package:study_first_ggs_later/core/constants/pomodoro_constants.dart';
 
 /*
@@ -51,6 +53,7 @@ class PomodoroState extends State<Pomodoro> {
   int pomodoroNum = 0;
   int setNum = 0;
   bool toggle = false;
+  bool isLoading = true;
   int minutesLong = 0;
   int minutesShort = 0;
   int minutesRunning = 0;
@@ -90,122 +93,134 @@ class PomodoroState extends State<Pomodoro> {
       ),
       drawer: const NavDrawer(),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: 40,
-                width: 300,
-                decoration: const BoxDecoration(
-                    color: Color(0xFF0B6BA7),
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(12),
-                    )),
-                child: Align(
-                  alignment: const AlignmentDirectional(0.00, 0.00),
-                  child: Text('$pomodoroStatus',
-                      style: const TextStyle(
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          color: Colors.white)),
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 24,
-            ),
-            CircularPercentIndicator(
-              arcType: ArcType.FULL,
-              arcBackgroundColor: const Color(0xffcecece),
-              radius: 220.0,
-              circularStrokeCap: CircularStrokeCap.round,
-              lineWidth: 15.0,
-              percent: _getPomodoroPercentage(),
-              center: Text(
-                _secToString(remainingTime),
-                style: const TextStyle(
-                    fontSize: 60,
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w700,
-                    color: Color(0xFF0B6BA7)),
-              ),
-              progressColor: statusColor[pomodoroStatus],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('$pomodoroNum',
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF0B6BA7))),
-                ProgressIcons(
-                  total: pomodoroPerSet,
-                  done: pomodoroNum - (setNum * pomodoroPerSet),
-                ),
-                Text('$setNum',
-                    style: const TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w700,
-                        color: Color(0xFF0B6BA7))),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                PomodoroButton(
-                  onTap: _resetPomodoroCount,
-                  buttonIcon: const Icon(Icons.restart_alt_rounded),
-                  buttonSize: 30,
-                ),
-                PomodoroButton(
-                    onTap: _mainBtnPressed,
-                    buttonSize: 80,
-                    buttonIcon: toggle == false
-                        ? const Icon(
-                            Icons.play_arrow_rounded,
-                            // size: 40,
-                          )
-                        : const Icon(
-                            Icons.pause_rounded,
-                            // size: 40,
-                          )),
-                PomodoroButton(
-                  onTap: _resetPomodoroCount,
-                  buttonSize: 40,
-                  buttonIcon: const Icon(
-                    Icons.stop_rounded,
-                    size: 40,
+        child: Stack(children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Container(
+                  height: 40,
+                  width: 300,
+                  decoration: const BoxDecoration(
+                      color: Color(0xFF0B6BA7),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      )),
+                  child: Align(
+                    alignment: const AlignmentDirectional(0.00, 0.00),
+                    child: Text('$pomodoroStatus',
+                        style: const TextStyle(
+                            fontSize: 14,
+                            fontFamily: 'Poppins',
+                            color: Colors.white)),
                   ),
                 ),
-              ],
-            ),
-            PomodoroButton(
-              onTap: () => Get.off(const pomodoroViewPage()),
-              buttonSize: 40,
-              buttonIcon: const Icon(
-                Icons.keyboard_control_rounded,
-                // size: 40,
-                color: Color(0xffcecece),
               ),
-            ),
-          ],
-        ),
+              const SizedBox(
+                height: 24,
+              ),
+              CircularPercentIndicator(
+                arcType: ArcType.FULL,
+                arcBackgroundColor: const Color(0xffcecece),
+                radius: 220.0,
+                circularStrokeCap: CircularStrokeCap.round,
+                lineWidth: 15.0,
+                percent: _getPomodoroPercentage(),
+                center: Text(
+                  _secToString(remainingTime),
+                  style: const TextStyle(
+                      fontSize: 60,
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF0B6BA7)),
+                ),
+                progressColor: statusColor[pomodoroStatus],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('$pomodoroNum',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF0B6BA7))),
+                  ProgressIcons(
+                    total: pomodoroPerSet,
+                    done: pomodoroNum - (setNum * pomodoroPerSet),
+                  ),
+                  Text('$setNum',
+                      style: const TextStyle(
+                          fontSize: 20,
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w700,
+                          color: Color(0xFF0B6BA7))),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  PomodoroButton(
+                    onTap: _resetPomodoroCount,
+                    buttonIcon: const Icon(Icons.restart_alt_rounded),
+                    buttonSize: 30,
+                  ),
+                  PomodoroButton(
+                      onTap: _mainBtnPressed,
+                      buttonSize: 80,
+                      buttonIcon: toggle == false
+                          ? const Icon(
+                              Icons.play_arrow_rounded,
+                              // size: 40,
+                            )
+                          : const Icon(
+                              Icons.pause_rounded,
+                              // size: 40,
+                            )),
+                  PomodoroButton(
+                    onTap: _resetPomodoroCount,
+                    buttonSize: 40,
+                    buttonIcon: const Icon(
+                      Icons.stop_rounded,
+                      size: 40,
+                    ),
+                  ),
+                ],
+              ),
+              PomodoroButton(
+                onTap: () async {
+                  var refresh = await Get.to(const pomodoroViewPage());
+                  _cancelTimer();
+                  if (refresh == true) {
+                    initTimer();
+                  }
+                },
+                buttonSize: 40,
+                buttonIcon: const Icon(
+                  Icons.keyboard_control_rounded,
+                  // size: 40,
+                  color: Color(0xffcecece),
+                ),
+              ),
+            ],
+          ),
+          isLoading ? const LoadingAnimation() : Container()
+        ]),
       ),
     );
   }
 
 // TODO: Refactor this to core/utils named (sec_to_string.dart)
 
-  initTimer() async {
+  void initTimer() async {
+    setState(() {
+      isLoading = true;
+    });
     SharedPreferences prefs = await SharedPreferences.getInstance();
     minutesRunning = prefs.getInt('minRunning') ?? 1;
     secondsRunning = prefs.getInt('secRunning') ?? 0;
@@ -218,7 +233,7 @@ class PomodoroState extends State<Pomodoro> {
     totalLong = (minutesLong * 60) + (secondsLong);
     remainingTime = totalRunning;
     setState(() {
-      
+      isLoading = false;
     });
   }
 

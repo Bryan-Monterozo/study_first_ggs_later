@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/controller/pomodoro_controller.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/models/pomodoro_model.dart';
+import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro.dart';
 import 'package:study_first_ggs_later/modules/pomodoro/view/screens/pomodoro_edit.dart';
 
 class PomodoroTileWidget extends StatelessWidget {
@@ -27,12 +28,12 @@ class PomodoroTileWidget extends StatelessWidget {
         await prefs.setInt('secShort', pomodoroModel.secondsShort);
         await prefs.setInt('minLong', pomodoroModel.minutesLong);
         await prefs.setInt('secLong', pomodoroModel.secondsLong);
-        // Get.back();
-        PomodoroController().getSetTimer();
-
+        Get.back(result: true);
+        // PomodoroController().getSetTimer();
       },
       onLongPress: () async {
-         Get.to(pomodoroEditPage(pomodoroId: pomodoroModel.id, pomodoroModel: pomodoroModel));
+        Get.to(pomodoroEditPage(
+            pomodoroId: pomodoroModel.id, pomodoroModel: pomodoroModel));
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),

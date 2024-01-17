@@ -9,6 +9,7 @@ import 'package:study_first_ggs_later/modules/reviewer/view/screens/reviewer_fla
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_buttons.dart';
 import 'package:study_first_ggs_later/modules/reviewer/view/widgets/flash_card_shuffle.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/widgets/loading_screen.dart';
 
 class ReviewerFcRunDeck extends StatelessWidget {
   final DeckModel? deckModel;
@@ -41,7 +42,7 @@ class ReviewerFcRunDeck extends StatelessWidget {
             stream: ref.snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: LoadingAnimationTransparent());
               }
               return Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
