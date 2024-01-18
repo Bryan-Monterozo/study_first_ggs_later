@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 
 class PlayerEquipController extends GetxController {
   //SERVICES
@@ -125,17 +126,21 @@ class PlayerEquipController extends GetxController {
         woodenSword.value = prefs.getInt('105')!;
         prefs.setInt('equipDamage', 3);
         print(woodenSword.value.toString());
+        Get.find<PlayerController>().equipDamage.value = prefs.getInt('equipDamage')!;
         break;
       case 6:
         await prefs.setInt('106', 2);
         prefs.setInt('equipHealth', 10);
         leatherTunic.value = prefs.getInt('106')!;
         await prefs.setInt('playerTotalHealth', prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!);
+        Get.find<PlayerController>().equipHealth.value = prefs.getInt('equipHealth')!;
+        Get.find<PlayerController>().playerTotalHealth.value = prefs.getInt('playerTotalHealth')!;
         break;
       case 7:
         await prefs.setInt('107', 2);
         prefs.setInt('equipDefense', 3);
         woodenShield.value = prefs.getInt('107')!;
+        Get.find<PlayerController>().equipDefense.value = prefs.getInt('equipDefense')!;
         break;
     }
   }

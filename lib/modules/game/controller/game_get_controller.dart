@@ -35,6 +35,7 @@ class EnemyController extends GetxController {
   // int enemySilver = 0;
 
   // RxBool isEnemySpawned = false.obs;
+  RxBool enemyLoad = false.obs;
   RxString enemyId = ''.obs;
   RxString enemyName = ''.obs;
   RxInt enemyHealth = 0.obs;
@@ -59,7 +60,7 @@ class EnemyController extends GetxController {
   spawnEnemy() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // isEnemySpawned = prefs.getBool('isEnemySpawned')!;
-
+    enemyLoad.value = true;
     if (prefs.getBool('isEnemySpawned') == null) {
       await prefs.setBool('isEnemySpawned', false);
       await prefs.setString('enemyId', enemyId.value);
@@ -101,6 +102,7 @@ class EnemyController extends GetxController {
       // print('triggered 2');
       // update(['enemyName', 'enemyHealth']);
     }
+    enemyLoad.value = false;
   }
 
   // TODO: add this to pubspec ---> multiple_random_choice: ^0.1.3+1
@@ -239,6 +241,7 @@ class EnemyController extends GetxController {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     enemyName.value = prefs.getString('enemyName')!;
     Get.find<PlayerController>().nextLevel();
+    spawnEnemy();
     Get.defaultDialog(
       title: 'You Won!',
       middleText: 'You have defeated the $enemyName',
@@ -246,7 +249,6 @@ class EnemyController extends GetxController {
         onPressed: () async {
           // prefs.setInt('playerExp', prefs.getInt('playerExp')! + enemyExp);
           // prefs.setInt('playerSilver', prefs.getInt('playerSilver')! + enemySilver);
-          spawnEnemy();
           Get.back();
         },
         child: Text('OK'),
@@ -370,7 +372,8 @@ class PlayerController extends GetxController {
     equipDamage.value = prefs.getInt('equipDamage')!;
     equipDefense.value = prefs.getInt('equipDefense')!;
     playerTotalHealth.value = prefs.getInt('playerTotalHealth')!;
-    playerMaxHealth.value = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
+    playerMaxHealth.value =
+        prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
     // update(['playerName', 'playerHealth']);
 
     print('Player Name: $playerName');
@@ -566,6 +569,8 @@ class PlayerController extends GetxController {
           playerHealth.value = prefs.getInt('playerHealth')!;
           playerTotalHealth.value =
               prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
+          playerMaxHealth.value =
+              prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
           skillUpPoints.value = prefs.getInt('skillUpPoints')!;
         }
         break;
@@ -598,7 +603,7 @@ class BattleController extends GetxController {
   final uid = FirebaseAuth.instance.currentUser!.uid;
 
   // Variables
-  
+
   RxInt totalBattlePoints = 0.obs;
   RxBool playerBattleSlash = false.obs;
   RxBool enemyBattleSlash = false.obs;

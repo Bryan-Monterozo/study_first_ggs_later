@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:study_first_ggs_later/modules/game/controller/game_get_controller.dart';
 
 class PlayerInvController extends GetxController {
   //SERVICES
@@ -25,7 +26,7 @@ class PlayerInvController extends GetxController {
 
   initInventory() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    
+
     if (prefs.getBool('hasInv') == null) {
       final ref = await firestore
           .collection('Users')
@@ -135,16 +136,17 @@ class PlayerInvController extends GetxController {
   healPlayer(int heal) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int currentHealth = prefs.getInt('playerTotalHealth')!;
-    int baseHealth = prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
+    int baseHealth =
+        prefs.getInt('playerHealth')! + prefs.getInt('equipHealth')!;
     if (currentHealth < baseHealth) {
-      if (currentHealth + heal >=
-          baseHealth) {
+      if (currentHealth + heal >= baseHealth) {
         await prefs.setInt('playerTotalHealth', baseHealth);
       } else {
-        await prefs.setInt(
-            'playerTotalHealth', currentHealth + heal);
+        await prefs.setInt('playerTotalHealth', currentHealth + heal);
       }
     }
+    Get.find<PlayerController>().playerTotalHealth.value =
+        prefs.getInt('playerTotalHealth')!;
   }
 
   getItemCount(int item) async {

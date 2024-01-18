@@ -41,7 +41,6 @@ class QuizController extends GetxController {
   void onInit() async {
     super.onInit();
     premadeQuestion();
-    premadeQuestion();
     hasQuestionField.value = false;
     questionController = TextEditingController(text: question.value);
     option1Controller = TextEditingController(text: option1.value);
