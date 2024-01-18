@@ -8,6 +8,7 @@ import 'package:study_first_ggs_later/modules/game/view/screens/game_shop.dart';
 import 'package:study_first_ggs_later/modules/game/view/screens/game_stats.dart';
 import 'package:study_first_ggs_later/modules/game/view/widgets/bottom_navbar.dart';
 import 'package:study_first_ggs_later/modules/shared/app_bar.dart';
+import 'package:study_first_ggs_later/modules/shared/controller/loading_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/controller/nav_controller.dart';
 import 'package:study_first_ggs_later/modules/shared/nav_bar.dart';
 
@@ -18,7 +19,9 @@ class GameHomePlay extends StatelessWidget {
   Widget build(BuildContext context) {
     GamePageController gamePageController = Get.put(GamePageController());
     Get.delete<NavController>();
+    Get.delete<LoadingController>();
     NavController navController = Get.put(NavController());
+    LoadingController loadingController = Get.put(LoadingController());
     navController.initNav(
       currentRoute: CurrentRoute.game,
     );
